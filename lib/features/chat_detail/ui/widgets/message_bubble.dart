@@ -1,0 +1,259 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:open_filex/open_filex.dart';
+
+import '../../../../data/db/app_database.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../../photo_association/media_kind.dart';
+import '../../../photo_association/ui/full_image_viewer.dart';
+import '../../../photo_association/ui/full_video_player.dart';
+import 'linkified_text.dart';
+
+Future<void> _openDocument(BuildContext context, String path) async {
+  final result = await OpenFilex.open(path);
+  if (result.type == ResultType.done || !context.mounted) return;
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        AppLocalizations.of(context)!.openFileFailedMessage(result.message),
+      ),
+    ),
+  );
+}
+
+class MessageBubble extends StatelessWidget {
+  const MessageBubble({
+    super.key,
+    required this.message,
+    required this.senderName,
+    required this.selected,
+    required this.selectionMode,
+    required this.onTap,
+    required this.onLongPress,
+    this.attachment,
+    this.onAttachPhoto,
+  });
+
+  final Message message;
+  final String? senderName;
+  final bool selected;
+  final bool selectionMode;
+  final VoidCallback onTap;
+  final VoidCallback onLongPress;
+
+  /// A photo the user has manually attached to this message, if any.
+  final ImageAttachment? attachment;
+
+  /// Called when the user taps a media-placeholder message that has no
+  /// attachment yet, to let them pick and attach a photo manually.
+  final VoidCallback? onAttachPhoto;
+
+  @override
+  Widget build(BuildContext context) {
+    if (message.isSystemMessage) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Center(
+          child: Text(
+            message.rawText,
+            style: TextStyle(color: Colors.grey[600], fontSize: 12),
+          ),
+        ),
+      );
+    }
+
+    final scheme = Theme.of(context).colorScheme;
+
+    return InkWell(
+      onTap: onTap,
+      onLongPress: onLongPress,
+      child: Container(
+        color: selected ? scheme.primaryContainer.withValues(alpha: 0.4) : null,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (selectionMode)
+              Padding(
+                padding: const EdgeInsets.only(right: 8, top: 4),
+                child: Icon(
+                  selected ? Icons.check_circle : Icons.circle_outlined,
+                  size: 20,
+                  color: selected ? scheme.primary : Colors.grey,
+                ),
+              ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        senderName ?? AppLocalizations.of(context)!.unknownSender,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: scheme.primary,
+                          fontSize: 13,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        DateFormat('MM/dd HH:mm').format(message.timestamp),
+                        style: TextStyle(color: Colors.grey[500], fontSize: 11),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 2),
+                  _MessageContent(
+                    message: message,
+                    attachment: attachment,
+                    onAttachPhoto: onAttachPhoto,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MessageContent extends StatelessWidget {
+  const _MessageContent({
+    required this.message,
+    required this.attachment,
+    required this.onAttachPhoto,
+  });
+
+  final Message message;
+  final ImageAttachment? attachment;
+  final VoidCallback? onAttachPhoto;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    if (message.mediaPlaceholderType != null) {
+      if (attachment != null) {
+        if (isDocumentPath(attachment!.localFilePath)) {
+          return InkWell(
+            onTap: () => _openDocument(context, attachment!.localFilePath),
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              decoration: BoxDecoration(
+                border: Border.all(color: scheme.outlineVariant),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.insert_drive_file_outlined, size: 18),
+                  const SizedBox(width: 6),
+                  Flexible(
+                    child: Text(
+                      documentDisplayName(attachment!.localFilePath),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: Colors.grey[700], fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+        final isVideo = isVideoPath(attachment!.localFilePath);
+        return GestureDetector(
+          onTap: () => isVideo
+              ? showFullVideoScreen(context, attachment!)
+              : showFullImageScreen(context, attachment!),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: isVideo
+                ? Container(
+                    width: 160,
+                    height: 160,
+                    color: Colors.black87,
+                    child: const Icon(
+                      Icons.play_circle_outline,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                  )
+                : Image.file(
+                    File(attachment!.localFilePath),
+                    width: 160,
+                    height: 160,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, _, _) => _placeholderBox(context),
+                  ),
+          ),
+        );
+      }
+      final isVideoPlaceholder = message.mediaPlaceholderType == 'video';
+      final isFilePlaceholder = message.mediaPlaceholderType == 'file';
+      return InkWell(
+        onTap: onAttachPhoto,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          decoration: BoxDecoration(
+            border: Border.all(color: scheme.outlineVariant),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(_iconFor(message.mediaPlaceholderType!), size: 18),
+              const SizedBox(width: 6),
+              Text(
+                isFilePlaceholder
+                    ? AppLocalizations.of(context)!.tapToAttachFile(message.rawText)
+                    : isVideoPlaceholder
+                    ? AppLocalizations.of(context)!.tapToAttachVideo(message.rawText)
+                    : AppLocalizations.of(context)!.tapToAttachPhoto(message.rawText),
+                style: TextStyle(color: Colors.grey[700], fontSize: 12),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: scheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: LinkifiedText(message.rawText),
+    );
+  }
+
+  Widget _placeholderBox(BuildContext context) {
+    return Container(
+      width: 160,
+      height: 160,
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+      child: const Icon(Icons.broken_image_outlined),
+    );
+  }
+
+  IconData _iconFor(String placeholderType) {
+    switch (placeholderType) {
+      case 'photo':
+        return Icons.image_outlined;
+      case 'sticker':
+        return Icons.emoji_emotions_outlined;
+      case 'video':
+        return Icons.videocam_outlined;
+      case 'file':
+        return Icons.insert_drive_file_outlined;
+      default:
+        return Icons.image_outlined;
+    }
+  }
+}

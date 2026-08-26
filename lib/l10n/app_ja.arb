@@ -1,0 +1,239 @@
+{
+  "@@locale": "ja",
+
+  "appTitle": "トーク保存",
+
+  "cancel": "キャンセル",
+  "delete": "削除",
+  "unknownSender": "不明",
+  "loadErrorWithMessage": "読み込みエラー: {error}",
+  "@loadErrorWithMessage": {
+    "placeholders": { "error": {} }
+  },
+
+  "settingsTooltip": "設定",
+  "importButtonLabel": "トークを取り込む",
+  "createChatRoomTitle": "新しいトークルームを作成",
+  "createChatRoomHint": "トークルーム名",
+  "createChatRoomButton": "作成",
+  "deleteChatConfirmTitle": "削除しますか？",
+  "pickChatIconTitle": "アイコンを選択",
+  "renameChatTitle": "トーク名を変更",
+  "renameChatButton": "変更",
+  "renameChatTooltip": "名称を変更",
+  "chatLockTooltip": "このトークをロック",
+  "chatUnlockTooltip": "ロックを解除",
+  "chatLockAuthReason": "このトークを表示するには認証してください",
+  "chatLockPaywallTitle": "個別ロックについて",
+  "chatLockPaywallBody": "個別ロック機能は「広告を非表示にする」を購入すると使えるようになります。",
+  "purchaseButton": "購入する",
+  "createdAtLabel": "作成日時: {datetime}",
+  "@createdAtLabel": {
+    "placeholders": { "datetime": {} }
+  },
+  "manualRoomBadgeLabel": "写真ルーム",
+  "deletePlaceholderConfirmTitle": "削除しますか？",
+  "deletePlaceholderConfirmBody": "このメッセージを削除します。添付した写真・動画があればそれも削除されます。元には戻せません。",
+  "deleteChatConfirmBody": "このトークの保存済みデータを削除します。元には戻せません。",
+  "detachSelectedTooltip": "選択したメッセージの写真・動画だけ削除",
+  "detachMessagesConfirmTitle": "写真・動画を削除しますか？",
+  "detachMessagesConfirmBody": "選択した{count}件のメッセージから、添付した写真・動画だけを削除します。メッセージ自体は残ります。元には戻せません。",
+  "@detachMessagesConfirmBody": {
+    "placeholders": { "count": {} }
+  },
+  "deleteAttachmentTooltip": "削除",
+  "deleteAttachmentConfirmTitle": "削除しますか？",
+  "deleteAttachmentConfirmBody": "この写真・動画を削除します。元には戻せません。",
+  "deleteAttachmentFailedMessage": "削除に失敗しました: {error}",
+  "@deleteAttachmentFailedMessage": {
+    "placeholders": { "error": {} }
+  },
+  "saveToDeviceTooltip": "端末に保存",
+  "saveToDeviceSuccessMessage": "端末に保存しました",
+  "saveToDeviceFailedMessage": "保存に失敗しました: {error}",
+  "@saveToDeviceFailedMessage": {
+    "placeholders": { "error": {} }
+  },
+  "emptyChatListMessage": "まだトークが取り込まれていません。\nLINEで「トークをテキストで送信」したファイルを右下のボタンから読み込んでください。",
+  "importedAtLabel": "取込日時: {datetime}",
+  "@importedAtLabel": {
+    "placeholders": { "datetime": {} }
+  },
+
+  "settingsTitle": "設定",
+  "appLockToggleTitle": "起動時にロックする",
+  "appLockToggleSubtitle": "端末のPIN・パターン・生体認証で保護します（下の「アプリPIN」設定時はそちらを優先使用）",
+  "appLockUnsupportedMessage": "この端末では画面ロック（PIN・パターン・生体認証など）が設定されていません。下の「アプリPIN」を設定するとロック機能を使えます。",
+  "appPinSectionTitle": "アプリPIN",
+  "appPinSetSubtitle": "設定済み。端末に画面ロックが無くてもロック機能を使えます",
+  "appPinNotSetSubtitle": "未設定。設定すると端末の画面ロックが無くてもロック機能を使えます",
+  "setAppPinButton": "設定",
+  "changeAppPinButton": "変更",
+  "setAppPinTitle": "アプリPINを設定",
+  "appPinHint": "PIN（4〜6桁の数字）",
+  "appPinConfirmHint": "もう一度入力",
+  "appPinTooShortMessage": "PINは4桁以上で入力してください",
+  "appPinMismatchMessage": "PINが一致しません",
+  "enterAppPinTitle": "PINを入力",
+  "appPinIncorrectMessage": "PINが違います",
+  "appPinManageAuthReason": "PINを変更・削除するには認証してください",
+  "removeAppPinWarningTitle": "アプリPINを削除しますか？",
+  "removeAppPinWarningBody": "この端末には他に使える認証方法がありません。ロック中のトークやアプリロックがある場合、PINを削除すると解除できなくなります。",
+  "purchaseUnavailableMessage": "この端末では購入機能を利用できません。",
+  "purchaseFetchFailedMessage": "購入情報を取得できませんでした。時間をおいて再度お試しください。",
+  "restoringPurchasesMessage": "購入情報を確認しています…",
+  "removeAdsTitle": "広告を非表示にする",
+  "removeAdsPurchasedSubtitle": "購入済みです。ご利用ありがとうございます。",
+  "removeAdsSubtitle": "一度購入すると、以降ずっと広告が表示されなくなります",
+  "restorePurchaseTitle": "購入を復元",
+  "restorePurchaseSubtitle": "機種変更などで再度購入済みの状態にする場合はこちら",
+  "backupTitle": "バックアップを作成",
+  "backupSubtitle": "全データを1つのファイルにまとめて保存します(機種変更などに)",
+  "backupCreateFailedMessage": "バックアップの作成に失敗しました: {error}",
+  "@backupCreateFailedMessage": {
+    "placeholders": { "error": {} }
+  },
+  "restoreBackupTitle": "バックアップから復元",
+  "restoreBackupSubtitle": "以前作成したバックアップファイルを読み込みます",
+  "restoreBackupConfirmTitle": "復元しますか？",
+  "restoreBackupConfirmBody": "現在のデータはすべて上書きされます。この操作は元に戻せません。",
+  "restoreBackupSuccessMessage": "復元が完了しました",
+  "restoreBackupInvalidFileMessage": "有効なバックアップファイルではありません",
+  "restoreBackupFailedMessage": "復元に失敗しました: {error}",
+  "@restoreBackupFailedMessage": {
+    "placeholders": { "error": {} }
+  },
+  "languageSettingTitle": "言語",
+  "languageSystemDefault": "端末の設定に従う",
+
+  "lockedMessage": "ロックされています",
+  "unlockButtonLabel": "認証してロック解除",
+  "appLockAuthReason": "トーク内容を表示するには認証してください",
+
+  "filterTitle": "絞り込み",
+  "textSearchLabel": "本文検索",
+  "keywordHint": "キーワードを入力",
+  "senderLabel": "発言者",
+  "periodLabel": "期間",
+  "periodPickerButton": "期間を選択",
+  "periodRangeFormat": "{start} 〜 {end}",
+  "@periodRangeFormat": {
+    "placeholders": { "start": {}, "end": {} }
+  },
+  "clearButton": "クリア",
+  "applyButton": "適用",
+
+  "loadingTitle": "読み込み中...",
+  "copySelectedTooltip": "選択したメッセージをコピー",
+  "copiedMessage": "{label}をコピーしました",
+  "@copiedMessage": {
+    "placeholders": { "label": {} }
+  },
+  "selectedCountLabel": "選択した{count}件",
+  "@selectedCountLabel": {
+    "placeholders": { "count": {} }
+  },
+  "photosTooltip": "写真",
+  "filterTooltip": "発言者・期間で絞り込み",
+  "copyAllTooltip": "すべてコピー",
+  "allCountLabel": "全{count}件",
+  "@allCountLabel": {
+    "placeholders": { "count": {} }
+  },
+  "exportTooltip": "エクスポート",
+  "defaultChatTitleForExport": "トーク",
+  "noMessagesFiltered": "条件に一致するメッセージがありません",
+  "noMessagesAtAll": "メッセージがありません",
+  "tapToAttachPhoto": "{placeholder} タップして写真を添付",
+  "@tapToAttachPhoto": {
+    "placeholders": { "placeholder": {} }
+  },
+  "tapToAttachVideo": "{placeholder} タップして動画を添付",
+  "@tapToAttachVideo": {
+    "placeholders": { "placeholder": {} }
+  },
+  "tapToAttachFile": "{placeholder} タップしてファイルを添付",
+  "@tapToAttachFile": {
+    "placeholders": { "placeholder": {} }
+  },
+
+  "photosTitle": "写真",
+  "noPhotosMessage": "このトークにはまだ写真がありません。\n右下のボタンから追加できます。",
+  "addPhotoTooltip": "写真を追加",
+  "addVideoLabel": "動画を追加",
+  "addFileLabel": "ファイルを追加",
+  "openFileFailedMessage": "ファイルを開けませんでした: {error}",
+  "@openFileFailedMessage": {
+    "placeholders": { "error": {} }
+  },
+  "addMediaTooltip": "写真・動画を追加",
+  "pickChatForPhotoTitle": "写真を追加するトークを選択",
+  "noChatsForPhotoMessage": "トークがありません。先にLINEのトークを取り込んでください。",
+  "attachPendingPhotoBannerMessage": "追加するメッセージをタップしてください(残り{count}件)",
+  "@attachPendingPhotoBannerMessage": {
+    "placeholders": { "count": {} }
+  },
+  "photoAttachedMessage": "写真を追加しました",
+  "fileAttachedMessage": "ファイルを追加しました",
+  "attachPendingDirectlyButton": "トークに直接追加",
+  "pendingAttachedToRoomMessage": "{count}件をこのトークルームに追加しました",
+  "@pendingAttachedToRoomMessage": {
+    "placeholders": { "count": {} }
+  },
+
+  "exportFormatTitle": "エクスポート形式を選択",
+  "excelOption": "Excel (.xlsx)",
+  "pdfOption": "PDF",
+  "wordOption": "Word (.docx)",
+  "exportFailedMessage": "エクスポートに失敗しました: {error}",
+  "@exportFailedMessage": {
+    "placeholders": { "error": {} }
+  },
+
+  "excelSheetName": "トーク",
+  "columnDate": "日付",
+  "columnTime": "時刻",
+  "columnSender": "発言者",
+  "columnBody": "本文",
+  "systemSender": "システム",
+  "excelGenerationFailed": "Excelファイルの生成に失敗しました",
+  "docxGenerationFailed": "Wordファイルの生成に失敗しました",
+
+  "importScreenTitle": "トークを取り込む",
+  "idleImportInstruction": "LINEアプリのトーク画面で「トークをテキストで送信」を選び、\n保存した.txtファイルをここから読み込んでください。",
+  "openLineButton": "LINEを開く",
+  "lineNotInstalledMessage": "LINEがインストールされていません",
+  "selectFileButton": "ファイルを選択",
+  "retrySelectFileButton": "もう一度選択",
+  "sharedTextFallbackTitle": "LINEトーク（共有）",
+  "sharedContentLoadFailed": "共有内容の読み込みに失敗しました: {error}",
+  "@sharedContentLoadFailed": {
+    "placeholders": { "error": {} }
+  },
+  "fileLoadFailed": "ファイルの読み込みに失敗しました: {error}",
+  "@fileLoadFailed": {
+    "placeholders": { "error": {} }
+  },
+  "saveFailedMessage": "保存に失敗しました: {error}",
+  "@saveFailedMessage": {
+    "placeholders": { "error": {} }
+  },
+  "previewLabelTitle": "タイトル",
+  "previewLabelMessageCount": "メッセージ数",
+  "previewLabelParticipantCount": "参加者数",
+  "previewNoTitleDetected": "(検出なし)",
+  "previewMessageCountValue": "{count}件",
+  "@previewMessageCountValue": {
+    "placeholders": { "count": {} }
+  },
+  "previewParticipantCountValue": "{count}人",
+  "@previewParticipantCountValue": {
+    "placeholders": { "count": {} }
+  },
+  "previewSuspiciousMessage": "メッセージとして認識できませんでした。LINEの標準エクスポート形式の.txtファイルか確認してください。",
+  "previewUnrecognizedLinesMessage": "{count}行は直前のメッセージの続きとして解析されました。",
+  "@previewUnrecognizedLinesMessage": {
+    "placeholders": { "count": {} }
+  },
+  "saveButton": "保存する"
+}
