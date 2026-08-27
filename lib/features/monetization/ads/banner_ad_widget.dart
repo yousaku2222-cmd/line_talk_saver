@@ -23,7 +23,7 @@ class _DismissibleBannerAdState extends ConsumerState<DismissibleBannerAd> {
     if (_loadRequested) return;
     _loadRequested = true;
     final ad = BannerAd(
-      adUnitId: AdUnitIds.androidBanner,
+      adUnitId: AdUnitIds.bannerAdUnitId,
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(

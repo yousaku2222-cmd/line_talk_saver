@@ -39,6 +39,14 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<!-- TODO: no iOS app has been registered in AdMob console yet (only
+	     "トーク保存 / Android" exists there as of 2026-08-27). This is
+	     Google's own public sample/test App ID, used only so the SDK
+	     initializes instead of crashing on launch. Swap to the real iOS
+	     App ID once one exists in AdMob console (see also
+	     lib/features/monetization/ads/ad_unit_ids.dart). -->
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>トークに写真・動画を添付するために写真ライブラリへのアクセスを使用します。</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
