@@ -1,10 +1,18 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- Required by local_auth for the biometric/device-credential app-lock prompt. -->
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
     <!-- Required by gal (save photo/video to device gallery) on API <= 29;
          newer versions use the scoped-storage MediaStore API instead. -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
                       android:maxSdkVersion="29"/>
+    <!-- open_filex declares broad media-library read permissions unconditionally,
+         but this app only uses it to hand off already-exported files (xlsx/pdf/docx)
+         to another app via a content:// URI, which doesn't require them. Photo/video
+         attachment uses image_picker's system Photo Picker, which also doesn't need
+         them. Remove both from the merged manifest. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" tools:node="remove"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" tools:node="remove"/>
     <application
         android:label="@string/app_name"
         android:name="${applicationName}"

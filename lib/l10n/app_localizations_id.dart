@@ -534,4 +534,69 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get saveButton => 'Simpan';
+
+  @override
+  String get helpMenuTitle => 'Panduan Pengguna';
+
+  @override
+  String get helpMenuSubtitle => 'Lihat cara menggunakan fitur aplikasi';
+
+  @override
+  String get helpScreenTitle => 'Panduan Pengguna';
+
+  @override
+  String get helpAboutTitle => 'Tentang aplikasi ini';
+
+  @override
+  String get helpAboutBody =>
+      'Talk Saver adalah aplikasi untuk menyimpan riwayat obrolan LINE ke perangkat Anda dalam format yang mudah dibaca kembali. Aplikasi ini tidak pernah mengoperasikan LINE secara otomatis — aplikasi ini bekerja dengan mengimpor file .txt yang Anda ekspor menggunakan fitur \"Kirim obrolan sebagai teks\" milik LINE sendiri.';
+
+  @override
+  String get helpImportTitle => 'Mengimpor obrolan';
+
+  @override
+  String get helpImportBody =>
+      '1. Di LINE, buka obrolan, ketuk menu (≡) → \"Kirim riwayat obrolan\" → \"Kirim sebagai teks\"\n2. Pilih \"Talk Saver\" dari lembar berbagi untuk mengimpornya secara otomatis\n3. Jika tidak muncul, simpan sebagai file .txt terlebih dahulu, lalu gunakan \"Impor obrolan\" → \"Pilih file\" di aplikasi ini\n\nAnda juga bisa langsung membuka LINE menggunakan tombol \"Buka LINE\" di layar impor.';
+
+  @override
+  String get helpChatListTitle => 'Mengelola daftar obrolan';
+
+  @override
+  String get helpChatListBody =>
+      '• Ketuk ikon pensil untuk mengganti nama obrolan\n• Gunakan tombol + di kanan atas untuk membuat ruang baru khusus foto, video, dan file\n• Ketuk ikon gembok untuk mengunci satu obrolan secara individual (memerlukan pembelian)';
+
+  @override
+  String get helpChatDetailTitle => 'Menggunakan layar obrolan';
+
+  @override
+  String get helpChatDetailBody =>
+      '• Tekan lama atau pilih beberapa pesan untuk menyalinnya\n• Saring berdasarkan pengirim, rentang tanggal, atau kata kunci\n• Ekspor ke Excel, PDF, atau Word dari ikon di kanan atas\n• Gunakan ikon galeri untuk melihat semua foto yang dilampirkan pada obrolan itu';
+
+  @override
+  String get helpAttachTitle => 'Melampirkan foto, video, dan file';
+
+  @override
+  String get helpAttachBody =>
+      'Ketuk placeholder [Foto] atau [Stiker] untuk melampirkan foto atau video dari perangkat Anda. Ekspor LINE tidak menyertakan gambar aslinya, jadi tidak bisa dipulihkan secara otomatis.';
+
+  @override
+  String get helpLockTitle => 'Tentang penguncian';
+
+  @override
+  String get helpLockBody =>
+      'Di Pengaturan, Anda bisa mewajibkan autentikasi biometrik, PIN perangkat, atau PIN dalam aplikasi untuk membuka aplikasi. Jika Anda mengatur PIN dalam aplikasi, PIN ini akan diutamakan dibandingkan autentikasi biometrik perangkat.\n\nMengunci obrolan individual termasuk dalam pembelian yang sama dengan menghapus iklan.';
+
+  @override
+  String get helpBackupTitle => 'Cadangan dan pemulihan';
+
+  @override
+  String get helpBackupBody =>
+      'Gunakan \"Buat cadangan\" di Pengaturan untuk menyimpan semua obrolan dan lampiran yang diimpor ke dalam satu file. Gunakan \"Pulihkan dari cadangan\" untuk membawa data yang sama ke perangkat baru.';
+
+  @override
+  String get helpPrivacyTitle => 'Tentang data Anda';
+
+  @override
+  String get helpPrivacyBody =>
+      'Semua yang Anda impor atau lampirkan hanya disimpan di perangkat ini. Tidak ada yang pernah dikirim ke server.';
 }

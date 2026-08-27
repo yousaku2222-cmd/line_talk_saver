@@ -166,5 +166,25 @@
   "previewParticipantCountValue": "{count}명",
   "previewSuspiciousMessage": "메시지를 인식할 수 없습니다. LINE 표준 내보내기 형식의 .txt 파일인지 확인해 주세요.",
   "previewUnrecognizedLinesMessage": "{count}줄이 이전 메시지에 이어붙여져 처리되었습니다.",
-  "saveButton": "저장"
+  "saveButton": "저장",
+
+  "helpMenuTitle": "사용 설명서",
+  "helpMenuSubtitle": "사용법과 기능 설명 보기",
+  "helpScreenTitle": "사용 설명서",
+  "helpAboutTitle": "이 앱에 대하여",
+  "helpAboutBody": "「토크 저장」은 LINE 대화 내용을 나중에 보기 쉬운 형태로 기기에 저장하는 앱입니다. LINE 앱을 자동으로 조작하지 않으며, LINE의 「대화를 텍스트로 보내기」 기능으로 내보낸 .txt 파일을 불러와 사용합니다.",
+  "helpImportTitle": "대화 불러오기",
+  "helpImportBody": "1. LINE 대화 화면에서 메뉴(≡) → 「대화 기록 보내기」 → 「텍스트로 보내기」 선택\n2. 공유 대상 목록에서 「토크 저장」을 선택하면 자동으로 불러옵니다\n3. 목록에 없으면 .txt 파일로 저장한 후, 앱의 「대화 불러오기」 → 「파일 선택」에서 불러오세요\n\n불러오기 화면의 「LINE 열기」 버튼으로 LINE 앱으로 바로 이동할 수도 있습니다.",
+  "helpChatListTitle": "대화 목록 조작",
+  "helpChatListBody": "・연필 아이콘으로 대화 이름을 변경할 수 있습니다\n・오른쪽 위 + 버튼으로 사진·동영상·파일 전용 방을 새로 만들 수 있습니다\n・자물쇠 아이콘으로 대화별 개별 잠금을 설정할 수 있습니다(구매 필요)",
+  "helpChatDetailTitle": "대화 화면 사용법",
+  "helpChatDetailBody": "・메시지를 길게 누르거나 여러 개 선택해 복사할 수 있습니다\n・발신자·기간·키워드로 검색할 수 있습니다\n・오른쪽 위 아이콘에서 Excel·PDF·Word로 내보낼 수 있습니다\n・갤러리 아이콘으로 해당 대화에 첨부한 사진을 모아 볼 수 있습니다",
+  "helpAttachTitle": "사진·동영상·파일 첨부",
+  "helpAttachBody": "[사진][스티커] 표시를 탭하면 기기에서 사진이나 동영상을 선택해 첨부할 수 있습니다. LINE 내보내기 기능에는 이미지 원본이 포함되지 않아 자동으로 복원할 수 없습니다.",
+  "helpLockTitle": "잠금 기능에 대하여",
+  "helpLockBody": "설정 화면에서 앱 실행 시 생체 인증·기기 PIN·앱 내 PIN 잠금을 설정할 수 있습니다. 앱 내 PIN을 설정하면 기기의 생체 인증보다 우선 적용됩니다.\n\n대화별 개별 잠금은 광고 제거와 동일한 인앱 구매에 포함되어 있습니다.",
+  "helpBackupTitle": "백업과 복원",
+  "helpBackupBody": "설정 화면의 「백업 만들기」에서 저장된 모든 대화와 첨부 파일을 하나의 파일로 내보낼 수 있습니다. 기기를 변경할 때는 「백업에서 복원」으로 새 기기에 동일한 내용을 불러올 수 있습니다.",
+  "helpPrivacyTitle": "데이터 저장 위치에 대하여",
+  "helpPrivacyBody": "불러온 대화와 첨부한 사진은 모두 이 기기 안에만 저장됩니다. 서버로 전송되는 일은 전혀 없습니다."
 }

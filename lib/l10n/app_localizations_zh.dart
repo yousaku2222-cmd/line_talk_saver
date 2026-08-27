@@ -513,6 +513,70 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get saveButton => '儲存';
+
+  @override
+  String get helpMenuTitle => '使用說明書';
+
+  @override
+  String get helpMenuSubtitle => '查看使用方法與功能說明';
+
+  @override
+  String get helpScreenTitle => '使用說明書';
+
+  @override
+  String get helpAboutTitle => '關於本應用程式';
+
+  @override
+  String get helpAboutBody =>
+      '「聊天記錄保存」是一款將LINE聊天記錄以便於日後查看的形式保存到裝置中的應用程式。本應用程式不會自動操作LINE本體,而是透過匯入您使用LINE自帶的「以文字形式傳送聊天記錄」功能匯出的.txt檔案來使用。';
+
+  @override
+  String get helpImportTitle => '匯入聊天記錄';
+
+  @override
+  String get helpImportBody =>
+      '1. 在LINE聊天畫面點擊選單(≡)→「傳送聊天記錄」→「以文字形式傳送」\n2. 從分享清單中選擇「聊天記錄保存」即可自動匯入\n3. 如果清單中沒有顯示,請先儲存為.txt檔案,然後在本應用程式中透過「匯入聊天記錄」→「選擇檔案」讀取\n\n您也可以在匯入畫面透過「開啟LINE」按鈕直接切換到LINE應用程式。';
+
+  @override
+  String get helpChatListTitle => '聊天清單操作';
+
+  @override
+  String get helpChatListBody =>
+      '• 點擊鉛筆圖示可以修改聊天名稱\n• 使用右上角的+按鈕可以新增一個專門用於存放照片、影片和檔案的房間\n• 點擊鎖頭圖示可以為單一聊天設定個別鎖定(需購買)';
+
+  @override
+  String get helpChatDetailTitle => '聊天詳情頁的使用方法';
+
+  @override
+  String get helpChatDetailBody =>
+      '• 長按或多選訊息即可複製\n• 可依發言人、時間段、關鍵字進行篩選搜尋\n• 可透過右上角圖示匯出為Excel、PDF或Word格式\n• 點擊圖庫圖示可檢視該聊天中新增的所有照片';
+
+  @override
+  String get helpAttachTitle => '新增照片、影片和檔案';
+
+  @override
+  String get helpAttachBody =>
+      '點擊[照片][貼圖]等預留位置,即可從裝置中選擇照片或影片進行新增。由於LINE的匯出功能不包含圖片本體,因此無法自動還原。';
+
+  @override
+  String get helpLockTitle => '關於鎖定功能';
+
+  @override
+  String get helpLockBody =>
+      '在設定頁面,您可以設定啟動應用程式時需要生物辨識、裝置PIN碼或應用程式內PIN碼驗證。設定應用程式內PIN碼後,將優先於裝置的生物辨識驗證使用。\n\n單一聊天鎖定功能與移除廣告包含在同一項內購中。';
+
+  @override
+  String get helpBackupTitle => '備份與還原';
+
+  @override
+  String get helpBackupBody =>
+      '在設定頁面的「建立備份」中,可以將所有已儲存的聊天記錄和附件彙總匯出為一個檔案。更換裝置時,可透過「從備份還原」將相同內容讀取到新裝置中。';
+
+  @override
+  String get helpPrivacyTitle => '關於資料儲存位置';
+
+  @override
+  String get helpPrivacyBody => '匯入的聊天記錄和新增的照片,均僅儲存在本裝置中,絕不會傳送至任何伺服器。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -1023,4 +1087,68 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get saveButton => '儲存';
+
+  @override
+  String get helpMenuTitle => '使用說明書';
+
+  @override
+  String get helpMenuSubtitle => '查看使用方法與功能說明';
+
+  @override
+  String get helpScreenTitle => '使用說明書';
+
+  @override
+  String get helpAboutTitle => '關於本應用程式';
+
+  @override
+  String get helpAboutBody =>
+      '「聊天記錄保存」是一款將LINE聊天記錄以便於日後查看的形式保存到裝置中的應用程式。本應用程式不會自動操作LINE本體,而是透過匯入您使用LINE自帶的「以文字形式傳送聊天記錄」功能匯出的.txt檔案來使用。';
+
+  @override
+  String get helpImportTitle => '匯入聊天記錄';
+
+  @override
+  String get helpImportBody =>
+      '1. 在LINE聊天畫面點擊選單(≡)→「傳送聊天記錄」→「以文字形式傳送」\n2. 從分享清單中選擇「聊天記錄保存」即可自動匯入\n3. 如果清單中沒有顯示,請先儲存為.txt檔案,然後在本應用程式中透過「匯入聊天記錄」→「選擇檔案」讀取\n\n您也可以在匯入畫面透過「開啟LINE」按鈕直接切換到LINE應用程式。';
+
+  @override
+  String get helpChatListTitle => '聊天清單操作';
+
+  @override
+  String get helpChatListBody =>
+      '• 點擊鉛筆圖示可以修改聊天名稱\n• 使用右上角的+按鈕可以新增一個專門用於存放照片、影片和檔案的房間\n• 點擊鎖頭圖示可以為單一聊天設定個別鎖定(需購買)';
+
+  @override
+  String get helpChatDetailTitle => '聊天詳情頁的使用方法';
+
+  @override
+  String get helpChatDetailBody =>
+      '• 長按或多選訊息即可複製\n• 可依發言人、時間段、關鍵字進行篩選搜尋\n• 可透過右上角圖示匯出為Excel、PDF或Word格式\n• 點擊圖庫圖示可檢視該聊天中新增的所有照片';
+
+  @override
+  String get helpAttachTitle => '新增照片、影片和檔案';
+
+  @override
+  String get helpAttachBody =>
+      '點擊[照片][貼圖]等預留位置,即可從裝置中選擇照片或影片進行新增。由於LINE的匯出功能不包含圖片本體,因此無法自動還原。';
+
+  @override
+  String get helpLockTitle => '關於鎖定功能';
+
+  @override
+  String get helpLockBody =>
+      '在設定頁面,您可以設定啟動應用程式時需要生物辨識、裝置PIN碼或應用程式內PIN碼驗證。設定應用程式內PIN碼後,將優先於裝置的生物辨識驗證使用。\n\n單一聊天鎖定功能與移除廣告包含在同一項內購中。';
+
+  @override
+  String get helpBackupTitle => '備份與還原';
+
+  @override
+  String get helpBackupBody =>
+      '在設定頁面的「建立備份」中,可以將所有已儲存的聊天記錄和附件彙總匯出為一個檔案。更換裝置時,可透過「從備份還原」將相同內容讀取到新裝置中。';
+
+  @override
+  String get helpPrivacyTitle => '關於資料儲存位置';
+
+  @override
+  String get helpPrivacyBody => '匯入的聊天記錄和新增的照片,均僅儲存在本裝置中,絕不會傳送至任何伺服器。';
 }

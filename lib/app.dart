@@ -7,6 +7,7 @@ import 'features/app_lock/ui/app_lock_gate.dart';
 import 'features/chat_detail/ui/chat_detail_screen.dart';
 import 'features/chat_detail/ui/chat_detail_screen_args.dart';
 import 'features/chat_list/ui/chat_list_screen.dart';
+import 'features/help/ui/help_screen.dart';
 import 'features/import/ui/import_screen.dart';
 import 'features/import/ui/import_screen_args.dart';
 import 'features/monetization/purchase/purchase_listener.dart';
@@ -77,6 +78,8 @@ class LineTalkSaverApp extends ConsumerWidget {
             );
           case '/settings':
             return MaterialPageRoute(builder: (_) => const SettingsScreen());
+          case '/help':
+            return MaterialPageRoute(builder: (_) => const HelpScreen());
           default:
             return MaterialPageRoute(builder: (_) => const ChatListScreen());
         }

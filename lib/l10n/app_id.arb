@@ -166,5 +166,25 @@
   "previewParticipantCountValue": "{count}",
   "previewSuspiciousMessage": "Tidak ada pesan yang dapat dikenali. Pastikan ini adalah file .txt hasil ekspor langsung dari LINE.",
   "previewUnrecognizedLinesMessage": "{count} baris digabungkan ke pesan sebelumnya.",
-  "saveButton": "Simpan"
+  "saveButton": "Simpan",
+
+  "helpMenuTitle": "Panduan Pengguna",
+  "helpMenuSubtitle": "Lihat cara menggunakan fitur aplikasi",
+  "helpScreenTitle": "Panduan Pengguna",
+  "helpAboutTitle": "Tentang aplikasi ini",
+  "helpAboutBody": "Talk Saver adalah aplikasi untuk menyimpan riwayat obrolan LINE ke perangkat Anda dalam format yang mudah dibaca kembali. Aplikasi ini tidak pernah mengoperasikan LINE secara otomatis — aplikasi ini bekerja dengan mengimpor file .txt yang Anda ekspor menggunakan fitur \"Kirim obrolan sebagai teks\" milik LINE sendiri.",
+  "helpImportTitle": "Mengimpor obrolan",
+  "helpImportBody": "1. Di LINE, buka obrolan, ketuk menu (≡) → \"Kirim riwayat obrolan\" → \"Kirim sebagai teks\"\n2. Pilih \"Talk Saver\" dari lembar berbagi untuk mengimpornya secara otomatis\n3. Jika tidak muncul, simpan sebagai file .txt terlebih dahulu, lalu gunakan \"Impor obrolan\" → \"Pilih file\" di aplikasi ini\n\nAnda juga bisa langsung membuka LINE menggunakan tombol \"Buka LINE\" di layar impor.",
+  "helpChatListTitle": "Mengelola daftar obrolan",
+  "helpChatListBody": "• Ketuk ikon pensil untuk mengganti nama obrolan\n• Gunakan tombol + di kanan atas untuk membuat ruang baru khusus foto, video, dan file\n• Ketuk ikon gembok untuk mengunci satu obrolan secara individual (memerlukan pembelian)",
+  "helpChatDetailTitle": "Menggunakan layar obrolan",
+  "helpChatDetailBody": "• Tekan lama atau pilih beberapa pesan untuk menyalinnya\n• Saring berdasarkan pengirim, rentang tanggal, atau kata kunci\n• Ekspor ke Excel, PDF, atau Word dari ikon di kanan atas\n• Gunakan ikon galeri untuk melihat semua foto yang dilampirkan pada obrolan itu",
+  "helpAttachTitle": "Melampirkan foto, video, dan file",
+  "helpAttachBody": "Ketuk placeholder [Foto] atau [Stiker] untuk melampirkan foto atau video dari perangkat Anda. Ekspor LINE tidak menyertakan gambar aslinya, jadi tidak bisa dipulihkan secara otomatis.",
+  "helpLockTitle": "Tentang penguncian",
+  "helpLockBody": "Di Pengaturan, Anda bisa mewajibkan autentikasi biometrik, PIN perangkat, atau PIN dalam aplikasi untuk membuka aplikasi. Jika Anda mengatur PIN dalam aplikasi, PIN ini akan diutamakan dibandingkan autentikasi biometrik perangkat.\n\nMengunci obrolan individual termasuk dalam pembelian yang sama dengan menghapus iklan.",
+  "helpBackupTitle": "Cadangan dan pemulihan",
+  "helpBackupBody": "Gunakan \"Buat cadangan\" di Pengaturan untuk menyimpan semua obrolan dan lampiran yang diimpor ke dalam satu file. Gunakan \"Pulihkan dari cadangan\" untuk membawa data yang sama ke perangkat baru.",
+  "helpPrivacyTitle": "Tentang data Anda",
+  "helpPrivacyBody": "Semua yang Anda impor atau lampirkan hanya disimpan di perangkat ini. Tidak ada yang pernah dikirim ke server."
 }

@@ -532,4 +532,69 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saveButton => 'Save';
+
+  @override
+  String get helpMenuTitle => 'User Guide';
+
+  @override
+  String get helpMenuSubtitle => 'See how to use the app\'s features';
+
+  @override
+  String get helpScreenTitle => 'User Guide';
+
+  @override
+  String get helpAboutTitle => 'About this app';
+
+  @override
+  String get helpAboutBody =>
+      'Talk Saver is an app for saving your LINE chat history to your device in a format that\'s easy to look back on. It never operates LINE automatically — it works by importing the .txt file you export using LINE\'s own \"Send chat as text\" feature.';
+
+  @override
+  String get helpImportTitle => 'Importing a chat';
+
+  @override
+  String get helpImportBody =>
+      '1. In LINE, open the chat, tap the menu (≡) → \"Send chat history\" → \"Send as text\"\n2. Choose \"Talk Saver\" from the share sheet to import it automatically\n3. If it doesn\'t appear in the list, save it as a .txt file first, then use \"Import chat\" → \"Choose file\" in this app\n\nYou can also jump straight to LINE using the \"Open LINE\" button on the import screen.';
+
+  @override
+  String get helpChatListTitle => 'Managing the chat list';
+
+  @override
+  String get helpChatListBody =>
+      '• Tap the pencil icon to rename a chat\n• Use the + button at the top right to create a new room just for photos, videos, and files\n• Tap the lock icon to lock an individual chat (requires purchase)';
+
+  @override
+  String get helpChatDetailTitle => 'Using the chat screen';
+
+  @override
+  String get helpChatDetailBody =>
+      '• Long-press or multi-select messages to copy them\n• Filter by sender, date range, or keyword\n• Export to Excel, PDF, or Word from the icon at the top right\n• Use the gallery icon to view all photos attached to that chat';
+
+  @override
+  String get helpAttachTitle => 'Attaching photos, videos, and files';
+
+  @override
+  String get helpAttachBody =>
+      'Tap a [Photo] or [Sticker] placeholder to attach a photo or video from your device. LINE\'s export doesn\'t include the actual images, so they can\'t be restored automatically.';
+
+  @override
+  String get helpLockTitle => 'About locking';
+
+  @override
+  String get helpLockBody =>
+      'In Settings, you can require biometric authentication, a device PIN, or an in-app PIN to open the app. If you set an in-app PIN, it takes priority over your device\'s biometric authentication.\n\nLocking individual chats is included in the same purchase as removing ads.';
+
+  @override
+  String get helpBackupTitle => 'Backup and restore';
+
+  @override
+  String get helpBackupBody =>
+      'Use \"Create backup\" in Settings to save all your imported chats and attachments into a single file. Use \"Restore from backup\" to bring the same data to a new device.';
+
+  @override
+  String get helpPrivacyTitle => 'Where your data is stored';
+
+  @override
+  String get helpPrivacyBody =>
+      'Everything you import or attach is stored only on this device. Nothing is ever sent to a server.';
 }

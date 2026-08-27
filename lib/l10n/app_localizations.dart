@@ -1006,6 +1006,120 @@ abstract class AppLocalizations {
   /// In ja, this message translates to:
   /// **'保存する'**
   String get saveButton;
+
+  /// No description provided for @helpMenuTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'取扱説明書'**
+  String get helpMenuTitle;
+
+  /// No description provided for @helpMenuSubtitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'使い方や機能の説明を見る'**
+  String get helpMenuSubtitle;
+
+  /// No description provided for @helpScreenTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'取扱説明書'**
+  String get helpScreenTitle;
+
+  /// No description provided for @helpAboutTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'このアプリについて'**
+  String get helpAboutTitle;
+
+  /// No description provided for @helpAboutBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'「トーク保存」は、LINEのトーク履歴をあとから見返しやすい形で端末に保存するためのアプリです。LINE本体を自動操作することはなく、LINE標準の「トークをテキストで送信」機能で書き出した.txtファイルを取り込んで使います。'**
+  String get helpAboutBody;
+
+  /// No description provided for @helpImportTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'トークを取り込む'**
+  String get helpImportTitle;
+
+  /// No description provided for @helpImportBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'1. LINEのトーク画面で「その他」→「トーク履歴を送信」→「テキストで送信」を選ぶ\n2. 共有先の一覧から「トーク保存」を選ぶと自動で取り込まれます\n3. 一覧に出ない場合は、いったん.txtとして保存し、本アプリの「トークを取り込む」→「ファイルを選択」から読み込んでください\n\n「トークを取り込む」画面の「LINEを開く」ボタンから、LINEアプリへすぐに切り替えることもできます。'**
+  String get helpImportBody;
+
+  /// No description provided for @helpChatListTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'トーク一覧の操作'**
+  String get helpChatListTitle;
+
+  /// No description provided for @helpChatListBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'・鉛筆アイコンでトーク名を変更できます\n・右上の＋ボタンから、写真・動画・ファイルだけをまとめる専用ルームを新規作成できます\n・鍵アイコンでトークごとに個別ロックを設定できます(要購入)'**
+  String get helpChatListBody;
+
+  /// No description provided for @helpChatDetailTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'トーク詳細の使い方'**
+  String get helpChatDetailTitle;
+
+  /// No description provided for @helpChatDetailBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'・メッセージの長押し、または複数選択でコピーできます\n・発言者・期間・キーワードで絞り込み検索ができます\n・右上のアイコンからExcel・PDF・Wordへの書き出しができます\n・ギャラリーアイコンで、そのトークに添付した写真をまとめて確認できます'**
+  String get helpChatDetailBody;
+
+  /// No description provided for @helpAttachTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'写真・動画・ファイルの添付'**
+  String get helpAttachTitle;
+
+  /// No description provided for @helpAttachBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'[写真][スタンプ]などのプレースホルダー部分をタップすると、端末から写真や動画を選んで添付できます。LINEのエクスポート機能には画像本体が含まれないため、自動で復元することはできません。'**
+  String get helpAttachBody;
+
+  /// No description provided for @helpLockTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'ロック機能について'**
+  String get helpLockTitle;
+
+  /// No description provided for @helpLockBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'設定画面から、アプリ起動時のロック(生体認証・端末PIN・アプリ内PIN)を設定できます。アプリ内PINを設定すると、端末の生体認証よりも優先して使われます。\n\nトークルームごとの個別ロックは、広告非表示と同じアプリ内購入に含まれています。'**
+  String get helpLockBody;
+
+  /// No description provided for @helpBackupTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'バックアップと復元'**
+  String get helpBackupTitle;
+
+  /// No description provided for @helpBackupBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'設定画面の「バックアップを作成」から、保存済みのすべてのトーク・添付ファイルを1つのファイルにまとめて書き出せます。機種変更の際などは、「バックアップから復元」で同じ内容を新しい端末に読み込めます。'**
+  String get helpBackupBody;
+
+  /// No description provided for @helpPrivacyTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'データの保存場所について'**
+  String get helpPrivacyTitle;
+
+  /// No description provided for @helpPrivacyBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'取り込んだトークや添付した写真は、すべてこの端末内にのみ保存されます。サーバーへの送信は一切行っていません。'**
+  String get helpPrivacyBody;
 }
 
 class _AppLocalizationsDelegate

@@ -345,6 +345,13 @@ class SettingsScreen extends ConsumerWidget {
             subtitle: Text(l10n.restoreBackupSubtitle),
             onTap: () => _restoreBackup(context, ref),
           ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Icon(Icons.menu_book_outlined),
+            title: Text(l10n.helpMenuTitle),
+            subtitle: Text(l10n.helpMenuSubtitle),
+            onTap: () => Navigator.of(context).pushNamed('/help'),
+          ),
         ],
       ),
       bottomNavigationBar: const SafeArea(child: DismissibleBannerAd()),
