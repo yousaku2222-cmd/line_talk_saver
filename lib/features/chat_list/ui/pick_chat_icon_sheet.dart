@@ -189,16 +189,13 @@ class _IconOption extends StatelessWidget {
                     ),
             ),
             if (!unlocked && !loading)
-              Positioned(
-                right: -2,
-                top: -2,
-                child: Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    color: scheme.surface,
-                    shape: BoxShape.circle,
+              Positioned.fill(
+                child: Center(
+                  child: Icon(
+                    Icons.lock,
+                    size: 18,
+                    color: selected ? scheme.onPrimary : scheme.onPrimaryContainer,
                   ),
-                  child: Icon(Icons.lock, size: 12, color: scheme.onSurfaceVariant),
                 ),
               ),
           ],
