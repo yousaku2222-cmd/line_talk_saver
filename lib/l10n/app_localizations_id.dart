@@ -48,6 +48,24 @@ class AppLocalizationsId extends AppLocalizations {
   String get pickChatIconTitle => 'Pilih ikon';
 
   @override
+  String get pickChatIconLockedHint =>
+      'Ikon dengan 🔒 akan terbuka permanen setelah menonton satu iklan.';
+
+  @override
+  String get unlockIconDialogTitle => 'Buka kunci ikon ini?';
+
+  @override
+  String get unlockIconDialogBody =>
+      'Tonton satu iklan untuk membuka ikon ini selamanya.';
+
+  @override
+  String get unlockIconWatchAdButton => 'Tonton iklan';
+
+  @override
+  String get unlockIconFailedMessage =>
+      'Iklan tidak dapat diputar. Coba lagi sebentar lagi.';
+
+  @override
   String get renameChatTitle => 'Ganti nama obrolan';
 
   @override

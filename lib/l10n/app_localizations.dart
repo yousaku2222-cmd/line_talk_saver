@@ -179,6 +179,36 @@ abstract class AppLocalizations {
   /// **'アイコンを選択'**
   String get pickChatIconTitle;
 
+  /// No description provided for @pickChatIconLockedHint.
+  ///
+  /// In ja, this message translates to:
+  /// **'🔒のアイコンは、広告を1回見ると今後ずっと使えるようになります'**
+  String get pickChatIconLockedHint;
+
+  /// No description provided for @unlockIconDialogTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'このアイコンを解放しますか?'**
+  String get unlockIconDialogTitle;
+
+  /// No description provided for @unlockIconDialogBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'広告を1回見ると、このアイコンを今後ずっと使えるようになります。'**
+  String get unlockIconDialogBody;
+
+  /// No description provided for @unlockIconWatchAdButton.
+  ///
+  /// In ja, this message translates to:
+  /// **'広告を見る'**
+  String get unlockIconWatchAdButton;
+
+  /// No description provided for @unlockIconFailedMessage.
+  ///
+  /// In ja, this message translates to:
+  /// **'広告を再生できませんでした。しばらくしてからもう一度お試しください。'**
+  String get unlockIconFailedMessage;
+
   /// No description provided for @renameChatTitle.
   ///
   /// In ja, this message translates to:

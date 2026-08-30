@@ -48,6 +48,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pickChatIconTitle => 'Choose an icon';
 
   @override
+  String get pickChatIconLockedHint =>
+      'Icons with 🔒 unlock permanently after watching one ad.';
+
+  @override
+  String get unlockIconDialogTitle => 'Unlock this icon?';
+
+  @override
+  String get unlockIconDialogBody =>
+      'Watch one ad to unlock this icon for good.';
+
+  @override
+  String get unlockIconWatchAdButton => 'Watch ad';
+
+  @override
+  String get unlockIconFailedMessage =>
+      'Couldn\'t play the ad. Please try again in a moment.';
+
+  @override
   String get renameChatTitle => 'Rename this chat';
 
   @override

@@ -48,6 +48,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get pickChatIconTitle => '選擇圖示';
 
   @override
+  String get pickChatIconLockedHint => '帶🔒的圖示,觀看一次廣告即可永久解鎖';
+
+  @override
+  String get unlockIconDialogTitle => '要解鎖這個圖示嗎?';
+
+  @override
+  String get unlockIconDialogBody => '觀看一次廣告,即可永久使用這個圖示。';
+
+  @override
+  String get unlockIconWatchAdButton => '觀看廣告';
+
+  @override
+  String get unlockIconFailedMessage => '廣告播放失敗,請稍後再試。';
+
+  @override
   String get renameChatTitle => '變更聊天名稱';
 
   @override
@@ -620,6 +635,21 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get pickChatIconTitle => '選擇圖示';
+
+  @override
+  String get pickChatIconLockedHint => '帶🔒的圖示,觀看一次廣告即可永久解鎖';
+
+  @override
+  String get unlockIconDialogTitle => '要解鎖這個圖示嗎?';
+
+  @override
+  String get unlockIconDialogBody => '觀看一次廣告,即可永久使用這個圖示。';
+
+  @override
+  String get unlockIconWatchAdButton => '觀看廣告';
+
+  @override
+  String get unlockIconFailedMessage => '廣告播放失敗,請稍後再試。';
 
   @override
   String get renameChatTitle => '變更聊天名稱';

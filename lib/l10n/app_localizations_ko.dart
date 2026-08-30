@@ -48,6 +48,21 @@ class AppLocalizationsKo extends AppLocalizations {
   String get pickChatIconTitle => '아이콘 선택';
 
   @override
+  String get pickChatIconLockedHint => '🔒 아이콘은 광고를 한 번 보면 앞으로 계속 사용할 수 있습니다';
+
+  @override
+  String get unlockIconDialogTitle => '이 아이콘을 잠금 해제하시겠습니까?';
+
+  @override
+  String get unlockIconDialogBody => '광고를 한 번 보면 이 아이콘을 앞으로 계속 사용할 수 있습니다.';
+
+  @override
+  String get unlockIconWatchAdButton => '광고 보기';
+
+  @override
+  String get unlockIconFailedMessage => '광고를 재생할 수 없었습니다. 잠시 후 다시 시도해 주세요.';
+
+  @override
   String get renameChatTitle => '대화 이름 변경';
 
   @override

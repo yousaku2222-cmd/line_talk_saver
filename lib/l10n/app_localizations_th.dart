@@ -48,6 +48,24 @@ class AppLocalizationsTh extends AppLocalizations {
   String get pickChatIconTitle => 'เลือกไอคอน';
 
   @override
+  String get pickChatIconLockedHint =>
+      'ไอคอนที่มี 🔒 จะปลดล็อกถาวรหลังจากดูโฆษณาหนึ่งครั้ง';
+
+  @override
+  String get unlockIconDialogTitle => 'ปลดล็อกไอคอนนี้หรือไม่?';
+
+  @override
+  String get unlockIconDialogBody =>
+      'ดูโฆษณาหนึ่งครั้งเพื่อปลดล็อกไอคอนนี้ถาวร';
+
+  @override
+  String get unlockIconWatchAdButton => 'ดูโฆษณา';
+
+  @override
+  String get unlockIconFailedMessage =>
+      'ไม่สามารถเล่นโฆษณาได้ กรุณาลองใหม่อีกครั้งในภายหลัง';
+
+  @override
   String get renameChatTitle => 'เปลี่ยนชื่อแชท';
 
   @override

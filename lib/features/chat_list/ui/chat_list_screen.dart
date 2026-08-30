@@ -19,6 +19,7 @@ class ChatListScreen extends ConsumerWidget {
   Future<void> _pickIcon(BuildContext context, WidgetRef ref, Chat chat) async {
     final chosen = await showPickChatIconSheet(
       context,
+      ref: ref,
       currentIconKey: chat.iconKey,
     );
     if (chosen == null) return;

@@ -48,6 +48,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get pickChatIconTitle => 'アイコンを選択';
 
   @override
+  String get pickChatIconLockedHint => '🔒のアイコンは、広告を1回見ると今後ずっと使えるようになります';
+
+  @override
+  String get unlockIconDialogTitle => 'このアイコンを解放しますか?';
+
+  @override
+  String get unlockIconDialogBody => '広告を1回見ると、このアイコンを今後ずっと使えるようになります。';
+
+  @override
+  String get unlockIconWatchAdButton => '広告を見る';
+
+  @override
+  String get unlockIconFailedMessage => '広告を再生できませんでした。しばらくしてからもう一度お試しください。';
+
+  @override
   String get renameChatTitle => 'トーク名を変更';
 
   @override

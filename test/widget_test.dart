@@ -34,7 +34,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('LINEトーク保存'), findsOneWidget);
+    expect(find.text('トーク保存'), findsOneWidget);
     expect(find.text('トークを取り込む'), findsOneWidget);
   });
 }

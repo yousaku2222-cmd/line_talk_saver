@@ -33,4 +33,25 @@ class AdUnitIds {
 
   /// Platform-aware banner ad unit ID.
   static String get bannerAdUnitId => Platform.isIOS ? iosBanner : androidBanner;
+
+  // TODO: create real "Rewarded" ad units in the AdMob console
+  // (console.admob.google.com) for both platforms and fill these in, the
+  // same way the banner units above were. Until then this always falls back
+  // to Google's public test rewarded ad unit, regardless of [useTestAds].
+  static const _realAndroidRewarded = '';
+  static const _testAndroidRewarded = 'ca-app-pub-3940256099942544/5224354917';
+
+  static const _realIosRewarded = '';
+  static const _testIosRewarded = 'ca-app-pub-3940256099942544/1712485313';
+
+  static String get androidRewarded =>
+      (useTestAds || _realAndroidRewarded.isEmpty)
+          ? _testAndroidRewarded
+          : _realAndroidRewarded;
+
+  static String get iosRewarded =>
+      (useTestAds || _realIosRewarded.isEmpty) ? _testIosRewarded : _realIosRewarded;
+
+  /// Platform-aware rewarded ad unit ID.
+  static String get rewardedAdUnitId => Platform.isIOS ? iosRewarded : androidRewarded;
 }
