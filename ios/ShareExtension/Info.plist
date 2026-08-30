@@ -14,11 +14,16 @@
 			<dict>
 				<!-- LINE's "トークをテキストで送信" hands the app either a .txt
 				     file attachment or inline text depending on OS/LINE version,
-				     so both activation rules are enabled. -->
+				     so both activation rules are enabled. FileWithMaxCount and
+				     ImageWithMaxCount are raised above 1 so multi-photo shares
+				     (e.g. selecting several images side-by-side in LINE) also
+				     show this app in the share sheet. -->
 				<key>NSExtensionActivationSupportsText</key>
 				<true/>
 				<key>NSExtensionActivationSupportsFileWithMaxCount</key>
-				<integer>1</integer>
+				<integer>20</integer>
+				<key>NSExtensionActivationSupportsImageWithMaxCount</key>
+				<integer>20</integer>
 			</dict>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
