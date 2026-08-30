@@ -561,7 +561,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpChatListBody =>
-      '• Tap the pencil icon to rename a chat\n• Use the + button at the top right to create a new room just for photos, videos, and files\n• Tap the lock icon to lock an individual chat (requires purchase)';
+      '• Tap the icon to the left of a chat to change it to any icon you like\n• Tap the pencil icon to rename a chat\n• Use the + button at the top right to create a new room just for photos, videos, and files\n• Tap the lock icon to lock an individual chat (requires purchase)';
 
   @override
   String get helpChatDetailTitle => 'Using the chat screen';
@@ -589,7 +589,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpBackupBody =>
-      'Use \"Create backup\" in Settings to save all your imported chats and attachments into a single file. Use \"Restore from backup\" to bring the same data to a new device.';
+      'Use \"Create backup\" in Settings to save all your imported chats and attachments into a single file. Use \"Restore from backup\" to bring the same data to a new device -- this works even when switching between iPhone and Android, since the backup file isn\'t tied to either platform.';
 
   @override
   String get helpPrivacyTitle => 'Where your data is stored';

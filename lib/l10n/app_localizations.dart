@@ -1058,7 +1058,7 @@ abstract class AppLocalizations {
   /// No description provided for @helpChatListBody.
   ///
   /// In ja, this message translates to:
-  /// **'・鉛筆アイコンでトーク名を変更できます\n・右上の＋ボタンから、写真・動画・ファイルだけをまとめる専用ルームを新規作成できます\n・鍵アイコンでトークごとに個別ロックを設定できます(要購入)'**
+  /// **'・トークの左のアイコンをタップすると、好きなアイコンに変更できます\n・鉛筆アイコンでトーク名を変更できます\n・右上の＋ボタンから、写真・動画・ファイルだけをまとめる専用ルームを新規作成できます\n・鍵アイコンでトークごとに個別ロックを設定できます(要購入)'**
   String get helpChatListBody;
 
   /// No description provided for @helpChatDetailTitle.
@@ -1106,7 +1106,7 @@ abstract class AppLocalizations {
   /// No description provided for @helpBackupBody.
   ///
   /// In ja, this message translates to:
-  /// **'設定画面の「バックアップを作成」から、保存済みのすべてのトーク・添付ファイルを1つのファイルにまとめて書き出せます。機種変更の際などは、「バックアップから復元」で同じ内容を新しい端末に読み込めます。'**
+  /// **'設定画面の「バックアップを作成」から、保存済みのすべてのトーク・添付ファイルを1つのファイルにまとめて書き出せます。機種変更の際などは、「バックアップから復元」で同じ内容を新しい端末に読み込めます。iPhoneとAndroidの間で機種変更する場合も、同じ手順でそのまま移行できます。'**
   String get helpBackupBody;
 
   /// No description provided for @helpPrivacyTitle.

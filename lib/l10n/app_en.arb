@@ -176,7 +176,7 @@
   "helpImportTitle": "Importing a chat",
   "helpImportBody": "1. In LINE, open the chat, tap the menu (≡) → \"Send chat history\" → \"Send as text\"\n2. Choose \"Talk Saver\" from the share sheet to import it automatically\n3. If it doesn't appear in the list, save it as a .txt file first, then use \"Import chat\" → \"Choose file\" in this app\n\nYou can also jump straight to LINE using the \"Open LINE\" button on the import screen.",
   "helpChatListTitle": "Managing the chat list",
-  "helpChatListBody": "• Tap the pencil icon to rename a chat\n• Use the + button at the top right to create a new room just for photos, videos, and files\n• Tap the lock icon to lock an individual chat (requires purchase)",
+  "helpChatListBody": "• Tap the icon to the left of a chat to change it to any icon you like\n• Tap the pencil icon to rename a chat\n• Use the + button at the top right to create a new room just for photos, videos, and files\n• Tap the lock icon to lock an individual chat (requires purchase)",
   "helpChatDetailTitle": "Using the chat screen",
   "helpChatDetailBody": "• Long-press or multi-select messages to copy them\n• Filter by sender, date range, or keyword\n• Export to Excel, PDF, or Word from the icon at the top right\n• Use the gallery icon to view all photos attached to that chat",
   "helpAttachTitle": "Attaching photos, videos, and files",
@@ -184,7 +184,7 @@
   "helpLockTitle": "About locking",
   "helpLockBody": "In Settings, you can require biometric authentication, a device PIN, or an in-app PIN to open the app. If you set an in-app PIN, it takes priority over your device's biometric authentication.\n\nLocking individual chats is included in the same purchase as removing ads.",
   "helpBackupTitle": "Backup and restore",
-  "helpBackupBody": "Use \"Create backup\" in Settings to save all your imported chats and attachments into a single file. Use \"Restore from backup\" to bring the same data to a new device.",
+  "helpBackupBody": "Use \"Create backup\" in Settings to save all your imported chats and attachments into a single file. Use \"Restore from backup\" to bring the same data to a new device -- this works even when switching between iPhone and Android, since the backup file isn't tied to either platform.",
   "helpPrivacyTitle": "Where your data is stored",
   "helpPrivacyBody": "Everything you import or attach is stored only on this device. Nothing is ever sent to a server."
 }

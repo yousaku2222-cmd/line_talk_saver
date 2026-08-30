@@ -542,7 +542,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get helpChatListBody =>
-      '• 點擊鉛筆圖示可以修改聊天名稱\n• 使用右上角的+按鈕可以新增一個專門用於存放照片、影片和檔案的房間\n• 點擊鎖頭圖示可以為單一聊天設定個別鎖定(需購買)';
+      '• 點擊聊天左側的圖示可以更換成喜歡的圖示\n• 點擊鉛筆圖示可以修改聊天名稱\n• 使用右上角的+按鈕可以新增一個專門用於存放照片、影片和檔案的房間\n• 點擊鎖頭圖示可以為單一聊天設定個別鎖定(需購買)';
 
   @override
   String get helpChatDetailTitle => '聊天詳情頁的使用方法';
@@ -570,7 +570,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get helpBackupBody =>
-      '在設定頁面的「建立備份」中,可以將所有已儲存的聊天記錄和附件彙總匯出為一個檔案。更換裝置時,可透過「從備份還原」將相同內容讀取到新裝置中。';
+      '在設定頁面的「建立備份」中,可以將所有已儲存的聊天記錄和附件彙總匯出為一個檔案。更換裝置時,可透過「從備份還原」將相同內容讀取到新裝置中。即使在iPhone和Android之間更換裝置,也能以同樣方式轉移資料。';
 
   @override
   String get helpPrivacyTitle => '關於資料儲存位置';
@@ -1116,7 +1116,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get helpChatListBody =>
-      '• 點擊鉛筆圖示可以修改聊天名稱\n• 使用右上角的+按鈕可以新增一個專門用於存放照片、影片和檔案的房間\n• 點擊鎖頭圖示可以為單一聊天設定個別鎖定(需購買)';
+      '• 點擊聊天左側的圖示可以更換成喜歡的圖示\n• 點擊鉛筆圖示可以修改聊天名稱\n• 使用右上角的+按鈕可以新增一個專門用於存放照片、影片和檔案的房間\n• 點擊鎖頭圖示可以為單一聊天設定個別鎖定(需購買)';
 
   @override
   String get helpChatDetailTitle => '聊天詳情頁的使用方法';
@@ -1144,7 +1144,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get helpBackupBody =>
-      '在設定頁面的「建立備份」中,可以將所有已儲存的聊天記錄和附件彙總匯出為一個檔案。更換裝置時,可透過「從備份還原」將相同內容讀取到新裝置中。';
+      '在設定頁面的「建立備份」中,可以將所有已儲存的聊天記錄和附件彙總匯出為一個檔案。更換裝置時,可透過「從備份還原」將相同內容讀取到新裝置中。即使在iPhone和Android之間更換裝置,也能以同樣方式轉移資料。';
 
   @override
   String get helpPrivacyTitle => '關於資料儲存位置';

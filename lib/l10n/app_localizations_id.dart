@@ -563,7 +563,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get helpChatListBody =>
-      '• Ketuk ikon pensil untuk mengganti nama obrolan\n• Gunakan tombol + di kanan atas untuk membuat ruang baru khusus foto, video, dan file\n• Ketuk ikon gembok untuk mengunci satu obrolan secara individual (memerlukan pembelian)';
+      '• Ketuk ikon di sebelah kiri obrolan untuk menggantinya dengan ikon pilihan Anda\n• Ketuk ikon pensil untuk mengganti nama obrolan\n• Gunakan tombol + di kanan atas untuk membuat ruang baru khusus foto, video, dan file\n• Ketuk ikon gembok untuk mengunci satu obrolan secara individual (memerlukan pembelian)';
 
   @override
   String get helpChatDetailTitle => 'Menggunakan layar obrolan';
@@ -591,7 +591,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get helpBackupBody =>
-      'Gunakan \"Buat cadangan\" di Pengaturan untuk menyimpan semua obrolan dan lampiran yang diimpor ke dalam satu file. Gunakan \"Pulihkan dari cadangan\" untuk membawa data yang sama ke perangkat baru.';
+      'Gunakan \"Buat cadangan\" di Pengaturan untuk menyimpan semua obrolan dan lampiran yang diimpor ke dalam satu file. Gunakan \"Pulihkan dari cadangan\" untuk membawa data yang sama ke perangkat baru. Cara ini juga berfungsi saat berpindah antara iPhone dan Android.';
 
   @override
   String get helpPrivacyTitle => 'Tentang data Anda';

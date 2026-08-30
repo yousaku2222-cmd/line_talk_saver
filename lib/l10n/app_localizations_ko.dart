@@ -547,7 +547,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get helpChatListBody =>
-      '・연필 아이콘으로 대화 이름을 변경할 수 있습니다\n・오른쪽 위 + 버튼으로 사진·동영상·파일 전용 방을 새로 만들 수 있습니다\n・자물쇠 아이콘으로 대화별 개별 잠금을 설정할 수 있습니다(구매 필요)';
+      '・대화 왼쪽의 아이콘을 탭하면 원하는 아이콘으로 바꿀 수 있습니다\n・연필 아이콘으로 대화 이름을 변경할 수 있습니다\n・오른쪽 위 + 버튼으로 사진·동영상·파일 전용 방을 새로 만들 수 있습니다\n・자물쇠 아이콘으로 대화별 개별 잠금을 설정할 수 있습니다(구매 필요)';
 
   @override
   String get helpChatDetailTitle => '대화 화면 사용법';
@@ -575,7 +575,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get helpBackupBody =>
-      '설정 화면의 「백업 만들기」에서 저장된 모든 대화와 첨부 파일을 하나의 파일로 내보낼 수 있습니다. 기기를 변경할 때는 「백업에서 복원」으로 새 기기에 동일한 내용을 불러올 수 있습니다.';
+      '설정 화면의 「백업 만들기」에서 저장된 모든 대화와 첨부 파일을 하나의 파일로 내보낼 수 있습니다. 기기를 변경할 때는 「백업에서 복원」으로 새 기기에 동일한 내용을 불러올 수 있습니다. iPhone과 Android 간에 기기를 변경하는 경우에도 동일한 방법으로 이전할 수 있습니다.';
 
   @override
   String get helpPrivacyTitle => '데이터 저장 위치에 대하여';
