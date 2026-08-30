@@ -1150,6 +1150,42 @@ abstract class AppLocalizations {
   /// In ja, this message translates to:
   /// **'取り込んだトークや添付した写真は、すべてこの端末内にのみ保存されます。サーバーへの送信は一切行っていません。'**
   String get helpPrivacyBody;
+
+  /// No description provided for @feedbackMenuTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'フィードバック・不具合報告'**
+  String get feedbackMenuTitle;
+
+  /// No description provided for @feedbackMenuSubtitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'お気づきの点をメールでお送りください'**
+  String get feedbackMenuSubtitle;
+
+  /// No description provided for @feedbackEmailSubject.
+  ///
+  /// In ja, this message translates to:
+  /// **'【トーク保存】フィードバック'**
+  String get feedbackEmailSubject;
+
+  /// No description provided for @feedbackEmailBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'ご意見・ご要望・不具合の内容をこの下にご記入ください。\n(不具合の場合は、どの操作で起きたか・ご使用の機種もあわせてお書きいただけると助かります)\n\n'**
+  String get feedbackEmailBody;
+
+  /// No description provided for @feedbackLaunchFailedMessage.
+  ///
+  /// In ja, this message translates to:
+  /// **'メールアプリを開けませんでした。talk-hozon-testers@googlegroups.com までご連絡ください。'**
+  String get feedbackLaunchFailedMessage;
+
+  /// No description provided for @appVersionTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'アプリのバージョン'**
+  String get appVersionTitle;
 }
 
 class _AppLocalizationsDelegate

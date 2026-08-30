@@ -595,4 +595,24 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get helpPrivacyBody =>
       '取り込んだトークや添付した写真は、すべてこの端末内にのみ保存されます。サーバーへの送信は一切行っていません。';
+
+  @override
+  String get feedbackMenuTitle => 'フィードバック・不具合報告';
+
+  @override
+  String get feedbackMenuSubtitle => 'お気づきの点をメールでお送りください';
+
+  @override
+  String get feedbackEmailSubject => '【トーク保存】フィードバック';
+
+  @override
+  String get feedbackEmailBody =>
+      'ご意見・ご要望・不具合の内容をこの下にご記入ください。\n(不具合の場合は、どの操作で起きたか・ご使用の機種もあわせてお書きいただけると助かります)\n\n';
+
+  @override
+  String get feedbackLaunchFailedMessage =>
+      'メールアプリを開けませんでした。talk-hozon-testers@googlegroups.com までご連絡ください。';
+
+  @override
+  String get appVersionTitle => 'アプリのバージョン';
 }

@@ -598,4 +598,24 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get helpPrivacyBody =>
       '불러온 대화와 첨부한 사진은 모두 이 기기 안에만 저장됩니다. 서버로 전송되는 일은 전혀 없습니다.';
+
+  @override
+  String get feedbackMenuTitle => '피드백·오류 신고';
+
+  @override
+  String get feedbackMenuSubtitle => '발견하신 점을 이메일로 보내 주세요';
+
+  @override
+  String get feedbackEmailSubject => '[톡 저장] 피드백';
+
+  @override
+  String get feedbackEmailBody =>
+      '의견·요청·오류 내용을 아래에 적어 주세요.\n(오류의 경우 어떤 조작에서 발생했는지와 사용 기종도 함께 적어 주시면 도움이 됩니다.)\n\n';
+
+  @override
+  String get feedbackLaunchFailedMessage =>
+      '메일 앱을 열 수 없습니다. talk-hozon-testers@googlegroups.com 으로 연락해 주세요.';
+
+  @override
+  String get appVersionTitle => '앱 버전';
 }

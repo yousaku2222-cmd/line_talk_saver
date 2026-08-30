@@ -191,5 +191,11 @@
   "helpBackupTitle": "백업과 복원",
   "helpBackupBody": "설정 화면의 「백업 만들기」에서 저장된 모든 대화와 첨부 파일을 하나의 파일로 내보낼 수 있습니다. 기기를 변경할 때는 「백업에서 복원」으로 새 기기에 동일한 내용을 불러올 수 있습니다. iPhone과 Android 간에 기기를 변경하는 경우에도 동일한 방법으로 이전할 수 있습니다.",
   "helpPrivacyTitle": "데이터 저장 위치에 대하여",
-  "helpPrivacyBody": "불러온 대화와 첨부한 사진은 모두 이 기기 안에만 저장됩니다. 서버로 전송되는 일은 전혀 없습니다."
+  "helpPrivacyBody": "불러온 대화와 첨부한 사진은 모두 이 기기 안에만 저장됩니다. 서버로 전송되는 일은 전혀 없습니다.",
+  "feedbackMenuTitle": "피드백·오류 신고",
+  "feedbackMenuSubtitle": "발견하신 점을 이메일로 보내 주세요",
+  "feedbackEmailSubject": "[톡 저장] 피드백",
+  "feedbackEmailBody": "의견·요청·오류 내용을 아래에 적어 주세요.\n(오류의 경우 어떤 조작에서 발생했는지와 사용 기종도 함께 적어 주시면 도움이 됩니다.)\n\n",
+  "feedbackLaunchFailedMessage": "메일 앱을 열 수 없습니다. talk-hozon-testers@googlegroups.com 으로 연락해 주세요.",
+  "appVersionTitle": "앱 버전"
 }

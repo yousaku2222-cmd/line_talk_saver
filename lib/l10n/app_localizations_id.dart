@@ -617,4 +617,25 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get helpPrivacyBody =>
       'Semua yang Anda impor atau lampirkan hanya disimpan di perangkat ini. Tidak ada yang pernah dikirim ke server.';
+
+  @override
+  String get feedbackMenuTitle => 'Masukan & laporan bug';
+
+  @override
+  String get feedbackMenuSubtitle =>
+      'Kirimkan hal apa pun yang Anda temukan lewat email';
+
+  @override
+  String get feedbackEmailSubject => '[Talk Saver] Masukan';
+
+  @override
+  String get feedbackEmailBody =>
+      'Silakan tulis masukan, permintaan, atau bug Anda di bawah ini.\n(Untuk bug, sertakan langkah saat terjadi dan model perangkat Anda.)\n\n';
+
+  @override
+  String get feedbackLaunchFailedMessage =>
+      'Tidak dapat membuka aplikasi email. Hubungi talk-hozon-testers@googlegroups.com.';
+
+  @override
+  String get appVersionTitle => 'Versi aplikasi';
 }

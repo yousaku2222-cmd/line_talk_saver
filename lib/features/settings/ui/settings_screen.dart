@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../app_lock/app_lock_prefs.dart';
@@ -18,6 +22,28 @@ import '../locale/locale_prefs.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
+
+  /// Closed-test feedback goes to the tester Google Group.
+  static const _feedbackEmail = 'talk-hozon-testers@googlegroups.com';
+
+  Future<void> _sendFeedback(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context)!;
+    final info = await PackageInfo.fromPlatform();
+    final footer = '\n----------\n'
+        'App: ${info.version} (build ${info.buildNumber})\n'
+        'OS: ${Platform.operatingSystem} ${Platform.operatingSystemVersion}';
+    final uri = Uri.parse(
+      'mailto:$_feedbackEmail'
+      '?subject=${Uri.encodeComponent(l10n.feedbackEmailSubject)}'
+      '&body=${Uri.encodeComponent(l10n.feedbackEmailBody + footer)}',
+    );
+    final launched = await launchUrl(uri);
+    if (!launched && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.feedbackLaunchFailedMessage)),
+      );
+    }
+  }
 
   Future<void> _onToggleLock(BuildContext context, WidgetRef ref, bool value) async {
     final l10n = AppLocalizations.of(context)!;
@@ -351,6 +377,26 @@ class SettingsScreen extends ConsumerWidget {
             title: Text(l10n.helpMenuTitle),
             subtitle: Text(l10n.helpMenuSubtitle),
             onTap: () => Navigator.of(context).pushNamed('/help'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.feedback_outlined),
+            title: Text(l10n.feedbackMenuTitle),
+            subtitle: Text(l10n.feedbackMenuSubtitle),
+            onTap: () => _sendFeedback(context, ref),
+          ),
+          const Divider(height: 1),
+          FutureBuilder<PackageInfo>(
+            future: PackageInfo.fromPlatform(),
+            builder: (context, snapshot) {
+              final info = snapshot.data;
+              return ListTile(
+                leading: const Icon(Icons.info_outline),
+                title: Text(l10n.appVersionTitle),
+                subtitle: Text(
+                  info == null ? '' : '${info.version} (${info.buildNumber})',
+                ),
+              );
+            },
           ),
         ],
       ),

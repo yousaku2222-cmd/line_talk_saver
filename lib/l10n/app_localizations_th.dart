@@ -611,4 +611,24 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get helpPrivacyBody =>
       'ทุกอย่างที่คุณนำเข้าหรือแนบจะถูกจัดเก็บไว้ในเครื่องนี้เท่านั้น ไม่มีการส่งข้อมูลใด ๆ ไปยังเซิร์ฟเวอร์';
+
+  @override
+  String get feedbackMenuTitle => 'ความคิดเห็นและรายงานปัญหา';
+
+  @override
+  String get feedbackMenuSubtitle => 'พบสิ่งใดโปรดส่งอีเมลมาบอกเรา';
+
+  @override
+  String get feedbackEmailSubject => '[Talk Saver] ความคิดเห็น';
+
+  @override
+  String get feedbackEmailBody =>
+      'โปรดเขียนความคิดเห็น คำขอ หรือปัญหาที่พบไว้ด้านล่าง\n(หากเป็นปัญหา โปรดระบุขั้นตอนที่เกิดและรุ่นเครื่องของคุณด้วย)\n\n';
+
+  @override
+  String get feedbackLaunchFailedMessage =>
+      'ไม่สามารถเปิดแอปอีเมลได้ โปรดติดต่อ talk-hozon-testers@googlegroups.com';
+
+  @override
+  String get appVersionTitle => 'เวอร์ชันแอป';
 }

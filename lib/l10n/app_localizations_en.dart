@@ -615,4 +615,24 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get helpPrivacyBody =>
       'Everything you import or attach is stored only on this device. Nothing is ever sent to a server.';
+
+  @override
+  String get feedbackMenuTitle => 'Feedback & bug reports';
+
+  @override
+  String get feedbackMenuSubtitle => 'Send us anything you notice by email';
+
+  @override
+  String get feedbackEmailSubject => '[Talk Saver] Feedback';
+
+  @override
+  String get feedbackEmailBody =>
+      'Please write your feedback, requests, or the bug below.\n(For a bug, it helps to include what you were doing and your device model.)\n\n';
+
+  @override
+  String get feedbackLaunchFailedMessage =>
+      'Couldn\'t open a mail app. Please contact talk-hozon-testers@googlegroups.com.';
+
+  @override
+  String get appVersionTitle => 'App version';
 }

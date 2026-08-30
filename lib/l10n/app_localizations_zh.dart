@@ -592,6 +592,26 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get helpPrivacyBody => '匯入的聊天記錄和新增的照片,均僅儲存在本裝置中,絕不會傳送至任何伺服器。';
+
+  @override
+  String get feedbackMenuTitle => '意見回饋與問題回報';
+
+  @override
+  String get feedbackMenuSubtitle => '如有任何發現,請透過電子郵件告訴我們';
+
+  @override
+  String get feedbackEmailSubject => '【聊天保存】意見回饋';
+
+  @override
+  String get feedbackEmailBody =>
+      '請在下方填寫您的意見、需求或遇到的問題。\n(若為問題,請一併說明在哪一步操作時發生,以及您的裝置型號。)\n\n';
+
+  @override
+  String get feedbackLaunchFailedMessage =>
+      '無法開啟郵件應用程式。請聯絡 talk-hozon-testers@googlegroups.com。';
+
+  @override
+  String get appVersionTitle => '應用程式版本';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -1181,4 +1201,24 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get helpPrivacyBody => '匯入的聊天記錄和新增的照片,均僅儲存在本裝置中,絕不會傳送至任何伺服器。';
+
+  @override
+  String get feedbackMenuTitle => '意見回饋與問題回報';
+
+  @override
+  String get feedbackMenuSubtitle => '如有任何發現,請透過電子郵件告訴我們';
+
+  @override
+  String get feedbackEmailSubject => '【聊天保存】意見回饋';
+
+  @override
+  String get feedbackEmailBody =>
+      '請在下方填寫您的意見、需求或遇到的問題。\n(若為問題,請一併說明在哪一步操作時發生,以及您的裝置型號。)\n\n';
+
+  @override
+  String get feedbackLaunchFailedMessage =>
+      '無法開啟郵件應用程式。請聯絡 talk-hozon-testers@googlegroups.com。';
+
+  @override
+  String get appVersionTitle => '應用程式版本';
 }

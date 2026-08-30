@@ -260,5 +260,11 @@
   "helpBackupTitle": "バックアップと復元",
   "helpBackupBody": "設定画面の「バックアップを作成」から、保存済みのすべてのトーク・添付ファイルを1つのファイルにまとめて書き出せます。機種変更の際などは、「バックアップから復元」で同じ内容を新しい端末に読み込めます。iPhoneとAndroidの間で機種変更する場合も、同じ手順でそのまま移行できます。",
   "helpPrivacyTitle": "データの保存場所について",
-  "helpPrivacyBody": "取り込んだトークや添付した写真は、すべてこの端末内にのみ保存されます。サーバーへの送信は一切行っていません。"
+  "helpPrivacyBody": "取り込んだトークや添付した写真は、すべてこの端末内にのみ保存されます。サーバーへの送信は一切行っていません。",
+  "feedbackMenuTitle": "フィードバック・不具合報告",
+  "feedbackMenuSubtitle": "お気づきの点をメールでお送りください",
+  "feedbackEmailSubject": "【トーク保存】フィードバック",
+  "feedbackEmailBody": "ご意見・ご要望・不具合の内容をこの下にご記入ください。\n(不具合の場合は、どの操作で起きたか・ご使用の機種もあわせてお書きいただけると助かります)\n\n",
+  "feedbackLaunchFailedMessage": "メールアプリを開けませんでした。talk-hozon-testers@googlegroups.com までご連絡ください。",
+  "appVersionTitle": "アプリのバージョン"
 }

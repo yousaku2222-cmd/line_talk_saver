@@ -191,5 +191,11 @@
   "helpBackupTitle": "Cadangan dan pemulihan",
   "helpBackupBody": "Gunakan \"Buat cadangan\" di Pengaturan untuk menyimpan semua obrolan dan lampiran yang diimpor ke dalam satu file. Gunakan \"Pulihkan dari cadangan\" untuk membawa data yang sama ke perangkat baru. Cara ini juga berfungsi saat berpindah antara iPhone dan Android.",
   "helpPrivacyTitle": "Tentang data Anda",
-  "helpPrivacyBody": "Semua yang Anda impor atau lampirkan hanya disimpan di perangkat ini. Tidak ada yang pernah dikirim ke server."
+  "helpPrivacyBody": "Semua yang Anda impor atau lampirkan hanya disimpan di perangkat ini. Tidak ada yang pernah dikirim ke server.",
+  "feedbackMenuTitle": "Masukan & laporan bug",
+  "feedbackMenuSubtitle": "Kirimkan hal apa pun yang Anda temukan lewat email",
+  "feedbackEmailSubject": "[Talk Saver] Masukan",
+  "feedbackEmailBody": "Silakan tulis masukan, permintaan, atau bug Anda di bawah ini.\n(Untuk bug, sertakan langkah saat terjadi dan model perangkat Anda.)\n\n",
+  "feedbackLaunchFailedMessage": "Tidak dapat membuka aplikasi email. Hubungi talk-hozon-testers@googlegroups.com.",
+  "appVersionTitle": "Versi aplikasi"
 }
