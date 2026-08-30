@@ -190,8 +190,8 @@ class _IconOption extends StatelessWidget {
             ),
             if (!unlocked && !loading)
               Positioned(
-                right: 4,
-                bottom: 4,
+                right: -2,
+                top: -2,
                 child: Container(
                   padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
