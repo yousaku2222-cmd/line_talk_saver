@@ -1,0 +1,36 @@
+{
+  "identifier" : "5A7A0000-0000-0000-0000-000000000001",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "480",
+      "familyShareable" : false,
+      "internalID" : "5A7A0000-0000-0000-0000-000000000002",
+      "localizations" : [
+        {
+          "description" : "広告を非表示にする",
+          "displayName" : "広告を非表示にする",
+          "locale" : "ja"
+        }
+      ],
+      "productID" : "remove_ads",
+      "referenceName" : "Remove Ads",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_askToBuyEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_disableDialogs" : false,
+    "_editorMode" : true,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "ja_JP",
+    "_storefront" : "JPN",
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
