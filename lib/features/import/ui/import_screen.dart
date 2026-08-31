@@ -51,7 +51,10 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       if (sharedPath != null) {
-        _loadAndParseFromPath(sharedPath, sharedPath.split(RegExp(r'[\\/]')).last);
+        _loadAndParseFromPath(
+          sharedPath,
+          sharedPath.split(RegExp(r'[\\/]')).last,
+        );
       } else {
         _loadFromSharedText(sharedText!);
       }
@@ -90,7 +93,9 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
     );
     if (launched || !mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(AppLocalizations.of(context)!.lineNotInstalledMessage)),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.lineNotInstalledMessage),
+      ),
     );
   }
 
@@ -171,7 +176,8 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
         _status = _Status.preview;
         // TEMPORARY debug aid for diagnosing on-device parse failures;
         // remove once the real-device import format issue is confirmed fixed.
-        _debugInfo = 'bytes=${bytes.length} chars=${content.length}\nhead: $head';
+        _debugInfo =
+            'bytes=${bytes.length} chars=${content.length}\nhead: $head';
       });
     } catch (e) {
       if (!mounted) return;
@@ -189,7 +195,9 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
     }
     setState(() => _status = _Status.working);
     try {
-      final chatId = await ref.read(importRepositoryProvider).importParsedChat(
+      final chatId = await ref
+          .read(importRepositoryProvider)
+          .importParsedChat(
             result: result,
             sourceFileName: _sourceFileName!,
             rawTxtPath: _rawTxtPath!,
@@ -208,7 +216,9 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.importScreenTitle)),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.importScreenTitle),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: _buildBody(context),
@@ -246,30 +256,51 @@ class _IdleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final scheme = Theme.of(context).colorScheme;
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.upload_file, size: 64, color: Colors.grey),
-          const SizedBox(height: 16),
-          Text(
-            l10n.idleImportInstruction,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          const SizedBox(height: 24),
-          FilledButton.icon(
-            onPressed: onOpenLine,
-            icon: const Icon(Icons.chat_bubble_outline),
-            label: Text(l10n.openLineButton),
-          ),
-          const SizedBox(height: 12),
-          OutlinedButton.icon(
-            onPressed: onPick,
-            icon: const Icon(Icons.folder_open),
-            label: Text(l10n.selectFileButton),
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 104,
+              height: 104,
+              decoration: BoxDecoration(
+                color: scheme.primaryContainer,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.file_upload_outlined,
+                size: 44,
+                color: scheme.onPrimaryContainer,
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              l10n.idleImportInstruction,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 32),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: onOpenLine,
+                icon: const Icon(Icons.chat_bubble_outline),
+                label: Text(l10n.openLineButton),
+              ),
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: onPick,
+                icon: const Icon(Icons.folder_open),
+                label: Text(l10n.selectFileButton),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -283,18 +314,33 @@ class _ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.error_outline,
-              size: 64, color: Theme.of(context).colorScheme.error),
-          const SizedBox(height: 16),
-          Text(message, textAlign: TextAlign.center),
+          Container(
+            width: 104,
+            height: 104,
+            decoration: BoxDecoration(
+              color: scheme.errorContainer,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.error_outline,
+              size: 44,
+              color: scheme.onErrorContainer,
+            ),
+          ),
           const SizedBox(height: 24),
-          FilledButton(
-            onPressed: onRetry,
-            child: Text(AppLocalizations.of(context)!.retrySelectFileButton),
+          Text(message, textAlign: TextAlign.center),
+          const SizedBox(height: 32),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: onRetry,
+              child: Text(AppLocalizations.of(context)!.retrySelectFileButton),
+            ),
           ),
         ],
       ),
@@ -325,22 +371,38 @@ class _PreviewView extends StatelessWidget {
     final looksSuspicious = result.messages.isEmpty;
     final l10n = AppLocalizations.of(context)!;
 
+    final scheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(fileName, style: Theme.of(context).textTheme.titleMedium),
-        const SizedBox(height: 16),
-        _StatRow(
-          label: l10n.previewLabelTitle,
-          value: result.chatTitle ?? l10n.previewNoTitleDetected,
-        ),
-        _StatRow(
-          label: l10n.previewLabelMessageCount,
-          value: l10n.previewMessageCountValue(result.messages.length),
-        ),
-        _StatRow(
-          label: l10n.previewLabelParticipantCount,
-          value: l10n.previewParticipantCountValue(result.senderNames.length),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: scheme.surfaceContainerLowest,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: scheme.outline),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(fileName, style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 16),
+              _StatRow(
+                label: l10n.previewLabelTitle,
+                value: result.chatTitle ?? l10n.previewNoTitleDetected,
+              ),
+              _StatRow(
+                label: l10n.previewLabelMessageCount,
+                value: l10n.previewMessageCountValue(result.messages.length),
+              ),
+              _StatRow(
+                label: l10n.previewLabelParticipantCount,
+                value: l10n.previewParticipantCountValue(
+                  result.senderNames.length,
+                ),
+              ),
+            ],
+          ),
         ),
         if (looksSuspicious || result.unrecognizedLineCount > 0)
           Padding(
@@ -348,11 +410,13 @@ class _PreviewView extends StatelessWidget {
             child: Text(
               looksSuspicious
                   ? l10n.previewSuspiciousMessage
-                  : l10n.previewUnrecognizedLinesMessage(result.unrecognizedLineCount),
+                  : l10n.previewUnrecognizedLinesMessage(
+                      result.unrecognizedLineCount,
+                    ),
               style: TextStyle(
                 color: looksSuspicious
                     ? Theme.of(context).colorScheme.error
-                    : Colors.grey[600],
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ),

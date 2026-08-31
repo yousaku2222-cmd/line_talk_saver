@@ -14,7 +14,8 @@ Future<MessageFilter?> showSearchFilterSheet(
   return showModalBottomSheet<MessageFilter>(
     context: context,
     isScrollControlled: true,
-    builder: (context) => _SearchFilterSheet(senders: senders, initial: current),
+    builder: (context) =>
+        _SearchFilterSheet(senders: senders, initial: current),
   );
 }
 
@@ -38,7 +39,9 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
     super.initState();
     _selectedSenderIds = {...?widget.initial.senderIds};
     _dateRange = widget.initial.dateRange;
-    _textController = TextEditingController(text: widget.initial.textQuery ?? '');
+    _textController = TextEditingController(
+      text: widget.initial.textQuery ?? '',
+    );
   }
 
   @override
@@ -77,21 +80,28 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(l10n.filterTitle, style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              l10n.filterTitle,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 16),
-            Text(l10n.textSearchLabel, style: Theme.of(context).textTheme.labelLarge),
+            Text(
+              l10n.textSearchLabel,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: _textController,
               decoration: InputDecoration(
                 hintText: l10n.keywordHint,
                 prefixIcon: const Icon(Icons.search),
-                border: const OutlineInputBorder(),
-                isDense: true,
               ),
             ),
             const SizedBox(height: 16),
-            Text(l10n.senderLabel, style: Theme.of(context).textTheme.labelLarge),
+            Text(
+              l10n.senderLabel,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
             Wrap(
               spacing: 8,
               children: [
@@ -112,7 +122,10 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
               ],
             ),
             const SizedBox(height: 16),
-            Text(l10n.periodLabel, style: Theme.of(context).textTheme.labelLarge),
+            Text(
+              l10n.periodLabel,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
             const SizedBox(height: 8),
             OutlinedButton.icon(
               onPressed: _pickDateRange,
@@ -146,8 +159,9 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
                   child: FilledButton(
                     onPressed: () => Navigator.of(context).pop(
                       MessageFilter(
-                        senderIds:
-                            _selectedSenderIds.isEmpty ? null : _selectedSenderIds,
+                        senderIds: _selectedSenderIds.isEmpty
+                            ? null
+                            : _selectedSenderIds,
                         dateRange: _dateRange,
                         textQuery: _textController.text.trim().isEmpty
                             ? null

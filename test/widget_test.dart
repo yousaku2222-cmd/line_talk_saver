@@ -35,6 +35,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('トーク保存'), findsOneWidget);
-    expect(find.text('トークを取り込む'), findsOneWidget);
+    // The import affordance appears both as the FAB and as the empty-state
+    // call-to-action, so there can be more than one.
+    expect(find.text('トークを取り込む'), findsWidgets);
   });
 }

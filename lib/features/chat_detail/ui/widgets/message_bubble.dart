@@ -23,6 +23,25 @@ Future<void> _openDocument(BuildContext context, String path) async {
   );
 }
 
+/// Distinct, muted colours cycled per sender so a group transcript is
+/// easier to follow at a glance. Keyed by a stable hash of the name.
+const _senderPalette = <Color>[
+  Color(0xFFCE7C6C), // coral
+  Color(0xFF8A6FB0), // lavender
+  Color(0xFF3E7CA6), // ocean
+  Color(0xFF5FA07A), // sage
+  Color(0xFFB07C3E), // amber
+];
+
+Color _senderColor(String? name) {
+  if (name == null || name.isEmpty) return const Color(0xFF8A8390);
+  var h = 0;
+  for (final c in name.codeUnits) {
+    h = (h * 31 + c) & 0x7fffffff;
+  }
+  return _senderPalette[h % _senderPalette.length];
+}
+
 class MessageBubble extends StatelessWidget {
   const MessageBubble({
     super.key,
@@ -32,6 +51,7 @@ class MessageBubble extends StatelessWidget {
     required this.selectionMode,
     required this.onTap,
     required this.onLongPress,
+    this.showHeader = true,
     this.attachment,
     this.onAttachPhoto,
   });
@@ -42,6 +62,10 @@ class MessageBubble extends StatelessWidget {
   final bool selectionMode;
   final VoidCallback onTap;
   final VoidCallback onLongPress;
+
+  /// When false this message follows another from the same sender within a
+  /// few minutes, so the name/time line is dropped and just the bubble shows.
+  final bool showHeader;
 
   /// A photo the user has manually attached to this message, if any.
   final ImageAttachment? attachment;
@@ -54,24 +78,31 @@ class MessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     if (message.isSystemMessage) {
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         child: Center(
           child: Text(
             message.rawText,
-            style: TextStyle(color: Colors.grey[600], fontSize: 12),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.labelSmall,
           ),
         ),
       );
     }
 
     final scheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
 
     return InkWell(
       onTap: onTap,
       onLongPress: onLongPress,
       child: Container(
         color: selected ? scheme.primaryContainer.withValues(alpha: 0.4) : null,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        padding: EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: showHeader ? 8 : 2,
+          bottom: 3,
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -81,31 +112,32 @@ class MessageBubble extends StatelessWidget {
                 child: Icon(
                   selected ? Icons.check_circle : Icons.circle_outlined,
                   size: 20,
-                  color: selected ? scheme.primary : Colors.grey,
+                  color: selected ? scheme.primary : scheme.onSurfaceVariant,
                 ),
               ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        senderName ?? AppLocalizations.of(context)!.unknownSender,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: scheme.primary,
-                          fontSize: 13,
+                  if (showHeader) ...[
+                    Row(
+                      children: [
+                        Text(
+                          senderName ??
+                              AppLocalizations.of(context)!.unknownSender,
+                          style: textTheme.labelLarge?.copyWith(
+                            color: _senderColor(senderName),
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        DateFormat('MM/dd HH:mm').format(message.timestamp),
-                        style: TextStyle(color: Colors.grey[500], fontSize: 11),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 2),
+                        const SizedBox(width: 8),
+                        Text(
+                          DateFormat('HH:mm').format(message.timestamp),
+                          style: textTheme.labelSmall,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 3),
+                  ],
                   _MessageContent(
                     message: message,
                     attachment: attachment,
@@ -211,10 +243,13 @@ class _MessageContent extends StatelessWidget {
               const SizedBox(width: 6),
               Text(
                 isFilePlaceholder
-                    ? AppLocalizations.of(context)!.tapToAttachFile(message.rawText)
+                    ? AppLocalizations.of(context)!
+                          .tapToAttachFile(message.rawText)
                     : isVideoPlaceholder
-                    ? AppLocalizations.of(context)!.tapToAttachVideo(message.rawText)
-                    : AppLocalizations.of(context)!.tapToAttachPhoto(message.rawText),
+                    ? AppLocalizations.of(context)!
+                          .tapToAttachVideo(message.rawText)
+                    : AppLocalizations.of(context)!
+                          .tapToAttachPhoto(message.rawText),
                 style: TextStyle(color: Colors.grey[700], fontSize: 12),
               ),
             ],
@@ -223,13 +258,22 @@ class _MessageContent extends StatelessWidget {
       );
     }
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: scheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(12),
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.sizeOf(context).width * 0.78,
+        ),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
+          decoration: BoxDecoration(
+            color: scheme.surfaceContainerHighest,
+            border: Border.all(color: scheme.outline),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: LinkifiedText(message.rawText),
+        ),
       ),
-      child: LinkifiedText(message.rawText),
     );
   }
 

@@ -276,34 +276,12 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
             ),
           ] else ...[
             IconButton(
-              icon: const Icon(Icons.photo_library_outlined),
-              tooltip: l10n.photosTooltip,
-              onPressed: () =>
-                  Navigator.of(context)
-                      .pushNamed('/photos', arguments: widget.chatId),
-            ),
-            IconButton(
               icon: Badge(
                 isLabelVisible: _filter.isActive,
                 child: const Icon(Icons.filter_list),
               ),
               tooltip: l10n.filterTooltip,
               onPressed: _openFilterSheet,
-            ),
-            IconButton(
-              icon: const Icon(Icons.copy_all_outlined),
-              tooltip: l10n.copyAllTooltip,
-              onPressed: messagesAsync.maybeWhen(
-                data: (messages) {
-                  if (messages.isEmpty) return null;
-                  final senders = sendersAsync.valueOrNull ?? const {};
-                  return () => _copyToClipboard(
-                    _formatMessages(messages, senders),
-                    label: l10n.allCountLabel(messages.length),
-                  );
-                },
-                orElse: () => null,
-              ),
             ),
             IconButton(
               icon: const Icon(Icons.ios_share_outlined),
@@ -323,6 +301,46 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                 },
                 orElse: () => null,
               ),
+            ),
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                switch (value) {
+                  case 'photos':
+                    Navigator.of(context)
+                        .pushNamed('/photos', arguments: widget.chatId);
+                  case 'copyAll':
+                    final messages = messagesAsync.valueOrNull ?? const [];
+                    if (messages.isEmpty) return;
+                    final senders = sendersAsync.valueOrNull ?? const {};
+                    _copyToClipboard(
+                      _formatMessages(messages, senders),
+                      label: l10n.allCountLabel(messages.length),
+                    );
+                }
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: 'photos',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.photo_library_outlined, size: 20),
+                      const SizedBox(width: 12),
+                      Text(l10n.photosTooltip),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'copyAll',
+                  enabled: (messagesAsync.valueOrNull ?? const []).isNotEmpty,
+                  child: Row(
+                    children: [
+                      const Icon(Icons.copy_all_outlined, size: 20),
+                      const SizedBox(width: 12),
+                      Text(l10n.copyAllTooltip),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ],
@@ -355,7 +373,8 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                                 minimumSize: Size.zero,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               ),
-                              onPressed: () => setState(_pendingPhotoPaths.clear),
+                              onPressed: () =>
+                                  setState(_pendingPhotoPaths.clear),
                               child: Text(l10n.cancel),
                             ),
                             TextButton(
@@ -405,6 +424,27 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                   );
                 }
                 final senders = sendersAsync.valueOrNull ?? const {};
+                // Precompute, in chronological order, whether each message
+                // opens a new calendar day (-> date separator) and whether it
+                // needs its own name/time header (new day, sender change,
+                // >5min gap, or following a system line).
+                final showDateSep = <int, bool>{};
+                final showHeader = <int, bool>{};
+                for (var i = 0; i < messages.length; i++) {
+                  final m = messages[i];
+                  final prev = i > 0 ? messages[i - 1] : null;
+                  final newDay =
+                      prev == null || !_sameDay(prev.timestamp, m.timestamp);
+                  showDateSep[m.id] = newDay;
+                  showHeader[m.id] =
+                      m.isSystemMessage ||
+                      prev == null ||
+                      newDay ||
+                      prev.isSystemMessage ||
+                      prev.senderId != m.senderId ||
+                      m.timestamp.difference(prev.timestamp).inMinutes.abs() >=
+                          5;
+                }
                 // Rendered newest-first with reverse:true so the list opens
                 // scrolled to the latest message (like a normal chat app)
                 // while still displaying oldest-to-newest top-to-bottom.
@@ -422,6 +462,7 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                       senderName: senderName,
                       selected: _selectedIds.contains(message.id),
                       selectionMode: _selectionMode,
+                      showHeader: showHeader[message.id] ?? true,
                       attachment: attachmentsByMessageId[message.id],
                       onAttachPhoto: _selectionMode
                           ? null
@@ -439,43 +480,58 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                       },
                     );
 
+                    Widget item = bubble;
                     // Swipe-to-delete, like the chat list's own swipe-to-
                     // delete -- only for placeholder messages
                     // (`[写真]`/`[動画]`/etc.), and not while selecting.
-                    if (_selectionMode || message.mediaPlaceholderType == null) {
-                      return bubble;
+                    if (!_selectionMode &&
+                        message.mediaPlaceholderType != null) {
+                      final attachment = attachmentsByMessageId[message.id];
+                      item = Dismissible(
+                        key: ValueKey(message.id),
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          color: Theme.of(context).colorScheme.errorContainer,
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Icon(
+                            Icons.delete_outline,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onErrorContainer,
+                          ),
+                        ),
+                        confirmDismiss: (_) async {
+                          final confirmed = await _confirmDeletePlaceholder(
+                            hasAttachment: attachment != null,
+                          );
+                          if (!confirmed) return false;
+                          if (attachment != null) {
+                            // Only the attachment goes away; the message
+                            // stays (reverts to "tap to attach"), so the
+                            // swipe shouldn't actually remove this list item
+                            // -- Dismissible animates it back into place.
+                            await ref
+                                .read(chatRepositoryProvider)
+                                .deleteImageAttachment(attachment);
+                            return false;
+                          }
+                          return true;
+                        },
+                        onDismissed: (_) => ref
+                            .read(chatRepositoryProvider)
+                            .deletePlaceholderMessage(message.id),
+                        child: bubble,
+                      );
                     }
-                    final attachment = attachmentsByMessageId[message.id];
-                    return Dismissible(
-                      key: ValueKey(message.id),
-                      direction: DismissDirection.endToStart,
-                      background: Container(
-                        color: Theme.of(context).colorScheme.errorContainer,
-                        alignment: Alignment.centerRight,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: const Icon(Icons.delete_outline),
-                      ),
-                      confirmDismiss: (_) async {
-                        final confirmed = await _confirmDeletePlaceholder(
-                          hasAttachment: attachment != null,
-                        );
-                        if (!confirmed) return false;
-                        if (attachment != null) {
-                          // Only the attachment goes away; the message stays
-                          // (reverts to "tap to attach"), so the swipe
-                          // shouldn't actually remove this list item --
-                          // Dismissible animates it back into place.
-                          await ref
-                              .read(chatRepositoryProvider)
-                              .deleteImageAttachment(attachment);
-                          return false;
-                        }
-                        return true;
-                      },
-                      onDismissed: (_) => ref
-                          .read(chatRepositoryProvider)
-                          .deletePlaceholderMessage(message.id),
-                      child: bubble,
+
+                    if (showDateSep[message.id] != true) return item;
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        _DateSeparator(date: message.timestamp),
+                        item,
+                      ],
                     );
                   },
                 );
@@ -485,6 +541,38 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
         ],
       ),
       bottomNavigationBar: const SafeArea(child: DismissibleBannerAd()),
+    );
+  }
+}
+
+bool _sameDay(DateTime a, DateTime b) =>
+    a.year == b.year && a.month == b.month && a.day == b.day;
+
+/// Centered date pill inserted where the transcript crosses midnight.
+class _DateSeparator extends StatelessWidget {
+  const _DateSeparator({required this.date});
+
+  final DateTime date;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+          decoration: BoxDecoration(
+            color: scheme.surfaceContainer,
+            borderRadius: BorderRadius.circular(999),
+          ),
+          child: Text(
+            MaterialLocalizations.of(context).formatFullDate(date),
+            style: Theme.of(context).textTheme.labelSmall
+                ?.copyWith(fontWeight: FontWeight.w700),
+          ),
+        ),
+      ),
     );
   }
 }

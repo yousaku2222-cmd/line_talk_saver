@@ -98,7 +98,14 @@ flutter:
   uses-material-design: true
 
   assets:
+    # Kept as a raw asset for the PDF export path (export_pdf.dart loads it
+    # via rootBundle). The app UI itself uses the variable font below.
     - assets/fonts/NotoSansJP-Regular.ttf
+
+  fonts:
+    - family: NotoSansJP
+      fonts:
+        - asset: assets/fonts/NotoSansJP-VF.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/providers/app_providers.dart';
+import '../../../core/theme/tokens.dart';
+import '../../../core/ui/empty_state.dart';
 import '../../../data/db/app_database.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../app_lock/authenticate.dart';
@@ -191,123 +193,54 @@ class ChatListScreen extends ConsumerWidget {
         error: (err, st) => Center(child: Text(l10n.loadErrorWithMessage(err))),
         data: (chats) {
           if (chats.isEmpty) {
-            return const _EmptyState();
+            return EmptyState(
+              icon: Icons.forum_outlined,
+              message: l10n.emptyChatListMessage,
+              action: FilledButton.icon(
+                onPressed: () => Navigator.of(context).pushNamed('/import'),
+                icon: const Icon(Icons.file_open_outlined),
+                label: Text(l10n.importButtonLabel),
+              ),
+            );
           }
-          return ListView.separated(
+          return ListView.builder(
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.screen,
+              AppSpacing.x2,
+              AppSpacing.screen,
+              96,
+            ),
             itemCount: chats.length,
-            separatorBuilder: (_, _) => const Divider(height: 1),
             itemBuilder: (context, index) {
               final chat = chats[index];
-              return Dismissible(
-                key: ValueKey(chat.id),
-                direction: DismissDirection.endToStart,
-                background: Container(
-                  color: Theme.of(context).colorScheme.errorContainer,
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: const Icon(Icons.delete_outline),
-                ),
-                confirmDismiss: (_) => _confirmDelete(context),
-                onDismissed: (_) =>
-                    ref.read(chatRepositoryProvider).deleteChat(chat.id),
-                child: ListTile(
-                  leading: GestureDetector(
-                    onTap: () => _pickIcon(context, ref, chat),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        CircleAvatar(
-                          child: Icon(chatIconForKey(chat.iconKey)),
-                        ),
-                        if (chat.sourceFileName.isEmpty)
-                          Positioned(
-                            right: -2,
-                            bottom: -2,
-                            child: Container(
-                              padding: const EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Theme.of(context).scaffoldBackgroundColor,
-                                  width: 2,
-                                ),
-                              ),
-                              child: Icon(
-                                Icons.photo_library_outlined,
-                                size: 12,
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              ),
-                            ),
-                          ),
-                      ],
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Dismissible(
+                  key: ValueKey(chat.id),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.errorContainer,
+                      borderRadius: BorderRadius.circular(AppRadius.lg),
+                    ),
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Icon(
+                      Icons.delete_outline,
+                      color: Theme.of(context).colorScheme.onErrorContainer,
                     ),
                   ),
-                  title: Row(
-                    children: [
-                      if (chat.isLocked) ...[
-                        Icon(
-                          Icons.lock,
-                          size: 16,
-                          color: Theme.of(context).colorScheme.error,
-                        ),
-                        const SizedBox(width: 4),
-                      ],
-                      Flexible(
-                        child: Text(
-                          chat.title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      if (chat.sourceFileName.isEmpty) ...[
-                        const SizedBox(width: 6),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primaryContainer,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            l10n.manualRoomBadgeLabel,
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: Theme.of(context).colorScheme.onPrimaryContainer,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ],
+                  confirmDismiss: (_) => _confirmDelete(context),
+                  onDismissed: (_) =>
+                      ref.read(chatRepositoryProvider).deleteChat(chat.id),
+                  child: _ChatCard(
+                    chat: chat,
+                    onTap: () => _openChat(context, ref, chat),
+                    onIconTap: () => _pickIcon(context, ref, chat),
+                    onRename: () => _renameChat(context, ref, chat),
+                    onToggleLock: () => _toggleLock(context, ref, chat),
+                    onDelete: () => _deleteChat(context, ref, chat),
                   ),
-                  subtitle: Text(
-                    chat.sourceFileName.isEmpty
-                        ? l10n.createdAtLabel(
-                            DateFormat('yyyy/MM/dd HH:mm').format(chat.importedAt),
-                          )
-                        : l10n.importedAtLabel(
-                            DateFormat('yyyy/MM/dd HH:mm').format(chat.importedAt),
-                          ),
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          chat.isLocked ? Icons.lock : Icons.lock_open_outlined,
-                        ),
-                        tooltip: chat.isLocked
-                            ? l10n.chatUnlockTooltip
-                            : l10n.chatLockTooltip,
-                        onPressed: () => _toggleLock(context, ref, chat),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.edit_outlined),
-                        tooltip: l10n.renameChatTooltip,
-                        onPressed: () => _renameChat(context, ref, chat),
-                      ),
-                    ],
-                  ),
-                  onTap: () => _openChat(context, ref, chat),
                 ),
               );
             },
@@ -344,29 +277,215 @@ class ChatListScreen extends ConsumerWidget {
     );
     return result ?? false;
   }
+
+  Future<void> _deleteChat(
+    BuildContext context,
+    WidgetRef ref,
+    Chat chat,
+  ) async {
+    if (!await _confirmDelete(context)) return;
+    await ref.read(chatRepositoryProvider).deleteChat(chat.id);
+  }
 }
 
-class _EmptyState extends StatelessWidget {
-  const _EmptyState();
+/// A single chat row: a soft icon tile (tap to change icon), the title with
+/// its lock / 写真ルーム markers, a one-line meta subtitle, and an overflow
+/// menu carrying rename / lock / delete.
+class _ChatCard extends StatelessWidget {
+  const _ChatCard({
+    required this.chat,
+    required this.onTap,
+    required this.onIconTap,
+    required this.onRename,
+    required this.onToggleLock,
+    required this.onDelete,
+  });
+
+  final Chat chat;
+  final VoidCallback onTap;
+  final VoidCallback onIconTap;
+  final VoidCallback onRename;
+  final VoidCallback onToggleLock;
+  final VoidCallback onDelete;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.forum_outlined, size: 64, color: Colors.grey),
-            const SizedBox(height: 16),
-            Text(
-              AppLocalizations.of(context)!.emptyChatListMessage,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
+    final scheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final isRoom = chat.sourceFileName.isEmpty;
+    final metaTime = DateFormat('yyyy/MM/dd HH:mm').format(chat.importedAt);
+
+    return Card(
+      margin: EdgeInsets.zero,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.x3),
+          child: Row(
+            children: [
+              GestureDetector(
+                onTap: onIconTap,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      width: 46,
+                      height: 46,
+                      decoration: BoxDecoration(
+                        color: scheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(AppRadius.md),
+                      ),
+                      child: Icon(
+                        chatIconForKey(chat.iconKey),
+                        size: 24,
+                        color: scheme.onPrimaryContainer,
+                      ),
+                    ),
+                    if (isRoom)
+                      Positioned(
+                        right: -3,
+                        bottom: -3,
+                        child: Container(
+                          padding: const EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            color: scheme.primary,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: scheme.surface,
+                              width: 2,
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.photo_library_outlined,
+                            size: 11,
+                            color: scheme.onPrimary,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: AppSpacing.x3),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        if (chat.isLocked) ...[
+                          Icon(Icons.lock, size: 15, color: scheme.error),
+                          const SizedBox(width: 4),
+                        ],
+                        Flexible(
+                          child: Text(
+                            chat.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        if (isRoom) ...[
+                          const SizedBox(width: 6),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: scheme.primaryContainer,
+                              borderRadius: BorderRadius.circular(AppRadius.pill),
+                            ),
+                            child: Text(
+                              l10n.manualRoomBadgeLabel,
+                              style: textTheme.labelSmall?.copyWith(
+                                color: scheme.onPrimaryContainer,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      isRoom
+                          ? l10n.createdAtLabel(metaTime)
+                          : l10n.importedAtLabel(metaTime),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuButton<String>(
+                icon: Icon(Icons.more_vert, color: scheme.onSurfaceVariant),
+                onSelected: (value) {
+                  switch (value) {
+                    case 'rename':
+                      onRename();
+                    case 'lock':
+                      onToggleLock();
+                    case 'delete':
+                      onDelete();
+                  }
+                },
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 'rename',
+                    child: _MenuRow(
+                      icon: Icons.edit_outlined,
+                      label: l10n.renameChatTooltip,
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: 'lock',
+                    child: _MenuRow(
+                      icon: chat.isLocked
+                          ? Icons.lock_open_outlined
+                          : Icons.lock_outline,
+                      label: chat.isLocked
+                          ? l10n.chatUnlockTooltip
+                          : l10n.chatLockTooltip,
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: 'delete',
+                    child: _MenuRow(
+                      icon: Icons.delete_outline,
+                      label: l10n.delete,
+                      color: scheme.error,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class _MenuRow extends StatelessWidget {
+  const _MenuRow({required this.icon, required this.label, this.color});
+
+  final IconData icon;
+  final String label;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, size: 20, color: color),
+        const SizedBox(width: AppSpacing.x3),
+        Text(label, style: TextStyle(color: color)),
+      ],
     );
   }
 }

@@ -6,6 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/theme/tokens.dart';
+import '../../../core/ui/brand_logo.dart';
+import '../../../core/ui/settings_group.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../app_lock/app_lock_prefs.dart';
 import '../../app_lock/app_lock_service.dart';
@@ -296,111 +299,155 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: ListView(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.screen,
+          AppSpacing.x3,
+          AppSpacing.screen,
+          AppSpacing.x6,
+        ),
         children: [
-          ListTile(
-            leading: const Icon(Icons.language_outlined),
-            title: Text(l10n.languageSettingTitle),
-            subtitle: Text(
-              locale == null ? l10n.languageSystemDefault : _languageDisplayName(locale),
-            ),
-            onTap: () => _pickLanguage(context, ref),
-          ),
-          const Divider(height: 1),
-          SwitchListTile(
-            title: Text(l10n.appLockToggleTitle),
-            subtitle: Text(l10n.appLockToggleSubtitle),
-            value: lockEnabled,
-            onChanged: (value) => _onToggleLock(context, ref, value),
-          ),
-          ListTile(
-            leading: const Icon(Icons.pin_outlined),
-            title: Text(l10n.appPinSectionTitle),
-            subtitle: Text(
-              pinSet ? l10n.appPinSetSubtitle : l10n.appPinNotSetSubtitle,
-            ),
-            trailing: pinSet
-                ? Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextButton(
-                        onPressed: () => _changeAppPin(context, ref),
-                        child: Text(l10n.changeAppPinButton),
-                      ),
-                      TextButton(
-                        onPressed: () => _removeAppPin(context, ref),
-                        child: Text(l10n.delete),
-                      ),
-                    ],
-                  )
-                : TextButton(
-                    onPressed: () => _setAppPin(context, ref),
-                    child: Text(l10n.setAppPinButton),
-                  ),
-          ),
-          const Divider(height: 1),
-          if (adsRemoved)
-            ListTile(
-              leading: const Icon(Icons.check_circle_outline),
-              title: Text(l10n.removeAdsTitle),
-              subtitle: Text(l10n.removeAdsPurchasedSubtitle),
-            )
-          else ...[
-            ListTile(
-              leading: const Icon(Icons.block_outlined),
-              title: Text(l10n.removeAdsTitle),
-              subtitle: Text(l10n.removeAdsSubtitle),
-              onTap: () => purchaseRemoveAds(context, ref),
-            ),
-            ListTile(
-              leading: const Icon(Icons.restore_outlined),
-              title: Text(l10n.restorePurchaseTitle),
-              subtitle: Text(l10n.restorePurchaseSubtitle),
-              onTap: () => _restorePurchases(context, ref),
-            ),
-          ],
-          const Divider(height: 1),
-          ListTile(
-            leading: const Icon(Icons.backup_outlined),
-            title: Text(l10n.backupTitle),
-            subtitle: Text(l10n.backupSubtitle),
-            onTap: () => _createBackup(context, ref),
-          ),
-          ListTile(
-            leading: const Icon(Icons.settings_backup_restore_outlined),
-            title: Text(l10n.restoreBackupTitle),
-            subtitle: Text(l10n.restoreBackupSubtitle),
-            onTap: () => _restoreBackup(context, ref),
-          ),
-          const Divider(height: 1),
-          ListTile(
-            leading: const Icon(Icons.menu_book_outlined),
-            title: Text(l10n.helpMenuTitle),
-            subtitle: Text(l10n.helpMenuSubtitle),
-            onTap: () => Navigator.of(context).pushNamed('/help'),
-          ),
-          ListTile(
-            leading: const Icon(Icons.feedback_outlined),
-            title: Text(l10n.feedbackMenuTitle),
-            subtitle: Text(l10n.feedbackMenuSubtitle),
-            onTap: () => _sendFeedback(context, ref),
-          ),
-          const Divider(height: 1),
-          FutureBuilder<PackageInfo>(
-            future: PackageInfo.fromPlatform(),
-            builder: (context, snapshot) {
-              final info = snapshot.data;
-              return ListTile(
-                leading: const Icon(Icons.info_outline),
-                title: Text(l10n.appVersionTitle),
+          SettingsGroup(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.language_outlined),
+                title: Text(l10n.languageSettingTitle),
                 subtitle: Text(
-                  info == null ? '' : '${info.version} (${info.buildNumber})',
+                  locale == null
+                      ? l10n.languageSystemDefault
+                      : _languageDisplayName(locale),
                 ),
-              );
-            },
+                onTap: () => _pickLanguage(context, ref),
+              ),
+            ],
           ),
+          const SizedBox(height: AppSpacing.x4),
+          SettingsGroup(
+            children: [
+              SwitchListTile(
+                secondary: const Icon(Icons.lock_outline),
+                title: Text(l10n.appLockToggleTitle),
+                subtitle: Text(l10n.appLockToggleSubtitle),
+                value: lockEnabled,
+                onChanged: (value) => _onToggleLock(context, ref, value),
+              ),
+              ListTile(
+                leading: const Icon(Icons.pin_outlined),
+                title: Text(l10n.appPinSectionTitle),
+                subtitle: Text(
+                  pinSet ? l10n.appPinSetSubtitle : l10n.appPinNotSetSubtitle,
+                ),
+                trailing: pinSet
+                    ? Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextButton(
+                            onPressed: () => _changeAppPin(context, ref),
+                            child: Text(l10n.changeAppPinButton),
+                          ),
+                          TextButton(
+                            onPressed: () => _removeAppPin(context, ref),
+                            child: Text(l10n.delete),
+                          ),
+                        ],
+                      )
+                    : TextButton(
+                        onPressed: () => _setAppPin(context, ref),
+                        child: Text(l10n.setAppPinButton),
+                      ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.x4),
+          SettingsGroup(
+            children: adsRemoved
+                ? [
+                    ListTile(
+                      leading: const Icon(Icons.check_circle_outline),
+                      title: Text(l10n.removeAdsTitle),
+                      subtitle: Text(l10n.removeAdsPurchasedSubtitle),
+                    ),
+                  ]
+                : [
+                    ListTile(
+                      leading: const Icon(Icons.block_outlined),
+                      title: Text(l10n.removeAdsTitle),
+                      subtitle: Text(l10n.removeAdsSubtitle),
+                      onTap: () => purchaseRemoveAds(context, ref),
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.restore_outlined),
+                      title: Text(l10n.restorePurchaseTitle),
+                      subtitle: Text(l10n.restorePurchaseSubtitle),
+                      onTap: () => _restorePurchases(context, ref),
+                    ),
+                  ],
+          ),
+          const SizedBox(height: AppSpacing.x4),
+          SettingsGroup(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.backup_outlined),
+                title: Text(l10n.backupTitle),
+                subtitle: Text(l10n.backupSubtitle),
+                onTap: () => _createBackup(context, ref),
+              ),
+              ListTile(
+                leading: const Icon(Icons.settings_backup_restore_outlined),
+                title: Text(l10n.restoreBackupTitle),
+                subtitle: Text(l10n.restoreBackupSubtitle),
+                onTap: () => _restoreBackup(context, ref),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.x4),
+          SettingsGroup(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.menu_book_outlined),
+                title: Text(l10n.helpMenuTitle),
+                subtitle: Text(l10n.helpMenuSubtitle),
+                onTap: () => Navigator.of(context).pushNamed('/help'),
+              ),
+              ListTile(
+                leading: const Icon(Icons.feedback_outlined),
+                title: Text(l10n.feedbackMenuTitle),
+                subtitle: Text(l10n.feedbackMenuSubtitle),
+                onTap: () => _sendFeedback(context, ref),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.x5),
+          const _SettingsFooter(),
         ],
       ),
       bottomNavigationBar: const SafeArea(child: DismissibleBannerAd()),
+    );
+  }
+}
+
+class _SettingsFooter extends StatelessWidget {
+  const _SettingsFooter();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Column(
+      children: [
+        const BrandLogo(),
+        const SizedBox(height: AppSpacing.x1),
+        FutureBuilder<PackageInfo>(
+          future: PackageInfo.fromPlatform(),
+          builder: (context, snapshot) {
+            final info = snapshot.data;
+            return Text(
+              info == null
+                  ? ''
+                  : '${l10n.appVersionTitle}  ${info.version} (${info.buildNumber})',
+              style: Theme.of(context).textTheme.labelSmall,
+            );
+          },
+        ),
+      ],
     );
   }
 }
