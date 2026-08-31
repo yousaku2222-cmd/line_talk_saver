@@ -23,6 +23,9 @@
   "unlockIconDialogBody": "広告を1回見ると、このアイコンを今後ずっと使えるようになります。",
   "unlockIconWatchAdButton": "広告を見る",
   "unlockIconFailedMessage": "広告を再生できませんでした。しばらくしてからもう一度お試しください。",
+  "themePickerLockedHint": "🔒のテーマは、広告を1回見ると今後ずっと使えるようになります",
+  "unlockThemeDialogTitle": "このテーマを解放しますか?",
+  "unlockThemeDialogBody": "広告を1回見ると、このテーマを今後ずっと使えるようになります。",
   "renameChatTitle": "トーク名を変更",
   "renameChatButton": "変更",
   "renameChatTooltip": "名称を変更",
@@ -108,6 +111,10 @@
   "@restoreBackupFailedMessage": {
     "placeholders": { "error": {} }
   },
+  "backupUnlockTitle": "バックアップ機能",
+  "backupUnlockSubtitle": "買い切りで、作成・復元をいつでも利用可能に",
+  "backupPaywallTitle": "バックアップ機能を解放しますか?",
+  "backupPaywallBody": "買い切り購入で、バックアップの作成と復元がいつでも使えるようになります。",
   "languageSettingTitle": "言語",
   "languageSystemDefault": "端末の設定に従う",
 

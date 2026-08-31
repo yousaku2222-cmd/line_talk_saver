@@ -209,6 +209,24 @@ abstract class AppLocalizations {
   /// **'広告を再生できませんでした。しばらくしてからもう一度お試しください。'**
   String get unlockIconFailedMessage;
 
+  /// No description provided for @themePickerLockedHint.
+  ///
+  /// In ja, this message translates to:
+  /// **'🔒のテーマは、広告を1回見ると今後ずっと使えるようになります'**
+  String get themePickerLockedHint;
+
+  /// No description provided for @unlockThemeDialogTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'このテーマを解放しますか?'**
+  String get unlockThemeDialogTitle;
+
+  /// No description provided for @unlockThemeDialogBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'広告を1回見ると、このテーマを今後ずっと使えるようになります。'**
+  String get unlockThemeDialogBody;
+
   /// No description provided for @renameChatTitle.
   ///
   /// In ja, this message translates to:
@@ -586,6 +604,30 @@ abstract class AppLocalizations {
   /// In ja, this message translates to:
   /// **'復元に失敗しました: {error}'**
   String restoreBackupFailedMessage(Object error);
+
+  /// No description provided for @backupUnlockTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'バックアップ機能'**
+  String get backupUnlockTitle;
+
+  /// No description provided for @backupUnlockSubtitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'買い切りで、作成・復元をいつでも利用可能に'**
+  String get backupUnlockSubtitle;
+
+  /// No description provided for @backupPaywallTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'バックアップ機能を解放しますか?'**
+  String get backupPaywallTitle;
+
+  /// No description provided for @backupPaywallBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'買い切り購入で、バックアップの作成と復元がいつでも使えるようになります。'**
+  String get backupPaywallBody;
 
   /// No description provided for @languageSettingTitle.
   ///

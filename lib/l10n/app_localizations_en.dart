@@ -66,6 +66,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'Couldn\'t play the ad. Please try again in a moment.';
 
   @override
+  String get themePickerLockedHint =>
+      'Themes with 🔒 unlock permanently after watching one ad.';
+
+  @override
+  String get unlockThemeDialogTitle => 'Unlock this theme?';
+
+  @override
+  String get unlockThemeDialogBody =>
+      'Watch one ad to unlock this theme for good.';
+
+  @override
   String get renameChatTitle => 'Rename this chat';
 
   @override
@@ -287,6 +298,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String restoreBackupFailedMessage(Object error) {
     return 'Restore failed: $error';
   }
+
+  @override
+  String get backupUnlockTitle => 'Backup & restore';
+
+  @override
+  String get backupUnlockSubtitle =>
+      'One-time purchase to create and restore backups anytime';
+
+  @override
+  String get backupPaywallTitle => 'Unlock backup & restore?';
+
+  @override
+  String get backupPaywallBody =>
+      'A one-time purchase lets you create and restore backups anytime.';
 
   @override
   String get languageSettingTitle => 'Language';

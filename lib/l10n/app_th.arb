@@ -20,6 +20,9 @@
   "unlockIconDialogBody": "ดูโฆษณาหนึ่งครั้งเพื่อปลดล็อกไอคอนนี้ถาวร",
   "unlockIconWatchAdButton": "ดูโฆษณา",
   "unlockIconFailedMessage": "ไม่สามารถเล่นโฆษณาได้ กรุณาลองใหม่อีกครั้งในภายหลัง",
+  "themePickerLockedHint": "ธีมที่มี 🔒 จะปลดล็อกถาวรหลังจากดูโฆษณาหนึ่งครั้ง",
+  "unlockThemeDialogTitle": "ปลดล็อกธีมนี้หรือไม่?",
+  "unlockThemeDialogBody": "ดูโฆษณาหนึ่งครั้งเพื่อปลดล็อกธีมนี้ถาวร",
   "renameChatTitle": "เปลี่ยนชื่อแชท",
   "renameChatButton": "เปลี่ยนชื่อ",
   "renameChatTooltip": "เปลี่ยนชื่อ",
@@ -90,6 +93,10 @@
   "@restoreBackupFailedMessage": {
     "placeholders": { "error": {} }
   },
+  "backupUnlockTitle": "ฟีเจอร์สำรองข้อมูล",
+  "backupUnlockSubtitle": "ซื้อครั้งเดียว ใช้สร้างและกู้คืนข้อมูลได้ตลอด",
+  "backupPaywallTitle": "ปลดล็อกฟีเจอร์สำรองข้อมูลหรือไม่?",
+  "backupPaywallBody": "ซื้อครั้งเดียวเพื่อสร้างและกู้คืนข้อมูลสำรองได้ตลอดเวลา",
   "languageSettingTitle": "ภาษา",
   "languageSystemDefault": "ตามการตั้งค่าเครื่อง",
 

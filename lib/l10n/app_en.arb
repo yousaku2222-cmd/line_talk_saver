@@ -20,6 +20,9 @@
   "unlockIconDialogBody": "Watch one ad to unlock this icon for good.",
   "unlockIconWatchAdButton": "Watch ad",
   "unlockIconFailedMessage": "Couldn't play the ad. Please try again in a moment.",
+  "themePickerLockedHint": "Themes with 🔒 unlock permanently after watching one ad.",
+  "unlockThemeDialogTitle": "Unlock this theme?",
+  "unlockThemeDialogBody": "Watch one ad to unlock this theme for good.",
   "renameChatTitle": "Rename this chat",
   "renameChatButton": "Rename",
   "renameChatTooltip": "Rename",
@@ -90,6 +93,10 @@
   "@restoreBackupFailedMessage": {
     "placeholders": { "error": {} }
   },
+  "backupUnlockTitle": "Backup & restore",
+  "backupUnlockSubtitle": "One-time purchase to create and restore backups anytime",
+  "backupPaywallTitle": "Unlock backup & restore?",
+  "backupPaywallBody": "A one-time purchase lets you create and restore backups anytime.",
   "languageSettingTitle": "Language",
   "languageSystemDefault": "Follow device language",
 

@@ -20,6 +20,9 @@
   "unlockIconDialogBody": "Tonton satu iklan untuk membuka ikon ini selamanya.",
   "unlockIconWatchAdButton": "Tonton iklan",
   "unlockIconFailedMessage": "Iklan tidak dapat diputar. Coba lagi sebentar lagi.",
+  "themePickerLockedHint": "Tema dengan 🔒 akan terbuka permanen setelah menonton satu iklan.",
+  "unlockThemeDialogTitle": "Buka kunci tema ini?",
+  "unlockThemeDialogBody": "Tonton satu iklan untuk membuka tema ini selamanya.",
   "renameChatTitle": "Ganti nama obrolan",
   "renameChatButton": "Ganti nama",
   "renameChatTooltip": "Ganti nama",
@@ -90,6 +93,10 @@
   "@restoreBackupFailedMessage": {
     "placeholders": { "error": {} }
   },
+  "backupUnlockTitle": "Cadangkan & pulihkan",
+  "backupUnlockSubtitle": "Pembelian sekali bayar untuk membuat dan memulihkan cadangan kapan saja",
+  "backupPaywallTitle": "Buka fitur cadangkan & pulihkan?",
+  "backupPaywallBody": "Pembelian sekali bayar memungkinkan Anda membuat dan memulihkan cadangan kapan saja.",
   "languageSettingTitle": "Bahasa",
   "languageSystemDefault": "Ikuti bahasa perangkat",
 

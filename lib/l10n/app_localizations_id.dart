@@ -66,6 +66,17 @@ class AppLocalizationsId extends AppLocalizations {
       'Iklan tidak dapat diputar. Coba lagi sebentar lagi.';
 
   @override
+  String get themePickerLockedHint =>
+      'Tema dengan 🔒 akan terbuka permanen setelah menonton satu iklan.';
+
+  @override
+  String get unlockThemeDialogTitle => 'Buka kunci tema ini?';
+
+  @override
+  String get unlockThemeDialogBody =>
+      'Tonton satu iklan untuk membuka tema ini selamanya.';
+
+  @override
   String get renameChatTitle => 'Ganti nama obrolan';
 
   @override
@@ -288,6 +299,20 @@ class AppLocalizationsId extends AppLocalizations {
   String restoreBackupFailedMessage(Object error) {
     return 'Pemulihan gagal: $error';
   }
+
+  @override
+  String get backupUnlockTitle => 'Cadangkan & pulihkan';
+
+  @override
+  String get backupUnlockSubtitle =>
+      'Pembelian sekali bayar untuk membuat dan memulihkan cadangan kapan saja';
+
+  @override
+  String get backupPaywallTitle => 'Buka fitur cadangkan & pulihkan?';
+
+  @override
+  String get backupPaywallBody =>
+      'Pembelian sekali bayar memungkinkan Anda membuat dan memulihkan cadangan kapan saja.';
 
   @override
   String get languageSettingTitle => 'Bahasa';

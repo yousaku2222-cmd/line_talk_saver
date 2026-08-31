@@ -19,6 +19,7 @@ import '../../app_lock/ui/pin_entry_dialog.dart';
 import '../../backup/backup_service.dart';
 import '../../chat_list/providers/chat_list_provider.dart';
 import '../../monetization/ads/banner_ad_widget.dart';
+import '../../monetization/purchase/backup_unlock_prefs.dart';
 import '../../monetization/purchase/purchase_flow.dart';
 import '../../monetization/purchase/purchase_prefs.dart';
 import '../../monetization/purchase/purchase_service.dart';
@@ -144,7 +145,7 @@ class SettingsScreen extends ConsumerWidget {
 
   Future<void> _restorePurchases(BuildContext context, WidgetRef ref) async {
     final l10n = AppLocalizations.of(context)!;
-    final service = PurchaseService(onAdsRemoved: () {});
+    final service = PurchaseService(onPurchased: (_) {});
     final available = await service.start();
     if (available) {
       await service.restorePurchases();
@@ -153,6 +154,34 @@ class SettingsScreen extends ConsumerWidget {
     if (!context.mounted) return;
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(l10n.restoringPurchasesMessage)));
+  }
+
+  /// Backup create/restore are gated behind the one-time [ProductIds.backupUnlock]
+  /// purchase. Tapping either row while locked lands here.
+  Future<void> _promptBackupPurchase(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    final l10n = AppLocalizations.of(context)!;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.backupPaywallTitle),
+        content: Text(l10n.backupPaywallBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(l10n.purchaseButton),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !context.mounted) return;
+    await purchaseBackupUnlock(context, ref);
   }
 
   Future<void> _createBackup(BuildContext context, WidgetRef ref) async {
@@ -298,6 +327,7 @@ class SettingsScreen extends ConsumerWidget {
     final lockEnabled = ref.watch(appLockEnabledProvider);
     final pinSet = ref.watch(appPinSetProvider);
     final adsRemoved = ref.watch(adsRemovedProvider);
+    final backupUnlocked = ref.watch(backupUnlockedProvider);
     final locale = ref.watch(localeProvider);
     final l10n = AppLocalizations.of(context)!;
 
@@ -370,28 +400,40 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const SizedBox(height: AppSpacing.x4),
           SettingsGroup(
-            children: adsRemoved
-                ? [
-                    ListTile(
-                      leading: const Icon(Icons.check_circle_outline),
-                      title: Text(l10n.removeAdsTitle),
-                      subtitle: Text(l10n.removeAdsPurchasedSubtitle),
-                    ),
-                  ]
-                : [
-                    ListTile(
-                      leading: const Icon(Icons.block_outlined),
-                      title: Text(l10n.removeAdsTitle),
-                      subtitle: Text(l10n.removeAdsSubtitle),
-                      onTap: () => purchaseRemoveAds(context, ref),
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.restore_outlined),
-                      title: Text(l10n.restorePurchaseTitle),
-                      subtitle: Text(l10n.restorePurchaseSubtitle),
-                      onTap: () => _restorePurchases(context, ref),
-                    ),
-                  ],
+            children: [
+              if (adsRemoved)
+                ListTile(
+                  leading: const Icon(Icons.check_circle_outline),
+                  title: Text(l10n.removeAdsTitle),
+                  subtitle: Text(l10n.removeAdsPurchasedSubtitle),
+                )
+              else
+                ListTile(
+                  leading: const Icon(Icons.block_outlined),
+                  title: Text(l10n.removeAdsTitle),
+                  subtitle: Text(l10n.removeAdsSubtitle),
+                  onTap: () => purchaseRemoveAds(context, ref),
+                ),
+              if (backupUnlocked)
+                ListTile(
+                  leading: const Icon(Icons.check_circle_outline),
+                  title: Text(l10n.backupUnlockTitle),
+                  subtitle: Text(l10n.removeAdsPurchasedSubtitle),
+                )
+              else
+                ListTile(
+                  leading: const Icon(Icons.cloud_download_outlined),
+                  title: Text(l10n.backupUnlockTitle),
+                  subtitle: Text(l10n.backupUnlockSubtitle),
+                  onTap: () => purchaseBackupUnlock(context, ref),
+                ),
+              ListTile(
+                leading: const Icon(Icons.restore_outlined),
+                title: Text(l10n.restorePurchaseTitle),
+                subtitle: Text(l10n.restorePurchaseSubtitle),
+                onTap: () => _restorePurchases(context, ref),
+              ),
+            ],
           ),
           const SizedBox(height: AppSpacing.x4),
           SettingsGroup(
@@ -400,13 +442,23 @@ class SettingsScreen extends ConsumerWidget {
                 leading: const Icon(Icons.backup_outlined),
                 title: Text(l10n.backupTitle),
                 subtitle: Text(l10n.backupSubtitle),
-                onTap: () => _createBackup(context, ref),
+                trailing: backupUnlocked
+                    ? null
+                    : const Icon(Icons.lock_outline, size: 18),
+                onTap: () => backupUnlocked
+                    ? _createBackup(context, ref)
+                    : _promptBackupPurchase(context, ref),
               ),
               ListTile(
                 leading: const Icon(Icons.settings_backup_restore_outlined),
                 title: Text(l10n.restoreBackupTitle),
                 subtitle: Text(l10n.restoreBackupSubtitle),
-                onTap: () => _restoreBackup(context, ref),
+                trailing: backupUnlocked
+                    ? null
+                    : const Icon(Icons.lock_outline, size: 18),
+                onTap: () => backupUnlocked
+                    ? _restoreBackup(context, ref)
+                    : _promptBackupPurchase(context, ref),
               ),
             ],
           ),

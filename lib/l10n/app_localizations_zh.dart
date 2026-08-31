@@ -63,6 +63,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get unlockIconFailedMessage => '廣告播放失敗,請稍後再試。';
 
   @override
+  String get themePickerLockedHint => '帶🔒的主題,觀看一次廣告即可永久解鎖';
+
+  @override
+  String get unlockThemeDialogTitle => '要解鎖這個主題嗎?';
+
+  @override
+  String get unlockThemeDialogBody => '觀看一次廣告,即可永久使用這個主題。';
+
+  @override
   String get renameChatTitle => '變更聊天名稱';
 
   @override
@@ -268,6 +277,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String restoreBackupFailedMessage(Object error) {
     return '還原失敗: $error';
   }
+
+  @override
+  String get backupUnlockTitle => '備份功能';
+
+  @override
+  String get backupUnlockSubtitle => '一次購買,隨時建立與還原備份';
+
+  @override
+  String get backupPaywallTitle => '要解鎖備份功能嗎?';
+
+  @override
+  String get backupPaywallBody => '一次購買,即可隨時建立與還原備份。';
 
   @override
   String get languageSettingTitle => '語言';
@@ -672,6 +693,15 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get unlockIconFailedMessage => '廣告播放失敗,請稍後再試。';
 
   @override
+  String get themePickerLockedHint => '帶🔒的主題,觀看一次廣告即可永久解鎖';
+
+  @override
+  String get unlockThemeDialogTitle => '要解鎖這個主題嗎?';
+
+  @override
+  String get unlockThemeDialogBody => '觀看一次廣告,即可永久使用這個主題。';
+
+  @override
   String get renameChatTitle => '變更聊天名稱';
 
   @override
@@ -877,6 +907,18 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String restoreBackupFailedMessage(Object error) {
     return '還原失敗: $error';
   }
+
+  @override
+  String get backupUnlockTitle => '備份功能';
+
+  @override
+  String get backupUnlockSubtitle => '一次購買,隨時建立與還原備份';
+
+  @override
+  String get backupPaywallTitle => '要解鎖備份功能嗎?';
+
+  @override
+  String get backupPaywallBody => '一次購買,即可隨時建立與還原備份。';
 
   @override
   String get languageSettingTitle => '語言';

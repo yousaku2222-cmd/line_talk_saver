@@ -11,7 +11,7 @@ class AppTheme {
 
   static const fontFamily = 'NotoSansJP';
 
-  static ThemeData light() => fromPalette(paletteFor(AppThemeId.paper));
+  static ThemeData light() => fromPalette(paletteFor(AppThemeId.mint));
   static ThemeData dark() => fromPalette(paletteFor(AppThemeId.night));
 
   static ThemeData fromPalette(AppThemePalette p) {

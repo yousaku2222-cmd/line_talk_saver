@@ -20,6 +20,9 @@
   "unlockIconDialogBody": "광고를 한 번 보면 이 아이콘을 앞으로 계속 사용할 수 있습니다.",
   "unlockIconWatchAdButton": "광고 보기",
   "unlockIconFailedMessage": "광고를 재생할 수 없었습니다. 잠시 후 다시 시도해 주세요.",
+  "themePickerLockedHint": "🔒 테마는 광고를 한 번 보면 앞으로 계속 사용할 수 있습니다",
+  "unlockThemeDialogTitle": "이 테마를 잠금 해제하시겠습니까?",
+  "unlockThemeDialogBody": "광고를 한 번 보면 이 테마를 앞으로 계속 사용할 수 있습니다.",
   "renameChatTitle": "대화 이름 변경",
   "renameChatButton": "변경",
   "renameChatTooltip": "이름 변경",
@@ -90,6 +93,10 @@
   "@restoreBackupFailedMessage": {
     "placeholders": { "error": {} }
   },
+  "backupUnlockTitle": "백업 기능",
+  "backupUnlockSubtitle": "한 번 구매하면 백업 생성·복원을 언제든지 사용",
+  "backupPaywallTitle": "백업 기능을 잠금 해제하시겠습니까?",
+  "backupPaywallBody": "한 번 구매하면 백업 생성과 복원을 앞으로 계속 사용할 수 있습니다.",
   "languageSettingTitle": "언어",
   "languageSystemDefault": "기기 설정을 따름",
 

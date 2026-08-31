@@ -63,6 +63,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get unlockIconFailedMessage => '광고를 재생할 수 없었습니다. 잠시 후 다시 시도해 주세요.';
 
   @override
+  String get themePickerLockedHint => '🔒 테마는 광고를 한 번 보면 앞으로 계속 사용할 수 있습니다';
+
+  @override
+  String get unlockThemeDialogTitle => '이 테마를 잠금 해제하시겠습니까?';
+
+  @override
+  String get unlockThemeDialogBody => '광고를 한 번 보면 이 테마를 앞으로 계속 사용할 수 있습니다.';
+
+  @override
   String get renameChatTitle => '대화 이름 변경';
 
   @override
@@ -272,6 +281,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String restoreBackupFailedMessage(Object error) {
     return '복원에 실패했습니다: $error';
   }
+
+  @override
+  String get backupUnlockTitle => '백업 기능';
+
+  @override
+  String get backupUnlockSubtitle => '한 번 구매하면 백업 생성·복원을 언제든지 사용';
+
+  @override
+  String get backupPaywallTitle => '백업 기능을 잠금 해제하시겠습니까?';
+
+  @override
+  String get backupPaywallBody => '한 번 구매하면 백업 생성과 복원을 앞으로 계속 사용할 수 있습니다.';
 
   @override
   String get languageSettingTitle => '언어';

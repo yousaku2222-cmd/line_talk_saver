@@ -20,6 +20,9 @@
   "unlockIconDialogBody": "觀看一次廣告,即可永久使用這個圖示。",
   "unlockIconWatchAdButton": "觀看廣告",
   "unlockIconFailedMessage": "廣告播放失敗,請稍後再試。",
+  "themePickerLockedHint": "帶🔒的主題,觀看一次廣告即可永久解鎖",
+  "unlockThemeDialogTitle": "要解鎖這個主題嗎?",
+  "unlockThemeDialogBody": "觀看一次廣告,即可永久使用這個主題。",
   "renameChatTitle": "變更聊天名稱",
   "renameChatButton": "變更",
   "renameChatTooltip": "變更名稱",
@@ -90,6 +93,10 @@
   "@restoreBackupFailedMessage": {
     "placeholders": { "error": {} }
   },
+  "backupUnlockTitle": "備份功能",
+  "backupUnlockSubtitle": "一次購買,隨時建立與還原備份",
+  "backupPaywallTitle": "要解鎖備份功能嗎?",
+  "backupPaywallBody": "一次購買,即可隨時建立與還原備份。",
   "languageSettingTitle": "語言",
   "languageSystemDefault": "跟隨裝置設定",
 

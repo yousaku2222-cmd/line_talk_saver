@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'backup_unlock_prefs.dart';
 import 'purchase_prefs.dart';
 import 'purchase_service.dart';
 
@@ -22,8 +23,17 @@ class _PurchaseListenerState extends ConsumerState<PurchaseListener> {
   @override
   void initState() {
     super.initState();
-    _service = PurchaseService(onAdsRemoved: () => setAdsRemoved(ref, true));
+    _service = PurchaseService(onPurchased: _grant);
     _service.start();
+  }
+
+  void _grant(String productId) {
+    switch (productId) {
+      case ProductIds.removeAds:
+        setAdsRemoved(ref, true);
+      case ProductIds.backupUnlock:
+        setBackupUnlocked(ref, true);
+    }
   }
 
   @override

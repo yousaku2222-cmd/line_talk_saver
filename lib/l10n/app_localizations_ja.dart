@@ -63,6 +63,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get unlockIconFailedMessage => '広告を再生できませんでした。しばらくしてからもう一度お試しください。';
 
   @override
+  String get themePickerLockedHint => '🔒のテーマは、広告を1回見ると今後ずっと使えるようになります';
+
+  @override
+  String get unlockThemeDialogTitle => 'このテーマを解放しますか?';
+
+  @override
+  String get unlockThemeDialogBody => '広告を1回見ると、このテーマを今後ずっと使えるようになります。';
+
+  @override
   String get renameChatTitle => 'トーク名を変更';
 
   @override
@@ -269,6 +278,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String restoreBackupFailedMessage(Object error) {
     return '復元に失敗しました: $error';
   }
+
+  @override
+  String get backupUnlockTitle => 'バックアップ機能';
+
+  @override
+  String get backupUnlockSubtitle => '買い切りで、作成・復元をいつでも利用可能に';
+
+  @override
+  String get backupPaywallTitle => 'バックアップ機能を解放しますか?';
+
+  @override
+  String get backupPaywallBody => '買い切り購入で、バックアップの作成と復元がいつでも使えるようになります。';
 
   @override
   String get languageSettingTitle => '言語';

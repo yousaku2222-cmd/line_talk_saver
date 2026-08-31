@@ -2,23 +2,32 @@ import 'dart:async';
 
 import 'package:in_app_purchase/in_app_purchase.dart';
 
-/// The Google Play Console / App Store Connect product ID for the
-/// one-time "広告を非表示にする" unlock. This ID must be created as a
-/// real in-app product in the store console before purchases will work --
-/// it does not exist anywhere until the developer creates it there.
+/// The Google Play Console / App Store Connect product IDs for this app's
+/// one-time (non-consumable) unlocks. Each ID must be created as a real
+/// in-app product in the store console before purchases will work -- it
+/// does not exist anywhere until the developer creates it there.
 class ProductIds {
   ProductIds._();
 
+  /// "広告を非表示にする" unlock.
   static const removeAds = 'remove_ads';
+
+  /// "バックアップ機能" unlock -- gates creating and restoring backups.
+  static const backupUnlock = 'backup_unlock';
+
+  /// Every product this app knows how to grant. The purchase stream is
+  /// filtered against this so an unknown product ID is never acted on.
+  static const all = {removeAds, backupUnlock};
 }
 
-/// Wraps `in_app_purchase` for the single "remove ads" non-consumable
-/// product this app sells.
+/// Wraps `in_app_purchase` for the non-consumable unlocks this app sells
+/// (see [ProductIds]).
 class PurchaseService {
-  PurchaseService({required this.onAdsRemoved});
+  PurchaseService({required this.onPurchased});
 
-  /// Called whenever a purchase or restore delivers the remove-ads product.
-  final void Function() onAdsRemoved;
+  /// Called with the product ID whenever a purchase or restore delivers one
+  /// of [ProductIds.all].
+  final void Function(String productId) onPurchased;
 
   final _iap = InAppPurchase.instance;
   StreamSubscription<List<PurchaseDetails>>? _subscription;
@@ -26,7 +35,8 @@ class PurchaseService {
   Future<bool> start() async {
     final available = await _iap.isAvailable();
     if (!available) return false;
-    _subscription = _iap.purchaseStream.listen(_onPurchaseUpdate, onError: (_) {});
+    _subscription =
+        _iap.purchaseStream.listen(_onPurchaseUpdate, onError: (_) {});
     return true;
   }
 
@@ -34,16 +44,18 @@ class PurchaseService {
     _subscription?.cancel();
   }
 
-  Future<ProductDetails?> fetchRemoveAdsProduct() async {
-    final response = await _iap.queryProductDetails({ProductIds.removeAds});
+  Future<ProductDetails?> fetchProduct(String id) async {
+    final response = await _iap.queryProductDetails({id});
     if (response.notFoundIDs.isNotEmpty || response.productDetails.isEmpty) {
       return null;
     }
     return response.productDetails.first;
   }
 
-  Future<void> buyRemoveAds(ProductDetails product) {
-    return _iap.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: product));
+  Future<void> buyNonConsumable(ProductDetails product) {
+    return _iap.buyNonConsumable(
+      purchaseParam: PurchaseParam(productDetails: product),
+    );
   }
 
   Future<void> restorePurchases() => _iap.restorePurchases();
@@ -52,8 +64,8 @@ class PurchaseService {
     for (final purchase in purchases) {
       if (purchase.status == PurchaseStatus.purchased ||
           purchase.status == PurchaseStatus.restored) {
-        if (purchase.productID == ProductIds.removeAds) {
-          onAdsRemoved();
+        if (ProductIds.all.contains(purchase.productID)) {
+          onPurchased(purchase.productID);
         }
       }
       if (purchase.pendingCompletePurchase) {

@@ -66,6 +66,16 @@ class AppLocalizationsTh extends AppLocalizations {
       'ไม่สามารถเล่นโฆษณาได้ กรุณาลองใหม่อีกครั้งในภายหลัง';
 
   @override
+  String get themePickerLockedHint =>
+      'ธีมที่มี 🔒 จะปลดล็อกถาวรหลังจากดูโฆษณาหนึ่งครั้ง';
+
+  @override
+  String get unlockThemeDialogTitle => 'ปลดล็อกธีมนี้หรือไม่?';
+
+  @override
+  String get unlockThemeDialogBody => 'ดูโฆษณาหนึ่งครั้งเพื่อปลดล็อกธีมนี้ถาวร';
+
+  @override
   String get renameChatTitle => 'เปลี่ยนชื่อแชท';
 
   @override
@@ -284,6 +294,20 @@ class AppLocalizationsTh extends AppLocalizations {
   String restoreBackupFailedMessage(Object error) {
     return 'กู้คืนข้อมูลไม่สำเร็จ: $error';
   }
+
+  @override
+  String get backupUnlockTitle => 'ฟีเจอร์สำรองข้อมูล';
+
+  @override
+  String get backupUnlockSubtitle =>
+      'ซื้อครั้งเดียว ใช้สร้างและกู้คืนข้อมูลได้ตลอด';
+
+  @override
+  String get backupPaywallTitle => 'ปลดล็อกฟีเจอร์สำรองข้อมูลหรือไม่?';
+
+  @override
+  String get backupPaywallBody =>
+      'ซื้อครั้งเดียวเพื่อสร้างและกู้คืนข้อมูลสำรองได้ตลอดเวลา';
 
   @override
   String get languageSettingTitle => 'ภาษา';
