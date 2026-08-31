@@ -199,11 +199,15 @@ LINE緑（`#06C755`）は主役から外す。Anniv 風の **淡いパステル*
 
 #### アイコンを 16 → 66 種に拡張し、2色（デュオトーン）イラスト風にする
 
-現状は Material の単色アウトライン 16 個（`chat_icon_options.dart`）。これを **66 個**に増やし、
-描画を「面（`accentSoft`）＋ 細い差し色（`accent`）」の 2 レイヤーに変える。実体は引き続き
-`Map<String, ...>` のキー文字列で永続化（DB 互換のため）。単色 `IconData` では 2 色化できないので、
-`chatIconOptions` の値を **アイコンビルダー**（`Widget Function(Color base, Color detail, double size)`）に変更するか、
-各キーに対応する専用 `CustomPainter` / インライン SVG アセットを用意する。
+現状は Material の単色アウトライン 16 個（`chat_icon_options.dart`）。これを **66 個**に増やす。
+`Map<String, IconData>` のキー文字列は引き続き永続化（DB 互換のため **追記のみ**。既存 16 キーは温存）。
+
+デュオトーンは段階的に:
+- **フェーズ A（実装済み）**: Material の `IconData` のまま、**タイル（`accentSoft` 角丸）＋グリフ（`accentText`）** の
+  2 トーン枠で表示（`_ChatCard` / アイコン選択シート）。カテゴリタブ（`chatIconCategories`）付き。
+- **フェーズ B（今後）**: 「面＋細い差し色」の本格デュオトーンにするなら `chatIconOptions` の値を
+  アイコンビルダー（`Widget Function(Color base, Color detail, double size)`）へ変更し、各キーに
+  専用 `CustomPainter` / インライン SVG を用意する。
 
 追加する 50 個を含めた全 66 キー（カテゴリ順）:
 

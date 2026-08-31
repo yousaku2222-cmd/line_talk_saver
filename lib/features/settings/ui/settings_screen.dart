@@ -10,6 +10,7 @@ import '../../../core/theme/tokens.dart';
 import '../../../core/ui/brand_logo.dart';
 import '../../../core/ui/settings_group.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../theming/theme_prefs.dart';
 import '../../app_lock/app_lock_prefs.dart';
 import '../../app_lock/app_lock_service.dart';
 import '../../app_lock/app_pin_prefs.dart';
@@ -32,7 +33,8 @@ class SettingsScreen extends ConsumerWidget {
   Future<void> _sendFeedback(BuildContext context, WidgetRef ref) async {
     final l10n = AppLocalizations.of(context)!;
     final info = await PackageInfo.fromPlatform();
-    final footer = '\n----------\n'
+    final footer =
+        '\n----------\n'
         'App: ${info.version} (build ${info.buildNumber})\n'
         'OS: ${Platform.operatingSystem} ${Platform.operatingSystemVersion}';
     final uri = Uri.parse(
@@ -42,21 +44,25 @@ class SettingsScreen extends ConsumerWidget {
     );
     final launched = await launchUrl(uri);
     if (!launched && context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.feedbackLaunchFailedMessage)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.feedbackLaunchFailedMessage)));
     }
   }
 
-  Future<void> _onToggleLock(BuildContext context, WidgetRef ref, bool value) async {
+  Future<void> _onToggleLock(
+    BuildContext context,
+    WidgetRef ref,
+    bool value,
+  ) async {
     final l10n = AppLocalizations.of(context)!;
     if (value) {
       final available = await canAuthenticate(ref);
       if (!available) {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.appLockUnsupportedMessage)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.appLockUnsupportedMessage)));
         return;
       }
       // Confirm the device credential (or app PIN) actually works before
@@ -145,9 +151,8 @@ class SettingsScreen extends ConsumerWidget {
     }
     service.dispose();
     if (!context.mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.restoringPurchasesMessage)),
-    );
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(l10n.restoringPurchasesMessage)));
   }
 
   Future<void> _createBackup(BuildContext context, WidgetRef ref) async {
@@ -170,9 +175,9 @@ class SettingsScreen extends ConsumerWidget {
       );
       if (savedUri == null) return;
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.saveToDeviceSuccessMessage)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.saveToDeviceSuccessMessage)));
     } catch (e) {
       if (!context.mounted) return;
       Navigator.of(context).pop();
@@ -220,9 +225,9 @@ class SettingsScreen extends ConsumerWidget {
       await BackupService(ref).restoreBackup(bytes);
       if (!context.mounted) return;
       Navigator.of(context).pop();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.restoreBackupSuccessMessage)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.restoreBackupSuccessMessage)));
     } on InvalidBackupFileException {
       if (!context.mounted) return;
       Navigator.of(context).pop();
@@ -308,6 +313,12 @@ class SettingsScreen extends ConsumerWidget {
         children: [
           SettingsGroup(
             children: [
+              ListTile(
+                leading: const Icon(Icons.palette_outlined),
+                title: const Text('着せ替え'),
+                subtitle: Text(ref.watch(themeIdProvider).label),
+                onTap: () => Navigator.of(context).pushNamed('/theme'),
+              ),
               ListTile(
                 leading: const Icon(Icons.language_outlined),
                 title: Text(l10n.languageSettingTitle),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/theme/tokens.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../monetization/ads/rewarded_ad_service.dart';
 import '../chat_icon_options.dart';
 import '../unlocked_icons_prefs.dart';
 
-/// Shows a grid of [chatIconOptions] and returns the key the user picked,
-/// or null if they dismissed the sheet without choosing.
+/// Shows a categorised grid of [chatIconOptions] and returns the key the
+/// user picked, or null if they dismissed the sheet without choosing.
 ///
 /// Every icon except [defaultChatIconKey] starts locked (🔒) until the user
 /// watches one rewarded ad for it -- after that it's unlocked for good, no
@@ -20,10 +21,8 @@ Future<String?> showPickChatIconSheet(
   return showModalBottomSheet<String>(
     context: context,
     isScrollControlled: true,
-    builder: (sheetContext) => _PickChatIconSheet(
-      ref: ref,
-      currentIconKey: currentIconKey,
-    ),
+    builder: (sheetContext) =>
+        _PickChatIconSheet(ref: ref, currentIconKey: currentIconKey),
   );
 }
 
@@ -79,61 +78,103 @@ class _PickChatIconSheetState extends ConsumerState<_PickChatIconSheet> {
       if (!mounted) return;
       Navigator.of(context).pop(iconKey);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.unlockIconFailedMessage)),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(l10n.unlockIconFailedMessage)));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final textTheme = Theme.of(context).textTheme;
+    final scheme = Theme.of(context).colorScheme;
     // Re-evaluate lock state on every rebuild -- watching these keeps the
     // grid in sync the instant an icon gets unlocked (or ads get removed).
     ref.watch(unlockedChatIconsProvider);
+    final selectedKey = widget.currentIconKey ?? defaultChatIconKey;
+
     return SafeArea(
-      child: SingleChildScrollView(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.sizeOf(context).height * 0.72,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 4),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(l10n.pickChatIconTitle),
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.screen,
+                4,
+                AppSpacing.screen,
+                AppSpacing.x1,
               ),
+              child: Text(l10n.pickChatIconTitle, style: textTheme.titleMedium),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  l10n.pickChatIconLockedHint,
-                  style: Theme.of(context).textTheme.bodySmall,
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.screen,
+                0,
+                AppSpacing.screen,
+                AppSpacing.x3,
+              ),
+              child: Text(
+                l10n.pickChatIconLockedHint,
+                style: textTheme.bodyMedium?.copyWith(
+                  color: scheme.onSurfaceVariant,
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: GridView.count(
-                crossAxisCount: 4,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  for (final entry in chatIconOptions.entries)
-                    _IconOption(
-                      iconKey: entry.key,
-                      icon: entry.value,
-                      selected: entry.key ==
-                          (widget.currentIconKey ?? defaultChatIconKey),
-                      unlocked: isChatIconUnlocked(ref, entry.key),
-                      loading: _loadingIconKey == entry.key,
-                      onTap: () => _onTapIcon(entry.key),
-                    ),
-                ],
+            Flexible(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.screen,
+                  0,
+                  AppSpacing.screen,
+                  AppSpacing.x5,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for (final entry in chatIconCategories.entries) ...[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                          4,
+                          AppSpacing.x3,
+                          4,
+                          AppSpacing.x2,
+                        ),
+                        child: Text(
+                          entry.key,
+                          style: textTheme.labelSmall?.copyWith(
+                            color: scheme.onPrimaryContainer,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.8,
+                          ),
+                        ),
+                      ),
+                      GridView.count(
+                        crossAxisCount: 5,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        children: [
+                          for (final key in entry.value)
+                            _IconOption(
+                              icon: chatIconOptions[key]!,
+                              selected: key == selectedKey,
+                              unlocked: isChatIconUnlocked(ref, key),
+                              loading: _loadingIconKey == key,
+                              onTap: () => _onTapIcon(key),
+                            ),
+                        ],
+                      ),
+                    ],
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 8),
           ],
         ),
       ),
@@ -143,7 +184,6 @@ class _PickChatIconSheetState extends ConsumerState<_PickChatIconSheet> {
 
 class _IconOption extends StatelessWidget {
   const _IconOption({
-    required this.iconKey,
     required this.icon,
     required this.selected,
     required this.unlocked,
@@ -151,7 +191,6 @@ class _IconOption extends StatelessWidget {
     required this.onTap,
   });
 
-  final String iconKey;
   final IconData icon;
   final bool selected;
   final bool unlocked;
@@ -161,45 +200,51 @@ class _IconOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final fg = selected ? scheme.onPrimary : scheme.onPrimaryContainer;
     return InkWell(
       onTap: loading ? null : onTap,
-      borderRadius: BorderRadius.circular(32),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            CircleAvatar(
-              backgroundColor: selected ? scheme.primary : scheme.primaryContainer,
+      borderRadius: BorderRadius.circular(AppRadius.md),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: selected ? scheme.primary : scheme.primaryContainer,
+              borderRadius: BorderRadius.circular(AppRadius.md),
+              border: selected ? null : Border.all(color: scheme.outline),
+            ),
+            child: Center(
               child: loading
                   ? SizedBox(
                       width: 18,
                       height: 18,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        color: selected ? scheme.onPrimary : scheme.onPrimaryContainer,
+                        color: fg,
                       ),
                     )
                   : Icon(
                       icon,
-                      color: unlocked
-                          ? (selected ? scheme.onPrimary : scheme.onPrimaryContainer)
-                          : (selected ? scheme.onPrimary : scheme.onPrimaryContainer)
-                              .withValues(alpha: 0.4),
+                      size: 26,
+                      color: fg.withValues(alpha: unlocked ? 1.0 : 0.5),
                     ),
             ),
-            if (!unlocked && !loading)
-              Positioned.fill(
-                child: Center(
-                  child: Icon(
-                    Icons.lock,
-                    size: 18,
-                    color: selected ? scheme.onPrimary : scheme.onPrimaryContainer,
-                  ),
+          ),
+          if (!unlocked && !loading)
+            Positioned(
+              right: -4,
+              bottom: -4,
+              child: Container(
+                padding: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  color: scheme.secondary,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: scheme.surface, width: 2),
                 ),
+                child: const Icon(Icons.lock, size: 10, color: Colors.white),
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/navigation/root_navigator_key.dart';
 import 'core/theme/app_theme.dart';
+import 'core/theme/tokens.dart';
 import 'features/app_lock/ui/app_lock_gate.dart';
 import 'features/chat_detail/ui/chat_detail_screen.dart';
 import 'features/chat_detail/ui/chat_detail_screen_args.dart';
@@ -17,6 +18,8 @@ import 'features/photo_association/ui/photo_gallery_screen_args.dart';
 import 'features/photo_association/ui/pick_chat_for_photo_screen.dart';
 import 'features/settings/locale/locale_prefs.dart';
 import 'features/settings/ui/settings_screen.dart';
+import 'features/theming/theme_prefs.dart';
+import 'features/theming/ui/theme_picker_screen.dart';
 import 'l10n/app_localizations.dart';
 
 class LineTalkSaverApp extends ConsumerWidget {
@@ -25,12 +28,12 @@ class LineTalkSaverApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(localeProvider);
+    final themeId = ref.watch(themeIdProvider);
 
     return MaterialApp(
       navigatorKey: rootNavigatorKey,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-      theme: AppTheme.light(),
-      darkTheme: AppTheme.dark(),
+      theme: AppTheme.fromPalette(paletteFor(themeId)),
       // null follows the device's system language, resolved against
       // supportedLocales below; the user can override it in Settings.
       locale: locale,
@@ -78,6 +81,8 @@ class LineTalkSaverApp extends ConsumerWidget {
             );
           case '/settings':
             return MaterialPageRoute(builder: (_) => const SettingsScreen());
+          case '/theme':
+            return MaterialPageRoute(builder: (_) => const ThemePickerScreen());
           case '/help':
             return MaterialPageRoute(builder: (_) => const HelpScreen());
           default:
