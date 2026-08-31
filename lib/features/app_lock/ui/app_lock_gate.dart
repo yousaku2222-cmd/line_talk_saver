@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/theme/tokens.dart';
+import '../../../core/ui/brand_logo.dart';
 import '../../../l10n/app_localizations.dart';
 import '../app_lock_prefs.dart';
 import '../app_lock_service.dart';
@@ -106,7 +108,11 @@ class _AppLockGateState extends ConsumerState<AppLockGate>
         _errorMessage = null;
       });
     } else {
-      setState(() => _errorMessage = AppLocalizations.of(context)!.appPinIncorrectMessage);
+      setState(
+        () =>
+            _errorMessage = AppLocalizations.of(context)!
+                .appPinIncorrectMessage,
+      );
     }
   }
 
@@ -125,52 +131,88 @@ class _AppLockGateState extends ConsumerState<AppLockGate>
         if (_locked)
           Positioned.fill(
             child: Scaffold(
-              body: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(32),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.lock_outline, size: 64, color: Colors.grey),
-                      const SizedBox(height: 16),
-                      Text(l10n.lockedMessage),
-                      const SizedBox(height: 24),
-                      if (_showPinField) ...[
-                        SizedBox(
-                          width: 220,
-                          child: TextField(
-                            controller: _pinController,
-                            autofocus: true,
-                            obscureText: true,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                            maxLength: 6,
-                            decoration: InputDecoration(hintText: l10n.appPinHint),
-                            onSubmitted: (_) => _submitPin(),
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              body: SafeArea(
+                child: Center(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(AppSpacing.x6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 96,
+                          height: 96,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surface
+                                .withValues(alpha: 0.6),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.lock_outline,
+                            size: 40,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
                           ),
                         ),
-                        FilledButton(
-                          onPressed: _submitPin,
-                          child: Text(l10n.unlockButtonLabel),
-                        ),
-                      ] else
-                        FilledButton.icon(
-                          onPressed: _authenticating ? null : _unlock,
-                          icon: const Icon(Icons.fingerprint),
-                          label: Text(l10n.unlockButtonLabel),
-                        ),
-                      if (_errorMessage != null) ...[
-                        const SizedBox(height: 8),
+                        const SizedBox(height: AppSpacing.x5),
+                        const BrandLogo(fontSize: 20),
+                        const SizedBox(height: AppSpacing.x2),
                         Text(
-                          _errorMessage!,
+                          l10n.lockedMessage,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.error,
-                            fontSize: 12,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
+                        const SizedBox(height: AppSpacing.x5),
+                        if (_showPinField) ...[
+                          SizedBox(
+                            width: 240,
+                            child: TextField(
+                              controller: _pinController,
+                              autofocus: true,
+                              obscureText: true,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              maxLength: 6,
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                hintText: l10n.appPinHint,
+                              ),
+                              onSubmitted: (_) => _submitPin(),
+                            ),
+                          ),
+                          const SizedBox(height: AppSpacing.x2),
+                          SizedBox(
+                            width: 240,
+                            child: FilledButton(
+                              onPressed: _submitPin,
+                              child: Text(l10n.unlockButtonLabel),
+                            ),
+                          ),
+                        ] else
+                          SizedBox(
+                            width: 240,
+                            child: FilledButton.icon(
+                              onPressed: _authenticating ? null : _unlock,
+                              icon: const Icon(Icons.fingerprint),
+                              label: Text(l10n.unlockButtonLabel),
+                            ),
+                          ),
+                        if (_errorMessage != null) ...[
+                          const SizedBox(height: AppSpacing.x3),
+                          Text(
+                            _errorMessage!,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.labelSmall
+                                ?.copyWith(
+                                  color: Theme.of(context).colorScheme.error,
+                                ),
+                          ),
+                        ],
                       ],
-                    ],
+                    ),
                   ),
                 ),
               ),
