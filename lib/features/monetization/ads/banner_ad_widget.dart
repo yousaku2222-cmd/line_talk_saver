@@ -5,6 +5,11 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../purchase/purchase_prefs.dart';
 import 'ad_unit_ids.dart';
 
+/// Set with `--dart-define=SCREENSHOT=true` to suppress the banner entirely
+/// when capturing store screenshots -- the AdMob test-ad placeholder reads
+/// badly in a listing. Has no effect on normal builds.
+const _screenshotMode = bool.fromEnvironment('SCREENSHOT');
+
 /// A banner ad, shown only when the user hasn't purchased "広告を非表示".
 /// Renders nothing (zero height) while loading, on failure, or once ads
 /// are removed, so it never leaves a visible gap.
@@ -49,7 +54,7 @@ class _DismissibleBannerAdState extends ConsumerState<DismissibleBannerAd> {
   @override
   Widget build(BuildContext context) {
     final adsRemoved = ref.watch(adsRemovedProvider);
-    if (adsRemoved) return const SizedBox.shrink();
+    if (adsRemoved || _screenshotMode) return const SizedBox.shrink();
 
     _load();
 
