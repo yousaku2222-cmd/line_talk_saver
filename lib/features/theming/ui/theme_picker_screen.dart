@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../monetization/ads/rewarded_ad_service.dart';
+import '../../monetization/purchase/purchase_prefs.dart';
 import '../theme_prefs.dart';
 import '../unlocked_themes_prefs.dart';
 
@@ -77,20 +78,24 @@ class _ThemePickerScreenState extends ConsumerState<ThemePickerScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              AppSpacing.screen,
-              AppSpacing.x3,
-              AppSpacing.screen,
-              0,
+          // Once "広告を非表示にする" is bought every theme is already
+          // unlocked (see isThemeUnlocked), so the watch-an-ad hint would
+          // just be noise.
+          if (!ref.watch(adsRemovedProvider))
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.screen,
+                AppSpacing.x3,
+                AppSpacing.screen,
+                0,
+              ),
+              child: Text(
+                l10n.themePickerLockedHint,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+              ),
             ),
-            child: Text(
-              l10n.themePickerLockedHint,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-            ),
-          ),
           Expanded(
             child: GridView.count(
               padding: const EdgeInsets.all(AppSpacing.screen),

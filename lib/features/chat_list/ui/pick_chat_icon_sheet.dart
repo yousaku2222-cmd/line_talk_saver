@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../monetization/ads/rewarded_ad_service.dart';
+import '../../monetization/purchase/purchase_prefs.dart';
 import '../chat_icon_options.dart';
 import '../unlocked_icons_prefs.dart';
 
@@ -111,20 +112,24 @@ class _PickChatIconSheetState extends ConsumerState<_PickChatIconSheet> {
               ),
               child: Text(l10n.pickChatIconTitle, style: textTheme.titleMedium),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                AppSpacing.screen,
-                0,
-                AppSpacing.screen,
-                AppSpacing.x3,
-              ),
-              child: Text(
-                l10n.pickChatIconLockedHint,
-                style: textTheme.bodyMedium?.copyWith(
-                  color: scheme.onSurfaceVariant,
+            // Once "広告を非表示にする" is bought every icon is already
+            // unlocked (see isChatIconUnlocked), so the watch-an-ad hint
+            // would just be noise.
+            if (!ref.watch(adsRemovedProvider))
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.screen,
+                  0,
+                  AppSpacing.screen,
+                  AppSpacing.x3,
+                ),
+                child: Text(
+                  l10n.pickChatIconLockedHint,
+                  style: textTheme.bodyMedium?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                  ),
                 ),
               ),
-            ),
             Flexible(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(
