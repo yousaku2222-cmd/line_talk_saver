@@ -38,10 +38,10 @@ class AdUnitIds {
   // (console.admob.google.com) for both platforms and fill these in, the
   // same way the banner units above were. Until then this always falls back
   // to Google's public test rewarded ad unit, regardless of [useTestAds].
-  static const _realAndroidRewarded = '';
+  static const _realAndroidRewarded = 'ca-app-pub-3818461038959537/3495506345';
   static const _testAndroidRewarded = 'ca-app-pub-3940256099942544/5224354917';
 
-  static const _realIosRewarded = '';
+  static const _realIosRewarded = 'ca-app-pub-3818461038959537/4441651302';
   static const _testIosRewarded = 'ca-app-pub-3940256099942544/1712485313';
 
   static String get androidRewarded =>
