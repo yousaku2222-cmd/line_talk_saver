@@ -13,9 +13,11 @@ class AdUnitIds {
   /// only the ad *unit* ID needs to change. Reference:
   /// https://developers.google.com/admob/android/test-ads
   ///
-  /// TODO: flip to false only for the production release build, once the
-  /// closed test period is over and this is being shipped to real users.
-  static const bool useTestAds = true;
+  /// iOS shipped to the App Store on 2026-09-04, so it now uses real ads.
+  /// Android is still pre-closed-test (no AAB submitted yet), so it stays on
+  /// test ads until that closed test period ends -- flip this to false too
+  /// once Android ships to real users.
+  static bool get useTestAds => !Platform.isIOS;
 
   static const androidAppId = 'ca-app-pub-3818461038959537~7254635029';
   static const iosAppId = 'ca-app-pub-3818461038959537~5614922743';
@@ -38,10 +40,10 @@ class AdUnitIds {
   // (console.admob.google.com) for both platforms and fill these in, the
   // same way the banner units above were. Until then this always falls back
   // to Google's public test rewarded ad unit, regardless of [useTestAds].
-  static const _realAndroidRewarded = '';
+  static const _realAndroidRewarded = 'ca-app-pub-3818461038959537/3495506345';
   static const _testAndroidRewarded = 'ca-app-pub-3940256099942544/5224354917';
 
-  static const _realIosRewarded = '';
+  static const _realIosRewarded = 'ca-app-pub-3818461038959537/4441651302';
   static const _testIosRewarded = 'ca-app-pub-3940256099942544/1712485313';
 
   static String get androidRewarded =>

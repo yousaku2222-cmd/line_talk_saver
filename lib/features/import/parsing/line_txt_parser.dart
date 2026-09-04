@@ -13,7 +13,11 @@ import 'parsed_message.dart';
 /// instead of silently losing content.
 class LineTxtParser {
   static final _dateSeparator = RegExp(r'^(\d{4})/(\d{1,2})/(\d{1,2})(\(.*\))?$');
-  static final _messageLine = RegExp(r'^(\d{1,2}):(\d{2})\t(.*)$');
+  // LINE for Android exports "HH:MM" (24h). LINE for iOS instead exports
+  // "午前/午後H:MM" (12h with a Japanese AM/PM prefix), so both are matched
+  // here and normalized to 24h below.
+  static final _messageLine =
+      RegExp(r'^(?:(午前|午後)\s*)?(\d{1,2}):(\d{2})\t(.*)$');
 
   ParseResult parse(String content) {
     final lines = content.split(RegExp(r'\r\n|\r|\n'));
@@ -69,9 +73,15 @@ class LineTxtParser {
 
       final msgMatch = _messageLine.firstMatch(line);
       if (msgMatch != null && currentDate != null) {
-        final hour = int.parse(msgMatch.group(1)!);
-        final minute = int.parse(msgMatch.group(2)!);
-        final rest = msgMatch.group(3)!;
+        final meridiem = msgMatch.group(1);
+        var hour = int.parse(msgMatch.group(2)!);
+        if (meridiem == '午後' && hour != 12) {
+          hour += 12;
+        } else if (meridiem == '午前' && hour == 12) {
+          hour = 0;
+        }
+        final minute = int.parse(msgMatch.group(3)!);
+        final rest = msgMatch.group(4)!;
         final tabIndex = rest.indexOf('\t');
 
         final timestamp = DateTime(
