@@ -13,9 +13,11 @@ class AdUnitIds {
   /// only the ad *unit* ID needs to change. Reference:
   /// https://developers.google.com/admob/android/test-ads
   ///
-  /// TODO: flip to false only for the production release build, once the
-  /// closed test period is over and this is being shipped to real users.
-  static const bool useTestAds = true;
+  /// iOS shipped to the App Store on 2026-09-04, so it now uses real ads.
+  /// Android is still pre-closed-test (no AAB submitted yet), so it stays on
+  /// test ads until that closed test period ends -- flip this to false too
+  /// once Android ships to real users.
+  static bool get useTestAds => !Platform.isIOS;
 
   static const androidAppId = 'ca-app-pub-3818461038959537~7254635029';
   static const iosAppId = 'ca-app-pub-3818461038959537~5614922743';
