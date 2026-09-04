@@ -11,6 +11,9 @@ import 'features/monetization/ads/ad_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
+  // Must run before initializeAds() so the first ad request already
+  // reflects the user's tracking choice.
+  await requestTrackingIfNeeded();
   // Must be awaited: initializeAds() also registers this device's test-ad
   // ID, and the very first ad request (from the chat list's banner, right
   // after the first frame) needs that to already be in effect -- doing it

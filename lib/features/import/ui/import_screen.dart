@@ -34,7 +34,6 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
   ParseResult? _result;
   String? _sourceFileName;
   String? _rawTxtPath;
-  String? _debugInfo;
 
   @override
   void initState() {
@@ -163,21 +162,11 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
       }
 
       final result = LineTxtParser().parse(content);
-      final headLen = content.length < 300 ? content.length : 300;
-      final head = content
-          .substring(0, headLen)
-          .replaceAll('\n', r'\n')
-          .replaceAll('\r', r'\r')
-          .replaceAll('\t', r'\t');
       setState(() {
         _result = result;
         _sourceFileName = displayName;
         _rawTxtPath = rawTxtPath;
         _status = _Status.preview;
-        // TEMPORARY debug aid for diagnosing on-device parse failures;
-        // remove once the real-device import format issue is confirmed fixed.
-        _debugInfo =
-            'bytes=${bytes.length} chars=${content.length}\nhead: $head';
       });
     } catch (e) {
       if (!mounted) return;
@@ -239,7 +228,6 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
         return _PreviewView(
           result: _result!,
           fileName: _sourceFileName!,
-          debugInfo: _debugInfo,
           onConfirm: _confirmImport,
           onCancel: () => setState(() => _status = _Status.idle),
         );
@@ -354,12 +342,10 @@ class _PreviewView extends StatelessWidget {
     required this.fileName,
     required this.onConfirm,
     required this.onCancel,
-    this.debugInfo,
   });
 
   final ParseResult result;
   final String fileName;
-  final String? debugInfo;
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
 
@@ -417,16 +403,6 @@ class _PreviewView extends StatelessWidget {
                 color: looksSuspicious
                     ? Theme.of(context).colorScheme.error
                     : Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-        if (looksSuspicious && debugInfo != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 12),
-            child: SingleChildScrollView(
-              child: SelectableText(
-                debugInfo!,
-                style: const TextStyle(fontSize: 11, fontFamily: 'monospace'),
               ),
             ),
           ),

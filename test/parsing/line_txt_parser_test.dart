@@ -80,6 +80,23 @@ void main() {
     expect(result.messages, isEmpty);
   });
 
+  test('parses iOS-style 午前/午後 12h timestamps', () {
+    final result = parser.parse(
+      '2024/03/15(金)\n'
+      '午前9:00\t田中太郎\tおはよう\n'
+      '午後0:30\t自分\tお昼ですね\n'
+      '午後8:05\t田中太郎\t夜ですね\n'
+      '午前0:15\t自分\t日付またぎ\n',
+    );
+
+    expect(result.messages, hasLength(4));
+    expect(result.messages[0].timestamp, DateTime(2024, 3, 15, 9, 0));
+    expect(result.messages[1].timestamp, DateTime(2024, 3, 15, 12, 30));
+    expect(result.messages[2].timestamp, DateTime(2024, 3, 15, 20, 5));
+    expect(result.messages[3].timestamp, DateTime(2024, 3, 15, 0, 15));
+    expect(result.unrecognizedLineCount, 0);
+  });
+
   test('folds unclassifiable lines into the previous message and counts them',
       () {
     final result = parser.parse(
