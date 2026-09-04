@@ -1,6 +1,18 @@
 {
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
   "identifier" : "5A7A0000-0000-0000-0000-000000000001",
-  "nonRenewingSubscriptions" : [],
+  "nonRenewingSubscriptions" : [
+
+  ],
   "products" : [
     {
       "displayPrice" : "480",
@@ -35,17 +47,24 @@
   ],
   "settings" : {
     "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
     "_billingIssuesEnabled" : false,
     "_disableDialogs" : false,
     "_editorMode" : true,
     "_failTransactionsEnabled" : false,
-    "_locale" : "ja_JP",
+    "_locale" : "ja",
+    "_renewalBillingIssuesEnabled" : false,
     "_storefront" : "JPN",
-    "_storeKitErrors" : []
+    "_storeKitErrors" : [
+
+    ],
+    "_timeRate" : 0
   },
-  "subscriptionGroups" : [],
+  "subscriptionGroups" : [
+
+  ],
   "version" : {
-    "major" : 3,
+    "major" : 5,
     "minor" : 0
   }
 }
