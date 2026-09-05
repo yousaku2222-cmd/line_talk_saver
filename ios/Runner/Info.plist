@@ -27,6 +27,18 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<!-- Declares supported UI languages (matches lib/l10n/app_*.arb) so the
+	     App Store product page shows all languages instead of English only. -->
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>ja</string>
+		<string>ko</string>
+		<string>th</string>
+		<string>id</string>
+		<string>zh-Hans</string>
+		<string>zh-Hant</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>line_talk_saver</string>
 	<key>CFBundlePackageType</key>
