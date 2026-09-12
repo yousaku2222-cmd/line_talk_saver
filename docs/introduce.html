@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>トーク保存 - 大切なトークを消える前に</title>
+<meta name="description" content="LINEなどのトーク履歴を取り込んで保存・検索・書き出し(Excel/PDF/Word)できるアプリ「トーク保存」。データは全部端末の中だけ。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="トーク保存 - 大切なトークを消える前に">
+<meta property="og:description" content="消えてしまう前に、大切なトークを保存。検索も書き出しもおまかせ。">
+<meta property="og:url" content="https://yousaku2222-cmd.github.io/line_talk_saver/introduce.html">
+<meta property="og:image" content="https://yousaku2222-cmd.github.io/line_talk_saver/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root {
+    --bg-top: #b7f0d6;
+    --bg-bottom: #8fd9e8;
+    --ink: #23332e;
+    --sub: #4d6159;
+    --card: rgba(255,255,255,.72);
+    --accent: #2e8f78;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, system-ui, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(160deg, var(--bg-top), var(--bg-bottom) 70%);
+    display: flex;
+    justify-content: center;
+    padding: 2.5rem 1.25rem 3.5rem;
+  }
+  main { width: 100%; max-width: 26rem; text-align: center; }
+
+  .badge {
+    display: inline-block;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--accent);
+    background: rgba(255,255,255,.6);
+    padding: .3rem .8rem;
+    border-radius: 999px;
+    margin-bottom: 1.6rem;
+  }
+
+  .icon {
+    width: min(40vw, 148px);
+    height: min(40vw, 148px);
+    border-radius: 33px;
+    box-shadow: 0 10px 26px rgba(30,80,70,.22);
+    margin: 0 auto 1.4rem;
+    display: block;
+  }
+
+  h1 { font-size: 1.5rem; line-height: 1.4; margin: 0 0 .5rem; }
+  .catch { font-size: 1.05rem; font-weight: 700; margin: 0 0 .4rem; }
+  .sub { color: var(--sub); font-size: .92rem; margin: 0 0 1.8rem; }
+
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    background: var(--card);
+    border-radius: 16px;
+    padding: .8rem 1rem;
+    box-shadow: 0 4px 14px rgba(30,70,60,.08);
+  }
+  .feature .emoji { font-size: 1.4rem; }
+  .feature .txt { font-size: .88rem; color: var(--ink); line-height: 1.5; }
+  .feature .txt b { display: block; font-size: .95rem; margin-bottom: .1rem; }
+
+  .cta {
+    display: inline-block;
+    width: 100%;
+    max-width: 20rem;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: .98rem;
+    padding: .9rem 1rem;
+    border-radius: 14px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.22);
+  }
+  .android-note {
+    margin-top: .7rem;
+    font-size: .8rem;
+    color: var(--sub);
+  }
+
+  footer {
+    margin-top: 2.4rem;
+    font-size: .8rem;
+    color: var(--sub);
+  }
+  footer a { color: var(--accent); }
+  footer p { margin: .3rem 0; }
+</style>
+</head>
+<body>
+<main>
+  <span class="badge">非公式・個人開発アプリ</span>
+
+  <img class="icon" src="og-image.png" alt="トーク保存のアイコン">
+
+  <h1>トーク保存</h1>
+  <p class="catch">大切なトークを消える前に</p>
+  <p class="sub">送られてきたトーク履歴の.txtファイルを渡すだけ。読みやすく整理して、検索も書き出しもおまかせ。</p>
+
+  <div class="features">
+    <div class="feature">
+      <div class="emoji">🔍</div>
+      <div class="txt"><b>キーワード検索</b>昔のやり取りも一瞬で見つかる</div>
+    </div>
+    <div class="feature">
+      <div class="emoji">📄</div>
+      <div class="txt"><b>Excel/PDF/Wordで書き出し</b>証拠保存や記録にそのまま使える</div>
+    </div>
+    <div class="feature">
+      <div class="emoji">🔒</div>
+      <div class="txt"><b>パスコードロック</b>データは端末の中だけ。外には出さない</div>
+    </div>
+  </div>
+
+  <a class="cta" href="https://apps.apple.com/jp/app/id6806939272">App Storeで見る（iOS）</a>
+  <p class="android-note">Android版は現在クローズドテスト中・近日公開予定</p>
+
+  <footer>
+    <p><a href="support.html">お問い合わせ・サポート</a></p>
+    <p><a href="https://sites.google.com/view/line-talk-saver-privacy/ホーム">プライバシーポリシー</a></p>
+    <p>&copy; 2026 Yusaku Mizogami</p>
+  </footer>
+</main>
+</body>
+</html>
