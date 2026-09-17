@@ -1,23 +1,21 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show kDebugMode;
+
 /// Real AdMob app / ad unit IDs from the developer's own AdMob account
 /// (console.admob.google.com), for the "トーク保存" app.
 class AdUnitIds {
   AdUnitIds._();
 
   /// While true, every install requests Google's official public test ad
-  /// unit instead of the real one, so closed/open testers on unregistered
-  /// devices see clearly-labeled test creatives instead of real ads —
-  /// avoiding any invalid-traffic risk from testers who aren't real users.
-  /// The AndroidManifest/Info.plist App ID stays the real one either way;
-  /// only the ad *unit* ID needs to change. Reference:
-  /// https://developers.google.com/admob/android/test-ads
-  ///
-  /// iOS shipped to the App Store on 2026-09-04, so it now uses real ads.
-  /// Android is still pre-closed-test (no AAB submitted yet), so it stays on
-  /// test ads until that closed test period ends -- flip this to false too
-  /// once Android ships to real users.
-  static bool get useTestAds => !Platform.isIOS;
+  /// unit instead of the real one, so debug builds show clearly-labeled test
+  /// creatives instead of real ads -- avoiding any invalid-traffic risk from
+  /// developer/tester taps on a build that was never distributed to real
+  /// users. Release builds (TestFlight, Play closed/open testing, and the
+  /// public stores) always use real ads. The AndroidManifest/Info.plist App
+  /// ID stays the real one either way; only the ad *unit* ID changes.
+  /// Reference: https://developers.google.com/admob/android/test-ads
+  static bool get useTestAds => kDebugMode;
 
   static const androidAppId = 'ca-app-pub-3818461038959537~7254635029';
   static const iosAppId = 'ca-app-pub-3818461038959537~5614922743';
