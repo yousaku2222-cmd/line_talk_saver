@@ -72,6 +72,65 @@ class AppLocalizationsZh extends AppLocalizations {
   String get unlockThemeDialogBody => '觀看一次廣告,即可永久使用這個主題。';
 
   @override
+  String get chatStatsTooltip => '聊天統計';
+
+  @override
+  String get chatStatsScreenTitle => '聊天統計';
+
+  @override
+  String get chatStatsGateDialogTitle => '今天的免費次數已用完';
+
+  @override
+  String get chatStatsGateDialogBody => '觀看一次廣告,即可再次查看聊天統計。';
+
+  @override
+  String get chatStatsSectionHeatmapTitle => '熱度圖表';
+
+  @override
+  String chatStatsPeakMonthLabel(Object month) {
+    return '$month是互動最頻繁的月份';
+  }
+
+  @override
+  String get chatStatsSectionCompatibilityTitle => '契合度分析';
+
+  @override
+  String get chatStatsSectionShareTitle => '發言比例';
+
+  @override
+  String get chatStatsAvgReplyTimeLabel => '平均回覆時間';
+
+  @override
+  String get chatStatsInitiatedCountLabel => '主動搭話次數';
+
+  @override
+  String get chatStatsStampRatioLabel => '貼圖使用率';
+
+  @override
+  String get chatStatsMessageCountLabel => '訊息數';
+
+  @override
+  String chatStatsDurationMinutes(Object minutes) {
+    return '$minutes分鐘';
+  }
+
+  @override
+  String get chatStatsNoReplyDataLabel => '無資料';
+
+  @override
+  String chatStatsFasterReplyLabel(Object name) {
+    return '$name的回覆通常比較快';
+  }
+
+  @override
+  String chatStatsMoreInitiationsLabel(Object name) {
+    return '$name比較常主動搭話';
+  }
+
+  @override
+  String get chatStatsNoDataMessage => '沒有可顯示統計的資料';
+
+  @override
   String get renameChatTitle => '變更聊天名稱';
 
   @override
@@ -700,6 +759,65 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get unlockThemeDialogBody => '觀看一次廣告,即可永久使用這個主題。';
+
+  @override
+  String get chatStatsTooltip => '聊天統計';
+
+  @override
+  String get chatStatsScreenTitle => '聊天統計';
+
+  @override
+  String get chatStatsGateDialogTitle => '今天的免費次數已用完';
+
+  @override
+  String get chatStatsGateDialogBody => '觀看一次廣告,即可再次查看聊天統計。';
+
+  @override
+  String get chatStatsSectionHeatmapTitle => '熱度圖表';
+
+  @override
+  String chatStatsPeakMonthLabel(Object month) {
+    return '$month是互動最頻繁的月份';
+  }
+
+  @override
+  String get chatStatsSectionCompatibilityTitle => '契合度分析';
+
+  @override
+  String get chatStatsSectionShareTitle => '發言比例';
+
+  @override
+  String get chatStatsAvgReplyTimeLabel => '平均回覆時間';
+
+  @override
+  String get chatStatsInitiatedCountLabel => '主動搭話次數';
+
+  @override
+  String get chatStatsStampRatioLabel => '貼圖使用率';
+
+  @override
+  String get chatStatsMessageCountLabel => '訊息數';
+
+  @override
+  String chatStatsDurationMinutes(Object minutes) {
+    return '$minutes分鐘';
+  }
+
+  @override
+  String get chatStatsNoReplyDataLabel => '無資料';
+
+  @override
+  String chatStatsFasterReplyLabel(Object name) {
+    return '$name的回覆通常比較快';
+  }
+
+  @override
+  String chatStatsMoreInitiationsLabel(Object name) {
+    return '$name比較常主動搭話';
+  }
+
+  @override
+  String get chatStatsNoDataMessage => '沒有可顯示統計的資料';
 
   @override
   String get renameChatTitle => '變更聊天名稱';

@@ -76,6 +76,66 @@ class AppLocalizationsTh extends AppLocalizations {
   String get unlockThemeDialogBody => 'ดูโฆษณาหนึ่งครั้งเพื่อปลดล็อกธีมนี้ถาวร';
 
   @override
+  String get chatStatsTooltip => 'สถิติแชท';
+
+  @override
+  String get chatStatsScreenTitle => 'สถิติแชท';
+
+  @override
+  String get chatStatsGateDialogTitle => 'ใช้สิทธิ์ฟรีวันนี้ครบแล้ว';
+
+  @override
+  String get chatStatsGateDialogBody =>
+      'ดูโฆษณาหนึ่งครั้งเพื่อดูสถิติแชทอีกครั้ง';
+
+  @override
+  String get chatStatsSectionHeatmapTitle => 'กราฟความถี่ในการพูดคุย';
+
+  @override
+  String chatStatsPeakMonthLabel(Object month) {
+    return '$month เป็นเดือนที่คุยกันมากที่สุด';
+  }
+
+  @override
+  String get chatStatsSectionCompatibilityTitle => 'วิเคราะห์ความเข้ากัน';
+
+  @override
+  String get chatStatsSectionShareTitle => 'สัดส่วนข้อความ';
+
+  @override
+  String get chatStatsAvgReplyTimeLabel => 'เวลาตอบกลับเฉลี่ย';
+
+  @override
+  String get chatStatsInitiatedCountLabel => 'จำนวนครั้งที่เริ่มทัก';
+
+  @override
+  String get chatStatsStampRatioLabel => 'อัตราการใช้สติกเกอร์';
+
+  @override
+  String get chatStatsMessageCountLabel => 'จำนวนข้อความ';
+
+  @override
+  String chatStatsDurationMinutes(Object minutes) {
+    return '$minutes นาที';
+  }
+
+  @override
+  String get chatStatsNoReplyDataLabel => 'ไม่มีข้อมูล';
+
+  @override
+  String chatStatsFasterReplyLabel(Object name) {
+    return '$name มักตอบกลับเร็วกว่า';
+  }
+
+  @override
+  String chatStatsMoreInitiationsLabel(Object name) {
+    return '$name มักเป็นฝ่ายเริ่มทักมากกว่า';
+  }
+
+  @override
+  String get chatStatsNoDataMessage => 'ไม่มีข้อมูลสำหรับแสดงสถิติ';
+
+  @override
   String get renameChatTitle => 'เปลี่ยนชื่อแชท';
 
   @override

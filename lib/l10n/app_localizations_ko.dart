@@ -72,6 +72,65 @@ class AppLocalizationsKo extends AppLocalizations {
   String get unlockThemeDialogBody => '광고를 한 번 보면 이 테마를 앞으로 계속 사용할 수 있습니다.';
 
   @override
+  String get chatStatsTooltip => '대화 통계';
+
+  @override
+  String get chatStatsScreenTitle => '대화 통계';
+
+  @override
+  String get chatStatsGateDialogTitle => '오늘의 무료 이용이 끝났습니다';
+
+  @override
+  String get chatStatsGateDialogBody => '광고를 한 번 보면 대화 통계를 다시 볼 수 있습니다.';
+
+  @override
+  String get chatStatsSectionHeatmapTitle => '활동 그래프';
+
+  @override
+  String chatStatsPeakMonthLabel(Object month) {
+    return '$month에 대화가 가장 활발했습니다';
+  }
+
+  @override
+  String get chatStatsSectionCompatibilityTitle => '궁합 분석';
+
+  @override
+  String get chatStatsSectionShareTitle => '발언 비율';
+
+  @override
+  String get chatStatsAvgReplyTimeLabel => '평균 답장 시간';
+
+  @override
+  String get chatStatsInitiatedCountLabel => '먼저 말을 건 횟수';
+
+  @override
+  String get chatStatsStampRatioLabel => '스티커 사용률';
+
+  @override
+  String get chatStatsMessageCountLabel => '메시지 수';
+
+  @override
+  String chatStatsDurationMinutes(Object minutes) {
+    return '$minutes분';
+  }
+
+  @override
+  String get chatStatsNoReplyDataLabel => '데이터 없음';
+
+  @override
+  String chatStatsFasterReplyLabel(Object name) {
+    return '$name님이 답장이 더 빠른 편입니다';
+  }
+
+  @override
+  String chatStatsMoreInitiationsLabel(Object name) {
+    return '$name님이 먼저 말을 거는 경우가 더 많습니다';
+  }
+
+  @override
+  String get chatStatsNoDataMessage => '통계를 표시할 데이터가 없습니다';
+
+  @override
   String get renameChatTitle => '대화 이름 변경';
 
   @override

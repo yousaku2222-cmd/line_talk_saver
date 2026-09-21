@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import '../../../core/providers/app_providers.dart';
 import '../../../data/db/app_database.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../chat_stats/ui/chat_stats_screen.dart';
 import '../../export/ui/export_options_sheet.dart';
 import '../../monetization/ads/banner_ad_widget.dart';
 import '../../photo_association/media_kind.dart';
@@ -301,6 +302,11 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                 },
                 orElse: () => null,
               ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.insights_outlined),
+              tooltip: l10n.chatStatsTooltip,
+              onPressed: () => showChatStatsScreen(context, ref, widget.chatId),
             ),
             PopupMenuButton<String>(
               onSelected: (value) {

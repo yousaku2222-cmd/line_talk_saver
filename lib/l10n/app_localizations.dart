@@ -227,6 +227,108 @@ abstract class AppLocalizations {
   /// **'広告を1回見ると、このテーマを今後ずっと使えるようになります。'**
   String get unlockThemeDialogBody;
 
+  /// No description provided for @chatStatsTooltip.
+  ///
+  /// In ja, this message translates to:
+  /// **'トーク統計'**
+  String get chatStatsTooltip;
+
+  /// No description provided for @chatStatsScreenTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'トーク統計'**
+  String get chatStatsScreenTitle;
+
+  /// No description provided for @chatStatsGateDialogTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'本日の無料利用は終了しました'**
+  String get chatStatsGateDialogTitle;
+
+  /// No description provided for @chatStatsGateDialogBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'広告を1回見ると、トーク統計をもう一度見られます。'**
+  String get chatStatsGateDialogBody;
+
+  /// No description provided for @chatStatsSectionHeatmapTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'温度感グラフ'**
+  String get chatStatsSectionHeatmapTitle;
+
+  /// No description provided for @chatStatsPeakMonthLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'{month}が一番やり取りが多い月でした'**
+  String chatStatsPeakMonthLabel(Object month);
+
+  /// No description provided for @chatStatsSectionCompatibilityTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'相性診断'**
+  String get chatStatsSectionCompatibilityTitle;
+
+  /// No description provided for @chatStatsSectionShareTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'発言割合'**
+  String get chatStatsSectionShareTitle;
+
+  /// No description provided for @chatStatsAvgReplyTimeLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'平均返信時間'**
+  String get chatStatsAvgReplyTimeLabel;
+
+  /// No description provided for @chatStatsInitiatedCountLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'話しかけた回数'**
+  String get chatStatsInitiatedCountLabel;
+
+  /// No description provided for @chatStatsStampRatioLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'スタンプ使用率'**
+  String get chatStatsStampRatioLabel;
+
+  /// No description provided for @chatStatsMessageCountLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'メッセージ数'**
+  String get chatStatsMessageCountLabel;
+
+  /// No description provided for @chatStatsDurationMinutes.
+  ///
+  /// In ja, this message translates to:
+  /// **'{minutes}分'**
+  String chatStatsDurationMinutes(Object minutes);
+
+  /// No description provided for @chatStatsNoReplyDataLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'データなし'**
+  String get chatStatsNoReplyDataLabel;
+
+  /// No description provided for @chatStatsFasterReplyLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'{name}さんの方が返信が早い傾向です'**
+  String chatStatsFasterReplyLabel(Object name);
+
+  /// No description provided for @chatStatsMoreInitiationsLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'{name}さんの方がよく話しかけている傾向です'**
+  String chatStatsMoreInitiationsLabel(Object name);
+
+  /// No description provided for @chatStatsNoDataMessage.
+  ///
+  /// In ja, this message translates to:
+  /// **'統計を表示できるデータがありません'**
+  String get chatStatsNoDataMessage;
+
   /// No description provided for @renameChatTitle.
   ///
   /// In ja, this message translates to:

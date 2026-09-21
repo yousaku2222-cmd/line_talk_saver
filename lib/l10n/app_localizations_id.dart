@@ -77,6 +77,66 @@ class AppLocalizationsId extends AppLocalizations {
       'Tonton satu iklan untuk membuka tema ini selamanya.';
 
   @override
+  String get chatStatsTooltip => 'Statistik obrolan';
+
+  @override
+  String get chatStatsScreenTitle => 'Statistik obrolan';
+
+  @override
+  String get chatStatsGateDialogTitle => 'Kuota gratis hari ini sudah habis';
+
+  @override
+  String get chatStatsGateDialogBody =>
+      'Tonton satu iklan untuk melihat statistik obrolan lagi.';
+
+  @override
+  String get chatStatsSectionHeatmapTitle => 'Grafik aktivitas';
+
+  @override
+  String chatStatsPeakMonthLabel(Object month) {
+    return '$month adalah bulan paling ramai';
+  }
+
+  @override
+  String get chatStatsSectionCompatibilityTitle => 'Analisis kecocokan';
+
+  @override
+  String get chatStatsSectionShareTitle => 'Porsi pesan';
+
+  @override
+  String get chatStatsAvgReplyTimeLabel => 'Rata-rata waktu balas';
+
+  @override
+  String get chatStatsInitiatedCountLabel => 'Jumlah memulai obrolan';
+
+  @override
+  String get chatStatsStampRatioLabel => 'Penggunaan stiker';
+
+  @override
+  String get chatStatsMessageCountLabel => 'Jumlah pesan';
+
+  @override
+  String chatStatsDurationMinutes(Object minutes) {
+    return '$minutes menit';
+  }
+
+  @override
+  String get chatStatsNoReplyDataLabel => 'Tidak ada data';
+
+  @override
+  String chatStatsFasterReplyLabel(Object name) {
+    return '$name cenderung membalas lebih cepat';
+  }
+
+  @override
+  String chatStatsMoreInitiationsLabel(Object name) {
+    return '$name cenderung lebih sering memulai obrolan';
+  }
+
+  @override
+  String get chatStatsNoDataMessage => 'Tidak ada data untuk ditampilkan';
+
+  @override
   String get renameChatTitle => 'Ganti nama obrolan';
 
   @override

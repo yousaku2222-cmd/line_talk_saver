@@ -72,6 +72,65 @@ class AppLocalizationsJa extends AppLocalizations {
   String get unlockThemeDialogBody => '広告を1回見ると、このテーマを今後ずっと使えるようになります。';
 
   @override
+  String get chatStatsTooltip => 'トーク統計';
+
+  @override
+  String get chatStatsScreenTitle => 'トーク統計';
+
+  @override
+  String get chatStatsGateDialogTitle => '本日の無料利用は終了しました';
+
+  @override
+  String get chatStatsGateDialogBody => '広告を1回見ると、トーク統計をもう一度見られます。';
+
+  @override
+  String get chatStatsSectionHeatmapTitle => '温度感グラフ';
+
+  @override
+  String chatStatsPeakMonthLabel(Object month) {
+    return '$monthが一番やり取りが多い月でした';
+  }
+
+  @override
+  String get chatStatsSectionCompatibilityTitle => '相性診断';
+
+  @override
+  String get chatStatsSectionShareTitle => '発言割合';
+
+  @override
+  String get chatStatsAvgReplyTimeLabel => '平均返信時間';
+
+  @override
+  String get chatStatsInitiatedCountLabel => '話しかけた回数';
+
+  @override
+  String get chatStatsStampRatioLabel => 'スタンプ使用率';
+
+  @override
+  String get chatStatsMessageCountLabel => 'メッセージ数';
+
+  @override
+  String chatStatsDurationMinutes(Object minutes) {
+    return '$minutes分';
+  }
+
+  @override
+  String get chatStatsNoReplyDataLabel => 'データなし';
+
+  @override
+  String chatStatsFasterReplyLabel(Object name) {
+    return '$nameさんの方が返信が早い傾向です';
+  }
+
+  @override
+  String chatStatsMoreInitiationsLabel(Object name) {
+    return '$nameさんの方がよく話しかけている傾向です';
+  }
+
+  @override
+  String get chatStatsNoDataMessage => '統計を表示できるデータがありません';
+
+  @override
   String get renameChatTitle => 'トーク名を変更';
 
   @override

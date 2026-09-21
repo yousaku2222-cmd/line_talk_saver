@@ -77,6 +77,66 @@ class AppLocalizationsEn extends AppLocalizations {
       'Watch one ad to unlock this theme for good.';
 
   @override
+  String get chatStatsTooltip => 'Chat stats';
+
+  @override
+  String get chatStatsScreenTitle => 'Chat stats';
+
+  @override
+  String get chatStatsGateDialogTitle => 'Today\'s free viewing is used up';
+
+  @override
+  String get chatStatsGateDialogBody =>
+      'Watch one ad to view chat stats again.';
+
+  @override
+  String get chatStatsSectionHeatmapTitle => 'Activity over time';
+
+  @override
+  String chatStatsPeakMonthLabel(Object month) {
+    return '$month was your busiest month';
+  }
+
+  @override
+  String get chatStatsSectionCompatibilityTitle => 'Compatibility';
+
+  @override
+  String get chatStatsSectionShareTitle => 'Message share';
+
+  @override
+  String get chatStatsAvgReplyTimeLabel => 'Average reply time';
+
+  @override
+  String get chatStatsInitiatedCountLabel => 'Times started the conversation';
+
+  @override
+  String get chatStatsStampRatioLabel => 'Sticker usage';
+
+  @override
+  String get chatStatsMessageCountLabel => 'Messages';
+
+  @override
+  String chatStatsDurationMinutes(Object minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get chatStatsNoReplyDataLabel => 'No data';
+
+  @override
+  String chatStatsFasterReplyLabel(Object name) {
+    return '$name tends to reply faster';
+  }
+
+  @override
+  String chatStatsMoreInitiationsLabel(Object name) {
+    return '$name tends to start the conversation more often';
+  }
+
+  @override
+  String get chatStatsNoDataMessage => 'There\'s no data to show stats for';
+
+  @override
   String get renameChatTitle => 'Rename this chat';
 
   @override

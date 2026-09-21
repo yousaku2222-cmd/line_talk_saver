@@ -26,6 +26,36 @@
   "themePickerLockedHint": "🔒のテーマは、広告を1回見ると今後ずっと使えるようになります",
   "unlockThemeDialogTitle": "このテーマを解放しますか?",
   "unlockThemeDialogBody": "広告を1回見ると、このテーマを今後ずっと使えるようになります。",
+
+  "chatStatsTooltip": "トーク統計",
+  "chatStatsScreenTitle": "トーク統計",
+  "chatStatsGateDialogTitle": "本日の無料利用は終了しました",
+  "chatStatsGateDialogBody": "広告を1回見ると、トーク統計をもう一度見られます。",
+  "chatStatsSectionHeatmapTitle": "温度感グラフ",
+  "chatStatsPeakMonthLabel": "{month}が一番やり取りが多い月でした",
+  "@chatStatsPeakMonthLabel": {
+    "placeholders": { "month": {} }
+  },
+  "chatStatsSectionCompatibilityTitle": "相性診断",
+  "chatStatsSectionShareTitle": "発言割合",
+  "chatStatsAvgReplyTimeLabel": "平均返信時間",
+  "chatStatsInitiatedCountLabel": "話しかけた回数",
+  "chatStatsStampRatioLabel": "スタンプ使用率",
+  "chatStatsMessageCountLabel": "メッセージ数",
+  "chatStatsDurationMinutes": "{minutes}分",
+  "@chatStatsDurationMinutes": {
+    "placeholders": { "minutes": {} }
+  },
+  "chatStatsNoReplyDataLabel": "データなし",
+  "chatStatsFasterReplyLabel": "{name}さんの方が返信が早い傾向です",
+  "@chatStatsFasterReplyLabel": {
+    "placeholders": { "name": {} }
+  },
+  "chatStatsMoreInitiationsLabel": "{name}さんの方がよく話しかけている傾向です",
+  "@chatStatsMoreInitiationsLabel": {
+    "placeholders": { "name": {} }
+  },
+  "chatStatsNoDataMessage": "統計を表示できるデータがありません",
   "renameChatTitle": "トーク名を変更",
   "renameChatButton": "変更",
   "renameChatTooltip": "名称を変更",
