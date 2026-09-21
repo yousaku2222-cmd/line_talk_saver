@@ -8,6 +8,7 @@ import '../../../core/ui/empty_state.dart';
 import '../../../data/db/app_database.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../app_lock/authenticate.dart';
+import '../../chat_stats/ui/dashboard_screen.dart';
 import '../../monetization/ads/banner_ad_widget.dart';
 import '../../monetization/purchase/purchase_flow.dart';
 import '../../monetization/purchase/purchase_prefs.dart';
@@ -176,6 +177,11 @@ class ChatListScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(l10n.appTitle),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.leaderboard_outlined),
+            tooltip: l10n.chatDashboardTooltip,
+            onPressed: () => showDashboardScreen(context, ref),
+          ),
           IconButton(
             icon: const Icon(Icons.add_comment_outlined),
             tooltip: l10n.createChatRoomTitle,

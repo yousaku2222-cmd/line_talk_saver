@@ -131,6 +131,59 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chatStatsNoDataMessage => '沒有可顯示統計的資料';
 
   @override
+  String get chatStatsSectionTimeOfDayTitle => '傳訊息時間傾向';
+
+  @override
+  String get chatStatsTimeSegmentLateNight => '深夜型';
+
+  @override
+  String get chatStatsTimeSegmentMorning => '早晨型';
+
+  @override
+  String get chatStatsTimeSegmentDay => '白天型';
+
+  @override
+  String get chatStatsTimeSegmentEvening => '夜晚型';
+
+  @override
+  String get chatStatsSectionQuestionCatchTitle => '對話你來我往程度';
+
+  @override
+  String chatStatsQuestionCatchRateValue(
+    Object rate,
+    Object answered,
+    Object asked,
+  ) {
+    return '問題回覆率 $rate%（$answered/$asked則）';
+  }
+
+  @override
+  String get chatDashboardTooltip => '整體儀表板';
+
+  @override
+  String get chatDashboardScreenTitle => '整體儀表板';
+
+  @override
+  String get chatDashboardGateDialogTitle => '今天的免費次數已用完';
+
+  @override
+  String get chatDashboardGateDialogBody => '觀看一次廣告,即可再次查看儀表板。';
+
+  @override
+  String get chatDashboardNoDataMessage => '沒有可顯示統計的資料';
+
+  @override
+  String get chatDashboardSectionSummaryTitle => '保存狀況';
+
+  @override
+  String chatDashboardSummaryValue(Object chats, Object messages) {
+    return '已保存$chats則聊天・共$messages則訊息';
+  }
+
+  @override
+  String get chatDashboardSectionRankingTitle => '最常聊天對象排行';
+
+  @override
   String get renameChatTitle => '變更聊天名稱';
 
   @override
@@ -513,6 +566,17 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String exportFailedMessage(Object error) {
     return '匯出失敗：$error';
+  }
+
+  @override
+  String get exportIncludeStatsLabel => '包含統計資訊';
+
+  @override
+  String get exportStatsSectionTitle => '聊天統計';
+
+  @override
+  String exportStatsTotalMessagesLabel(Object count) {
+    return '訊息總數：$count則';
   }
 
   @override
@@ -820,6 +884,59 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get chatStatsNoDataMessage => '沒有可顯示統計的資料';
 
   @override
+  String get chatStatsSectionTimeOfDayTitle => '傳訊息時間傾向';
+
+  @override
+  String get chatStatsTimeSegmentLateNight => '深夜型';
+
+  @override
+  String get chatStatsTimeSegmentMorning => '早晨型';
+
+  @override
+  String get chatStatsTimeSegmentDay => '白天型';
+
+  @override
+  String get chatStatsTimeSegmentEvening => '夜晚型';
+
+  @override
+  String get chatStatsSectionQuestionCatchTitle => '對話你來我往程度';
+
+  @override
+  String chatStatsQuestionCatchRateValue(
+    Object rate,
+    Object answered,
+    Object asked,
+  ) {
+    return '問題回覆率 $rate%（$answered/$asked則）';
+  }
+
+  @override
+  String get chatDashboardTooltip => '整體儀表板';
+
+  @override
+  String get chatDashboardScreenTitle => '整體儀表板';
+
+  @override
+  String get chatDashboardGateDialogTitle => '今天的免費次數已用完';
+
+  @override
+  String get chatDashboardGateDialogBody => '觀看一次廣告,即可再次查看儀表板。';
+
+  @override
+  String get chatDashboardNoDataMessage => '沒有可顯示統計的資料';
+
+  @override
+  String get chatDashboardSectionSummaryTitle => '保存狀況';
+
+  @override
+  String chatDashboardSummaryValue(Object chats, Object messages) {
+    return '已保存$chats則聊天・共$messages則訊息';
+  }
+
+  @override
+  String get chatDashboardSectionRankingTitle => '最常聊天對象排行';
+
+  @override
   String get renameChatTitle => '變更聊天名稱';
 
   @override
@@ -1202,6 +1319,17 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   @override
   String exportFailedMessage(Object error) {
     return '匯出失敗：$error';
+  }
+
+  @override
+  String get exportIncludeStatsLabel => '包含統計資訊';
+
+  @override
+  String get exportStatsSectionTitle => '聊天統計';
+
+  @override
+  String exportStatsTotalMessagesLabel(Object count) {
+    return '訊息總數：$count則';
   }
 
   @override

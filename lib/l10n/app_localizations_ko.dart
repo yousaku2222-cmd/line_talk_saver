@@ -131,6 +131,59 @@ class AppLocalizationsKo extends AppLocalizations {
   String get chatStatsNoDataMessage => '통계를 표시할 데이터가 없습니다';
 
   @override
+  String get chatStatsSectionTimeOfDayTitle => '메시지 시간대 경향';
+
+  @override
+  String get chatStatsTimeSegmentLateNight => '심야형';
+
+  @override
+  String get chatStatsTimeSegmentMorning => '아침형';
+
+  @override
+  String get chatStatsTimeSegmentDay => '낮형';
+
+  @override
+  String get chatStatsTimeSegmentEvening => '저녁형';
+
+  @override
+  String get chatStatsSectionQuestionCatchTitle => '대화 캐치볼 정도';
+
+  @override
+  String chatStatsQuestionCatchRateValue(
+    Object rate,
+    Object answered,
+    Object asked,
+  ) {
+    return '질문 응답률 $rate%（$answered/$asked건）';
+  }
+
+  @override
+  String get chatDashboardTooltip => '전체 대시보드';
+
+  @override
+  String get chatDashboardScreenTitle => '전체 대시보드';
+
+  @override
+  String get chatDashboardGateDialogTitle => '오늘의 무료 이용이 끝났습니다';
+
+  @override
+  String get chatDashboardGateDialogBody => '광고를 한 번 보면 대시보드를 다시 볼 수 있습니다.';
+
+  @override
+  String get chatDashboardNoDataMessage => '통계를 표시할 데이터가 없습니다';
+
+  @override
+  String get chatDashboardSectionSummaryTitle => '저장 현황';
+
+  @override
+  String chatDashboardSummaryValue(Object chats, Object messages) {
+    return '$chats개의 대화 저장 중・총 $messages건의 메시지';
+  }
+
+  @override
+  String get chatDashboardSectionRankingTitle => '많이 대화한 상대 순위';
+
+  @override
   String get renameChatTitle => '대화 이름 변경';
 
   @override
@@ -517,6 +570,17 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String exportFailedMessage(Object error) {
     return '내보내기 실패: $error';
+  }
+
+  @override
+  String get exportIncludeStatsLabel => '통계 정보 포함';
+
+  @override
+  String get exportStatsSectionTitle => '대화 통계';
+
+  @override
+  String exportStatsTotalMessagesLabel(Object count) {
+    return '총 메시지 수: $count건';
   }
 
   @override

@@ -36,6 +36,16 @@ class MessageDao extends DatabaseAccessor<AppDatabase>
     return query.watch();
   }
 
+  /// All messages across every chat, for the cross-chat dashboard (ranking
+  /// + combined 温度感グラフ). Small personal chat histories, so no need
+  /// for a SQL-side aggregate -- the dashboard just sums these in Dart the
+  /// same way [ChatStatsCalculator] does for a single chat.
+  Stream<List<Message>> watchAllMessages() {
+    return (select(messages)
+          ..orderBy([(t) => OrderingTerm.asc(t.timestamp)]))
+        .watch();
+  }
+
   Future<void> insertMessages(List<MessagesCompanion> rows) async {
     await batch((b) => b.insertAll(messages, rows));
   }

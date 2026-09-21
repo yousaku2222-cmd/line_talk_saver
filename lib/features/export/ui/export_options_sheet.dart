@@ -6,9 +6,11 @@ import 'package:share_plus/share_plus.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../data/db/app_database.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../chat_stats/chat_stats_calculator.dart';
 import '../docx/export_docx.dart';
 import '../excel/export_excel.dart';
 import '../pdf/export_pdf.dart';
+import '../stats_summary_lines.dart';
 
 /// Shows a sheet letting the user pick Excel / PDF / Word, generates the
 /// file, and hands it to the OS share sheet.
@@ -19,74 +21,101 @@ Future<void> showExportOptionsSheet(
   required Map<int, String> senderNames,
 }) {
   final l10n = AppLocalizations.of(context)!;
+  final locale = Localizations.localeOf(context).toString();
   return showModalBottomSheet<void>(
     context: context,
     builder: (sheetContext) {
-      void run(Future<File> Function() build) {
-        Navigator.of(sheetContext).pop();
-        _export(context, build: build);
-      }
+      var includeStats = false;
 
-      return SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(
-            AppSpacing.screen,
-            AppSpacing.x1,
-            AppSpacing.screen,
-            AppSpacing.x5,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 4, bottom: AppSpacing.x3),
-                child: Text(
-                  l10n.exportFormatTitle,
-                  style: Theme.of(sheetContext).textTheme.titleMedium,
-                ),
+      return StatefulBuilder(
+        builder: (sheetContext, setState) {
+          List<String>? statsLines() {
+            if (!includeStats) return null;
+            final stats = ChatStatsCalculator.compute(messages, senderNames);
+            if (stats.totalMessages == 0) return null;
+            return buildStatsSummaryLines(l10n, stats, locale);
+          }
+
+          void run(
+            Future<File> Function({required List<String>? statsLines}) build,
+          ) {
+            Navigator.of(sheetContext).pop();
+            _export(context, build: () => build(statsLines: statsLines()));
+          }
+
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.screen,
+                AppSpacing.x1,
+                AppSpacing.screen,
+                AppSpacing.x5,
               ),
-              _ExportOption(
-                icon: Icons.table_chart_outlined,
-                label: l10n.excelOption,
-                onTap: () => run(
-                  () => buildExcelFile(
-                    l10n: l10n,
-                    chatTitle: chatTitle,
-                    messages: messages,
-                    senderNames: senderNames,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4, bottom: AppSpacing.x3),
+                    child: Text(
+                      l10n.exportFormatTitle,
+                      style: Theme.of(sheetContext).textTheme.titleMedium,
+                    ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              _ExportOption(
-                icon: Icons.picture_as_pdf_outlined,
-                label: l10n.pdfOption,
-                onTap: () => run(
-                  () => buildPdfFile(
-                    l10n: l10n,
-                    chatTitle: chatTitle,
-                    messages: messages,
-                    senderNames: senderNames,
+                  _ExportOption(
+                    icon: Icons.table_chart_outlined,
+                    label: l10n.excelOption,
+                    onTap: () => run(
+                      ({required statsLines}) => buildExcelFile(
+                        l10n: l10n,
+                        chatTitle: chatTitle,
+                        messages: messages,
+                        senderNames: senderNames,
+                        statsLines: statsLines,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              _ExportOption(
-                icon: Icons.description_outlined,
-                label: l10n.wordOption,
-                onTap: () => run(
-                  () => buildDocxFile(
-                    l10n: l10n,
-                    chatTitle: chatTitle,
-                    messages: messages,
-                    senderNames: senderNames,
+                  const SizedBox(height: 10),
+                  _ExportOption(
+                    icon: Icons.picture_as_pdf_outlined,
+                    label: l10n.pdfOption,
+                    onTap: () => run(
+                      ({required statsLines}) => buildPdfFile(
+                        l10n: l10n,
+                        chatTitle: chatTitle,
+                        messages: messages,
+                        senderNames: senderNames,
+                        statsLines: statsLines,
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(height: 10),
+                  _ExportOption(
+                    icon: Icons.description_outlined,
+                    label: l10n.wordOption,
+                    onTap: () => run(
+                      ({required statsLines}) => buildDocxFile(
+                        l10n: l10n,
+                        chatTitle: chatTitle,
+                        messages: messages,
+                        senderNames: senderNames,
+                        statsLines: statsLines,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  CheckboxListTile(
+                    value: includeStats,
+                    onChanged: (v) => setState(() => includeStats = v ?? false),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(l10n.exportIncludeStatsLabel),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       );
     },
   );

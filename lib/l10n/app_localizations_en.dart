@@ -137,6 +137,60 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatStatsNoDataMessage => 'There\'s no data to show stats for';
 
   @override
+  String get chatStatsSectionTimeOfDayTitle => 'Time-of-day tendency';
+
+  @override
+  String get chatStatsTimeSegmentLateNight => 'Night owl';
+
+  @override
+  String get chatStatsTimeSegmentMorning => 'Early bird';
+
+  @override
+  String get chatStatsTimeSegmentDay => 'Daytime type';
+
+  @override
+  String get chatStatsTimeSegmentEvening => 'Evening type';
+
+  @override
+  String get chatStatsSectionQuestionCatchTitle => 'Conversation catch rate';
+
+  @override
+  String chatStatsQuestionCatchRateValue(
+    Object rate,
+    Object answered,
+    Object asked,
+  ) {
+    return '$rate% of questions got a reply ($answered/$asked)';
+  }
+
+  @override
+  String get chatDashboardTooltip => 'Overall dashboard';
+
+  @override
+  String get chatDashboardScreenTitle => 'Overall dashboard';
+
+  @override
+  String get chatDashboardGateDialogTitle => 'Today\'s free viewing is used up';
+
+  @override
+  String get chatDashboardGateDialogBody =>
+      'Watch one ad to view the dashboard again.';
+
+  @override
+  String get chatDashboardNoDataMessage => 'There\'s no data to show stats for';
+
+  @override
+  String get chatDashboardSectionSummaryTitle => 'Saved so far';
+
+  @override
+  String chatDashboardSummaryValue(Object chats, Object messages) {
+    return '$chats chats saved, $messages messages total';
+  }
+
+  @override
+  String get chatDashboardSectionRankingTitle => 'Who you talk to most';
+
+  @override
   String get renameChatTitle => 'Rename this chat';
 
   @override
@@ -539,6 +593,17 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String exportFailedMessage(Object error) {
     return 'Export failed: $error';
+  }
+
+  @override
+  String get exportIncludeStatsLabel => 'Include statistics';
+
+  @override
+  String get exportStatsSectionTitle => 'Chat stats';
+
+  @override
+  String exportStatsTotalMessagesLabel(Object count) {
+    return 'Total messages: $count';
   }
 
   @override

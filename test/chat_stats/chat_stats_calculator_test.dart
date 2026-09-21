@@ -108,4 +108,35 @@ void main() {
 
     expect(stats.senderStats.single.stampRatio, closeTo(0.25, 1e-9));
   });
+
+  test('dominant time segment picks the hour range with the most messages', () {
+    final messages = [
+      _msg(id: 1, senderId: 1, timestamp: DateTime(2026, 1, 1, 1, 0)), // lateNight
+      _msg(id: 2, senderId: 1, timestamp: DateTime(2026, 1, 1, 2, 0)), // lateNight
+      _msg(id: 3, senderId: 1, timestamp: DateTime(2026, 1, 1, 20, 0)), // evening
+    ];
+    final stats = ChatStatsCalculator.compute(messages, {1: 'Alice'});
+
+    final alice = stats.senderStats.single;
+    expect(alice.dominantTimeSegment, TimeOfDaySegment.lateNight);
+    expect(alice.dominantTimeSegmentRatio, closeTo(2 / 3, 1e-9));
+  });
+
+  test('question catch rate: same-sender follow-ups don\'t count as an answer', () {
+    final messages = [
+      // Alice asks a question; Bob's reply 5 minutes later answers it.
+      _msg(id: 1, senderId: 1, timestamp: DateTime(2026, 1, 1, 9, 0), rawText: '行く?'),
+      _msg(id: 2, senderId: 2, timestamp: DateTime(2026, 1, 1, 9, 5), rawText: '行く！'),
+      // Alice asks again, but only follows up with more of her own
+      // messages before the session lapses -- never actually answered.
+      _msg(id: 3, senderId: 1, timestamp: DateTime(2026, 1, 1, 9, 10), rawText: '何時にする？'),
+      _msg(id: 4, senderId: 1, timestamp: DateTime(2026, 1, 1, 9, 11), rawText: '10時とか'),
+      _msg(id: 5, senderId: 1, timestamp: DateTime(2026, 1, 2, 9, 0), rawText: 'おはよう'),
+    ];
+    final stats = ChatStatsCalculator.compute(messages, {1: 'Alice', 2: 'Bob'});
+
+    expect(stats.questionsAsked, 2);
+    expect(stats.questionsAnswered, 1);
+    expect(stats.questionCatchRate, closeTo(0.5, 1e-9));
+  });
 }

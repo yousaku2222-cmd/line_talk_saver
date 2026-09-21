@@ -14,6 +14,7 @@ Future<File> buildExcelFile({
   required String chatTitle,
   required List<Message> messages,
   required Map<int, String> senderNames,
+  List<String>? statsLines,
 }) async {
   final workbook = xls.Excel.createExcel();
   final sheetName = l10n.excelSheetName;
@@ -21,6 +22,13 @@ Future<File> buildExcelFile({
   final defaultSheet = workbook.getDefaultSheet();
   if (defaultSheet != null && defaultSheet != sheetName) {
     workbook.delete(defaultSheet);
+  }
+
+  if (statsLines != null && statsLines.isNotEmpty) {
+    final statsSheet = workbook[l10n.exportStatsSectionTitle];
+    for (final line in statsLines) {
+      statsSheet.appendRow([xls.TextCellValue(line)]);
+    }
   }
 
   sheet.appendRow([

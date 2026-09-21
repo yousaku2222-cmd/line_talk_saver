@@ -1,7 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../chat_detail/providers/chat_detail_provider.dart';
@@ -10,6 +9,7 @@ import '../../monetization/purchase/purchase_prefs.dart';
 import '../../search/providers/message_filter.dart';
 import '../chat_stats_calculator.dart';
 import '../stats_prefs.dart';
+import 'monthly_bar_chart.dart';
 
 /// Entry point for the トーク統計 screen: gates on today's one free viewing
 /// (unlimited for ads-removed users), offering a rewarded ad for any extra
@@ -91,7 +91,10 @@ class ChatStatsScreen extends ConsumerWidget {
             children: [
               _SectionCard(
                 title: l10n.chatStatsSectionHeatmapTitle,
-                child: _HeatmapChart(stats: stats),
+                child: MonthlyBarChart(
+                  monthlyCounts: stats.monthlyCounts,
+                  peakMonth: stats.peakMonth,
+                ),
               ),
               const SizedBox(height: 16),
               if (stats.isGroup)
@@ -104,6 +107,18 @@ class ChatStatsScreen extends ConsumerWidget {
                   title: l10n.chatStatsSectionCompatibilityTitle,
                   child: _CompatibilityCard(stats: stats),
                 ),
+              const SizedBox(height: 16),
+              _SectionCard(
+                title: l10n.chatStatsSectionTimeOfDayTitle,
+                child: _TimeOfDaySection(stats: stats),
+              ),
+              if (stats.questionsAsked > 0) ...[
+                const SizedBox(height: 16),
+                _SectionCard(
+                  title: l10n.chatStatsSectionQuestionCatchTitle,
+                  child: _QuestionCatchRateSection(stats: stats),
+                ),
+              ],
             ],
           );
         },
@@ -137,98 +152,6 @@ class _SectionCard extends StatelessWidget {
           child,
         ],
       ),
-    );
-  }
-}
-
-class _HeatmapChart extends StatelessWidget {
-  const _HeatmapChart({required this.stats});
-
-  final ChatStats stats;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    final scheme = Theme.of(context).colorScheme;
-    final months = stats.monthlyCounts;
-    final maxCount = months.map((e) => e.value).reduce((a, b) => a > b ? a : b);
-    final locale = Localizations.localeOf(context).toString();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (stats.peakMonth != null)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Text(
-              l10n.chatStatsPeakMonthLabel(
-                DateFormat.yMMMM(locale).format(stats.peakMonth!),
-              ),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(fontWeight: FontWeight.w600),
-            ),
-          ),
-        SizedBox(
-          height: 160,
-          child: BarChart(
-            BarChartData(
-              maxY: maxCount.toDouble() * 1.15,
-              gridData: const FlGridData(show: false),
-              borderData: FlBorderData(show: false),
-              titlesData: FlTitlesData(
-                leftTitles: const AxisTitles(
-                  sideTitles: SideTitles(showTitles: false),
-                ),
-                rightTitles: const AxisTitles(
-                  sideTitles: SideTitles(showTitles: false),
-                ),
-                topTitles: const AxisTitles(
-                  sideTitles: SideTitles(showTitles: false),
-                ),
-                bottomTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    reservedSize: 24,
-                    getTitlesWidget: (value, meta) {
-                      final i = value.toInt();
-                      if (i < 0 || i >= months.length) return const SizedBox.shrink();
-                      // Thin out labels so they don't overlap on long
-                      // histories -- show at most ~6 across the chart.
-                      final step = (months.length / 6).ceil().clamp(1, months.length);
-                      if (i % step != 0) return const SizedBox.shrink();
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 6),
-                        child: Text(
-                          DateFormat.MMM(locale).format(months[i].key),
-                          style: const TextStyle(fontSize: 10),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              barGroups: [
-                for (var i = 0; i < months.length; i++)
-                  BarChartGroupData(
-                    x: i,
-                    barRods: [
-                      BarChartRodData(
-                        toY: months[i].value.toDouble(),
-                        color: months[i].key == stats.peakMonth
-                            ? scheme.primary
-                            : scheme.primary.withValues(alpha: 0.4),
-                        width: (months.length > 24) ? 4 : 10,
-                        borderRadius: BorderRadius.circular(3),
-                      ),
-                    ],
-                  ),
-              ],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -432,5 +355,69 @@ class _CompatibilityCard extends StatelessWidget {
   String _formatDuration(AppLocalizations l10n, Duration? d) {
     if (d == null) return l10n.chatStatsNoReplyDataLabel;
     return l10n.chatStatsDurationMinutes(d.inMinutes.clamp(0, 999));
+  }
+}
+
+class _TimeOfDaySection extends StatelessWidget {
+  const _TimeOfDaySection({required this.stats});
+
+  final ChatStats stats;
+
+  static String _segmentLabel(AppLocalizations l10n, TimeOfDaySegment seg) {
+    switch (seg) {
+      case TimeOfDaySegment.lateNight:
+        return l10n.chatStatsTimeSegmentLateNight;
+      case TimeOfDaySegment.morning:
+        return l10n.chatStatsTimeSegmentMorning;
+      case TimeOfDaySegment.day:
+        return l10n.chatStatsTimeSegmentDay;
+      case TimeOfDaySegment.evening:
+        return l10n.chatStatsTimeSegmentEvening;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final textTheme = Theme.of(context).textTheme;
+    return Column(
+      children: [
+        for (final s in stats.senderStats)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(s.name, overflow: TextOverflow.ellipsis),
+                ),
+                Text(
+                  '${_segmentLabel(l10n, s.dominantTimeSegment)}'
+                  ' (${(s.dominantTimeSegmentRatio * 100).round()}%)',
+                  style: textTheme.bodyMedium,
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class _QuestionCatchRateSection extends StatelessWidget {
+  const _QuestionCatchRateSection({required this.stats});
+
+  final ChatStats stats;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Text(
+      l10n.chatStatsQuestionCatchRateValue(
+        (stats.questionCatchRate * 100).round(),
+        stats.questionsAnswered,
+        stats.questionsAsked,
+      ),
+      style: Theme.of(context).textTheme.bodyMedium,
+    );
   }
 }

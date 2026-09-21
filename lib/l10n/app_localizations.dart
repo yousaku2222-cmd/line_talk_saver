@@ -329,6 +329,100 @@ abstract class AppLocalizations {
   /// **'統計を表示できるデータがありません'**
   String get chatStatsNoDataMessage;
 
+  /// No description provided for @chatStatsSectionTimeOfDayTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'送信時間の傾向'**
+  String get chatStatsSectionTimeOfDayTitle;
+
+  /// No description provided for @chatStatsTimeSegmentLateNight.
+  ///
+  /// In ja, this message translates to:
+  /// **'深夜型'**
+  String get chatStatsTimeSegmentLateNight;
+
+  /// No description provided for @chatStatsTimeSegmentMorning.
+  ///
+  /// In ja, this message translates to:
+  /// **'朝型'**
+  String get chatStatsTimeSegmentMorning;
+
+  /// No description provided for @chatStatsTimeSegmentDay.
+  ///
+  /// In ja, this message translates to:
+  /// **'日中型'**
+  String get chatStatsTimeSegmentDay;
+
+  /// No description provided for @chatStatsTimeSegmentEvening.
+  ///
+  /// In ja, this message translates to:
+  /// **'夜型'**
+  String get chatStatsTimeSegmentEvening;
+
+  /// No description provided for @chatStatsSectionQuestionCatchTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'会話のキャッチボール度'**
+  String get chatStatsSectionQuestionCatchTitle;
+
+  /// No description provided for @chatStatsQuestionCatchRateValue.
+  ///
+  /// In ja, this message translates to:
+  /// **'質問への返信率 {rate}%（{answered}/{asked}件）'**
+  String chatStatsQuestionCatchRateValue(
+    Object rate,
+    Object answered,
+    Object asked,
+  );
+
+  /// No description provided for @chatDashboardTooltip.
+  ///
+  /// In ja, this message translates to:
+  /// **'トーク全体ダッシュボード'**
+  String get chatDashboardTooltip;
+
+  /// No description provided for @chatDashboardScreenTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'トーク全体ダッシュボード'**
+  String get chatDashboardScreenTitle;
+
+  /// No description provided for @chatDashboardGateDialogTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'本日の無料利用は終了しました'**
+  String get chatDashboardGateDialogTitle;
+
+  /// No description provided for @chatDashboardGateDialogBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'広告を1回見ると、ダッシュボードをもう一度見られます。'**
+  String get chatDashboardGateDialogBody;
+
+  /// No description provided for @chatDashboardNoDataMessage.
+  ///
+  /// In ja, this message translates to:
+  /// **'統計を表示できるデータがありません'**
+  String get chatDashboardNoDataMessage;
+
+  /// No description provided for @chatDashboardSectionSummaryTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'保存状況'**
+  String get chatDashboardSectionSummaryTitle;
+
+  /// No description provided for @chatDashboardSummaryValue.
+  ///
+  /// In ja, this message translates to:
+  /// **'{chats}件のトークを保存中・合計{messages}件のメッセージ'**
+  String chatDashboardSummaryValue(Object chats, Object messages);
+
+  /// No description provided for @chatDashboardSectionRankingTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'よく話す相手ランキング'**
+  String get chatDashboardSectionRankingTitle;
+
   /// No description provided for @renameChatTitle.
   ///
   /// In ja, this message translates to:
@@ -1018,6 +1112,24 @@ abstract class AppLocalizations {
   /// In ja, this message translates to:
   /// **'エクスポートに失敗しました: {error}'**
   String exportFailedMessage(Object error);
+
+  /// No description provided for @exportIncludeStatsLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'統計情報を含める'**
+  String get exportIncludeStatsLabel;
+
+  /// No description provided for @exportStatsSectionTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'トーク統計'**
+  String get exportStatsSectionTitle;
+
+  /// No description provided for @exportStatsTotalMessagesLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'合計メッセージ数: {count}件'**
+  String exportStatsTotalMessagesLabel(Object count);
 
   /// No description provided for @excelSheetName.
   ///

@@ -131,6 +131,59 @@ class AppLocalizationsJa extends AppLocalizations {
   String get chatStatsNoDataMessage => '統計を表示できるデータがありません';
 
   @override
+  String get chatStatsSectionTimeOfDayTitle => '送信時間の傾向';
+
+  @override
+  String get chatStatsTimeSegmentLateNight => '深夜型';
+
+  @override
+  String get chatStatsTimeSegmentMorning => '朝型';
+
+  @override
+  String get chatStatsTimeSegmentDay => '日中型';
+
+  @override
+  String get chatStatsTimeSegmentEvening => '夜型';
+
+  @override
+  String get chatStatsSectionQuestionCatchTitle => '会話のキャッチボール度';
+
+  @override
+  String chatStatsQuestionCatchRateValue(
+    Object rate,
+    Object answered,
+    Object asked,
+  ) {
+    return '質問への返信率 $rate%（$answered/$asked件）';
+  }
+
+  @override
+  String get chatDashboardTooltip => 'トーク全体ダッシュボード';
+
+  @override
+  String get chatDashboardScreenTitle => 'トーク全体ダッシュボード';
+
+  @override
+  String get chatDashboardGateDialogTitle => '本日の無料利用は終了しました';
+
+  @override
+  String get chatDashboardGateDialogBody => '広告を1回見ると、ダッシュボードをもう一度見られます。';
+
+  @override
+  String get chatDashboardNoDataMessage => '統計を表示できるデータがありません';
+
+  @override
+  String get chatDashboardSectionSummaryTitle => '保存状況';
+
+  @override
+  String chatDashboardSummaryValue(Object chats, Object messages) {
+    return '$chats件のトークを保存中・合計$messages件のメッセージ';
+  }
+
+  @override
+  String get chatDashboardSectionRankingTitle => 'よく話す相手ランキング';
+
+  @override
   String get renameChatTitle => 'トーク名を変更';
 
   @override
@@ -514,6 +567,17 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String exportFailedMessage(Object error) {
     return 'エクスポートに失敗しました: $error';
+  }
+
+  @override
+  String get exportIncludeStatsLabel => '統計情報を含める';
+
+  @override
+  String get exportStatsSectionTitle => 'トーク統計';
+
+  @override
+  String exportStatsTotalMessagesLabel(Object count) {
+    return '合計メッセージ数: $count件';
   }
 
   @override

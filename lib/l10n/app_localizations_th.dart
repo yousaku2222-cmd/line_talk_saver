@@ -136,6 +136,60 @@ class AppLocalizationsTh extends AppLocalizations {
   String get chatStatsNoDataMessage => 'ไม่มีข้อมูลสำหรับแสดงสถิติ';
 
   @override
+  String get chatStatsSectionTimeOfDayTitle => 'แนวโน้มช่วงเวลาส่งข้อความ';
+
+  @override
+  String get chatStatsTimeSegmentLateNight => 'สายนอนดึก';
+
+  @override
+  String get chatStatsTimeSegmentMorning => 'สายเช้า';
+
+  @override
+  String get chatStatsTimeSegmentDay => 'สายกลางวัน';
+
+  @override
+  String get chatStatsTimeSegmentEvening => 'สายกลางคืน';
+
+  @override
+  String get chatStatsSectionQuestionCatchTitle => 'ระดับการโต้ตอบบทสนทนา';
+
+  @override
+  String chatStatsQuestionCatchRateValue(
+    Object rate,
+    Object answered,
+    Object asked,
+  ) {
+    return 'อัตราการตอบคำถาม $rate%（$answered/$asked ข้อความ）';
+  }
+
+  @override
+  String get chatDashboardTooltip => 'แดชบอร์ดภาพรวม';
+
+  @override
+  String get chatDashboardScreenTitle => 'แดชบอร์ดภาพรวม';
+
+  @override
+  String get chatDashboardGateDialogTitle => 'ใช้สิทธิ์ฟรีวันนี้ครบแล้ว';
+
+  @override
+  String get chatDashboardGateDialogBody =>
+      'ดูโฆษณาหนึ่งครั้งเพื่อดูแดชบอร์ดอีกครั้ง';
+
+  @override
+  String get chatDashboardNoDataMessage => 'ไม่มีข้อมูลสำหรับแสดงสถิติ';
+
+  @override
+  String get chatDashboardSectionSummaryTitle => 'สถานะการบันทึก';
+
+  @override
+  String chatDashboardSummaryValue(Object chats, Object messages) {
+    return 'บันทึกไว้ $chats แชท รวม $messages ข้อความ';
+  }
+
+  @override
+  String get chatDashboardSectionRankingTitle => 'อันดับคนที่คุยด้วยบ่อยที่สุด';
+
+  @override
   String get renameChatTitle => 'เปลี่ยนชื่อแชท';
 
   @override
@@ -534,6 +588,17 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String exportFailedMessage(Object error) {
     return 'ส่งออกไม่สำเร็จ: $error';
+  }
+
+  @override
+  String get exportIncludeStatsLabel => 'รวมข้อมูลสถิติ';
+
+  @override
+  String get exportStatsSectionTitle => 'สถิติแชท';
+
+  @override
+  String exportStatsTotalMessagesLabel(Object count) {
+    return 'จำนวนข้อความทั้งหมด: $count';
   }
 
   @override

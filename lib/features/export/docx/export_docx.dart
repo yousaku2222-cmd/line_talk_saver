@@ -16,6 +16,7 @@ Future<File> buildDocxFile({
   required String chatTitle,
   required List<Message> messages,
   required Map<int, String> senderNames,
+  List<String>? statsLines,
 }) async {
   final dateTimeFormat = DateFormat('yyyy/MM/dd HH:mm');
   final buffer = StringBuffer();
@@ -25,6 +26,19 @@ Future<File> buildDocxFile({
     '<w:r><w:rPr><w:b/><w:sz w:val="32"/></w:rPr>'
     '<w:t>${escapeXmlText(chatTitle)}</w:t></w:r></w:p>',
   );
+
+  if (statsLines != null && statsLines.isNotEmpty) {
+    buffer.writeln(
+      '<w:p><w:r><w:rPr><w:b/><w:sz w:val="24"/></w:rPr>'
+      '<w:t>${escapeXmlText(l10n.exportStatsSectionTitle)}</w:t></w:r></w:p>',
+    );
+    for (final line in statsLines) {
+      buffer.writeln(
+        '<w:p><w:r><w:t xml:space="preserve">${escapeXmlText(line)}</w:t></w:r></w:p>',
+      );
+    }
+    buffer.writeln('<w:p><w:pPr><w:pageBreakBefore/></w:pPr></w:p>');
+  }
 
   for (final m in messages) {
     if (m.isSystemMessage) {

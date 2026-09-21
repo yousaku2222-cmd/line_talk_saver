@@ -56,6 +56,27 @@
     "placeholders": { "name": {} }
   },
   "chatStatsNoDataMessage": "統計を表示できるデータがありません",
+  "chatStatsSectionTimeOfDayTitle": "送信時間の傾向",
+  "chatStatsTimeSegmentLateNight": "深夜型",
+  "chatStatsTimeSegmentMorning": "朝型",
+  "chatStatsTimeSegmentDay": "日中型",
+  "chatStatsTimeSegmentEvening": "夜型",
+  "chatStatsSectionQuestionCatchTitle": "会話のキャッチボール度",
+  "chatStatsQuestionCatchRateValue": "質問への返信率 {rate}%（{answered}/{asked}件）",
+  "@chatStatsQuestionCatchRateValue": {
+    "placeholders": { "rate": {}, "answered": {}, "asked": {} }
+  },
+  "chatDashboardTooltip": "トーク全体ダッシュボード",
+  "chatDashboardScreenTitle": "トーク全体ダッシュボード",
+  "chatDashboardGateDialogTitle": "本日の無料利用は終了しました",
+  "chatDashboardGateDialogBody": "広告を1回見ると、ダッシュボードをもう一度見られます。",
+  "chatDashboardNoDataMessage": "統計を表示できるデータがありません",
+  "chatDashboardSectionSummaryTitle": "保存状況",
+  "chatDashboardSummaryValue": "{chats}件のトークを保存中・合計{messages}件のメッセージ",
+  "@chatDashboardSummaryValue": {
+    "placeholders": { "chats": {}, "messages": {} }
+  },
+  "chatDashboardSectionRankingTitle": "よく話す相手ランキング",
   "renameChatTitle": "トーク名を変更",
   "renameChatButton": "変更",
   "renameChatTooltip": "名称を変更",
@@ -230,6 +251,12 @@
   "exportFailedMessage": "エクスポートに失敗しました: {error}",
   "@exportFailedMessage": {
     "placeholders": { "error": {} }
+  },
+  "exportIncludeStatsLabel": "統計情報を含める",
+  "exportStatsSectionTitle": "トーク統計",
+  "exportStatsTotalMessagesLabel": "合計メッセージ数: {count}件",
+  "@exportStatsTotalMessagesLabel": {
+    "placeholders": { "count": {} }
   },
 
   "excelSheetName": "トーク",

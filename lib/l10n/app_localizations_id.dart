@@ -137,6 +137,62 @@ class AppLocalizationsId extends AppLocalizations {
   String get chatStatsNoDataMessage => 'Tidak ada data untuk ditampilkan';
 
   @override
+  String get chatStatsSectionTimeOfDayTitle => 'Kecenderungan waktu kirim';
+
+  @override
+  String get chatStatsTimeSegmentLateNight => 'Tipe begadang';
+
+  @override
+  String get chatStatsTimeSegmentMorning => 'Tipe pagi';
+
+  @override
+  String get chatStatsTimeSegmentDay => 'Tipe siang';
+
+  @override
+  String get chatStatsTimeSegmentEvening => 'Tipe malam';
+
+  @override
+  String get chatStatsSectionQuestionCatchTitle => 'Tingkat respons pertanyaan';
+
+  @override
+  String chatStatsQuestionCatchRateValue(
+    Object rate,
+    Object answered,
+    Object asked,
+  ) {
+    return '$rate% pertanyaan dibalas ($answered/$asked)';
+  }
+
+  @override
+  String get chatDashboardTooltip => 'Dasbor keseluruhan';
+
+  @override
+  String get chatDashboardScreenTitle => 'Dasbor keseluruhan';
+
+  @override
+  String get chatDashboardGateDialogTitle =>
+      'Kuota gratis hari ini sudah habis';
+
+  @override
+  String get chatDashboardGateDialogBody =>
+      'Tonton satu iklan untuk melihat dasbor lagi.';
+
+  @override
+  String get chatDashboardNoDataMessage => 'Tidak ada data untuk ditampilkan';
+
+  @override
+  String get chatDashboardSectionSummaryTitle => 'Status penyimpanan';
+
+  @override
+  String chatDashboardSummaryValue(Object chats, Object messages) {
+    return '$chats obrolan tersimpan, total $messages pesan';
+  }
+
+  @override
+  String get chatDashboardSectionRankingTitle =>
+      'Peringkat lawan bicara terbanyak';
+
+  @override
   String get renameChatTitle => 'Ganti nama obrolan';
 
   @override
@@ -541,6 +597,17 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String exportFailedMessage(Object error) {
     return 'Ekspor gagal: $error';
+  }
+
+  @override
+  String get exportIncludeStatsLabel => 'Sertakan statistik';
+
+  @override
+  String get exportStatsSectionTitle => 'Statistik obrolan';
+
+  @override
+  String exportStatsTotalMessagesLabel(Object count) {
+    return 'Total pesan: $count';
   }
 
   @override

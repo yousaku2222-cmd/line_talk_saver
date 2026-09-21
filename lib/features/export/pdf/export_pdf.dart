@@ -16,6 +16,7 @@ Future<File> buildPdfFile({
   required String chatTitle,
   required List<Message> messages,
   required Map<int, String> senderNames,
+  List<String>? statsLines,
 }) async {
   final fontData = await rootBundle.load('assets/fonts/NotoSansJP-Regular.ttf');
   final font = pw.Font.ttf(fontData);
@@ -32,6 +33,29 @@ Future<File> buildPdfFile({
   final unknownSender = noGlyphCoverage ? 'Unknown' : l10n.unknownSender;
 
   final dateTimeFormat = DateFormat('yyyy/MM/dd HH:mm');
+
+  if (statsLines != null && statsLines.isNotEmpty) {
+    doc.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (context) => pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            pw.Text(
+              l10n.exportStatsSectionTitle,
+              style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold),
+            ),
+            pw.SizedBox(height: 12),
+            for (final line in statsLines)
+              pw.Padding(
+                padding: const pw.EdgeInsets.only(bottom: 6),
+                child: pw.Text(line, style: const pw.TextStyle(fontSize: 11)),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
 
   doc.addPage(
     pw.MultiPage(
