@@ -23,6 +23,8 @@ import '../../monetization/purchase/backup_unlock_prefs.dart';
 import '../../monetization/purchase/purchase_flow.dart';
 import '../../monetization/purchase/purchase_prefs.dart';
 import '../../monetization/purchase/purchase_service.dart';
+import '../../reminder/reminder_prefs.dart';
+import '../../reminder/reminder_service.dart';
 import '../locale/locale_prefs.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -78,6 +80,31 @@ class SettingsScreen extends ConsumerWidget {
       if (!ok) return;
     }
     await setAppLockEnabled(ref, value);
+  }
+
+  Future<void> _onToggleReminder(
+    BuildContext context,
+    WidgetRef ref,
+    bool value,
+  ) async {
+    final l10n = AppLocalizations.of(context)!;
+    if (value) {
+      final granted = await ReminderService.instance.requestPermission();
+      if (!granted) {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.reminderPermissionDeniedMessage)),
+        );
+        return;
+      }
+      await ReminderService.instance.scheduleWeekly(
+        title: l10n.reminderNotificationTitle,
+        body: l10n.reminderNotificationBody,
+      );
+    } else {
+      await ReminderService.instance.cancel();
+    }
+    await setReminderEnabled(ref, value);
   }
 
   Future<void> _setAppPin(BuildContext context, WidgetRef ref) async {
@@ -325,6 +352,7 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lockEnabled = ref.watch(appLockEnabledProvider);
+    final reminderEnabled = ref.watch(reminderEnabledProvider);
     final pinSet = ref.watch(appPinSetProvider);
     final adsRemoved = ref.watch(adsRemovedProvider);
     final backupUnlocked = ref.watch(backupUnlockedProvider);
@@ -358,6 +386,18 @@ class SettingsScreen extends ConsumerWidget {
                       : _languageDisplayName(locale),
                 ),
                 onTap: () => _pickLanguage(context, ref),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.x4),
+          SettingsGroup(
+            children: [
+              SwitchListTile(
+                secondary: const Icon(Icons.notifications_outlined),
+                title: Text(l10n.reminderToggleTitle),
+                subtitle: Text(l10n.reminderToggleSubtitle),
+                value: reminderEnabled,
+                onChanged: (value) => _onToggleReminder(context, ref, value),
               ),
             ],
           ),
@@ -470,6 +510,12 @@ class SettingsScreen extends ConsumerWidget {
                 title: Text(l10n.helpMenuTitle),
                 subtitle: Text(l10n.helpMenuSubtitle),
                 onTap: () => Navigator.of(context).pushNamed('/help'),
+              ),
+              ListTile(
+                leading: const Icon(Icons.new_releases_outlined),
+                title: Text(l10n.whatsNewMenuTitle),
+                subtitle: Text(l10n.whatsNewMenuSubtitle),
+                onTap: () => Navigator.of(context).pushNamed('/whats-new'),
               ),
               ListTile(
                 leading: const Icon(Icons.feedback_outlined),

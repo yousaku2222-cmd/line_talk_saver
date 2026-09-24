@@ -6,8 +6,10 @@ import '../../monetization/ads/rewarded_ad_service.dart';
 import '../../monetization/purchase/purchase_prefs.dart';
 import '../cross_chat_stats_calculator.dart';
 import '../providers/cross_chat_stats_provider.dart';
+import '../stats_image_share.dart';
 import '../stats_prefs.dart';
 import 'monthly_bar_chart.dart';
+import 'section_card.dart';
 
 /// Entry point for the 全トーク横断ダッシュボード, gated the same way as
 /// [showChatStatsScreen] but with its own separate daily-free quota (see
@@ -63,9 +65,22 @@ class DashboardScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final chatsAsync = ref.watch(allChatsForDashboardProvider);
     final messagesAsync = ref.watch(allMessagesForDashboardProvider);
+    final shareAllKey = GlobalKey();
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.chatDashboardScreenTitle)),
+      appBar: AppBar(
+        title: Text(l10n.chatDashboardScreenTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.ios_share),
+            tooltip: l10n.statsShareAllTooltip,
+            onPressed: () => shareWidgetAsImage(
+              shareAllKey,
+              fileName: l10n.chatDashboardScreenTitle,
+            ),
+          ),
+        ],
+      ),
       body: chatsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text(l10n.loadErrorWithMessage(e.toString()))),
@@ -79,66 +94,45 @@ class DashboardScreen extends ConsumerWidget {
               if (stats.totalMessages == 0) {
                 return Center(child: Text(l10n.chatDashboardNoDataMessage));
               }
-              return ListView(
+              return SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
-                children: [
-                  _SectionCard(
-                    title: l10n.chatDashboardSectionSummaryTitle,
-                    child: Text(
-                      l10n.chatDashboardSummaryValue(
-                        stats.totalChats,
-                        stats.totalMessages,
-                      ),
-                      style: Theme.of(context).textTheme.bodyMedium,
+                child: RepaintBoundary(
+                  key: shareAllKey,
+                  child: Container(
+                    color: Theme.of(context).colorScheme.surface,
+                    child: Column(
+                      children: [
+                        SectionCard(
+                          title: l10n.chatDashboardSectionSummaryTitle,
+                          child: Text(
+                            l10n.chatDashboardSummaryValue(
+                              stats.totalChats,
+                              stats.totalMessages,
+                            ),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        SectionCard(
+                          title: l10n.chatStatsSectionHeatmapTitle,
+                          child: MonthlyBarChart(
+                            monthlyCounts: stats.monthlyCounts,
+                            peakMonth: stats.peakMonth,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        SectionCard(
+                          title: l10n.chatDashboardSectionRankingTitle,
+                          child: _RankingList(stats: stats),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  _SectionCard(
-                    title: l10n.chatStatsSectionHeatmapTitle,
-                    child: MonthlyBarChart(
-                      monthlyCounts: stats.monthlyCounts,
-                      peakMonth: stats.peakMonth,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  _SectionCard(
-                    title: l10n.chatDashboardSectionRankingTitle,
-                    child: _RankingList(stats: stats),
-                  ),
-                ],
+                ),
               );
             },
           );
         },
-      ),
-    );
-  }
-}
-
-class _SectionCard extends StatelessWidget {
-  const _SectionCard({required this.title, required this.child});
-
-  final String title;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: scheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: scheme.outlineVariant),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: Theme.of(context).textTheme.titleMedium),
-          const SizedBox(height: 12),
-          child,
-        ],
       ),
     );
   }

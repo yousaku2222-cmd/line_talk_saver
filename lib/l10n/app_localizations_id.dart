@@ -93,6 +93,13 @@ class AppLocalizationsId extends AppLocalizations {
   String get chatStatsSectionHeatmapTitle => 'Grafik aktivitas';
 
   @override
+  String get statsShareImageTooltip => 'Bagikan sebagai gambar';
+
+  @override
+  String get statsShareAllTooltip =>
+      'Bagikan semua statistik sebagai satu gambar';
+
+  @override
   String chatStatsPeakMonthLabel(Object month) {
     return '$month adalah bulan paling ramai';
   }
@@ -164,6 +171,64 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
+  String get chatStatsSectionWordsTitle => 'Kata yang sering digunakan';
+
+  @override
+  String get chatStatsSectionWeekdayHeatmapTitle =>
+      'Aktivitas berdasarkan hari dan waktu';
+
+  @override
+  String get chatStatsSectionTriviaTitle => 'Trivia obrolan';
+
+  @override
+  String get chatStatsTabOverview => 'Ringkasan';
+
+  @override
+  String get chatStatsTabTrends => 'Tren';
+
+  @override
+  String get chatStatsTabTrivia => 'Trivia';
+
+  @override
+  String chatStatsStreakLabel(Object days) {
+    return 'Rentetan terpanjang: $days hari';
+  }
+
+  @override
+  String get chatStatsTopDaysLabel => '5 hari teraktif';
+
+  @override
+  String chatStatsSilenceGapLabel(Object duration, Object start, Object end) {
+    return 'Jeda terlama: $duration ($start - $end)';
+  }
+
+  @override
+  String chatStatsDurationDays(Object days) {
+    return '$days hari';
+  }
+
+  @override
+  String chatStatsDurationHours(Object hours) {
+    return '$hours jam';
+  }
+
+  @override
+  String chatStatsEmojiRateLabel(Object rate) {
+    return 'Pesan dengan emoji: $rate%';
+  }
+
+  @override
+  String get chatStatsOneLinerLabel => 'Tipe singkat';
+
+  @override
+  String get chatStatsLongFormLabel => 'Tipe panjang';
+
+  @override
+  String chatStatsAvgLengthLabel(Object name, Object length, Object label) {
+    return '$name: rata-rata $length karakter ($label)';
+  }
+
+  @override
   String get chatDashboardTooltip => 'Dasbor keseluruhan';
 
   @override
@@ -206,6 +271,25 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get chatUnlockTooltip => 'Buka kunci';
+
+  @override
+  String get chatFavoriteTooltip => 'Tambahkan ke favorit';
+
+  @override
+  String get chatUnfavoriteTooltip => 'Hapus dari favorit';
+
+  @override
+  String get crossSearchTooltip => 'Cari semua obrolan';
+
+  @override
+  String get crossSearchHint => 'Cari kata kunci di semua obrolan';
+
+  @override
+  String get crossSearchPrompt =>
+      'Masukkan kata kunci untuk mencari semua obrolan tersimpan';
+
+  @override
+  String get crossSearchNoResults => 'Tidak ada pesan yang cocok';
 
   @override
   String get chatLockAuthReason => 'Autentikasi untuk melihat obrolan ini';
@@ -288,6 +372,24 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settingsTitle => 'Pengaturan';
+
+  @override
+  String get reminderToggleTitle => 'Pengingat penyimpanan';
+
+  @override
+  String get reminderToggleSubtitle =>
+      'Mengirim notifikasi setiap Minggu pukul 10 pagi untuk mengingatkan Anda menyimpan obrolan';
+
+  @override
+  String get reminderPermissionDeniedMessage =>
+      'Pengingat tidak dapat diatur karena notifikasi tidak diizinkan. Izinkan notifikasi di pengaturan perangkat Anda.';
+
+  @override
+  String get reminderNotificationTitle => 'Talk Saver';
+
+  @override
+  String get reminderNotificationBody =>
+      'Saatnya menyimpan obrolan terbaru Anda?';
 
   @override
   String get appLockToggleTitle => 'Kunci saat dibuka';
@@ -715,6 +817,30 @@ class AppLocalizationsId extends AppLocalizations {
   String get helpScreenTitle => 'Panduan Pengguna';
 
   @override
+  String get whatsNewMenuTitle => 'Yang Baru';
+
+  @override
+  String get whatsNewMenuSubtitle => 'Lihat perubahan pada pembaruan terbaru';
+
+  @override
+  String get whatsNewScreenTitle => 'Yang Baru';
+
+  @override
+  String whatsNewVersionLabel(Object version) {
+    return 'Versi $version';
+  }
+
+  @override
+  String get whatsNewDialogTitle => 'Aplikasi telah diperbarui';
+
+  @override
+  String get whatsNewDialogOkButton => 'OK';
+
+  @override
+  String get whatsNewV120Body =>
+      'Kami telah memperluas fitur statistik obrolan.\n\n• Lihat tren waktu Anda mengirim pesan (tipe malam, tipe pagi, dll.)\n• Lihat tingkat balasan pertanyaan Anda (seberapa lancar percakapan berjalan)\n• Menambahkan dasbor untuk melihat statistik semua obrolan tersimpan\n• Sekarang Anda dapat menyertakan statistik saat mengekspor ke PDF/Excel/Word';
+
+  @override
   String get helpAboutTitle => 'Tentang aplikasi ini';
 
   @override
@@ -733,7 +859,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get helpChatListBody =>
-      '• Ketuk ikon di sebelah kiri obrolan untuk menggantinya dengan ikon pilihan Anda\n• Ketuk ikon pensil untuk mengganti nama obrolan\n• Gunakan tombol + di kanan atas untuk membuat ruang baru khusus foto, video, dan file\n• Ketuk ikon gembok untuk mengunci satu obrolan secara individual (memerlukan pembelian)';
+      '• Ketuk ikon di sebelah kiri obrolan untuk menggantinya dengan ikon pilihan Anda\n• Ketuk ikon pensil untuk mengganti nama obrolan\n• Gunakan tombol + di kanan atas untuk membuat ruang baru khusus foto, video, dan file\n• Ketuk ikon gembok untuk mengunci satu obrolan secara individual (memerlukan pembelian)\n• Ketuk ikon bintang untuk menambahkan obrolan ke favorit; favorit disematkan di bagian atas daftar\n• Gunakan ikon pencarian di kanan atas untuk mencari kata kunci di semua obrolan tersimpan sekaligus';
 
   @override
   String get helpChatDetailTitle => 'Menggunakan layar obrolan';
@@ -741,6 +867,13 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get helpChatDetailBody =>
       '• Tekan lama atau pilih beberapa pesan untuk menyalinnya\n• Saring berdasarkan pengirim, rentang tanggal, atau kata kunci\n• Ekspor ke Excel, PDF, atau Word dari ikon di kanan atas\n• Gunakan ikon galeri untuk melihat semua foto yang dilampirkan pada obrolan itu';
+
+  @override
+  String get helpStatsTitle => 'Memahami statistik obrolan';
+
+  @override
+  String get helpStatsBody =>
+      '• Lihat grafik jumlah pesan bulanan\n• Untuk obrolan 1:1, dapatkan diagnosis kecocokan berdasarkan kecepatan balasan, rasio stiker, dan lainnya\n• Untuk grup 3 orang atau lebih, lihat diagram lingkaran proporsi pesan\n• Lihat tren waktu Anda paling aktif (tipe malam, tipe pagi, dll.)\n• Lihat tingkat balasan pertanyaan Anda (seberapa lancar percakapan berjalan)\n• Buka ikon dasbor dari daftar obrolan untuk melihat statistik semua obrolan tersimpan\n• Anda juga bisa menyertakan statistik saat mengekspor ke Excel, PDF, atau Word';
 
   @override
   String get helpAttachTitle => 'Melampirkan foto, video, dan file';

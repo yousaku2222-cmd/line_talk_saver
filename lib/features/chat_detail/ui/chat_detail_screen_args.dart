@@ -5,8 +5,10 @@ class ChatDetailScreenArgs {
   const ChatDetailScreenArgs({
     required this.chatId,
     this.pendingPhotoPaths = const [],
+    this.initialTextQuery,
   });
 
   final int chatId;
   final List<String> pendingPhotoPaths;
+  final String? initialTextQuery;
 }

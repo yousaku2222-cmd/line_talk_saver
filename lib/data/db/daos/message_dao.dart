@@ -58,6 +58,11 @@ class MessageDao extends DatabaseAccessor<AppDatabase>
     return (select(senders)..where((t) => t.chatId.equals(chatId))).get();
   }
 
+  /// All senders across every chat, for the cross-chat search screen (to
+  /// resolve a [Message.senderId] to a display name without a per-chat
+  /// query for each result).
+  Stream<List<Sender>> watchAllSenders() => select(senders).watch();
+
   Future<void> insertSenders(List<SendersCompanion> rows) async {
     await batch((b) => b.insertAll(senders, rows));
   }

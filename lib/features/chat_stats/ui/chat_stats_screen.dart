@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../chat_detail/providers/chat_detail_provider.dart';
@@ -8,8 +9,10 @@ import '../../monetization/ads/rewarded_ad_service.dart';
 import '../../monetization/purchase/purchase_prefs.dart';
 import '../../search/providers/message_filter.dart';
 import '../chat_stats_calculator.dart';
+import '../stats_image_share.dart';
 import '../stats_prefs.dart';
 import 'monthly_bar_chart.dart';
+import 'section_card.dart';
 
 /// Entry point for the トーク統計 screen: gates on today's one free viewing
 /// (unlimited for ads-removed users), offering a rewarded ad for any extra
@@ -62,95 +65,182 @@ Future<void> showChatStatsScreen(
   );
 }
 
-class ChatStatsScreen extends ConsumerWidget {
+class ChatStatsScreen extends ConsumerStatefulWidget {
   const ChatStatsScreen({super.key, required this.chatId});
 
   final int chatId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ChatStatsScreen> createState() => _ChatStatsScreenState();
+}
+
+/// Split across 3 tabs (rather than one long scroll) now that v1+v2+v3
+/// stats add up to 9 cards -- each tab's own [RepaintBoundary] backs that
+/// tab's "share all" button, so sharing covers everything on the visible
+/// tab rather than the whole (now much longer) screen.
+class _ChatStatsScreenState extends ConsumerState<ChatStatsScreen>
+    with SingleTickerProviderStateMixin {
+  late final _tabController = TabController(length: 3, vsync: this);
+  final _overviewKey = GlobalKey();
+  final _trendsKey = GlobalKey();
+  final _triviaKey = GlobalKey();
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  GlobalKey _keyForTab(int index) {
+    switch (index) {
+      case 0:
+        return _overviewKey;
+      case 1:
+        return _trendsKey;
+      default:
+        return _triviaKey;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final messagesAsync = ref.watch(
-      chatMessagesProvider((chatId, MessageFilter.empty)),
+      chatMessagesProvider((widget.chatId, MessageFilter.empty)),
     );
-    final sendersAsync = ref.watch(chatSendersProvider(chatId));
+    final sendersAsync = ref.watch(chatSendersProvider(widget.chatId));
 
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.chatStatsScreenTitle)),
-      body: messagesAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text(l10n.loadErrorWithMessage(e.toString()))),
-        data: (messages) {
-          final senders = sendersAsync.valueOrNull ?? const {};
-          final stats = ChatStatsCalculator.compute(messages, senders);
-          if (stats.totalMessages == 0) {
-            return Center(child: Text(l10n.chatStatsNoDataMessage));
-          }
-          return ListView(
-            padding: const EdgeInsets.all(16),
-            children: [
-              _SectionCard(
-                title: l10n.chatStatsSectionHeatmapTitle,
-                child: MonthlyBarChart(
-                  monthlyCounts: stats.monthlyCounts,
-                  peakMonth: stats.peakMonth,
-                ),
-              ),
-              const SizedBox(height: 16),
-              if (stats.isGroup)
-                _SectionCard(
-                  title: l10n.chatStatsSectionShareTitle,
-                  child: _ShareChart(stats: stats),
-                )
-              else if (stats.senderStats.length == 2)
-                _SectionCard(
-                  title: l10n.chatStatsSectionCompatibilityTitle,
-                  child: _CompatibilityCard(stats: stats),
-                ),
-              const SizedBox(height: 16),
-              _SectionCard(
-                title: l10n.chatStatsSectionTimeOfDayTitle,
-                child: _TimeOfDaySection(stats: stats),
-              ),
-              if (stats.questionsAsked > 0) ...[
-                const SizedBox(height: 16),
-                _SectionCard(
-                  title: l10n.chatStatsSectionQuestionCatchTitle,
-                  child: _QuestionCatchRateSection(stats: stats),
-                ),
-              ],
-            ],
-          );
-        },
+    return messagesAsync.when(
+      loading: () => Scaffold(
+        appBar: AppBar(title: Text(l10n.chatStatsScreenTitle)),
+        body: const Center(child: CircularProgressIndicator()),
       ),
+      error: (e, _) => Scaffold(
+        appBar: AppBar(title: Text(l10n.chatStatsScreenTitle)),
+        body: Center(child: Text(l10n.loadErrorWithMessage(e.toString()))),
+      ),
+      data: (messages) {
+        final senders = sendersAsync.valueOrNull ?? const {};
+        final stats = ChatStatsCalculator.compute(messages, senders);
+        if (stats.totalMessages == 0) {
+          return Scaffold(
+            appBar: AppBar(title: Text(l10n.chatStatsScreenTitle)),
+            body: Center(child: Text(l10n.chatStatsNoDataMessage)),
+          );
+        }
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(l10n.chatStatsScreenTitle),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.ios_share),
+                tooltip: l10n.statsShareAllTooltip,
+                onPressed: () => shareWidgetAsImage(
+                  _keyForTab(_tabController.index),
+                  fileName: l10n.chatStatsScreenTitle,
+                ),
+              ),
+            ],
+            bottom: TabBar(
+              controller: _tabController,
+              tabs: [
+                Tab(text: l10n.chatStatsTabOverview),
+                Tab(text: l10n.chatStatsTabTrends),
+                Tab(text: l10n.chatStatsTabTrivia),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            controller: _tabController,
+            children: [
+              _StatsTabScroll(
+                shareKey: _overviewKey,
+                children: [
+                  SectionCard(
+                    title: l10n.chatStatsSectionHeatmapTitle,
+                    child: MonthlyBarChart(
+                      monthlyCounts: stats.monthlyCounts,
+                      peakMonth: stats.peakMonth,
+                    ),
+                  ),
+                  if (stats.isGroup)
+                    SectionCard(
+                      title: l10n.chatStatsSectionShareTitle,
+                      child: _ShareChart(stats: stats),
+                    )
+                  else if (stats.senderStats.length == 2)
+                    SectionCard(
+                      title: l10n.chatStatsSectionCompatibilityTitle,
+                      child: _CompatibilityCard(stats: stats),
+                    ),
+                ],
+              ),
+              _StatsTabScroll(
+                shareKey: _trendsKey,
+                children: [
+                  SectionCard(
+                    title: l10n.chatStatsSectionTimeOfDayTitle,
+                    child: _TimeOfDaySection(stats: stats),
+                  ),
+                  if (stats.questionsAsked > 0)
+                    SectionCard(
+                      title: l10n.chatStatsSectionQuestionCatchTitle,
+                      child: _QuestionCatchRateSection(stats: stats),
+                    ),
+                  SectionCard(
+                    title: l10n.chatStatsSectionWeekdayHeatmapTitle,
+                    child: _WeekdayHeatmap(stats: stats),
+                  ),
+                ],
+              ),
+              _StatsTabScroll(
+                shareKey: _triviaKey,
+                children: [
+                  if (stats.topWords.isNotEmpty)
+                    SectionCard(
+                      title: l10n.chatStatsSectionWordsTitle,
+                      child: _TopWordsList(stats: stats),
+                    ),
+                  SectionCard(
+                    title: l10n.chatStatsSectionTriviaTitle,
+                    child: _TriviaSection(stats: stats),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
 
-class _SectionCard extends StatelessWidget {
-  const _SectionCard({required this.title, required this.child});
+/// One tab's worth of [SectionCard]s, scrollable and wrapped in a
+/// [RepaintBoundary] (keyed by [shareKey]) so the AppBar's "share all"
+/// button can render just this tab to an image.
+class _StatsTabScroll extends StatelessWidget {
+  const _StatsTabScroll({required this.shareKey, required this.children});
 
-  final String title;
-  final Widget child;
+  final GlobalKey shareKey;
+  final List<Widget> children;
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return Container(
-      width: double.infinity,
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: scheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: scheme.outlineVariant),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: Theme.of(context).textTheme.titleMedium),
-          const SizedBox(height: 12),
-          child,
-        ],
+      child: RepaintBoundary(
+        key: shareKey,
+        child: Container(
+          color: Theme.of(context).colorScheme.surface,
+          child: Column(
+            children: [
+              for (var i = 0; i < children.length; i++) ...[
+                if (i != 0) const SizedBox(height: 16),
+                children[i],
+              ],
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -418,6 +508,209 @@ class _QuestionCatchRateSection extends StatelessWidget {
         stats.questionsAsked,
       ),
       style: Theme.of(context).textTheme.bodyMedium,
+    );
+  }
+}
+
+class _TopWordsList extends StatelessWidget {
+  const _TopWordsList({required this.stats});
+
+  final ChatStats stats;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final scheme = Theme.of(context).colorScheme;
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        for (var i = 0; i < stats.topWords.length; i++)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: scheme.primaryContainer,
+              borderRadius: BorderRadius.circular(999),
+            ),
+            child: Text(
+              '${stats.topWords[i].word} ×${stats.topWords[i].count}',
+              style: textTheme.bodySmall?.copyWith(
+                color: scheme.onPrimaryContainer,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+/// Weekday (columns) × time-of-day segment (rows) activity grid. Weekday
+/// labels use `DateFormat.E` against a known Monday (2024-01-01) so they
+/// come out localized without needing our own translated strings.
+class _WeekdayHeatmap extends StatelessWidget {
+  const _WeekdayHeatmap({required this.stats});
+
+  final ChatStats stats;
+
+  static String _segmentLabel(AppLocalizations l10n, int segIndex) {
+    switch (TimeOfDaySegment.values[segIndex]) {
+      case TimeOfDaySegment.lateNight:
+        return l10n.chatStatsTimeSegmentLateNight;
+      case TimeOfDaySegment.morning:
+        return l10n.chatStatsTimeSegmentMorning;
+      case TimeOfDaySegment.day:
+        return l10n.chatStatsTimeSegmentDay;
+      case TimeOfDaySegment.evening:
+        return l10n.chatStatsTimeSegmentEvening;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final scheme = Theme.of(context).colorScheme;
+    final locale = Localizations.localeOf(context).toString();
+    final weekdayFormat = DateFormat.E(locale);
+
+    var maxCount = 1;
+    for (final row in stats.weekdaySegmentCounts) {
+      for (final c in row) {
+        if (c > maxCount) maxCount = c;
+      }
+    }
+
+    return Column(
+      children: [
+        Row(
+          children: [
+            const SizedBox(width: 44),
+            for (var wd = 0; wd < 7; wd++)
+              Expanded(
+                child: Center(
+                  child: Text(
+                    weekdayFormat.format(DateTime(2024, 1, 1 + wd)),
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ),
+              ),
+          ],
+        ),
+        for (var seg = 0; seg < 4; seg++)
+          Row(
+            children: [
+              SizedBox(
+                width: 44,
+                child: Text(
+                  _segmentLabel(l10n, seg),
+                  style: Theme.of(context).textTheme.labelSmall,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              for (var wd = 0; wd < 7; wd++)
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: scheme.primary.withValues(
+                            alpha:
+                                0.08 +
+                                0.82 *
+                                    (stats.weekdaySegmentCounts[wd][seg] /
+                                        maxCount),
+                          ),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+      ],
+    );
+  }
+}
+
+class _TriviaSection extends StatelessWidget {
+  const _TriviaSection({required this.stats});
+
+  final ChatStats stats;
+
+  static const _oneLinerThreshold = 15;
+
+  /// Formats a gap duration at whichever granularity it's actually
+  /// legible at -- most gaps in an active chat are well under a day, so
+  /// always showing whole days (as [Duration.inDays] does) rounds almost
+  /// everything down to "0日間".
+  static String _formatGapDuration(AppLocalizations l10n, Duration d) {
+    if (d.inDays >= 1) return l10n.chatStatsDurationDays(d.inDays);
+    if (d.inHours >= 1) return l10n.chatStatsDurationHours(d.inHours);
+    return l10n.chatStatsDurationMinutes(d.inMinutes);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final textTheme = Theme.of(context).textTheme;
+    final locale = Localizations.localeOf(context).toString();
+    final dateFormat = DateFormat.MMMd(locale);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.chatStatsStreakLabel(stats.longestStreakDays),
+          style: textTheme.bodyMedium,
+        ),
+        const SizedBox(height: 10),
+        Text(l10n.chatStatsTopDaysLabel, style: textTheme.bodyMedium),
+        const SizedBox(height: 4),
+        for (final day in stats.topDays)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 2),
+            child: Text(
+              '${dateFormat.format(day.date)}  '
+              '${l10n.chatStatsMessageCountLabel} ${day.count}',
+              style: textTheme.bodySmall,
+            ),
+          ),
+        if (stats.longestSilenceGap != null) ...[
+          const SizedBox(height: 10),
+          Text(
+            l10n.chatStatsSilenceGapLabel(
+              _formatGapDuration(l10n, stats.longestSilenceGap!),
+              dateFormat.format(stats.longestSilenceGapStart!),
+              dateFormat.format(stats.longestSilenceGapEnd!),
+            ),
+            style: textTheme.bodyMedium,
+          ),
+        ],
+        const SizedBox(height: 10),
+        Text(
+          l10n.chatStatsEmojiRateLabel((stats.emojiMessageRate * 100).round()),
+          style: textTheme.bodyMedium,
+        ),
+        const SizedBox(height: 10),
+        for (final s in stats.senderStats)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 2),
+            child: Text(
+              l10n.chatStatsAvgLengthLabel(
+                s.name,
+                s.avgMessageLength.round(),
+                s.avgMessageLength < _oneLinerThreshold
+                    ? l10n.chatStatsOneLinerLabel
+                    : l10n.chatStatsLongFormLabel,
+              ),
+              style: textTheme.bodySmall,
+            ),
+          ),
+      ],
     );
   }
 }

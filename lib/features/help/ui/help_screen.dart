@@ -29,6 +29,11 @@ class HelpScreen extends StatelessWidget {
         body: l10n.helpChatDetailBody,
       ),
       (
+        icon: Icons.insights_outlined,
+        title: l10n.helpStatsTitle,
+        body: l10n.helpStatsBody,
+      ),
+      (
         icon: Icons.image_outlined,
         title: l10n.helpAttachTitle,
         body: l10n.helpAttachBody,

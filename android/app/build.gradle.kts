@@ -22,6 +22,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // Required by flutter_local_notifications (uses java.time APIs via
+        // desugaring to support minSdk < 26).
+        isCoreLibraryDesugaringEnabled = true
     }
 
     defaultConfig {
@@ -82,6 +85,8 @@ kotlin {
 dependencies {
     // Required by local_auth: its biometric prompt needs an AppCompat theme.
     implementation("androidx.appcompat:appcompat:1.7.0")
+    // Required by flutter_local_notifications (core library desugaring, see above).
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
 
 flutter {

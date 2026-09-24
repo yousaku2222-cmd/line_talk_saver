@@ -43,7 +43,12 @@ class ChatRepository {
   Future<void> setChatLocked(int chatId, bool locked) =>
       _db.chatDao.updateLocked(chatId, locked);
 
+  Future<void> setChatFavorite(int chatId, bool favorite) =>
+      _db.chatDao.updateFavorite(chatId, favorite);
+
   Stream<List<Message>> watchAllMessages() => _db.messageDao.watchAllMessages();
+
+  Stream<List<Sender>> watchAllSenders() => _db.messageDao.watchAllSenders();
 
   Stream<List<Message>> watchMessages(
     int chatId, {

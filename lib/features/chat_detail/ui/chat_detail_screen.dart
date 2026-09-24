@@ -24,6 +24,7 @@ class ChatDetailScreen extends ConsumerStatefulWidget {
     super.key,
     required this.chatId,
     this.pendingPhotoPaths = const [],
+    this.initialTextQuery,
   });
 
   final int chatId;
@@ -33,6 +34,11 @@ class ChatDetailScreen extends ConsumerStatefulWidget {
   /// whichever messages the user taps next, in order.
   final List<String> pendingPhotoPaths;
 
+  /// Pre-fills the in-chat text filter (e.g. when opened from the
+  /// cross-chat search screen), so the timeline starts already narrowed
+  /// down to the messages that matched the search.
+  final String? initialTextQuery;
+
   @override
   ConsumerState<ChatDetailScreen> createState() => _ChatDetailScreenState();
 }
@@ -40,7 +46,9 @@ class ChatDetailScreen extends ConsumerStatefulWidget {
 class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
   bool _selectionMode = false;
   final _selectedIds = <int>{};
-  MessageFilter _filter = MessageFilter.empty;
+  late MessageFilter _filter = widget.initialTextQuery == null
+      ? MessageFilter.empty
+      : MessageFilter(textQuery: widget.initialTextQuery);
   late final List<String> _pendingPhotoPaths = [...widget.pendingPhotoPaths];
 
   Future<void> _openFilterSheet() async {

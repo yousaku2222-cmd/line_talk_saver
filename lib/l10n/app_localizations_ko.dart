@@ -87,6 +87,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get chatStatsSectionHeatmapTitle => '활동 그래프';
 
   @override
+  String get statsShareImageTooltip => '이미지로 공유';
+
+  @override
+  String get statsShareAllTooltip => '통계를 모두 한 이미지로 공유';
+
+  @override
   String chatStatsPeakMonthLabel(Object month) {
     return '$month에 대화가 가장 활발했습니다';
   }
@@ -158,6 +164,63 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get chatStatsSectionWordsTitle => '자주 쓰는 단어';
+
+  @override
+  String get chatStatsSectionWeekdayHeatmapTitle => '요일×시간대 경향';
+
+  @override
+  String get chatStatsSectionTriviaTitle => '대화 트리비아';
+
+  @override
+  String get chatStatsTabOverview => '개요';
+
+  @override
+  String get chatStatsTabTrends => '경향';
+
+  @override
+  String get chatStatsTabTrivia => '트리비아';
+
+  @override
+  String chatStatsStreakLabel(Object days) {
+    return '최장 연속 일수: $days일';
+  }
+
+  @override
+  String get chatStatsTopDaysLabel => '가장 활발했던 날 Top5';
+
+  @override
+  String chatStatsSilenceGapLabel(Object duration, Object start, Object end) {
+    return '가장 긴 공백 기간: $duration（$start〜$end）';
+  }
+
+  @override
+  String chatStatsDurationDays(Object days) {
+    return '$days일간';
+  }
+
+  @override
+  String chatStatsDurationHours(Object hours) {
+    return '$hours시간';
+  }
+
+  @override
+  String chatStatsEmojiRateLabel(Object rate) {
+    return '이모지가 포함된 메시지 비율: $rate%';
+  }
+
+  @override
+  String get chatStatsOneLinerLabel => '짧은 메시지파';
+
+  @override
+  String get chatStatsLongFormLabel => '긴 메시지파';
+
+  @override
+  String chatStatsAvgLengthLabel(Object name, Object length, Object label) {
+    return '$name: 평균 $length자（$label）';
+  }
+
+  @override
   String get chatDashboardTooltip => '전체 대시보드';
 
   @override
@@ -197,6 +260,24 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get chatUnlockTooltip => '잠금 해제';
+
+  @override
+  String get chatFavoriteTooltip => '즐겨찾기에 추가';
+
+  @override
+  String get chatUnfavoriteTooltip => '즐겨찾기 해제';
+
+  @override
+  String get crossSearchTooltip => '전체 대화 검색';
+
+  @override
+  String get crossSearchHint => '모든 대화에서 키워드 검색';
+
+  @override
+  String get crossSearchPrompt => '키워드를 입력하면 저장된 모든 대화에서 검색할 수 있습니다';
+
+  @override
+  String get crossSearchNoResults => '일치하는 메시지를 찾을 수 없습니다';
 
   @override
   String get chatLockAuthReason => '이 대화를 보려면 인증하세요';
@@ -275,6 +356,22 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsTitle => '설정';
+
+  @override
+  String get reminderToggleTitle => '저장 알림';
+
+  @override
+  String get reminderToggleSubtitle => '매주 일요일 오전 10시에 대화 저장을 알려주는 알림을 보냅니다';
+
+  @override
+  String get reminderPermissionDeniedMessage =>
+      '알림이 허용되지 않아 리마인더를 설정할 수 없습니다. 기기 설정에서 알림을 허용해 주세요.';
+
+  @override
+  String get reminderNotificationTitle => '대화 저장';
+
+  @override
+  String get reminderNotificationBody => '최근 대화를 저장할 시간이에요';
 
   @override
   String get appLockToggleTitle => '실행 시 잠금';
@@ -688,6 +785,30 @@ class AppLocalizationsKo extends AppLocalizations {
   String get helpScreenTitle => '사용 설명서';
 
   @override
+  String get whatsNewMenuTitle => '업데이트 정보';
+
+  @override
+  String get whatsNewMenuSubtitle => '최근 업데이트 변경 내용 보기';
+
+  @override
+  String get whatsNewScreenTitle => '업데이트 정보';
+
+  @override
+  String whatsNewVersionLabel(Object version) {
+    return '버전 $version';
+  }
+
+  @override
+  String get whatsNewDialogTitle => '앱이 업데이트되었습니다';
+
+  @override
+  String get whatsNewDialogOkButton => '확인';
+
+  @override
+  String get whatsNewV120Body =>
+      '대화 통계 기능을 확장했습니다.\n\n・메시지를 보내는 시간대 경향을 볼 수 있습니다(야행성, 아침형 등)\n・질문에 대한 답장률(대화의 핑퐁 정도)을 볼 수 있습니다\n・저장된 모든 대화의 통계를 모아 보는 대시보드를 추가했습니다\n・PDF/Excel/Word로 내보낼 때 통계 정보를 포함할 수 있습니다';
+
+  @override
   String get helpAboutTitle => '이 앱에 대하여';
 
   @override
@@ -706,7 +827,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get helpChatListBody =>
-      '・대화 왼쪽의 아이콘을 탭하면 원하는 아이콘으로 바꿀 수 있습니다\n・연필 아이콘으로 대화 이름을 변경할 수 있습니다\n・오른쪽 위 + 버튼으로 사진·동영상·파일 전용 방을 새로 만들 수 있습니다\n・자물쇠 아이콘으로 대화별 개별 잠금을 설정할 수 있습니다(구매 필요)';
+      '・대화 왼쪽의 아이콘을 탭하면 원하는 아이콘으로 바꿀 수 있습니다\n・연필 아이콘으로 대화 이름을 변경할 수 있습니다\n・오른쪽 위 + 버튼으로 사진·동영상·파일 전용 방을 새로 만들 수 있습니다\n・자물쇠 아이콘으로 대화별 개별 잠금을 설정할 수 있습니다(구매 필요)\n・별 아이콘으로 즐겨찾기에 추가하면 목록 맨 위에 고정 표시됩니다\n・오른쪽 위 검색 아이콘으로 저장된 모든 대화를 한 번에 키워드 검색할 수 있습니다';
 
   @override
   String get helpChatDetailTitle => '대화 화면 사용법';
@@ -714,6 +835,13 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get helpChatDetailBody =>
       '・메시지를 길게 누르거나 여러 개 선택해 복사할 수 있습니다\n・발신자·기간·키워드로 검색할 수 있습니다\n・오른쪽 위 아이콘에서 Excel·PDF·Word로 내보낼 수 있습니다\n・갤러리 아이콘으로 해당 대화에 첨부한 사진을 모아 볼 수 있습니다';
+
+  @override
+  String get helpStatsTitle => '대화 통계 보는 법';
+
+  @override
+  String get helpStatsBody =>
+      '・월별 메시지 수를 그래프로 표시합니다\n・1:1 대화에서는 답장 속도, 스티커 비율 등으로 궁합을 진단합니다\n・3명 이상 그룹에서는 발언 비율을 원그래프로 표시합니다\n・자주 대화하는 시간대 경향(야행성/아침형 등)을 표시합니다\n・질문에 대한 답장률(대화의 핑퐁 정도)을 표시합니다\n・대화 목록의 대시보드 아이콘에서 저장된 모든 대화를 모아 볼 수 있는 대시보드를 열 수 있습니다\n・Excel·PDF·Word로 내보낼 때 통계 정보를 포함할 수도 있습니다';
 
   @override
   String get helpAttachTitle => '사진·동영상·파일 첨부';

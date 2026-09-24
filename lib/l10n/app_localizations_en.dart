@@ -93,6 +93,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatStatsSectionHeatmapTitle => 'Activity over time';
 
   @override
+  String get statsShareImageTooltip => 'Share as image';
+
+  @override
+  String get statsShareAllTooltip => 'Share all stats as one image';
+
+  @override
   String chatStatsPeakMonthLabel(Object month) {
     return '$month was your busiest month';
   }
@@ -164,6 +170,63 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get chatStatsSectionWordsTitle => 'Frequent words';
+
+  @override
+  String get chatStatsSectionWeekdayHeatmapTitle => 'Activity by day and time';
+
+  @override
+  String get chatStatsSectionTriviaTitle => 'Chat trivia';
+
+  @override
+  String get chatStatsTabOverview => 'Overview';
+
+  @override
+  String get chatStatsTabTrends => 'Trends';
+
+  @override
+  String get chatStatsTabTrivia => 'Trivia';
+
+  @override
+  String chatStatsStreakLabel(Object days) {
+    return 'Longest streak: $days days';
+  }
+
+  @override
+  String get chatStatsTopDaysLabel => 'Top 5 busiest days';
+
+  @override
+  String chatStatsSilenceGapLabel(Object duration, Object start, Object end) {
+    return 'Longest silence: $duration ($start to $end)';
+  }
+
+  @override
+  String chatStatsDurationDays(Object days) {
+    return '$days days';
+  }
+
+  @override
+  String chatStatsDurationHours(Object hours) {
+    return '${hours}h';
+  }
+
+  @override
+  String chatStatsEmojiRateLabel(Object rate) {
+    return 'Messages with an emoji: $rate%';
+  }
+
+  @override
+  String get chatStatsOneLinerLabel => 'Short and sweet';
+
+  @override
+  String get chatStatsLongFormLabel => 'Long-form writer';
+
+  @override
+  String chatStatsAvgLengthLabel(Object name, Object length, Object label) {
+    return '$name: $length characters on average ($label)';
+  }
+
+  @override
   String get chatDashboardTooltip => 'Overall dashboard';
 
   @override
@@ -204,6 +267,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatUnlockTooltip => 'Unlock';
+
+  @override
+  String get chatFavoriteTooltip => 'Add to favorites';
+
+  @override
+  String get chatUnfavoriteTooltip => 'Remove from favorites';
+
+  @override
+  String get crossSearchTooltip => 'Search all chats';
+
+  @override
+  String get crossSearchHint => 'Search keywords across all chats';
+
+  @override
+  String get crossSearchPrompt => 'Enter a keyword to search every saved chat';
+
+  @override
+  String get crossSearchNoResults => 'No matching messages found';
 
   @override
   String get chatLockAuthReason => 'Authenticate to view this chat';
@@ -286,6 +367,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsTitle => 'Settings';
+
+  @override
+  String get reminderToggleTitle => 'Save reminder';
+
+  @override
+  String get reminderToggleSubtitle =>
+      'Sends a notification every Sunday at 10am prompting you to save your chats';
+
+  @override
+  String get reminderPermissionDeniedMessage =>
+      'Couldn\'t set up the reminder because notifications weren\'t allowed. Please allow notifications in your device settings.';
+
+  @override
+  String get reminderNotificationTitle => 'Talk Saver';
+
+  @override
+  String get reminderNotificationBody => 'Time to save your recent chats?';
 
   @override
   String get appLockToggleTitle => 'Lock on launch';
@@ -711,6 +809,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get helpScreenTitle => 'User Guide';
 
   @override
+  String get whatsNewMenuTitle => 'What\'s New';
+
+  @override
+  String get whatsNewMenuSubtitle => 'See what changed in recent updates';
+
+  @override
+  String get whatsNewScreenTitle => 'What\'s New';
+
+  @override
+  String whatsNewVersionLabel(Object version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get whatsNewDialogTitle => 'The app has been updated';
+
+  @override
+  String get whatsNewDialogOkButton => 'OK';
+
+  @override
+  String get whatsNewV120Body =>
+      'We\'ve expanded the chat stats feature.\n\n• See trends in when you send messages (night owl, early bird, etc.)\n• See your question reply rate (how well conversations go back and forth)\n• Added a dashboard to see stats across every saved chat\n• You can now include stats when exporting to PDF/Excel/Word';
+
+  @override
   String get helpAboutTitle => 'About this app';
 
   @override
@@ -729,7 +851,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpChatListBody =>
-      '• Tap the icon to the left of a chat to change it to any icon you like\n• Tap the pencil icon to rename a chat\n• Use the + button at the top right to create a new room just for photos, videos, and files\n• Tap the lock icon to lock an individual chat (requires purchase)';
+      '• Tap the icon to the left of a chat to change it to any icon you like\n• Tap the pencil icon to rename a chat\n• Use the + button at the top right to create a new room just for photos, videos, and files\n• Tap the lock icon to lock an individual chat (requires purchase)\n• Tap the star icon to add a chat to favorites; favorites are pinned to the top of the list\n• Use the search icon at the top right to search keywords across every saved chat at once';
 
   @override
   String get helpChatDetailTitle => 'Using the chat screen';
@@ -737,6 +859,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get helpChatDetailBody =>
       '• Long-press or multi-select messages to copy them\n• Filter by sender, date range, or keyword\n• Export to Excel, PDF, or Word from the icon at the top right\n• Use the gallery icon to view all photos attached to that chat';
+
+  @override
+  String get helpStatsTitle => 'Understanding chat stats';
+
+  @override
+  String get helpStatsBody =>
+      '• See a monthly message-count graph\n• For 1:1 chats, get a compatibility diagnosis based on reply speed, sticker ratio, and more\n• For groups of 3 or more, see a message-share pie chart\n• See trends in when you\'re most active (night owl, early bird, etc.)\n• See your question reply rate (how well conversations go back and forth)\n• Open the dashboard icon from the chat list to see stats across every saved chat\n• You can also include stats when exporting to Excel, PDF, or Word';
 
   @override
   String get helpAttachTitle => 'Attaching photos, videos, and files';

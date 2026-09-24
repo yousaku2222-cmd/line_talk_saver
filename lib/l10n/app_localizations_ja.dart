@@ -87,6 +87,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get chatStatsSectionHeatmapTitle => '温度感グラフ';
 
   @override
+  String get statsShareImageTooltip => '画像で共有';
+
+  @override
+  String get statsShareAllTooltip => '統計をまとめて画像で共有';
+
+  @override
   String chatStatsPeakMonthLabel(Object month) {
     return '$monthが一番やり取りが多い月でした';
   }
@@ -158,6 +164,63 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get chatStatsSectionWordsTitle => 'よく使う単語';
+
+  @override
+  String get chatStatsSectionWeekdayHeatmapTitle => '曜日×時間帯の傾向';
+
+  @override
+  String get chatStatsSectionTriviaTitle => '会話のトリビア';
+
+  @override
+  String get chatStatsTabOverview => '概要';
+
+  @override
+  String get chatStatsTabTrends => '傾向';
+
+  @override
+  String get chatStatsTabTrivia => 'トリビア';
+
+  @override
+  String chatStatsStreakLabel(Object days) {
+    return '最長連続日数: $days日';
+  }
+
+  @override
+  String get chatStatsTopDaysLabel => 'よく話した日 Top5';
+
+  @override
+  String chatStatsSilenceGapLabel(Object duration, Object start, Object end) {
+    return '最長の沈黙期間: $duration（$start〜$end）';
+  }
+
+  @override
+  String chatStatsDurationDays(Object days) {
+    return '$days日間';
+  }
+
+  @override
+  String chatStatsDurationHours(Object hours) {
+    return '$hours時間';
+  }
+
+  @override
+  String chatStatsEmojiRateLabel(Object rate) {
+    return '絵文字入りメッセージの割合: $rate%';
+  }
+
+  @override
+  String get chatStatsOneLinerLabel => '一言派';
+
+  @override
+  String get chatStatsLongFormLabel => '長文派';
+
+  @override
+  String chatStatsAvgLengthLabel(Object name, Object length, Object label) {
+    return '$name: 平均$length文字（$label）';
+  }
+
+  @override
   String get chatDashboardTooltip => 'トーク全体ダッシュボード';
 
   @override
@@ -197,6 +260,24 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get chatUnlockTooltip => 'ロックを解除';
+
+  @override
+  String get chatFavoriteTooltip => 'お気に入りに追加';
+
+  @override
+  String get chatUnfavoriteTooltip => 'お気に入りを解除';
+
+  @override
+  String get crossSearchTooltip => '全トーク横断検索';
+
+  @override
+  String get crossSearchHint => '全てのトークからキーワードを検索';
+
+  @override
+  String get crossSearchPrompt => 'キーワードを入力すると、保存済みの全トークから検索できます';
+
+  @override
+  String get crossSearchNoResults => '一致するメッセージが見つかりませんでした';
 
   @override
   String get chatLockAuthReason => 'このトークを表示するには認証してください';
@@ -275,6 +356,22 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsTitle => '設定';
+
+  @override
+  String get reminderToggleTitle => '保存リマインダー';
+
+  @override
+  String get reminderToggleSubtitle => '毎週日曜10時に、トークの保存を促す通知を送ります';
+
+  @override
+  String get reminderPermissionDeniedMessage =>
+      '通知が許可されなかったため、リマインダーを設定できませんでした。端末の設定から通知を許可してください。';
+
+  @override
+  String get reminderNotificationTitle => 'トーク保存';
+
+  @override
+  String get reminderNotificationBody => 'そろそろ最近のトークを保存しませんか？';
 
   @override
   String get appLockToggleTitle => '起動時にロックする';
@@ -685,6 +782,30 @@ class AppLocalizationsJa extends AppLocalizations {
   String get helpScreenTitle => '取扱説明書';
 
   @override
+  String get whatsNewMenuTitle => '更新情報';
+
+  @override
+  String get whatsNewMenuSubtitle => 'アップデートの変更点を見る';
+
+  @override
+  String get whatsNewScreenTitle => '更新情報';
+
+  @override
+  String whatsNewVersionLabel(Object version) {
+    return 'バージョン $version';
+  }
+
+  @override
+  String get whatsNewDialogTitle => 'アプリがアップデートされました';
+
+  @override
+  String get whatsNewDialogOkButton => 'OK';
+
+  @override
+  String get whatsNewV120Body =>
+      'トーク統計機能を強化しました。\n\n・送信時間の傾向がわかるようになりました(夜型か朝型かなど、よく話す時間帯を表示)\n・質問への返信率(キャッチボール度)を表示するようになりました\n・保存した複数のトークをまとめて見られるダッシュボードを追加しました\n・書き出し(PDF/Excel/Word)に統計情報を含められるようになりました';
+
+  @override
   String get helpAboutTitle => 'このアプリについて';
 
   @override
@@ -703,7 +824,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get helpChatListBody =>
-      '・トークの左のアイコンをタップすると、好きなアイコンに変更できます\n・鉛筆アイコンでトーク名を変更できます\n・右上の＋ボタンから、写真・動画・ファイルだけをまとめる専用ルームを新規作成できます\n・鍵アイコンでトークごとに個別ロックを設定できます(要購入)';
+      '・トークの左のアイコンをタップすると、好きなアイコンに変更できます\n・鉛筆アイコンでトーク名を変更できます\n・右上の＋ボタンから、写真・動画・ファイルだけをまとめる専用ルームを新規作成できます\n・鍵アイコンでトークごとに個別ロックを設定できます(要購入)\n・星アイコンでお気に入りに登録すると、一覧の最上部に固定表示されます\n・右上の検索アイコンから、保存済みの全トークをまとめてキーワード検索できます';
 
   @override
   String get helpChatDetailTitle => 'トーク詳細の使い方';
@@ -711,6 +832,13 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get helpChatDetailBody =>
       '・メッセージの長押し、または複数選択でコピーできます\n・発言者・期間・キーワードで絞り込み検索ができます\n・右上のアイコンからExcel・PDF・Wordへの書き出しができます\n・ギャラリーアイコンで、そのトークに添付した写真をまとめて確認できます';
+
+  @override
+  String get helpStatsTitle => 'トーク統計の見方';
+
+  @override
+  String get helpStatsBody =>
+      '・月ごとのメッセージ数をグラフで表示します\n・1:1のトークでは、返信の速さやスタンプの比率などから相性を診断します\n・3人以上のグループでは、発言割合を円グラフで表示します\n・よく話す時間帯の傾向(夜型/朝型など)を表示します\n・質問への返信率(会話のキャッチボール度)を表示します\n・トーク一覧のグラフアイコンから、保存した全トークをまとめて見られるダッシュボードを開けます\n・書き出し(Excel・PDF・Word)の際に、統計情報を含めることもできます';
 
   @override
   String get helpAttachTitle => '写真・動画・ファイルの添付';

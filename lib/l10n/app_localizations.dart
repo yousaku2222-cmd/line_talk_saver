@@ -257,6 +257,18 @@ abstract class AppLocalizations {
   /// **'温度感グラフ'**
   String get chatStatsSectionHeatmapTitle;
 
+  /// No description provided for @statsShareImageTooltip.
+  ///
+  /// In ja, this message translates to:
+  /// **'画像で共有'**
+  String get statsShareImageTooltip;
+
+  /// No description provided for @statsShareAllTooltip.
+  ///
+  /// In ja, this message translates to:
+  /// **'統計をまとめて画像で共有'**
+  String get statsShareAllTooltip;
+
   /// No description provided for @chatStatsPeakMonthLabel.
   ///
   /// In ja, this message translates to:
@@ -375,6 +387,96 @@ abstract class AppLocalizations {
     Object asked,
   );
 
+  /// No description provided for @chatStatsSectionWordsTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'よく使う単語'**
+  String get chatStatsSectionWordsTitle;
+
+  /// No description provided for @chatStatsSectionWeekdayHeatmapTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'曜日×時間帯の傾向'**
+  String get chatStatsSectionWeekdayHeatmapTitle;
+
+  /// No description provided for @chatStatsSectionTriviaTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'会話のトリビア'**
+  String get chatStatsSectionTriviaTitle;
+
+  /// No description provided for @chatStatsTabOverview.
+  ///
+  /// In ja, this message translates to:
+  /// **'概要'**
+  String get chatStatsTabOverview;
+
+  /// No description provided for @chatStatsTabTrends.
+  ///
+  /// In ja, this message translates to:
+  /// **'傾向'**
+  String get chatStatsTabTrends;
+
+  /// No description provided for @chatStatsTabTrivia.
+  ///
+  /// In ja, this message translates to:
+  /// **'トリビア'**
+  String get chatStatsTabTrivia;
+
+  /// No description provided for @chatStatsStreakLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'最長連続日数: {days}日'**
+  String chatStatsStreakLabel(Object days);
+
+  /// No description provided for @chatStatsTopDaysLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'よく話した日 Top5'**
+  String get chatStatsTopDaysLabel;
+
+  /// No description provided for @chatStatsSilenceGapLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'最長の沈黙期間: {duration}（{start}〜{end}）'**
+  String chatStatsSilenceGapLabel(Object duration, Object start, Object end);
+
+  /// No description provided for @chatStatsDurationDays.
+  ///
+  /// In ja, this message translates to:
+  /// **'{days}日間'**
+  String chatStatsDurationDays(Object days);
+
+  /// No description provided for @chatStatsDurationHours.
+  ///
+  /// In ja, this message translates to:
+  /// **'{hours}時間'**
+  String chatStatsDurationHours(Object hours);
+
+  /// No description provided for @chatStatsEmojiRateLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'絵文字入りメッセージの割合: {rate}%'**
+  String chatStatsEmojiRateLabel(Object rate);
+
+  /// No description provided for @chatStatsOneLinerLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'一言派'**
+  String get chatStatsOneLinerLabel;
+
+  /// No description provided for @chatStatsLongFormLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'長文派'**
+  String get chatStatsLongFormLabel;
+
+  /// No description provided for @chatStatsAvgLengthLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'{name}: 平均{length}文字（{label}）'**
+  String chatStatsAvgLengthLabel(Object name, Object length, Object label);
+
   /// No description provided for @chatDashboardTooltip.
   ///
   /// In ja, this message translates to:
@@ -452,6 +554,42 @@ abstract class AppLocalizations {
   /// In ja, this message translates to:
   /// **'ロックを解除'**
   String get chatUnlockTooltip;
+
+  /// No description provided for @chatFavoriteTooltip.
+  ///
+  /// In ja, this message translates to:
+  /// **'お気に入りに追加'**
+  String get chatFavoriteTooltip;
+
+  /// No description provided for @chatUnfavoriteTooltip.
+  ///
+  /// In ja, this message translates to:
+  /// **'お気に入りを解除'**
+  String get chatUnfavoriteTooltip;
+
+  /// No description provided for @crossSearchTooltip.
+  ///
+  /// In ja, this message translates to:
+  /// **'全トーク横断検索'**
+  String get crossSearchTooltip;
+
+  /// No description provided for @crossSearchHint.
+  ///
+  /// In ja, this message translates to:
+  /// **'全てのトークからキーワードを検索'**
+  String get crossSearchHint;
+
+  /// No description provided for @crossSearchPrompt.
+  ///
+  /// In ja, this message translates to:
+  /// **'キーワードを入力すると、保存済みの全トークから検索できます'**
+  String get crossSearchPrompt;
+
+  /// No description provided for @crossSearchNoResults.
+  ///
+  /// In ja, this message translates to:
+  /// **'一致するメッセージが見つかりませんでした'**
+  String get crossSearchNoResults;
 
   /// No description provided for @chatLockAuthReason.
   ///
@@ -584,6 +722,36 @@ abstract class AppLocalizations {
   /// In ja, this message translates to:
   /// **'設定'**
   String get settingsTitle;
+
+  /// No description provided for @reminderToggleTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'保存リマインダー'**
+  String get reminderToggleTitle;
+
+  /// No description provided for @reminderToggleSubtitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'毎週日曜10時に、トークの保存を促す通知を送ります'**
+  String get reminderToggleSubtitle;
+
+  /// No description provided for @reminderPermissionDeniedMessage.
+  ///
+  /// In ja, this message translates to:
+  /// **'通知が許可されなかったため、リマインダーを設定できませんでした。端末の設定から通知を許可してください。'**
+  String get reminderPermissionDeniedMessage;
+
+  /// No description provided for @reminderNotificationTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'トーク保存'**
+  String get reminderNotificationTitle;
+
+  /// No description provided for @reminderNotificationBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'そろそろ最近のトークを保存しませんか？'**
+  String get reminderNotificationBody;
 
   /// No description provided for @appLockToggleTitle.
   ///
@@ -1311,6 +1479,48 @@ abstract class AppLocalizations {
   /// **'取扱説明書'**
   String get helpScreenTitle;
 
+  /// No description provided for @whatsNewMenuTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'更新情報'**
+  String get whatsNewMenuTitle;
+
+  /// No description provided for @whatsNewMenuSubtitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'アップデートの変更点を見る'**
+  String get whatsNewMenuSubtitle;
+
+  /// No description provided for @whatsNewScreenTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'更新情報'**
+  String get whatsNewScreenTitle;
+
+  /// No description provided for @whatsNewVersionLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'バージョン {version}'**
+  String whatsNewVersionLabel(Object version);
+
+  /// No description provided for @whatsNewDialogTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'アプリがアップデートされました'**
+  String get whatsNewDialogTitle;
+
+  /// No description provided for @whatsNewDialogOkButton.
+  ///
+  /// In ja, this message translates to:
+  /// **'OK'**
+  String get whatsNewDialogOkButton;
+
+  /// No description provided for @whatsNewV120Body.
+  ///
+  /// In ja, this message translates to:
+  /// **'トーク統計機能を強化しました。\n\n・送信時間の傾向がわかるようになりました(夜型か朝型かなど、よく話す時間帯を表示)\n・質問への返信率(キャッチボール度)を表示するようになりました\n・保存した複数のトークをまとめて見られるダッシュボードを追加しました\n・書き出し(PDF/Excel/Word)に統計情報を含められるようになりました'**
+  String get whatsNewV120Body;
+
   /// No description provided for @helpAboutTitle.
   ///
   /// In ja, this message translates to:
@@ -1344,7 +1554,7 @@ abstract class AppLocalizations {
   /// No description provided for @helpChatListBody.
   ///
   /// In ja, this message translates to:
-  /// **'・トークの左のアイコンをタップすると、好きなアイコンに変更できます\n・鉛筆アイコンでトーク名を変更できます\n・右上の＋ボタンから、写真・動画・ファイルだけをまとめる専用ルームを新規作成できます\n・鍵アイコンでトークごとに個別ロックを設定できます(要購入)'**
+  /// **'・トークの左のアイコンをタップすると、好きなアイコンに変更できます\n・鉛筆アイコンでトーク名を変更できます\n・右上の＋ボタンから、写真・動画・ファイルだけをまとめる専用ルームを新規作成できます\n・鍵アイコンでトークごとに個別ロックを設定できます(要購入)\n・星アイコンでお気に入りに登録すると、一覧の最上部に固定表示されます\n・右上の検索アイコンから、保存済みの全トークをまとめてキーワード検索できます'**
   String get helpChatListBody;
 
   /// No description provided for @helpChatDetailTitle.
@@ -1358,6 +1568,18 @@ abstract class AppLocalizations {
   /// In ja, this message translates to:
   /// **'・メッセージの長押し、または複数選択でコピーできます\n・発言者・期間・キーワードで絞り込み検索ができます\n・右上のアイコンからExcel・PDF・Wordへの書き出しができます\n・ギャラリーアイコンで、そのトークに添付した写真をまとめて確認できます'**
   String get helpChatDetailBody;
+
+  /// No description provided for @helpStatsTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'トーク統計の見方'**
+  String get helpStatsTitle;
+
+  /// No description provided for @helpStatsBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'・月ごとのメッセージ数をグラフで表示します\n・1:1のトークでは、返信の速さやスタンプの比率などから相性を診断します\n・3人以上のグループでは、発言割合を円グラフで表示します\n・よく話す時間帯の傾向(夜型/朝型など)を表示します\n・質問への返信率(会話のキャッチボール度)を表示します\n・トーク一覧のグラフアイコンから、保存した全トークをまとめて見られるダッシュボードを開けます\n・書き出し(Excel・PDF・Word)の際に、統計情報を含めることもできます'**
+  String get helpStatsBody;
 
   /// No description provided for @helpAttachTitle.
   ///

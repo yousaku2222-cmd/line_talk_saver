@@ -8,6 +8,7 @@ import 'features/app_lock/ui/app_lock_gate.dart';
 import 'features/chat_detail/ui/chat_detail_screen.dart';
 import 'features/chat_detail/ui/chat_detail_screen_args.dart';
 import 'features/chat_list/ui/chat_list_screen.dart';
+import 'features/cross_search/ui/cross_search_screen.dart';
 import 'features/help/ui/help_screen.dart';
 import 'features/import/ui/import_screen.dart';
 import 'features/import/ui/import_screen_args.dart';
@@ -20,6 +21,7 @@ import 'features/settings/locale/locale_prefs.dart';
 import 'features/settings/ui/settings_screen.dart';
 import 'features/theming/theme_prefs.dart';
 import 'features/theming/ui/theme_picker_screen.dart';
+import 'features/whats_new/ui/whats_new_screen.dart';
 import 'l10n/app_localizations.dart';
 
 class LineTalkSaverApp extends ConsumerWidget {
@@ -61,6 +63,7 @@ class LineTalkSaverApp extends ConsumerWidget {
               builder: (_) => ChatDetailScreen(
                 chatId: chatArgs.chatId,
                 pendingPhotoPaths: chatArgs.pendingPhotoPaths,
+                initialTextQuery: chatArgs.initialTextQuery,
               ),
             );
           case '/pick-chat-for-photo':
@@ -85,6 +88,10 @@ class LineTalkSaverApp extends ConsumerWidget {
             return MaterialPageRoute(builder: (_) => const ThemePickerScreen());
           case '/help':
             return MaterialPageRoute(builder: (_) => const HelpScreen());
+          case '/search':
+            return MaterialPageRoute(builder: (_) => const CrossSearchScreen());
+          case '/whats-new':
+            return MaterialPageRoute(builder: (_) => const WhatsNewScreen());
           default:
             return MaterialPageRoute(builder: (_) => const ChatListScreen());
         }

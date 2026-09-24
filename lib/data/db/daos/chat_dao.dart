@@ -11,7 +11,10 @@ class ChatDao extends DatabaseAccessor<AppDatabase> with _$ChatDaoMixin {
 
   Stream<List<Chat>> watchAllChats() {
     return (select(chats)
-          ..orderBy([(t) => OrderingTerm.desc(t.importedAt)]))
+          ..orderBy([
+            (t) => OrderingTerm.desc(t.isFavorite),
+            (t) => OrderingTerm.desc(t.importedAt),
+          ]))
         .watch();
   }
 
@@ -38,5 +41,10 @@ class ChatDao extends DatabaseAccessor<AppDatabase> with _$ChatDaoMixin {
   Future<void> updateLocked(int chatId, bool locked) {
     return (update(chats)..where((t) => t.id.equals(chatId)))
         .write(ChatsCompanion(isLocked: Value(locked)));
+  }
+
+  Future<void> updateFavorite(int chatId, bool favorite) {
+    return (update(chats)..where((t) => t.id.equals(chatId)))
+        .write(ChatsCompanion(isFavorite: Value(favorite)));
   }
 }

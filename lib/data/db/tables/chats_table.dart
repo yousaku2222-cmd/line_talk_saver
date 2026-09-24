@@ -14,4 +14,7 @@ class Chats extends Table {
   /// When true, opening this chat requires device authentication
   /// (see AppLockService), independent of the app-wide lock setting.
   BoolColumn get isLocked => boolean().withDefault(const Constant(false))();
+
+  /// When true, this chat is pinned to the top of the chat list.
+  BoolColumn get isFavorite => boolean().withDefault(const Constant(false))();
 }

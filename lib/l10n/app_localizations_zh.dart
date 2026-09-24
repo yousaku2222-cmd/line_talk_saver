@@ -87,6 +87,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chatStatsSectionHeatmapTitle => '熱度圖表';
 
   @override
+  String get statsShareImageTooltip => '以圖片分享';
+
+  @override
+  String get statsShareAllTooltip => '將所有統計彙整成一張圖片分享';
+
+  @override
   String chatStatsPeakMonthLabel(Object month) {
     return '$month是互動最頻繁的月份';
   }
@@ -158,6 +164,63 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get chatStatsSectionWordsTitle => '常用詞彙';
+
+  @override
+  String get chatStatsSectionWeekdayHeatmapTitle => '星期×時段傾向';
+
+  @override
+  String get chatStatsSectionTriviaTitle => '聊天小知識';
+
+  @override
+  String get chatStatsTabOverview => '概覽';
+
+  @override
+  String get chatStatsTabTrends => '傾向';
+
+  @override
+  String get chatStatsTabTrivia => '小知識';
+
+  @override
+  String chatStatsStreakLabel(Object days) {
+    return '最長連續天數: $days天';
+  }
+
+  @override
+  String get chatStatsTopDaysLabel => '最熱絡的5天';
+
+  @override
+  String chatStatsSilenceGapLabel(Object duration, Object start, Object end) {
+    return '最長沉默期間: $duration（$start〜$end）';
+  }
+
+  @override
+  String chatStatsDurationDays(Object days) {
+    return '$days天';
+  }
+
+  @override
+  String chatStatsDurationHours(Object hours) {
+    return '$hours小時';
+  }
+
+  @override
+  String chatStatsEmojiRateLabel(Object rate) {
+    return '含表情符號的訊息比例: $rate%';
+  }
+
+  @override
+  String get chatStatsOneLinerLabel => '簡短派';
+
+  @override
+  String get chatStatsLongFormLabel => '長文派';
+
+  @override
+  String chatStatsAvgLengthLabel(Object name, Object length, Object label) {
+    return '$name: 平均$length字（$label）';
+  }
+
+  @override
   String get chatDashboardTooltip => '整體儀表板';
 
   @override
@@ -197,6 +260,24 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get chatUnlockTooltip => '解除鎖定';
+
+  @override
+  String get chatFavoriteTooltip => '加入我的最愛';
+
+  @override
+  String get chatUnfavoriteTooltip => '取消我的最愛';
+
+  @override
+  String get crossSearchTooltip => '搜尋所有聊天';
+
+  @override
+  String get crossSearchHint => '在所有聊天中搜尋關鍵字';
+
+  @override
+  String get crossSearchPrompt => '輸入關鍵字即可搜尋所有已儲存的聊天';
+
+  @override
+  String get crossSearchNoResults => '找不到符合的訊息';
 
   @override
   String get chatLockAuthReason => '請驗證身分以檢視此聊天';
@@ -274,6 +355,21 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsTitle => '設定';
+
+  @override
+  String get reminderToggleTitle => '儲存提醒';
+
+  @override
+  String get reminderToggleSubtitle => '每週日上午10點發送通知,提醒您儲存聊天記錄';
+
+  @override
+  String get reminderPermissionDeniedMessage => '由於未允許通知,無法設定提醒。請在裝置設定中允許通知。';
+
+  @override
+  String get reminderNotificationTitle => '聊天保存';
+
+  @override
+  String get reminderNotificationBody => '該儲存最近的聊天記錄了嗎?';
 
   @override
   String get appLockToggleTitle => '啟動時鎖定';
@@ -683,6 +779,30 @@ class AppLocalizationsZh extends AppLocalizations {
   String get helpScreenTitle => '使用說明書';
 
   @override
+  String get whatsNewMenuTitle => '更新資訊';
+
+  @override
+  String get whatsNewMenuSubtitle => '查看最近更新的變更內容';
+
+  @override
+  String get whatsNewScreenTitle => '更新資訊';
+
+  @override
+  String whatsNewVersionLabel(Object version) {
+    return '版本 $version';
+  }
+
+  @override
+  String get whatsNewDialogTitle => '應用程式已更新';
+
+  @override
+  String get whatsNewDialogOkButton => '確定';
+
+  @override
+  String get whatsNewV120Body =>
+      '我們強化了聊天統計功能。\n\n• 可以看出傳訊時段的傾向了(夜貓型、早起型等)\n• 顯示對問題的回覆率(對話的一來一往程度)\n• 新增了可彙整檢視所有已儲存聊天的儀表板\n• 匯出為PDF/Excel/Word時,現在也可以一併包含統計資訊';
+
+  @override
   String get helpAboutTitle => '關於本應用程式';
 
   @override
@@ -701,7 +821,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get helpChatListBody =>
-      '• 點擊聊天左側的圖示可以更換成喜歡的圖示\n• 點擊鉛筆圖示可以修改聊天名稱\n• 使用右上角的+按鈕可以新增一個專門用於存放照片、影片和檔案的房間\n• 點擊鎖頭圖示可以為單一聊天設定個別鎖定(需購買)';
+      '• 點擊聊天左側的圖示可以更換成喜歡的圖示\n• 點擊鉛筆圖示可以修改聊天名稱\n• 使用右上角的+按鈕可以新增一個專門用於存放照片、影片和檔案的房間\n• 點擊鎖頭圖示可以為單一聊天設定個別鎖定(需購買)\n• 點擊星形圖示可加入我的最愛,最愛的聊天會固定顯示在清單最上方\n• 使用右上角的搜尋圖示,可一次搜尋所有已儲存聊天中的關鍵字';
 
   @override
   String get helpChatDetailTitle => '聊天詳情頁的使用方法';
@@ -709,6 +829,13 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get helpChatDetailBody =>
       '• 長按或多選訊息即可複製\n• 可依發言人、時間段、關鍵字進行篩選搜尋\n• 可透過右上角圖示匯出為Excel、PDF或Word格式\n• 點擊圖庫圖示可檢視該聊天中新增的所有照片';
+
+  @override
+  String get helpStatsTitle => '如何檢視聊天統計';
+
+  @override
+  String get helpStatsBody =>
+      '• 以圖表顯示每月訊息數量\n• 1對1聊天會根據回覆速度、貼圖比例等診斷契合度\n• 3人以上的群組會以圓餅圖顯示發言比例\n• 顯示常聊天時段的傾向(夜貓型、早起型等)\n• 顯示對問題的回覆率(對話的一來一往程度)\n• 從聊天清單的儀表板圖示,可開啟彙整所有已儲存聊天的儀表板\n• 匯出為Excel、PDF、Word時,也可以一併包含統計資訊';
 
   @override
   String get helpAttachTitle => '新增照片、影片和檔案';
@@ -840,6 +967,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get chatStatsSectionHeatmapTitle => '熱度圖表';
 
   @override
+  String get statsShareImageTooltip => '以圖片分享';
+
+  @override
+  String get statsShareAllTooltip => '將所有統計彙整成一張圖片分享';
+
+  @override
   String chatStatsPeakMonthLabel(Object month) {
     return '$month是互動最頻繁的月份';
   }
@@ -911,6 +1044,63 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
+  String get chatStatsSectionWordsTitle => '常用詞彙';
+
+  @override
+  String get chatStatsSectionWeekdayHeatmapTitle => '星期×時段傾向';
+
+  @override
+  String get chatStatsSectionTriviaTitle => '聊天小知識';
+
+  @override
+  String get chatStatsTabOverview => '概覽';
+
+  @override
+  String get chatStatsTabTrends => '傾向';
+
+  @override
+  String get chatStatsTabTrivia => '小知識';
+
+  @override
+  String chatStatsStreakLabel(Object days) {
+    return '最長連續天數: $days天';
+  }
+
+  @override
+  String get chatStatsTopDaysLabel => '最熱絡的5天';
+
+  @override
+  String chatStatsSilenceGapLabel(Object duration, Object start, Object end) {
+    return '最長沉默期間: $duration（$start〜$end）';
+  }
+
+  @override
+  String chatStatsDurationDays(Object days) {
+    return '$days天';
+  }
+
+  @override
+  String chatStatsDurationHours(Object hours) {
+    return '$hours小時';
+  }
+
+  @override
+  String chatStatsEmojiRateLabel(Object rate) {
+    return '含表情符號的訊息比例: $rate%';
+  }
+
+  @override
+  String get chatStatsOneLinerLabel => '簡短派';
+
+  @override
+  String get chatStatsLongFormLabel => '長文派';
+
+  @override
+  String chatStatsAvgLengthLabel(Object name, Object length, Object label) {
+    return '$name: 平均$length字（$label）';
+  }
+
+  @override
   String get chatDashboardTooltip => '整體儀表板';
 
   @override
@@ -950,6 +1140,24 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get chatUnlockTooltip => '解除鎖定';
+
+  @override
+  String get chatFavoriteTooltip => '加入我的最愛';
+
+  @override
+  String get chatUnfavoriteTooltip => '取消我的最愛';
+
+  @override
+  String get crossSearchTooltip => '搜尋所有聊天';
+
+  @override
+  String get crossSearchHint => '在所有聊天中搜尋關鍵字';
+
+  @override
+  String get crossSearchPrompt => '輸入關鍵字即可搜尋所有已儲存的聊天';
+
+  @override
+  String get crossSearchNoResults => '找不到符合的訊息';
 
   @override
   String get chatLockAuthReason => '請驗證身分以檢視此聊天';
@@ -1027,6 +1235,21 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get settingsTitle => '設定';
+
+  @override
+  String get reminderToggleTitle => '儲存提醒';
+
+  @override
+  String get reminderToggleSubtitle => '每週日上午10點發送通知,提醒您儲存聊天記錄';
+
+  @override
+  String get reminderPermissionDeniedMessage => '由於未允許通知,無法設定提醒。請在裝置設定中允許通知。';
+
+  @override
+  String get reminderNotificationTitle => '聊天保存';
+
+  @override
+  String get reminderNotificationBody => '該儲存最近的聊天記錄了嗎?';
 
   @override
   String get appLockToggleTitle => '啟動時鎖定';
@@ -1436,6 +1659,30 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get helpScreenTitle => '使用說明書';
 
   @override
+  String get whatsNewMenuTitle => '更新資訊';
+
+  @override
+  String get whatsNewMenuSubtitle => '查看最近更新的變更內容';
+
+  @override
+  String get whatsNewScreenTitle => '更新資訊';
+
+  @override
+  String whatsNewVersionLabel(Object version) {
+    return '版本 $version';
+  }
+
+  @override
+  String get whatsNewDialogTitle => '應用程式已更新';
+
+  @override
+  String get whatsNewDialogOkButton => '確定';
+
+  @override
+  String get whatsNewV120Body =>
+      '我們強化了聊天統計功能。\n\n• 可以看出傳訊時段的傾向了(夜貓型、早起型等)\n• 顯示對問題的回覆率(對話的一來一往程度)\n• 新增了可彙整檢視所有已儲存聊天的儀表板\n• 匯出為PDF/Excel/Word時,現在也可以一併包含統計資訊';
+
+  @override
   String get helpAboutTitle => '關於本應用程式';
 
   @override
@@ -1454,7 +1701,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get helpChatListBody =>
-      '• 點擊聊天左側的圖示可以更換成喜歡的圖示\n• 點擊鉛筆圖示可以修改聊天名稱\n• 使用右上角的+按鈕可以新增一個專門用於存放照片、影片和檔案的房間\n• 點擊鎖頭圖示可以為單一聊天設定個別鎖定(需購買)';
+      '• 點擊聊天左側的圖示可以更換成喜歡的圖示\n• 點擊鉛筆圖示可以修改聊天名稱\n• 使用右上角的+按鈕可以新增一個專門用於存放照片、影片和檔案的房間\n• 點擊鎖頭圖示可以為單一聊天設定個別鎖定(需購買)\n• 點擊星形圖示可加入我的最愛,最愛的聊天會固定顯示在清單最上方\n• 使用右上角的搜尋圖示,可一次搜尋所有已儲存聊天中的關鍵字';
 
   @override
   String get helpChatDetailTitle => '聊天詳情頁的使用方法';
@@ -1462,6 +1709,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   @override
   String get helpChatDetailBody =>
       '• 長按或多選訊息即可複製\n• 可依發言人、時間段、關鍵字進行篩選搜尋\n• 可透過右上角圖示匯出為Excel、PDF或Word格式\n• 點擊圖庫圖示可檢視該聊天中新增的所有照片';
+
+  @override
+  String get helpStatsTitle => '如何檢視聊天統計';
+
+  @override
+  String get helpStatsBody =>
+      '• 以圖表顯示每月訊息數量\n• 1對1聊天會根據回覆速度、貼圖比例等診斷契合度\n• 3人以上的群組會以圓餅圖顯示發言比例\n• 顯示常聊天時段的傾向(夜貓型、早起型等)\n• 顯示對問題的回覆率(對話的一來一往程度)\n• 從聊天清單的儀表板圖示,可開啟彙整所有已儲存聊天的儀表板\n• 匯出為Excel、PDF、Word時,也可以一併包含統計資訊';
 
   @override
   String get helpAttachTitle => '新增照片、影片和檔案';

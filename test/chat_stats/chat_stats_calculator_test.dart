@@ -139,4 +139,70 @@ void main() {
     expect(stats.questionsAnswered, 1);
     expect(stats.questionCatchRate, closeTo(0.5, 1e-9));
   });
+
+  test('top words ranks by frequency and drops short/particle-only fragments', () {
+    final messages = [
+      _msg(id: 1, senderId: 1, timestamp: DateTime(2026, 1, 1), rawText: 'カフェに行った'),
+      _msg(id: 2, senderId: 1, timestamp: DateTime(2026, 1, 2), rawText: 'カフェまた行こう'),
+      _msg(id: 3, senderId: 1, timestamp: DateTime(2026, 1, 3), rawText: 'は'),
+    ];
+    final stats = ChatStatsCalculator.compute(messages, {1: 'Alice'});
+
+    final cafe = stats.topWords.firstWhere((w) => w.word == 'カフェ');
+    expect(cafe.count, 2);
+    // A single-character hiragana fragment ("は") never becomes a word.
+    expect(stats.topWords.any((w) => w.word == 'は'), isFalse);
+  });
+
+  test('longest streak counts consecutive calendar days with a message', () {
+    final messages = [
+      _msg(id: 1, senderId: 1, timestamp: DateTime(2026, 1, 1)),
+      _msg(id: 2, senderId: 1, timestamp: DateTime(2026, 1, 2)),
+      _msg(id: 3, senderId: 1, timestamp: DateTime(2026, 1, 3)),
+      // gap of 2 days breaks the streak
+      _msg(id: 4, senderId: 1, timestamp: DateTime(2026, 1, 6)),
+    ];
+    final stats = ChatStatsCalculator.compute(messages, {1: 'Alice'});
+
+    expect(stats.longestStreakDays, 3);
+  });
+
+  test('longest silence gap is the biggest interval between two messages', () {
+    final messages = [
+      _msg(id: 1, senderId: 1, timestamp: DateTime(2026, 1, 1, 9, 0)),
+      _msg(id: 2, senderId: 2, timestamp: DateTime(2026, 1, 1, 9, 10)),
+      _msg(id: 3, senderId: 1, timestamp: DateTime(2026, 1, 10, 9, 10)),
+    ];
+    final stats = ChatStatsCalculator.compute(messages, {1: 'Alice', 2: 'Bob'});
+
+    expect(stats.longestSilenceGap, const Duration(days: 9));
+    expect(stats.longestSilenceGapStart, DateTime(2026, 1, 1, 9, 10));
+    expect(stats.longestSilenceGapEnd, DateTime(2026, 1, 10, 9, 10));
+  });
+
+  test('emoji message rate only counts messages containing a Unicode emoji', () {
+    final messages = [
+      _msg(id: 1, senderId: 1, timestamp: DateTime(2026, 1, 1), rawText: '楽しかった😊'),
+      _msg(id: 2, senderId: 1, timestamp: DateTime(2026, 1, 2), rawText: '普通のメッセージ'),
+    ];
+    final stats = ChatStatsCalculator.compute(messages, {1: 'Alice'});
+
+    expect(stats.emojiMessageRate, closeTo(0.5, 1e-9));
+  });
+
+  test('avg message length excludes media placeholder messages', () {
+    final messages = [
+      _msg(id: 1, senderId: 1, timestamp: DateTime(2026, 1, 1), rawText: 'あいうえお'),
+      _msg(
+        id: 2,
+        senderId: 1,
+        timestamp: DateTime(2026, 1, 1, 0, 1),
+        rawText: '[写真]',
+        mediaPlaceholderType: 'photo',
+      ),
+    ];
+    final stats = ChatStatsCalculator.compute(messages, {1: 'Alice'});
+
+    expect(stats.senderStats.single.avgMessageLength, closeTo(5, 1e-9));
+  });
 }

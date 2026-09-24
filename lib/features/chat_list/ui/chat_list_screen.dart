@@ -12,6 +12,7 @@ import '../../chat_stats/ui/dashboard_screen.dart';
 import '../../monetization/ads/banner_ad_widget.dart';
 import '../../monetization/purchase/purchase_flow.dart';
 import '../../monetization/purchase/purchase_prefs.dart';
+import '../../whats_new/ui/whats_new_auto_popup.dart';
 import '../chat_icon_options.dart';
 import '../providers/chat_list_provider.dart';
 import 'pick_chat_icon_sheet.dart';
@@ -47,19 +48,26 @@ class ChatListScreen extends ConsumerWidget {
             child: Text(l10n.cancel),
           ),
           TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(controller.text.trim()),
+            onPressed: () =>
+                Navigator.of(dialogContext).pop(controller.text.trim()),
             child: Text(l10n.createChatRoomButton),
           ),
         ],
       ),
     );
     if (title == null || title.isEmpty) return;
-    final chatId = await ref.read(chatRepositoryProvider).createEmptyChat(title);
+    final chatId = await ref
+        .read(chatRepositoryProvider)
+        .createEmptyChat(title);
     if (!context.mounted) return;
     Navigator.of(context).pushNamed('/photos', arguments: chatId);
   }
 
-  Future<void> _renameChat(BuildContext context, WidgetRef ref, Chat chat) async {
+  Future<void> _renameChat(
+    BuildContext context,
+    WidgetRef ref,
+    Chat chat,
+  ) async {
     final l10n = AppLocalizations.of(context)!;
     final controller = TextEditingController(text: chat.title);
     final title = await showDialog<String>(
@@ -77,7 +85,8 @@ class ChatListScreen extends ConsumerWidget {
             child: Text(l10n.cancel),
           ),
           TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(controller.text.trim()),
+            onPressed: () =>
+                Navigator.of(dialogContext).pop(controller.text.trim()),
             child: Text(l10n.renameChatButton),
           ),
         ],
@@ -98,7 +107,11 @@ class ChatListScreen extends ConsumerWidget {
   /// opening a locked chat at all -- requires the same device
   /// authentication so a locked chat can't be unlocked by anyone else just
   /// by tapping the icon.
-  Future<void> _toggleLock(BuildContext context, WidgetRef ref, Chat chat) async {
+  Future<void> _toggleLock(
+    BuildContext context,
+    WidgetRef ref,
+    Chat chat,
+  ) async {
     final l10n = AppLocalizations.of(context)!;
     if (!chat.isLocked) {
       if (!ref.read(adsRemovedProvider)) {
@@ -143,6 +156,12 @@ class ChatListScreen extends ConsumerWidget {
     await ref.read(chatRepositoryProvider).setChatLocked(chat.id, false);
   }
 
+  Future<void> _toggleFavorite(WidgetRef ref, Chat chat) {
+    return ref
+        .read(chatRepositoryProvider)
+        .setChatFavorite(chat.id, !chat.isFavorite);
+  }
+
   Future<void> _openChat(BuildContext context, WidgetRef ref, Chat chat) async {
     if (chat.isLocked) {
       final l10n = AppLocalizations.of(context)!;
@@ -178,6 +197,11 @@ class ChatListScreen extends ConsumerWidget {
         title: Text(l10n.appTitle),
         actions: [
           IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: l10n.crossSearchTooltip,
+            onPressed: () => Navigator.of(context).pushNamed('/search'),
+          ),
+          IconButton(
             icon: const Icon(Icons.leaderboard_outlined),
             tooltip: l10n.chatDashboardTooltip,
             onPressed: () => showDashboardScreen(context, ref),
@@ -194,64 +218,71 @@ class ChatListScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: chatsAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, st) => Center(child: Text(l10n.loadErrorWithMessage(err))),
-        data: (chats) {
-          if (chats.isEmpty) {
-            return EmptyState(
-              icon: Icons.forum_outlined,
-              message: l10n.emptyChatListMessage,
-              action: FilledButton.icon(
-                onPressed: () => Navigator.of(context).pushNamed('/import'),
-                icon: const Icon(Icons.file_open_outlined),
-                label: Text(l10n.importButtonLabel),
-              ),
-            );
-          }
-          return ListView.builder(
-            padding: const EdgeInsets.fromLTRB(
-              AppSpacing.screen,
-              AppSpacing.x2,
-              AppSpacing.screen,
-              96,
-            ),
-            itemCount: chats.length,
-            itemBuilder: (context, index) {
-              final chat = chats[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Dismissible(
-                  key: ValueKey(chat.id),
-                  direction: DismissDirection.endToStart,
-                  background: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.errorContainer,
-                      borderRadius: BorderRadius.circular(AppRadius.lg),
-                    ),
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Icon(
-                      Icons.delete_outline,
-                      color: Theme.of(context).colorScheme.onErrorContainer,
-                    ),
+      body: Stack(
+        children: [
+          chatsAsync.when(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (err, st) =>
+                Center(child: Text(l10n.loadErrorWithMessage(err))),
+            data: (chats) {
+              if (chats.isEmpty) {
+                return EmptyState(
+                  icon: Icons.forum_outlined,
+                  message: l10n.emptyChatListMessage,
+                  action: FilledButton.icon(
+                    onPressed: () => Navigator.of(context).pushNamed('/import'),
+                    icon: const Icon(Icons.file_open_outlined),
+                    label: Text(l10n.importButtonLabel),
                   ),
-                  confirmDismiss: (_) => _confirmDelete(context),
-                  onDismissed: (_) =>
-                      ref.read(chatRepositoryProvider).deleteChat(chat.id),
-                  child: _ChatCard(
-                    chat: chat,
-                    onTap: () => _openChat(context, ref, chat),
-                    onIconTap: () => _pickIcon(context, ref, chat),
-                    onRename: () => _renameChat(context, ref, chat),
-                    onToggleLock: () => _toggleLock(context, ref, chat),
-                    onDelete: () => _deleteChat(context, ref, chat),
-                  ),
+                );
+              }
+              return ListView.builder(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.screen,
+                  AppSpacing.x2,
+                  AppSpacing.screen,
+                  96,
                 ),
+                itemCount: chats.length,
+                itemBuilder: (context, index) {
+                  final chat = chats[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Dismissible(
+                      key: ValueKey(chat.id),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.errorContainer,
+                          borderRadius: BorderRadius.circular(AppRadius.lg),
+                        ),
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Icon(
+                          Icons.delete_outline,
+                          color: Theme.of(context).colorScheme.onErrorContainer,
+                        ),
+                      ),
+                      confirmDismiss: (_) => _confirmDelete(context),
+                      onDismissed: (_) =>
+                          ref.read(chatRepositoryProvider).deleteChat(chat.id),
+                      child: _ChatCard(
+                        chat: chat,
+                        onTap: () => _openChat(context, ref, chat),
+                        onIconTap: () => _pickIcon(context, ref, chat),
+                        onRename: () => _renameChat(context, ref, chat),
+                        onToggleLock: () => _toggleLock(context, ref, chat),
+                        onToggleFavorite: () => _toggleFavorite(ref, chat),
+                        onDelete: () => _deleteChat(context, ref, chat),
+                      ),
+                    ),
+                  );
+                },
               );
             },
-          );
-        },
+          ),
+          const WhatsNewAutoPopup(),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Navigator.of(context).pushNamed('/import'),
@@ -304,6 +335,7 @@ class _ChatCard extends StatelessWidget {
     required this.onIconTap,
     required this.onRename,
     required this.onToggleLock,
+    required this.onToggleFavorite,
     required this.onDelete,
   });
 
@@ -312,6 +344,7 @@ class _ChatCard extends StatelessWidget {
   final VoidCallback onIconTap;
   final VoidCallback onRename;
   final VoidCallback onToggleLock;
+  final VoidCallback onToggleFavorite;
   final VoidCallback onDelete;
 
   @override
@@ -358,10 +391,7 @@ class _ChatCard extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: scheme.primary,
                             shape: BoxShape.circle,
-                            border: Border.all(
-                              color: scheme.surface,
-                              width: 2,
-                            ),
+                            border: Border.all(color: scheme.surface, width: 2),
                           ),
                           child: Icon(
                             Icons.photo_library_outlined,
@@ -403,7 +433,9 @@ class _ChatCard extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                               color: scheme.primaryContainer,
-                              borderRadius: BorderRadius.circular(AppRadius.pill),
+                              borderRadius: BorderRadius.circular(
+                                AppRadius.pill,
+                              ),
                             ),
                             child: Text(
                               l10n.manualRoomBadgeLabel,
@@ -427,6 +459,18 @@ class _ChatCard extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+              IconButton(
+                icon: Icon(
+                  chat.isFavorite ? Icons.star : Icons.star_border,
+                  color: chat.isFavorite
+                      ? scheme.primary
+                      : scheme.onSurfaceVariant,
+                ),
+                tooltip: chat.isFavorite
+                    ? l10n.chatUnfavoriteTooltip
+                    : l10n.chatFavoriteTooltip,
+                onPressed: onToggleFavorite,
               ),
               PopupMenuButton<String>(
                 icon: Icon(Icons.more_vert, color: scheme.onSurfaceVariant),

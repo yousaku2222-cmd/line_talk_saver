@@ -92,6 +92,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get chatStatsSectionHeatmapTitle => 'กราฟความถี่ในการพูดคุย';
 
   @override
+  String get statsShareImageTooltip => 'แชร์เป็นรูปภาพ';
+
+  @override
+  String get statsShareAllTooltip => 'แชร์สถิติทั้งหมดเป็นภาพเดียว';
+
+  @override
   String chatStatsPeakMonthLabel(Object month) {
     return '$month เป็นเดือนที่คุยกันมากที่สุด';
   }
@@ -163,6 +169,63 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get chatStatsSectionWordsTitle => 'คำที่ใช้บ่อย';
+
+  @override
+  String get chatStatsSectionWeekdayHeatmapTitle => 'แนวโน้มตามวันและช่วงเวลา';
+
+  @override
+  String get chatStatsSectionTriviaTitle => 'เกร็ดเล็กเกร็ดน้อยของแชท';
+
+  @override
+  String get chatStatsTabOverview => 'ภาพรวม';
+
+  @override
+  String get chatStatsTabTrends => 'แนวโน้ม';
+
+  @override
+  String get chatStatsTabTrivia => 'เกร็ดเล็กเกร็ดน้อย';
+
+  @override
+  String chatStatsStreakLabel(Object days) {
+    return 'วันต่อเนื่องยาวนานที่สุด: $days วัน';
+  }
+
+  @override
+  String get chatStatsTopDaysLabel => '5 วันที่คึกคักที่สุด';
+
+  @override
+  String chatStatsSilenceGapLabel(Object duration, Object start, Object end) {
+    return 'ช่วงเงียบที่นานที่สุด: $duration（$start ถึง $end）';
+  }
+
+  @override
+  String chatStatsDurationDays(Object days) {
+    return '$days วัน';
+  }
+
+  @override
+  String chatStatsDurationHours(Object hours) {
+    return '$hours ชั่วโมง';
+  }
+
+  @override
+  String chatStatsEmojiRateLabel(Object rate) {
+    return 'ข้อความที่มีอิโมจิ: $rate%';
+  }
+
+  @override
+  String get chatStatsOneLinerLabel => 'สายข้อความสั้น';
+
+  @override
+  String get chatStatsLongFormLabel => 'สายข้อความยาว';
+
+  @override
+  String chatStatsAvgLengthLabel(Object name, Object length, Object label) {
+    return '$name: เฉลี่ย $length ตัวอักษร（$label）';
+  }
+
+  @override
   String get chatDashboardTooltip => 'แดชบอร์ดภาพรวม';
 
   @override
@@ -203,6 +266,25 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get chatUnlockTooltip => 'ปลดล็อก';
+
+  @override
+  String get chatFavoriteTooltip => 'เพิ่มในรายการโปรด';
+
+  @override
+  String get chatUnfavoriteTooltip => 'นำออกจากรายการโปรด';
+
+  @override
+  String get crossSearchTooltip => 'ค้นหาทุกแชท';
+
+  @override
+  String get crossSearchHint => 'ค้นหาคำสำคัญในทุกแชท';
+
+  @override
+  String get crossSearchPrompt =>
+      'ป้อนคำสำคัญเพื่อค้นหาในแชทที่บันทึกไว้ทั้งหมด';
+
+  @override
+  String get crossSearchNoResults => 'ไม่พบข้อความที่ตรงกัน';
 
   @override
   String get chatLockAuthReason => 'ยืนยันตัวตนเพื่อดูแชทนี้';
@@ -284,6 +366,23 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get settingsTitle => 'ตั้งค่า';
+
+  @override
+  String get reminderToggleTitle => 'การแจ้งเตือนบันทึก';
+
+  @override
+  String get reminderToggleSubtitle =>
+      'ส่งการแจ้งเตือนทุกวันอาทิตย์เวลา 10 โมงเช้า เพื่อเตือนให้คุณบันทึกแชท';
+
+  @override
+  String get reminderPermissionDeniedMessage =>
+      'ไม่สามารถตั้งค่าการแจ้งเตือนได้เนื่องจากไม่ได้รับอนุญาต โปรดอนุญาตการแจ้งเตือนในการตั้งค่าเครื่อง';
+
+  @override
+  String get reminderNotificationTitle => 'บันทึกแชท';
+
+  @override
+  String get reminderNotificationBody => 'ถึงเวลาบันทึกแชทล่าสุดของคุณหรือยัง?';
 
   @override
   String get appLockToggleTitle => 'ล็อกเมื่อเปิดแอป';
@@ -706,6 +805,30 @@ class AppLocalizationsTh extends AppLocalizations {
   String get helpScreenTitle => 'คู่มือการใช้งาน';
 
   @override
+  String get whatsNewMenuTitle => 'มีอะไรใหม่';
+
+  @override
+  String get whatsNewMenuSubtitle => 'ดูการเปลี่ยนแปลงในอัปเดตล่าสุด';
+
+  @override
+  String get whatsNewScreenTitle => 'มีอะไรใหม่';
+
+  @override
+  String whatsNewVersionLabel(Object version) {
+    return 'เวอร์ชัน $version';
+  }
+
+  @override
+  String get whatsNewDialogTitle => 'แอปได้รับการอัปเดตแล้ว';
+
+  @override
+  String get whatsNewDialogOkButton => 'ตกลง';
+
+  @override
+  String get whatsNewV120Body =>
+      'เราได้ขยายฟีเจอร์สถิติแชท\n\n• ดูแนวโน้มช่วงเวลาที่คุณส่งข้อความ (กลางคืน กลางวัน ฯลฯ)\n• ดูอัตราการตอบคำถาม (ความราบรื่นของบทสนทนา)\n• เพิ่มแดชบอร์ดเพื่อดูสถิติของแชทที่บันทึกไว้ทั้งหมด\n• ตอนนี้สามารถรวมข้อมูลสถิติเมื่อส่งออกเป็น PDF/Excel/Word ได้แล้ว';
+
+  @override
   String get helpAboutTitle => 'เกี่ยวกับแอปนี้';
 
   @override
@@ -724,7 +847,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get helpChatListBody =>
-      '• แตะไอคอนทางซ้ายของแชทเพื่อเปลี่ยนเป็นไอคอนที่ต้องการ\n• แตะไอคอนดินสอเพื่อเปลี่ยนชื่อแชท\n• ใช้ปุ่ม + ที่มุมขวาบนเพื่อสร้างห้องใหม่สำหรับรูปภาพ วิดีโอ และไฟล์โดยเฉพาะ\n• แตะไอคอนกุญแจเพื่อล็อกแชทแต่ละรายการ (ต้องซื้อ)';
+      '• แตะไอคอนทางซ้ายของแชทเพื่อเปลี่ยนเป็นไอคอนที่ต้องการ\n• แตะไอคอนดินสอเพื่อเปลี่ยนชื่อแชท\n• ใช้ปุ่ม + ที่มุมขวาบนเพื่อสร้างห้องใหม่สำหรับรูปภาพ วิดีโอ และไฟล์โดยเฉพาะ\n• แตะไอคอนกุญแจเพื่อล็อกแชทแต่ละรายการ (ต้องซื้อ)\n• แตะไอคอนดาวเพื่อเพิ่มแชทลงในรายการโปรด แชทโปรดจะถูกปักหมุดไว้ด้านบนสุดของรายการ\n• ใช้ไอคอนค้นหาที่มุมขวาบนเพื่อค้นหาคำสำคัญในแชทที่บันทึกไว้ทั้งหมดพร้อมกัน';
 
   @override
   String get helpChatDetailTitle => 'การใช้งานหน้าจอแชท';
@@ -732,6 +855,13 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get helpChatDetailBody =>
       '• กดค้างหรือเลือกหลายข้อความเพื่อคัดลอก\n• กรองตามผู้ส่ง ช่วงวันที่ หรือคำสำคัญ\n• ส่งออกเป็น Excel, PDF หรือ Word จากไอคอนที่มุมขวาบน\n• ใช้ไอคอนแกลเลอรีเพื่อดูรูปภาพทั้งหมดที่แนบในแชทนั้น';
+
+  @override
+  String get helpStatsTitle => 'วิธีดูสถิติแชท';
+
+  @override
+  String get helpStatsBody =>
+      '• ดูกราฟจำนวนข้อความรายเดือน\n• สำหรับแชทแบบ 1 ต่อ 1 จะวินิจฉัยความเข้ากันได้จากความเร็วในการตอบกลับ สัดส่วนสติกเกอร์ และอื่นๆ\n• สำหรับกลุ่มตั้งแต่ 3 คนขึ้นไป จะแสดงกราฟวงกลมสัดส่วนข้อความ\n• ดูแนวโน้มช่วงเวลาที่คุณแอคทีฟที่สุด (กลางคืน กลางวัน ฯลฯ)\n• ดูอัตราการตอบคำถาม (ความราบรื่นของบทสนทนา)\n• เปิดไอคอนแดชบอร์ดจากรายการแชทเพื่อดูสถิติของแชทที่บันทึกไว้ทั้งหมด\n• สามารถรวมข้อมูลสถิติเมื่อส่งออกเป็น Excel, PDF หรือ Word ได้เช่นกัน';
 
   @override
   String get helpAttachTitle => 'การแนบรูปภาพ วิดีโอ และไฟล์';

@@ -11,6 +11,7 @@ Chat _chat({required int id, required String title}) {
     rawTxtPath: '/a.txt',
     iconKey: null,
     isLocked: false,
+    isFavorite: false,
   );
 }
 

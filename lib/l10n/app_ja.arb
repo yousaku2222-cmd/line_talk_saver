@@ -32,6 +32,8 @@
   "chatStatsGateDialogTitle": "本日の無料利用は終了しました",
   "chatStatsGateDialogBody": "広告を1回見ると、トーク統計をもう一度見られます。",
   "chatStatsSectionHeatmapTitle": "温度感グラフ",
+  "statsShareImageTooltip": "画像で共有",
+  "statsShareAllTooltip": "統計をまとめて画像で共有",
   "chatStatsPeakMonthLabel": "{month}が一番やり取りが多い月でした",
   "@chatStatsPeakMonthLabel": {
     "placeholders": { "month": {} }
@@ -66,6 +68,39 @@
   "@chatStatsQuestionCatchRateValue": {
     "placeholders": { "rate": {}, "answered": {}, "asked": {} }
   },
+  "chatStatsSectionWordsTitle": "よく使う単語",
+  "chatStatsSectionWeekdayHeatmapTitle": "曜日×時間帯の傾向",
+  "chatStatsSectionTriviaTitle": "会話のトリビア",
+  "chatStatsTabOverview": "概要",
+  "chatStatsTabTrends": "傾向",
+  "chatStatsTabTrivia": "トリビア",
+  "chatStatsStreakLabel": "最長連続日数: {days}日",
+  "@chatStatsStreakLabel": {
+    "placeholders": { "days": {} }
+  },
+  "chatStatsTopDaysLabel": "よく話した日 Top5",
+  "chatStatsSilenceGapLabel": "最長の沈黙期間: {duration}（{start}〜{end}）",
+  "@chatStatsSilenceGapLabel": {
+    "placeholders": { "duration": {}, "start": {}, "end": {} }
+  },
+  "chatStatsDurationDays": "{days}日間",
+  "@chatStatsDurationDays": {
+    "placeholders": { "days": {} }
+  },
+  "chatStatsDurationHours": "{hours}時間",
+  "@chatStatsDurationHours": {
+    "placeholders": { "hours": {} }
+  },
+  "chatStatsEmojiRateLabel": "絵文字入りメッセージの割合: {rate}%",
+  "@chatStatsEmojiRateLabel": {
+    "placeholders": { "rate": {} }
+  },
+  "chatStatsOneLinerLabel": "一言派",
+  "chatStatsLongFormLabel": "長文派",
+  "chatStatsAvgLengthLabel": "{name}: 平均{length}文字（{label}）",
+  "@chatStatsAvgLengthLabel": {
+    "placeholders": { "name": {}, "length": {}, "label": {} }
+  },
   "chatDashboardTooltip": "トーク全体ダッシュボード",
   "chatDashboardScreenTitle": "トーク全体ダッシュボード",
   "chatDashboardGateDialogTitle": "本日の無料利用は終了しました",
@@ -82,6 +117,12 @@
   "renameChatTooltip": "名称を変更",
   "chatLockTooltip": "このトークをロック",
   "chatUnlockTooltip": "ロックを解除",
+  "chatFavoriteTooltip": "お気に入りに追加",
+  "chatUnfavoriteTooltip": "お気に入りを解除",
+  "crossSearchTooltip": "全トーク横断検索",
+  "crossSearchHint": "全てのトークからキーワードを検索",
+  "crossSearchPrompt": "キーワードを入力すると、保存済みの全トークから検索できます",
+  "crossSearchNoResults": "一致するメッセージが見つかりませんでした",
   "chatLockAuthReason": "このトークを表示するには認証してください",
   "chatLockPaywallTitle": "個別ロックについて",
   "chatLockPaywallBody": "個別ロック機能は「広告を非表示にする」を購入すると使えるようになります。",
@@ -120,6 +161,11 @@
   },
 
   "settingsTitle": "設定",
+  "reminderToggleTitle": "保存リマインダー",
+  "reminderToggleSubtitle": "毎週日曜10時に、トークの保存を促す通知を送ります",
+  "reminderPermissionDeniedMessage": "通知が許可されなかったため、リマインダーを設定できませんでした。端末の設定から通知を許可してください。",
+  "reminderNotificationTitle": "トーク保存",
+  "reminderNotificationBody": "そろそろ最近のトークを保存しませんか？",
   "appLockToggleTitle": "起動時にロックする",
   "appLockToggleSubtitle": "端末のPIN・パターン・生体認証で保護します（下の「アプリPIN」設定時はそちらを優先使用）",
   "appLockUnsupportedMessage": "この端末では画面ロック（PIN・パターン・生体認証など）が設定されていません。下の「アプリPIN」を設定するとロック機能を使えます。",
@@ -309,14 +355,26 @@
   "helpMenuTitle": "取扱説明書",
   "helpMenuSubtitle": "使い方や機能の説明を見る",
   "helpScreenTitle": "取扱説明書",
+  "whatsNewMenuTitle": "更新情報",
+  "whatsNewMenuSubtitle": "アップデートの変更点を見る",
+  "whatsNewScreenTitle": "更新情報",
+  "whatsNewVersionLabel": "バージョン {version}",
+  "@whatsNewVersionLabel": {
+    "placeholders": { "version": {} }
+  },
+  "whatsNewDialogTitle": "アプリがアップデートされました",
+  "whatsNewDialogOkButton": "OK",
+  "whatsNewV120Body": "トーク統計機能を強化しました。\n\n・送信時間の傾向がわかるようになりました(夜型か朝型かなど、よく話す時間帯を表示)\n・質問への返信率(キャッチボール度)を表示するようになりました\n・保存した複数のトークをまとめて見られるダッシュボードを追加しました\n・書き出し(PDF/Excel/Word)に統計情報を含められるようになりました",
   "helpAboutTitle": "このアプリについて",
   "helpAboutBody": "「トーク保存」は、LINEのトーク履歴をあとから見返しやすい形で端末に保存するためのアプリです。LINE本体を自動操作することはなく、LINE標準の「トークをテキストで送信」機能で書き出した.txtファイルを取り込んで使います。",
   "helpImportTitle": "トークを取り込む",
   "helpImportBody": "1. LINEのトーク画面で「その他」→「トーク履歴を送信」→「テキストで送信」を選ぶ\n2. 共有先の一覧から「トーク保存」を選ぶと自動で取り込まれます\n3. 一覧に出ない場合は、いったん.txtとして保存し、本アプリの「トークを取り込む」→「ファイルを選択」から読み込んでください\n\n「トークを取り込む」画面の「LINEを開く」ボタンから、LINEアプリへすぐに切り替えることもできます。",
   "helpChatListTitle": "トーク一覧の操作",
-  "helpChatListBody": "・トークの左のアイコンをタップすると、好きなアイコンに変更できます\n・鉛筆アイコンでトーク名を変更できます\n・右上の＋ボタンから、写真・動画・ファイルだけをまとめる専用ルームを新規作成できます\n・鍵アイコンでトークごとに個別ロックを設定できます(要購入)",
+  "helpChatListBody": "・トークの左のアイコンをタップすると、好きなアイコンに変更できます\n・鉛筆アイコンでトーク名を変更できます\n・右上の＋ボタンから、写真・動画・ファイルだけをまとめる専用ルームを新規作成できます\n・鍵アイコンでトークごとに個別ロックを設定できます(要購入)\n・星アイコンでお気に入りに登録すると、一覧の最上部に固定表示されます\n・右上の検索アイコンから、保存済みの全トークをまとめてキーワード検索できます",
   "helpChatDetailTitle": "トーク詳細の使い方",
   "helpChatDetailBody": "・メッセージの長押し、または複数選択でコピーできます\n・発言者・期間・キーワードで絞り込み検索ができます\n・右上のアイコンからExcel・PDF・Wordへの書き出しができます\n・ギャラリーアイコンで、そのトークに添付した写真をまとめて確認できます",
+  "helpStatsTitle": "トーク統計の見方",
+  "helpStatsBody": "・月ごとのメッセージ数をグラフで表示します\n・1:1のトークでは、返信の速さやスタンプの比率などから相性を診断します\n・3人以上のグループでは、発言割合を円グラフで表示します\n・よく話す時間帯の傾向(夜型/朝型など)を表示します\n・質問への返信率(会話のキャッチボール度)を表示します\n・トーク一覧のグラフアイコンから、保存した全トークをまとめて見られるダッシュボードを開けます\n・書き出し(Excel・PDF・Word)の際に、統計情報を含めることもできます",
   "helpAttachTitle": "写真・動画・ファイルの添付",
   "helpAttachBody": "[写真][スタンプ]などのプレースホルダー部分をタップすると、端末から写真や動画を選んで添付できます。LINEのエクスポート機能には画像本体が含まれないため、自動で復元することはできません。",
   "helpLockTitle": "ロック機能について",
