@@ -902,6 +902,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get feedbackMenuSubtitle => 'Send us anything you notice by email';
 
   @override
+  String get privacyOptionsTitle => 'Ad privacy options';
+
+  @override
+  String get privacyOptionsSubtitle =>
+      'Change your consent for personalised ads';
+
+  @override
   String get feedbackEmailSubject => '[Talk Saver] Feedback';
 
   @override

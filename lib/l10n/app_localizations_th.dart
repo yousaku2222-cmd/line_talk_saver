@@ -898,6 +898,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get feedbackMenuSubtitle => 'พบสิ่งใดโปรดส่งอีเมลมาบอกเรา';
 
   @override
+  String get privacyOptionsTitle => 'ตัวเลือกความเป็นส่วนตัวของโฆษณา';
+
+  @override
+  String get privacyOptionsSubtitle =>
+      'เปลี่ยนการยินยอมสำหรับโฆษณาที่ปรับตามบุคคล';
+
+  @override
   String get feedbackEmailSubject => '[Talk Saver] ความคิดเห็น';
 
   @override

@@ -871,6 +871,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get feedbackMenuSubtitle => '如有任何發現,請透過電子郵件告訴我們';
 
   @override
+  String get privacyOptionsTitle => '广告隐私设置';
+
+  @override
+  String get privacyOptionsSubtitle => '更改您对个性化广告的同意设置';
+
+  @override
   String get feedbackEmailSubject => '【聊天保存】意見回饋';
 
   @override
@@ -1749,6 +1755,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get feedbackMenuSubtitle => '如有任何發現,請透過電子郵件告訴我們';
+
+  @override
+  String get privacyOptionsTitle => '廣告隱私設定';
+
+  @override
+  String get privacyOptionsSubtitle => '變更您對個人化廣告的同意設定';
 
   @override
   String get feedbackEmailSubject => '【聊天保存】意見回饋';

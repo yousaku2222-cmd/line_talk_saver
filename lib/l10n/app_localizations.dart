@@ -1641,6 +1641,18 @@ abstract class AppLocalizations {
   /// **'お気づきの点をメールでお送りください'**
   String get feedbackMenuSubtitle;
 
+  /// No description provided for @privacyOptionsTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'広告のプライバシー設定'**
+  String get privacyOptionsTitle;
+
+  /// No description provided for @privacyOptionsSubtitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'広告表示に関する同意内容を変更できます'**
+  String get privacyOptionsSubtitle;
+
   /// No description provided for @feedbackEmailSubject.
   ///
   /// In ja, this message translates to:

@@ -878,6 +878,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get feedbackMenuSubtitle => '발견하신 점을 이메일로 보내 주세요';
 
   @override
+  String get privacyOptionsTitle => '광고 개인정보 설정';
+
+  @override
+  String get privacyOptionsSubtitle => '맞춤 광고에 대한 동의를 변경할 수 있습니다';
+
+  @override
   String get feedbackEmailSubject => '[톡 저장] 피드백';
 
   @override

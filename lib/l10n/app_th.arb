@@ -277,6 +277,8 @@
   "helpPrivacyBody": "ทุกอย่างที่คุณนำเข้าหรือแนบจะถูกจัดเก็บไว้ในเครื่องนี้เท่านั้น ไม่มีการส่งข้อมูลใด ๆ ไปยังเซิร์ฟเวอร์",
   "feedbackMenuTitle": "ความคิดเห็นและรายงานปัญหา",
   "feedbackMenuSubtitle": "พบสิ่งใดโปรดส่งอีเมลมาบอกเรา",
+  "privacyOptionsTitle": "ตัวเลือกความเป็นส่วนตัวของโฆษณา",
+  "privacyOptionsSubtitle": "เปลี่ยนการยินยอมสำหรับโฆษณาที่ปรับตามบุคคล",
   "feedbackEmailSubject": "[Talk Saver] ความคิดเห็น",
   "feedbackEmailBody": "โปรดเขียนความคิดเห็น คำขอ หรือปัญหาที่พบไว้ด้านล่าง\n(หากเป็นปัญหา โปรดระบุขั้นตอนที่เกิดและรุ่นเครื่องของคุณด้วย)\n\n",
   "feedbackLaunchFailedMessage": "ไม่สามารถเปิดแอปอีเมลได้ โปรดติดต่อ talk-hozon-testers@googlegroups.com",

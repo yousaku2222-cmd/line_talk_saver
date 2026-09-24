@@ -18,6 +18,7 @@ import '../../app_lock/authenticate.dart';
 import '../../app_lock/ui/pin_entry_dialog.dart';
 import '../../backup/backup_service.dart';
 import '../../chat_list/providers/chat_list_provider.dart';
+import '../../monetization/ads/ad_service.dart';
 import '../../monetization/ads/banner_ad_widget.dart';
 import '../../monetization/purchase/backup_unlock_prefs.dart';
 import '../../monetization/purchase/purchase_flow.dart';
@@ -523,6 +524,7 @@ class SettingsScreen extends ConsumerWidget {
                 subtitle: Text(l10n.feedbackMenuSubtitle),
                 onTap: () => _sendFeedback(context, ref),
               ),
+              const _PrivacyOptionsTile(),
             ],
           ),
           const SizedBox(height: AppSpacing.x5),
@@ -530,6 +532,52 @@ class SettingsScreen extends ConsumerWidget {
         ],
       ),
       bottomNavigationBar: const SafeArea(child: DismissibleBannerAd()),
+    );
+  }
+}
+
+/// Re-entry point into Google's consent form, so a user who agreed at first
+/// launch can change or withdraw that choice. Renders nothing outside the
+/// regions where consent applies (EEA/UK), where the form would open on
+/// nothing -- which is why this is a tile that can vanish rather than a
+/// permanently visible menu row.
+class _PrivacyOptionsTile extends StatefulWidget {
+  const _PrivacyOptionsTile();
+
+  @override
+  State<_PrivacyOptionsTile> createState() => _PrivacyOptionsTileState();
+}
+
+class _PrivacyOptionsTileState extends State<_PrivacyOptionsTile> {
+  late Future<bool> _required;
+
+  @override
+  void initState() {
+    super.initState();
+    _required = isPrivacyOptionsRequired();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return FutureBuilder<bool>(
+      future: _required,
+      builder: (context, snapshot) {
+        if (snapshot.data != true) return const SizedBox.shrink();
+        return ListTile(
+          leading: const Icon(Icons.privacy_tip_outlined),
+          title: Text(l10n.privacyOptionsTitle),
+          subtitle: Text(l10n.privacyOptionsSubtitle),
+          onTap: () async {
+            await showPrivacyOptionsForm();
+            // Withdrawing consent can flip the requirement off, so re-read it
+            // instead of leaving a tile that no longer opens anything.
+            if (mounted) {
+              setState(() => _required = isPrivacyOptionsRequired());
+            }
+          },
+        );
+      },
     );
   }
 }

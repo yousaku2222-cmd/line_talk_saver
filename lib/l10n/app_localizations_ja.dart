@@ -875,6 +875,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get feedbackMenuSubtitle => 'お気づきの点をメールでお送りください';
 
   @override
+  String get privacyOptionsTitle => '広告のプライバシー設定';
+
+  @override
+  String get privacyOptionsSubtitle => '広告表示に関する同意内容を変更できます';
+
+  @override
   String get feedbackEmailSubject => '【トーク保存】フィードバック';
 
   @override

@@ -911,6 +911,13 @@ class AppLocalizationsId extends AppLocalizations {
       'Kirimkan hal apa pun yang Anda temukan lewat email';
 
   @override
+  String get privacyOptionsTitle => 'Opsi privasi iklan';
+
+  @override
+  String get privacyOptionsSubtitle =>
+      'Ubah persetujuan Anda untuk iklan yang dipersonalisasi';
+
+  @override
   String get feedbackEmailSubject => '[Talk Saver] Masukan';
 
   @override
