@@ -60,17 +60,17 @@ foreach ($shot in $shots) {
 
   $headBrush = New-Object System.Drawing.SolidBrush $headCol
   $subBrush  = New-Object System.Drawing.SolidBrush $subCol
-  $g.DrawString($shot.head, $headFont, $headBrush, ($Width / 2), (176 * $s), $fmt)
-  $g.DrawString($shot.sub,  $subFont,  $subBrush,  ($Width / 2), (394 * $s), $fmt)
+  $g.DrawString($shot.head, $headFont, $headBrush, ($Width / 2), (150 * $s), $fmt)
+  $g.DrawString($shot.sub,  $subFont,  $subBrush,  ($Width / 2), (362 * $s), $fmt)
 
   # The screen sits below the caption and runs off the bottom of the canvas --
   # the interesting part of every screen is its top, and cropping there keeps
   # the half-empty lower half of a tall simulator out of the picture.
   $src = [System.Drawing.Image]::FromFile((Resolve-Path $srcPath))
-  $shotW = [int]($Width * 0.80)
+  $shotW = [int]($Width * 0.84)
   $shotH = [int]($shotW * $src.Height / $src.Width)
   $shotX = [int](($Width - $shotW) / 2)
-  $shotY = [int](500 * $s)
+  $shotY = $Height - $shotH
   $radius = [int](44 * $s)
 
   $path = New-Object System.Drawing.Drawing2D.GraphicsPath
