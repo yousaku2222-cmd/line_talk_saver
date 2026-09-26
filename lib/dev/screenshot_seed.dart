@@ -21,7 +21,10 @@ Future<void> seedScreenshotSamplesIfNeeded(ProviderContainer container) async {
   if (!kScreenshotMode) return;
 
   final chats = await container.read(chatRepositoryProvider).watchAllChats().first;
-  if (chats.isNotEmpty) return; // already seeded on a previous launch
+  // Tops up rather than requiring an empty install: the screenshot simulator
+  // usually still holds chats from the previous shoot, and wiping it to get
+  // the samples in would throw away whatever was set up by hand there.
+  if (chats.length >= _samples.length) return;
 
   final dir = await getApplicationDocumentsDirectory();
   final parser = LineTxtParser();
