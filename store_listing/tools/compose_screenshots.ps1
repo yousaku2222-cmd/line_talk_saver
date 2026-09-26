@@ -1,18 +1,20 @@
-﻿# Turns the raw simulator captures in store_listing/screenshots_ios into the
-# images the App Store listing actually shows: a caption above, the app screen
-# below, bleeding off the bottom edge so the shot stays dense instead of ending
-# in the empty space a tall phone leaves under a short list.
+﻿# Turns the raw simulator captures into the images the store listing shows: a
+# caption above, the app screen below.
 #
 #   powershell -ExecutionPolicy Bypass -File store_listing\tools\compose_screenshots.ps1
+#   ... -Width 2048 -Height 2732 -Source store_listing\screenshots_ipad -OutDir store_listing\screenshots_ipad\composed
 #
-# -Width/-Height pick the output size; App Store 6.9" is 1320x2868 and 6.5" is
-# 1284x2778, and the same captures compose to either.
+# App Store sizes: 6.9" is 1320x2868, 6.5" is 1284x2778, iPad 12.9" is
+# 2048x2732. The same captures compose to any of them.
 
 param(
   [int]$Width = 1320,
   [int]$Height = 2868,
   [string]$Source = "store_listing\screenshots_ios",
-  [string]$OutDir = "store_listing\screenshots_ios\composed"
+  [string]$OutDir = "store_listing\screenshots_ios\composed",
+  # A tablet's screen is wider relative to the canvas, so its card can take more
+  # of the width without the caption above it looking cramped.
+  [double]$ImageWidthRatio = 0.84
 )
 
 Add-Type -AssemblyName System.Drawing
@@ -30,6 +32,26 @@ $bgTop    = [System.Drawing.Color]::FromArgb(238, 245, 240)
 $bgBottom = [System.Drawing.Color]::FromArgb(205, 227, 213)
 $headCol  = [System.Drawing.Color]::FromArgb(27, 42, 34)
 $subCol   = [System.Drawing.Color]::FromArgb(78, 104, 89)
+
+# How far down the capture the last full-width row of content sits. A tablet
+# leaves half its screen empty under a nine-row list, and pasting that in whole
+# is what made the previous set look like an empty app; cropping to the content
+# keeps every image dense regardless of the device it was shot on.
+function Get-ContentBottom($bmp) {
+  $bg = $bmp.GetPixel(4, [int]($bmp.Height * 0.5))
+  $last = 0
+  for ($y = 0; $y -lt $bmp.Height; $y += 4) {
+    $diff = 0; $n = 0
+    for ($x = 0; $x -lt $bmp.Width; $x += 16) {
+      $p = $bmp.GetPixel($x, $y); $n++
+      if ([Math]::Abs($p.R - $bg.R) + [Math]::Abs($p.G - $bg.G) + [Math]::Abs($p.B - $bg.B) -gt 12) { $diff++ }
+    }
+    # A floating action button is narrow and would otherwise defeat the crop,
+    # so only rows that are mostly content count.
+    if ($diff / $n -gt 0.4) { $last = $y }
+  }
+  return $last
+}
 
 $null = New-Item -ItemType Directory -Force -Path $OutDir
 
@@ -63,21 +85,38 @@ foreach ($shot in $shots) {
   $g.DrawString($shot.head, $headFont, $headBrush, ($Width / 2), (150 * $s), $fmt)
   $g.DrawString($shot.sub,  $subFont,  $subBrush,  ($Width / 2), (362 * $s), $fmt)
 
-  # The screen sits below the caption and runs off the bottom of the canvas --
-  # the interesting part of every screen is its top, and cropping there keeps
-  # the half-empty lower half of a tall simulator out of the picture.
-  $src = [System.Drawing.Image]::FromFile((Resolve-Path $srcPath))
-  $shotW = [int]($Width * 0.84)
-  $shotH = [int]($shotW * $src.Height / $src.Width)
-  $shotX = [int](($Width - $shotW) / 2)
-  $shotY = $Height - $shotH
-  $radius = [int](44 * $s)
+  $src = New-Object System.Drawing.Bitmap $srcPath
+  $bottom = Get-ContentBottom $src
+  $cropH = [Math]::Min($src.Height, [int]($bottom + $src.Height * 0.035))
+  # A screen whose content runs to the bottom keeps the shape it was shot in.
+  if (($cropH / $src.Height) -gt 0.90) { $cropH = $src.Height }
 
-  $path = New-Object System.Drawing.Drawing2D.GraphicsPath
+  $shotW = [int]($Width * $ImageWidthRatio)
+  $shotH = [int]($shotW * $cropH / $src.Width)
+  $shotX = [int](($Width - $shotW) / 2)
+
+  $top = [int](500 * $s)
+  if (($top + $shotH) -ge $Height) {
+    # Tall enough to reach the bottom edge: bottom-align it and let it bleed
+    # off, which reads as a screen continuing past the frame.
+    $shotY = $Height - $shotH
+    $roundBottom = $false
+  } else {
+    $shotY = $top + [int](($Height - $top - $shotH) / 2)
+    $roundBottom = $true
+  }
+
+  $radius = [int](44 * $s)
   $d = $radius * 2
+  $path = New-Object System.Drawing.Drawing2D.GraphicsPath
   $path.AddArc($shotX, $shotY, $d, $d, 180, 90)
   $path.AddArc(($shotX + $shotW - $d), $shotY, $d, $d, 270, 90)
-  $path.AddLine(($shotX + $shotW), ($shotY + $shotH), $shotX, ($shotY + $shotH))
+  if ($roundBottom) {
+    $path.AddArc(($shotX + $shotW - $d), ($shotY + $shotH - $d), $d, $d, 0, 90)
+    $path.AddArc($shotX, ($shotY + $shotH - $d), $d, $d, 90, 90)
+  } else {
+    $path.AddLine(($shotX + $shotW), ($shotY + $shotH), $shotX, ($shotY + $shotH))
+  }
   $path.CloseFigure()
 
   # A soft shadow, drawn as a few offset translucent copies of the outline.
@@ -92,7 +131,9 @@ foreach ($shot in $shots) {
   }
 
   $g.SetClip($path)
-  $g.DrawImage($src, $shotX, $shotY, $shotW, $shotH)
+  $destRect = New-Object System.Drawing.Rectangle $shotX, $shotY, $shotW, $shotH
+  $srcRect = New-Object System.Drawing.Rectangle 0, 0, $src.Width, $cropH
+  $g.DrawImage($src, $destRect, $srcRect, [System.Drawing.GraphicsUnit]::Pixel)
   $g.ResetClip()
 
   $pen = New-Object System.Drawing.Pen ([System.Drawing.Color]::FromArgb(40, 30, 48, 38)), (2 * $s)
@@ -104,5 +145,5 @@ foreach ($shot in $shots) {
   $pen.Dispose(); $path.Dispose(); $src.Dispose()
   $headFont.Dispose(); $subFont.Dispose(); $headBrush.Dispose(); $subBrush.Dispose()
   $g.Dispose(); $canvas.Dispose()
-  Write-Output "wrote $outPath"
+  Write-Output ("wrote {0}  (crop {1} / content {2})" -f $outPath, $cropH, $bottom)
 }
