@@ -13,6 +13,11 @@ class ImportRepository {
     required ParseResult result,
     required String sourceFileName,
     required String rawTxtPath,
+
+    /// Only the store-screenshot seeding passes this, to spread the sample
+    /// chats over a plausible span instead of stamping all nine with the same
+    /// minute. A real import always happens now.
+    DateTime? importedAt,
   }) async {
     final title = (result.chatTitle?.isNotEmpty ?? false)
         ? result.chatTitle!
@@ -22,7 +27,7 @@ class ImportRepository {
       final chatId = await _db.chatDao.insertChat(
         ChatsCompanion.insert(
           title: title,
-          importedAt: DateTime.now(),
+          importedAt: importedAt ?? DateTime.now(),
           sourceFileName: sourceFileName,
           rawTxtPath: rawTxtPath,
         ),

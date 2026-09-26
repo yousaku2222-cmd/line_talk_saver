@@ -27,7 +27,12 @@ Future<void> seedScreenshotSamplesIfNeeded(ProviderContainer container) async {
   final parser = LineTxtParser();
   final importRepository = container.read(importRepositoryProvider);
 
+  // Walked backwards from today, a couple of days apart, so the list reads as
+  // chats saved over time rather than nine imports in the same minute.
+  var importedAt = DateTime.now().subtract(const Duration(hours: 5));
+
   for (final sample in _samples) {
+    importedAt = importedAt.subtract(Duration(hours: 41 + _samples.length));
     final result = parser.parse(sample.content);
     // Skipping by title keeps this safe to re-run: adding a sample later tops
     // the simulator up instead of duplicating the chats already in it, and
@@ -40,6 +45,7 @@ Future<void> seedScreenshotSamplesIfNeeded(ProviderContainer container) async {
       result: result,
       sourceFileName: sample.fileName,
       rawTxtPath: file.path,
+      importedAt: importedAt,
     );
   }
 }
