@@ -17,6 +17,16 @@ import 'package:line_talk_saver/dev/screenshot_seed.dart';
 /// click in; the simulator only exists as a framebuffer `simctl` can read.
 ///
 /// See `test_driver/store_screenshots_driver.dart` for the command to run.
+///
+/// Lets a push transition and the dashboard's bar animation actually finish.
+/// pumpAndSettle alone returned while the dashboard was still sliding in, and
+/// the shot caught both screens at once.
+Future<void> _rest(WidgetTester tester) async {
+  await tester.pumpAndSettle();
+  await Future<void>.delayed(const Duration(seconds: 2));
+  await tester.pumpAndSettle();
+}
+
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -49,6 +59,7 @@ void main() {
       await tester.pumpAndSettle();
     }
 
+    await _rest(tester);
     await binding.takeScreenshot('01_chat_list');
 
     // 2. A saved conversation -- the thing the app exists to produce.
@@ -56,6 +67,7 @@ void main() {
     expect(firstChat, findsWidgets, reason: 'seeded chats should be listed');
     await tester.tap(firstChat.first);
     await tester.pumpAndSettle(const Duration(seconds: 1));
+    await _rest(tester);
     await binding.takeScreenshot('02_chat_detail');
     rootNavigatorKey.currentState!.pop();
     await tester.pumpAndSettle();
@@ -63,8 +75,9 @@ void main() {
     // 3. Cross-chat search, with a keyword that hits more than one chat.
     await tester.tap(find.byIcon(Icons.search));
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).first, '旅行');
+    await tester.enterText(find.byType(TextField).first, 'ありがとう');
     await tester.pumpAndSettle(const Duration(seconds: 1));
+    await _rest(tester);
     await binding.takeScreenshot('03_cross_search');
     rootNavigatorKey.currentState!.pop();
     await tester.pumpAndSettle();
@@ -72,6 +85,7 @@ void main() {
     // 4. The stats dashboard across every saved chat.
     await tester.tap(find.byIcon(Icons.leaderboard_outlined));
     await tester.pumpAndSettle(const Duration(seconds: 2));
+    await _rest(tester);
     await binding.takeScreenshot('04_dashboard');
     rootNavigatorKey.currentState!.pop();
     await tester.pumpAndSettle();
@@ -79,6 +93,7 @@ void main() {
     // 5. Settings, where the save reminder lives.
     await tester.tap(find.byIcon(Icons.settings_outlined));
     await tester.pumpAndSettle();
+    await _rest(tester);
     await binding.takeScreenshot('05_settings');
   });
 }
