@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
 import 'core/navigation/root_navigator_key.dart';
 import 'core/providers/app_providers.dart';
+import 'dev/screenshot_seed.dart';
 import 'features/import/share_intake/share_intent_listener.dart';
 import 'features/monetization/ads/ad_service.dart';
 
@@ -21,9 +22,17 @@ Future<void> main() async {
   // so it kept going out as a live, and so far always no-fill, request.
   await initializeAds();
 
+  // Built explicitly so the store-screenshot seeding below can write through
+  // the same providers the app is about to read from. It is an ordinary
+  // ProviderScope otherwise; seeding is a no-op unless SCREENSHOT is set.
+  final container = ProviderContainer(
+    overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+  );
+  await seedScreenshotSamplesIfNeeded(container);
+
   runApp(
-    ProviderScope(
-      overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+    UncontrolledProviderScope(
+      container: container,
       child: const LineTalkSaverApp(),
     ),
   );

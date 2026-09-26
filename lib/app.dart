@@ -34,6 +34,10 @@ class LineTalkSaverApp extends ConsumerWidget {
 
     return MaterialApp(
       navigatorKey: rootNavigatorKey,
+      // The debug ribbon ended up in the App Store screenshots once already;
+      // store shots get taken from whatever build is quickest to run, so keep
+      // it off rather than rely on remembering to build in release mode.
+      debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       theme: AppTheme.fromPalette(paletteFor(themeId)),
       // null follows the device's system language, resolved against
