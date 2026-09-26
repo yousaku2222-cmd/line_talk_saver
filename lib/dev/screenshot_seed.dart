@@ -21,22 +21,23 @@ Future<void> seedScreenshotSamplesIfNeeded(ProviderContainer container) async {
   if (!kScreenshotMode) return;
 
   final chats = await container.read(chatRepositoryProvider).watchAllChats().first;
-  // Tops up rather than requiring an empty install: the screenshot simulator
-  // usually still holds chats from the previous shoot, and wiping it to get
-  // the samples in would throw away whatever was set up by hand there.
-  if (chats.length >= _samples.length) return;
+  final existingTitles = chats.map((chat) => chat.title).toSet();
 
   final dir = await getApplicationDocumentsDirectory();
   final parser = LineTxtParser();
   final importRepository = container.read(importRepositoryProvider);
 
-  // Seeded oldest first so the list's "most recent import" ordering puts the
-  // liveliest chat at the top, where the screenshot crops.
   for (final sample in _samples) {
+    final result = parser.parse(sample.content);
+    // Skipping by title keeps this safe to re-run: adding a sample later tops
+    // the simulator up instead of duplicating the chats already in it, and
+    // nothing has to be wiped to pick the new one up.
+    if (existingTitles.contains(result.chatTitle)) continue;
+
     final file = File('${dir.path}/screenshot_${sample.fileName}');
     await file.writeAsString(sample.content);
     await importRepository.importParsedChat(
-      result: parser.parse(sample.content),
+      result: result,
       sourceFileName: sample.fileName,
       rawTxtPath: file.path,
     );
@@ -56,6 +57,10 @@ const _samples = <_Sample>[
   _Sample('sato.txt', _sato),
   _Sample('minami.txt', _minami),
   _Sample('hanako.txt', _hanako),
+  _Sample('yuka.txt', _yuka),
+  _Sample('kenta.txt', _kenta),
+  _Sample('mama.txt', _mama),
+  _Sample('work.txt', _work),
 ];
 
 const _tennisCircle = '''
@@ -228,4 +233,90 @@ const _hanako = '''
 08:45\t自分\t上着出しておこう
 08:48\t山田花子\t風邪ひかないようにね
 08:50\t自分\tありがとう、そっちもね
+''';
+
+const _yuka = '''
+[LINE] 田中優香とのトーク履歴
+保存日時：2026/09/19 21:00
+
+2026/07/08(水)
+12:30\t田中優香\tランチ、新しくできたお店行ってみない?
+12:35\t自分\t行きたい!明日はどう
+12:36\t田中優香\t大丈夫!12時に下で待ち合わせしよう
+12:40\t自分\t了解
+
+2026/08/15(土)
+16:20\t田中優香\t夏休みどこか行った?
+16:25\t自分\t実家に帰ってた。そっちは
+16:30\t田中優香\t沖縄!海がきれいすぎた
+16:35\t自分\tいいなあ、写真見たい
+16:40\t田中優香\t送るね
+
+2026/09/19(金)
+20:50\t田中優香\t来週の勉強会、資料持っていくね
+20:55\t自分\t助かる、ありがとう
+''';
+
+const _kenta = '''
+[LINE] 鈴木健太とのトーク履歴
+保存日時：2026/09/11 19:30
+
+2026/06/22(日)
+14:10\t鈴木健太\t引っ越し手伝ってくれてありがとう
+14:15\t自分\tいえいえ、無事終わってよかった
+14:20\t鈴木健太\t落ち着いたら家に遊びに来てよ
+14:22\t自分\tぜひ行きたい
+
+2026/08/09(日)
+11:05\t鈴木健太\t新居のリビング、やっと片付いた
+11:10\t自分\t早いね
+11:15\t鈴木健太\tソファ買ったら一気にそれっぽくなった
+11:20\t自分\t写真ちょうだい
+
+2026/09/11(金)
+19:00\t鈴木健太\t来月の連休、空いてる?
+19:05\t自分\t空いてるよ
+19:10\t鈴木健太\tキャンプ行こう
+''';
+
+const _mama = '''
+[LINE] ママ友グループとのトーク履歴
+保存日時：2026/09/17 12:00
+
+2026/07/03(金)
+08:05\t佐々木\tおはようございます。今日の遠足、集合は8時半で合ってますか
+08:10\t井上\tはい、正門前です
+08:15\t佐々木\tありがとうございます
+08:30\t中川\t間に合いました!
+
+2026/08/21(金)
+19:20\t井上\t夏祭りの写真、共有しますね
+19:25\t中川\tありがとうございます、どれもかわいい
+19:30\t佐々木\t来年も楽しみです
+
+2026/09/17(木)
+11:40\t井上\t運動会のお弁当、何持っていきますか
+11:45\t中川\t唐揚げは確定です
+11:50\t佐々木\tうちはおにぎり作ります
+''';
+
+const _work = '''
+[LINE] 開発チームとのトーク履歴
+保存日時：2026/09/24 18:00
+
+2026/07/15(火)
+09:30\t部長\tおはようございます。今日の定例は15時からです
+09:35\t自分\t承知しました
+09:40\t吉田\t資料を共有フォルダに置きました
+09:45\t自分\t確認します
+
+2026/08/27(木)
+13:10\t吉田\tリリース、無事完了しました
+13:15\t自分\tお疲れさまでした
+13:20\t部長\tありがとう、助かりました
+
+2026/09/24(木)
+17:30\t部長\t来期の体制について、明日少し話しましょう
+17:35\t自分\t了解しました
+17:40\t吉田\t私も同席します
 ''';
