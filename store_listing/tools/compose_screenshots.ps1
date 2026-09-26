@@ -14,7 +14,10 @@ param(
   [string]$OutDir = "store_listing\screenshots_ios\composed",
   # A tablet's screen is wider relative to the canvas, so its card can take more
   # of the width without the caption above it looking cramped.
-  [double]$ImageWidthRatio = 0.84
+  [double]$ImageWidthRatio = 0.84,
+  # Only a tablet needs this. On a phone the screens already run to the bottom,
+  # and cropping turns them into a short card floating in empty background.
+  [switch]$CropToContent
 )
 
 Add-Type -AssemblyName System.Drawing
@@ -86,8 +89,12 @@ foreach ($shot in $shots) {
   $g.DrawString($shot.sub,  $subFont,  $subBrush,  ($Width / 2), (362 * $s), $fmt)
 
   $src = New-Object System.Drawing.Bitmap $srcPath
-  $bottom = Get-ContentBottom $src
-  $cropH = [Math]::Min($src.Height, [int]($bottom + $src.Height * 0.035))
+  $cropH = $src.Height
+  $bottom = $src.Height
+  if ($CropToContent) {
+    $bottom = Get-ContentBottom $src
+    $cropH = [Math]::Min($src.Height, [int]($bottom + $src.Height * 0.035))
+  }
   # A screen whose content runs to the bottom keeps the shape it was shot in.
   if (($cropH / $src.Height) -gt 0.90) { $cropH = $src.Height }
 
