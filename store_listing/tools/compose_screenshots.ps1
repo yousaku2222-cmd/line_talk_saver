@@ -66,7 +66,9 @@ foreach ($shot in $shots) {
   $srcPath = Join-Path $Source $shot.file
   if (-not (Test-Path $srcPath)) { Write-Output "skip (not found): $srcPath"; continue }
 
-  $canvas = New-Object System.Drawing.Bitmap $Width, $Height
+  # 24bpp, not the default 32bpp: App Store Connect rejects any image that
+  # carries an alpha channel at all, even one that is fully opaque.
+  $canvas = New-Object System.Drawing.Bitmap $Width, $Height, ([System.Drawing.Imaging.PixelFormat]::Format24bppRgb)
   $g = [System.Drawing.Graphics]::FromImage($canvas)
   $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
   $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
