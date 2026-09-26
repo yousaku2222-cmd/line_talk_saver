@@ -7,6 +7,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:line_talk_saver/app.dart';
+import 'package:line_talk_saver/core/navigation/root_navigator_key.dart';
 import 'package:line_talk_saver/core/providers/app_providers.dart';
 import 'package:line_talk_saver/dev/screenshot_seed.dart';
 
@@ -56,7 +57,7 @@ void main() {
     await tester.tap(firstChat.first);
     await tester.pumpAndSettle(const Duration(seconds: 1));
     await binding.takeScreenshot('02_chat_detail');
-    await tester.pageBack();
+    rootNavigatorKey.currentState!.pop();
     await tester.pumpAndSettle();
 
     // 3. Cross-chat search, with a keyword that hits more than one chat.
@@ -65,14 +66,14 @@ void main() {
     await tester.enterText(find.byType(TextField).first, '旅行');
     await tester.pumpAndSettle(const Duration(seconds: 1));
     await binding.takeScreenshot('03_cross_search');
-    await tester.pageBack();
+    rootNavigatorKey.currentState!.pop();
     await tester.pumpAndSettle();
 
     // 4. The stats dashboard across every saved chat.
     await tester.tap(find.byIcon(Icons.leaderboard_outlined));
     await tester.pumpAndSettle(const Duration(seconds: 2));
     await binding.takeScreenshot('04_dashboard');
-    await tester.pageBack();
+    rootNavigatorKey.currentState!.pop();
     await tester.pumpAndSettle();
 
     // 5. Settings, where the save reminder lives.
