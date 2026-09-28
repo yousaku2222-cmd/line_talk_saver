@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart' show kDebugMode;
 
+import 'build_channel.dart';
+
 /// Real AdMob app / ad unit IDs from the developer's own AdMob account
 /// (console.admob.google.com), for the "トーク保存" app.
 class AdUnitIds {
@@ -15,7 +17,7 @@ class AdUnitIds {
   /// public stores) always use real ads. The AndroidManifest/Info.plist App
   /// ID stays the real one either way; only the ad *unit* ID changes.
   /// Reference: https://developers.google.com/admob/android/test-ads
-  static bool get useTestAds => kDebugMode;
+  static bool get useTestAds => kDebugMode || BuildChannel.isTestFlight;
 
   static const androidAppId = 'ca-app-pub-3818461038959537~7254635029';
   static const iosAppId = 'ca-app-pub-3818461038959537~5614922743';
