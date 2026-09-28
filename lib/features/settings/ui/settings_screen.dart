@@ -24,6 +24,7 @@ import '../../monetization/purchase/backup_unlock_prefs.dart';
 import '../../monetization/purchase/purchase_flow.dart';
 import '../../monetization/purchase/purchase_prefs.dart';
 import '../../monetization/purchase/purchase_service.dart';
+import '../../notices/notices.dart';
 import '../../reminder/reminder_prefs.dart';
 import '../../reminder/reminder_service.dart';
 import '../locale/locale_prefs.dart';
@@ -517,6 +518,12 @@ class SettingsScreen extends ConsumerWidget {
                 title: Text(l10n.whatsNewMenuTitle),
                 subtitle: Text(l10n.whatsNewMenuSubtitle),
                 onTap: () => Navigator.of(context).pushNamed('/whats-new'),
+              ),
+              ListTile(
+                leading: const Icon(Icons.campaign_outlined),
+                title: Text(noticesMenuTitle(context)),
+                trailing: const NoticeUnreadDot(),
+                onTap: () => openNoticesScreen(context),
               ),
               ListTile(
                 leading: const Icon(Icons.feedback_outlined),

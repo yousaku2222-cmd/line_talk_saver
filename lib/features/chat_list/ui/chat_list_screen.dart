@@ -12,6 +12,7 @@ import '../../chat_stats/ui/dashboard_screen.dart';
 import '../../monetization/ads/banner_ad_widget.dart';
 import '../../monetization/purchase/purchase_flow.dart';
 import '../../monetization/purchase/purchase_prefs.dart';
+import '../../notices/notices.dart';
 import '../../whats_new/ui/whats_new_auto_popup.dart';
 import '../chat_icon_options.dart';
 import '../providers/chat_list_provider.dart';
@@ -192,104 +193,110 @@ class ChatListScreen extends ConsumerWidget {
     final chatsAsync = ref.watch(chatListProvider);
     final l10n = AppLocalizations.of(context)!;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.appTitle),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            tooltip: l10n.crossSearchTooltip,
-            onPressed: () => Navigator.of(context).pushNamed('/search'),
-          ),
-          IconButton(
-            icon: const Icon(Icons.leaderboard_outlined),
-            tooltip: l10n.chatDashboardTooltip,
-            onPressed: () => showDashboardScreen(context, ref),
-          ),
-          IconButton(
-            icon: const Icon(Icons.add_comment_outlined),
-            tooltip: l10n.createChatRoomTitle,
-            onPressed: () => _createChatRoom(context, ref),
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            tooltip: l10n.settingsTooltip,
-            onPressed: () => Navigator.of(context).pushNamed('/settings'),
-          ),
-        ],
-      ),
-      body: Stack(
-        children: [
-          chatsAsync.when(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (err, st) =>
-                Center(child: Text(l10n.loadErrorWithMessage(err))),
-            data: (chats) {
-              if (chats.isEmpty) {
-                return EmptyState(
-                  icon: Icons.forum_outlined,
-                  message: l10n.emptyChatListMessage,
-                  action: FilledButton.icon(
-                    onPressed: () => Navigator.of(context).pushNamed('/import'),
-                    icon: const Icon(Icons.file_open_outlined),
-                    label: Text(l10n.importButtonLabel),
-                  ),
-                );
-              }
-              return ListView.builder(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.screen,
-                  AppSpacing.x2,
-                  AppSpacing.screen,
-                  96,
-                ),
-                itemCount: chats.length,
-                itemBuilder: (context, index) {
-                  final chat = chats[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: Dismissible(
-                      key: ValueKey(chat.id),
-                      direction: DismissDirection.endToStart,
-                      background: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.errorContainer,
-                          borderRadius: BorderRadius.circular(AppRadius.lg),
-                        ),
-                        alignment: Alignment.centerRight,
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Icon(
-                          Icons.delete_outline,
-                          color: Theme.of(context).colorScheme.onErrorContainer,
-                        ),
-                      ),
-                      confirmDismiss: (_) => _confirmDelete(context),
-                      onDismissed: (_) =>
-                          ref.read(chatRepositoryProvider).deleteChat(chat.id),
-                      child: _ChatCard(
-                        chat: chat,
-                        onTap: () => _openChat(context, ref, chat),
-                        onIconTap: () => _pickIcon(context, ref, chat),
-                        onRename: () => _renameChat(context, ref, chat),
-                        onToggleLock: () => _toggleLock(context, ref, chat),
-                        onToggleFavorite: () => _toggleFavorite(ref, chat),
-                        onDelete: () => _deleteChat(context, ref, chat),
-                      ),
+    return NoticePopupGate(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(l10n.appTitle),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              tooltip: l10n.crossSearchTooltip,
+              onPressed: () => Navigator.of(context).pushNamed('/search'),
+            ),
+            IconButton(
+              icon: const Icon(Icons.leaderboard_outlined),
+              tooltip: l10n.chatDashboardTooltip,
+              onPressed: () => showDashboardScreen(context, ref),
+            ),
+            IconButton(
+              icon: const Icon(Icons.add_comment_outlined),
+              tooltip: l10n.createChatRoomTitle,
+              onPressed: () => _createChatRoom(context, ref),
+            ),
+            IconButton(
+              icon: const Icon(Icons.settings_outlined),
+              tooltip: l10n.settingsTooltip,
+              onPressed: () => Navigator.of(context).pushNamed('/settings'),
+            ),
+          ],
+        ),
+        body: Stack(
+          children: [
+            chatsAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (err, st) =>
+                  Center(child: Text(l10n.loadErrorWithMessage(err))),
+              data: (chats) {
+                if (chats.isEmpty) {
+                  return EmptyState(
+                    icon: Icons.forum_outlined,
+                    message: l10n.emptyChatListMessage,
+                    action: FilledButton.icon(
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed('/import'),
+                      icon: const Icon(Icons.file_open_outlined),
+                      label: Text(l10n.importButtonLabel),
                     ),
                   );
-                },
-              );
-            },
-          ),
-          const WhatsNewAutoPopup(),
-        ],
+                }
+                return ListView.builder(
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.screen,
+                    AppSpacing.x2,
+                    AppSpacing.screen,
+                    96,
+                  ),
+                  itemCount: chats.length,
+                  itemBuilder: (context, index) {
+                    final chat = chats[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: Dismissible(
+                        key: ValueKey(chat.id),
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.errorContainer,
+                            borderRadius: BorderRadius.circular(AppRadius.lg),
+                          ),
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Icon(
+                            Icons.delete_outline,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onErrorContainer,
+                          ),
+                        ),
+                        confirmDismiss: (_) => _confirmDelete(context),
+                        onDismissed: (_) => ref
+                            .read(chatRepositoryProvider)
+                            .deleteChat(chat.id),
+                        child: _ChatCard(
+                          chat: chat,
+                          onTap: () => _openChat(context, ref, chat),
+                          onIconTap: () => _pickIcon(context, ref, chat),
+                          onRename: () => _renameChat(context, ref, chat),
+                          onToggleLock: () => _toggleLock(context, ref, chat),
+                          onToggleFavorite: () => _toggleFavorite(ref, chat),
+                          onDelete: () => _deleteChat(context, ref, chat),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+            const WhatsNewAutoPopup(),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () => Navigator.of(context).pushNamed('/import'),
+          icon: const Icon(Icons.file_open_outlined),
+          label: Text(l10n.importButtonLabel),
+        ),
+        bottomNavigationBar: const SafeArea(child: DismissibleBannerAd()),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Navigator.of(context).pushNamed('/import'),
-        icon: const Icon(Icons.file_open_outlined),
-        label: Text(l10n.importButtonLabel),
-      ),
-      bottomNavigationBar: const SafeArea(child: DismissibleBannerAd()),
     );
   }
 

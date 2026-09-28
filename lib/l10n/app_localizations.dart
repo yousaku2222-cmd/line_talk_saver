@@ -209,6 +209,12 @@ abstract class AppLocalizations {
   /// **'広告を再生できませんでした。しばらくしてからもう一度お試しください。'**
   String get unlockIconFailedMessage;
 
+  /// No description provided for @adOfflineMessage.
+  ///
+  /// In ja, this message translates to:
+  /// **'通信できません。インターネットに接続してからもう一度お試しください。'**
+  String get adOfflineMessage;
+
   /// No description provided for @themePickerLockedHint.
   ///
   /// In ja, this message translates to:

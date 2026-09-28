@@ -63,6 +63,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get unlockIconFailedMessage => '광고를 재생할 수 없었습니다. 잠시 후 다시 시도해 주세요.';
 
   @override
+  String get adOfflineMessage => '통신할 수 없습니다. 인터넷에 연결한 후 다시 시도해 주세요.';
+
+  @override
   String get themePickerLockedHint => '🔒 테마는 광고를 한 번 보면 앞으로 계속 사용할 수 있습니다';
 
   @override

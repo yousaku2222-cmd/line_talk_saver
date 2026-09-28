@@ -20,6 +20,7 @@
   "unlockIconDialogBody": "觀看一次廣告,即可永久使用這個圖示。",
   "unlockIconWatchAdButton": "觀看廣告",
   "unlockIconFailedMessage": "廣告播放失敗,請稍後再試。",
+  "adOfflineMessage": "無法連線。請連上網路後再試一次。",
   "themePickerLockedHint": "帶🔒的主題,觀看一次廣告即可永久解鎖",
   "unlockThemeDialogTitle": "要解鎖這個主題嗎?",
   "unlockThemeDialogBody": "觀看一次廣告,即可永久使用這個主題。",

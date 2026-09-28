@@ -50,7 +50,8 @@ class _ThemePickerScreenState extends ConsumerState<ThemePickerScreen> {
     if (confirmed != true || !mounted) return;
 
     setState(() => _loadingThemeId = id);
-    final earned = await RewardedAdService.instance.show();
+    final earned =
+        await RewardedAdService.instance.show() == RewardOutcome.earned;
     if (!mounted) return;
     setState(() => _loadingThemeId = null);
 

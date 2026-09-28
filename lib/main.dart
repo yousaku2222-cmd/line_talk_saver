@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,10 +10,14 @@ import 'core/providers/app_providers.dart';
 import 'dev/screenshot_seed.dart';
 import 'features/import/share_intake/share_intent_listener.dart';
 import 'features/monetization/ads/ad_service.dart';
+import 'features/notices/notices.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
+  // Loads the operator notices in the background: the chat list pops the
+  // newest unread one, and the settings row shows an unread dot.
+  unawaited(NoticeService.instance.init('talk_saver'));
   // Must run before initializeAds() so the first ad request already
   // reflects the user's tracking choice.
   await requestTrackingIfNeeded();

@@ -66,6 +66,10 @@ class AppLocalizationsTh extends AppLocalizations {
       'ไม่สามารถเล่นโฆษณาได้ กรุณาลองใหม่อีกครั้งในภายหลัง';
 
   @override
+  String get adOfflineMessage =>
+      'ไม่สามารถเชื่อมต่อได้ กรุณาเชื่อมต่ออินเทอร์เน็ตแล้วลองใหม่อีกครั้ง';
+
+  @override
   String get themePickerLockedHint =>
       'ธีมที่มี 🔒 จะปลดล็อกถาวรหลังจากดูโฆษณาหนึ่งครั้ง';
 

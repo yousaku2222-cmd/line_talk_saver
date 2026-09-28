@@ -63,6 +63,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get unlockIconFailedMessage => '廣告播放失敗,請稍後再試。';
 
   @override
+  String get adOfflineMessage => '無法連線。請連上網路後再試一次。';
+
+  @override
   String get themePickerLockedHint => '帶🔒的主題,觀看一次廣告即可永久解鎖';
 
   @override
@@ -947,6 +950,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get unlockIconFailedMessage => '廣告播放失敗,請稍後再試。';
+
+  @override
+  String get adOfflineMessage => '無法連線。請連上網路後再試一次。';
 
   @override
   String get themePickerLockedHint => '帶🔒的主題,觀看一次廣告即可永久解鎖';

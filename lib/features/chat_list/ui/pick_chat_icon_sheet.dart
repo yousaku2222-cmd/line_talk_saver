@@ -70,7 +70,8 @@ class _PickChatIconSheetState extends ConsumerState<_PickChatIconSheet> {
     if (confirmed != true || !mounted) return;
 
     setState(() => _loadingIconKey = iconKey);
-    final earned = await RewardedAdService.instance.show();
+    final earned =
+        await RewardedAdService.instance.show() == RewardOutcome.earned;
     if (!mounted) return;
     setState(() => _loadingIconKey = null);
 

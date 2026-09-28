@@ -23,6 +23,7 @@
   "unlockIconDialogBody": "広告を1回見ると、このアイコンを今後ずっと使えるようになります。",
   "unlockIconWatchAdButton": "広告を見る",
   "unlockIconFailedMessage": "広告を再生できませんでした。しばらくしてからもう一度お試しください。",
+  "adOfflineMessage": "通信できません。インターネットに接続してからもう一度お試しください。",
   "themePickerLockedHint": "🔒のテーマは、広告を1回見ると今後ずっと使えるようになります",
   "unlockThemeDialogTitle": "このテーマを解放しますか?",
   "unlockThemeDialogBody": "広告を1回見ると、このテーマを今後ずっと使えるようになります。",

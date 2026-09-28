@@ -63,6 +63,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get unlockIconFailedMessage => '広告を再生できませんでした。しばらくしてからもう一度お試しください。';
 
   @override
+  String get adOfflineMessage => '通信できません。インターネットに接続してからもう一度お試しください。';
+
+  @override
   String get themePickerLockedHint => '🔒のテーマは、広告を1回見ると今後ずっと使えるようになります';
 
   @override

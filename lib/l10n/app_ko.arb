@@ -20,6 +20,7 @@
   "unlockIconDialogBody": "광고를 한 번 보면 이 아이콘을 앞으로 계속 사용할 수 있습니다.",
   "unlockIconWatchAdButton": "광고 보기",
   "unlockIconFailedMessage": "광고를 재생할 수 없었습니다. 잠시 후 다시 시도해 주세요.",
+  "adOfflineMessage": "통신할 수 없습니다. 인터넷에 연결한 후 다시 시도해 주세요.",
   "themePickerLockedHint": "🔒 테마는 광고를 한 번 보면 앞으로 계속 사용할 수 있습니다",
   "unlockThemeDialogTitle": "이 테마를 잠금 해제하시겠습니까?",
   "unlockThemeDialogBody": "광고를 한 번 보면 이 테마를 앞으로 계속 사용할 수 있습니다.",

@@ -10,6 +10,7 @@ import '../stats_image_share.dart';
 import '../stats_prefs.dart';
 import 'monthly_bar_chart.dart';
 import 'section_card.dart';
+import 'stats_ad_gate.dart';
 
 /// Entry point for the 全トーク横断ダッシュボード, gated the same way as
 /// [showChatStatsScreen] but with its own separate daily-free quota (see
@@ -39,14 +40,9 @@ Future<void> showDashboardScreen(BuildContext context, WidgetRef ref) async {
     );
     if (confirmed != true) return;
 
-    final earned = await RewardedAdService.instance.show();
+    final outcome = await RewardedAdService.instance.show();
     if (!context.mounted) return;
-    if (!earned) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.unlockIconFailedMessage)),
-      );
-      return;
-    }
+    if (!showGateAdResult(context, outcome)) return;
   } else if (!adsRemoved) {
     await markDashboardFreeUseToday(ref);
   }

@@ -20,6 +20,7 @@
   "unlockIconDialogBody": "Tonton satu iklan untuk membuka ikon ini selamanya.",
   "unlockIconWatchAdButton": "Tonton iklan",
   "unlockIconFailedMessage": "Iklan tidak dapat diputar. Coba lagi sebentar lagi.",
+  "adOfflineMessage": "Tidak ada koneksi. Sambungkan ke internet lalu coba lagi.",
   "themePickerLockedHint": "Tema dengan 🔒 akan terbuka permanen setelah menonton satu iklan.",
   "unlockThemeDialogTitle": "Buka kunci tema ini?",
   "unlockThemeDialogBody": "Tonton satu iklan untuk membuka tema ini selamanya.",

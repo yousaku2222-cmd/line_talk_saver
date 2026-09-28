@@ -20,6 +20,7 @@
   "unlockIconDialogBody": "ดูโฆษณาหนึ่งครั้งเพื่อปลดล็อกไอคอนนี้ถาวร",
   "unlockIconWatchAdButton": "ดูโฆษณา",
   "unlockIconFailedMessage": "ไม่สามารถเล่นโฆษณาได้ กรุณาลองใหม่อีกครั้งในภายหลัง",
+  "adOfflineMessage": "ไม่สามารถเชื่อมต่อได้ กรุณาเชื่อมต่ออินเทอร์เน็ตแล้วลองใหม่อีกครั้ง",
   "themePickerLockedHint": "ธีมที่มี 🔒 จะปลดล็อกถาวรหลังจากดูโฆษณาหนึ่งครั้ง",
   "unlockThemeDialogTitle": "ปลดล็อกธีมนี้หรือไม่?",
   "unlockThemeDialogBody": "ดูโฆษณาหนึ่งครั้งเพื่อปลดล็อกธีมนี้ถาวร",

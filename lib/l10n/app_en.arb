@@ -20,6 +20,7 @@
   "unlockIconDialogBody": "Watch one ad to unlock this icon for good.",
   "unlockIconWatchAdButton": "Watch ad",
   "unlockIconFailedMessage": "Couldn't play the ad. Please try again in a moment.",
+  "adOfflineMessage": "No connection. Please connect to the internet and try again.",
   "themePickerLockedHint": "Themes with 🔒 unlock permanently after watching one ad.",
   "unlockThemeDialogTitle": "Unlock this theme?",
   "unlockThemeDialogBody": "Watch one ad to unlock this theme for good.",

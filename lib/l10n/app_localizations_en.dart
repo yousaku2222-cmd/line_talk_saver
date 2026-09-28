@@ -66,6 +66,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Couldn\'t play the ad. Please try again in a moment.';
 
   @override
+  String get adOfflineMessage =>
+      'No connection. Please connect to the internet and try again.';
+
+  @override
   String get themePickerLockedHint =>
       'Themes with 🔒 unlock permanently after watching one ad.';
 

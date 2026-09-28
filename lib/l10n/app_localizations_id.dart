@@ -66,6 +66,10 @@ class AppLocalizationsId extends AppLocalizations {
       'Iklan tidak dapat diputar. Coba lagi sebentar lagi.';
 
   @override
+  String get adOfflineMessage =>
+      'Tidak ada koneksi. Sambungkan ke internet lalu coba lagi.';
+
+  @override
   String get themePickerLockedHint =>
       'Tema dengan 🔒 akan terbuka permanen setelah menonton satu iklan.';
 

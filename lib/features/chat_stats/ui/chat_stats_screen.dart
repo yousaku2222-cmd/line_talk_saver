@@ -13,6 +13,7 @@ import '../stats_image_share.dart';
 import '../stats_prefs.dart';
 import 'monthly_bar_chart.dart';
 import 'section_card.dart';
+import 'stats_ad_gate.dart';
 
 /// Entry point for the トーク統計 screen: gates on today's one free viewing
 /// (unlimited for ads-removed users), offering a rewarded ad for any extra
@@ -45,14 +46,9 @@ Future<void> showChatStatsScreen(
     );
     if (confirmed != true) return;
 
-    final earned = await RewardedAdService.instance.show();
+    final outcome = await RewardedAdService.instance.show();
     if (!context.mounted) return;
-    if (!earned) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.unlockIconFailedMessage)),
-      );
-      return;
-    }
+    if (!showGateAdResult(context, outcome)) return;
   } else if (!adsRemoved) {
     // Paying (ads-removed) users never spend their free daily viewing --
     // they always have unlimited access, so there's nothing to record.
