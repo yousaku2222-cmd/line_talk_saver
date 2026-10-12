@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../whats_new_prefs.dart';
+import 'whats_new_screen.dart';
 
 /// Invisible; on first build after an app update (not a fresh install) it
 /// shows a one-time dialog summarizing the latest version's release notes.
@@ -30,7 +31,9 @@ class _WhatsNewAutoPopupState extends State<WhatsNewAutoPopup> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: Text(l10n.whatsNewDialogTitle),
-        content: SingleChildScrollView(child: Text(l10n.whatsNewV120Body)),
+        content: SingleChildScrollView(
+          child: Text(whatsNewEntries(l10n).first.body),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),

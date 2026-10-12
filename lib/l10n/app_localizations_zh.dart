@@ -719,6 +719,39 @@ class AppLocalizationsZh extends AppLocalizations {
   String get selectFileButton => '選擇檔案';
 
   @override
+  String get importAltBodyAndroid => '也可讀取以LINE的「備份聊天記錄」→「以文字備份」儲存的.txt檔案。';
+
+  @override
+  String get importAltBodyIos => '可選擇從LINE「儲存到檔案」的.txt檔案來讀取。';
+
+  @override
+  String get importAltTitle => '其他方法：讀取已儲存的檔案';
+
+  @override
+  String get importStepDone => '本應用程式開啟並顯示內容後，確認並儲存即完成';
+
+  @override
+  String get importStepPickAndroid => '從應用程式清單中選擇「聊天記錄保存」';
+
+  @override
+  String get importStepPickIos => '在分享選單中選擇「聊天記錄保存」（找不到時，將應用程式列滑到最右邊，從「更多」選擇）';
+
+  @override
+  String get importStepSend => '點「傳送聊天記錄」';
+
+  @override
+  String get importStepMenu => '點右上角的選單(≡)→「設定」';
+
+  @override
+  String get importStepOpenChat => '點下方的「開啟LINE」，開啟想保留的聊天';
+
+  @override
+  String get importRecommendedLead => '不必先儲存檔案，只要從LINE傳送就能匯入。';
+
+  @override
+  String get importRecommendedTitle => '推薦：從LINE直接傳送';
+
+  @override
   String get retrySelectFileButton => '重新選擇';
 
   @override
@@ -806,6 +839,10 @@ class AppLocalizationsZh extends AppLocalizations {
       '我們強化了聊天統計功能。\n\n• 可以看出傳訊時段的傾向了(夜貓型、早起型等)\n• 顯示對問題的回覆率(對話的一來一往程度)\n• 新增了可彙整檢視所有已儲存聊天的儀表板\n• 匯出為PDF/Excel/Word時,現在也可以一併包含統計資訊';
 
   @override
+  String get whatsNewV132Body =>
+      '匯入聊天記錄變得更簡單了。\n\n・「匯入聊天記錄」畫面會以編號步驟說明如何從LINE直接傳送\n・活躍度圖表顯示超過一年的期間時，會一併顯示年份，不再出現兩個相同的月份\n\n版本1.3新增的功能：跨所有聊天搜尋、訊息收藏、儲存提醒、統計圖片分享';
+
+  @override
   String get helpAboutTitle => '關於本應用程式';
 
   @override
@@ -817,7 +854,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. 在LINE聊天畫面點擊選單(≡)→「傳送聊天記錄」→「以文字形式傳送」\n2. 從分享清單中選擇「聊天記錄保存」即可自動匯入\n3. 如果清單中沒有顯示,請先儲存為.txt檔案,然後在本應用程式中透過「匯入聊天記錄」→「選擇檔案」讀取\n\n您也可以在匯入畫面透過「開啟LINE」按鈕直接切換到LINE應用程式。';
+      '1. 在LINE開啟想保留的聊天，點右上角的選單(≡)→「設定」→「傳送聊天記錄」\n2. 從分享清單中選擇「聊天記錄保存」即可自動匯入\n3. 如果清單中沒有顯示,請先儲存為.txt檔案（Android也可使用「備份聊天記錄」→「以文字備份」）,然後在本應用程式中透過「匯入聊天記錄」→「選擇檔案」讀取\n\n您也可以在匯入畫面透過「開啟LINE」按鈕直接切換到LINE應用程式。';
 
   @override
   String get helpChatListTitle => '聊天清單操作';
@@ -1608,6 +1645,39 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get selectFileButton => '選擇檔案';
 
   @override
+  String get importAltBodyAndroid => '也可讀取以LINE的「備份聊天記錄」→「以文字備份」儲存的.txt檔案。';
+
+  @override
+  String get importAltBodyIos => '可選擇從LINE「儲存到檔案」的.txt檔案來讀取。';
+
+  @override
+  String get importAltTitle => '其他方法：讀取已儲存的檔案';
+
+  @override
+  String get importStepDone => '本應用程式開啟並顯示內容後，確認並儲存即完成';
+
+  @override
+  String get importStepPickAndroid => '從應用程式清單中選擇「聊天記錄保存」';
+
+  @override
+  String get importStepPickIos => '在分享選單中選擇「聊天記錄保存」（找不到時，將應用程式列滑到最右邊，從「更多」選擇）';
+
+  @override
+  String get importStepSend => '點「傳送聊天記錄」';
+
+  @override
+  String get importStepMenu => '點右上角的選單(≡)→「設定」';
+
+  @override
+  String get importStepOpenChat => '點下方的「開啟LINE」，開啟想保留的聊天';
+
+  @override
+  String get importRecommendedLead => '不必先儲存檔案，只要從LINE傳送就能匯入。';
+
+  @override
+  String get importRecommendedTitle => '推薦：從LINE直接傳送';
+
+  @override
   String get retrySelectFileButton => '重新選擇';
 
   @override
@@ -1695,6 +1765,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
       '我們強化了聊天統計功能。\n\n• 可以看出傳訊時段的傾向了(夜貓型、早起型等)\n• 顯示對問題的回覆率(對話的一來一往程度)\n• 新增了可彙整檢視所有已儲存聊天的儀表板\n• 匯出為PDF/Excel/Word時,現在也可以一併包含統計資訊';
 
   @override
+  String get whatsNewV132Body =>
+      '匯入聊天記錄變得更簡單了。\n\n・「匯入聊天記錄」畫面會以編號步驟說明如何從LINE直接傳送\n・活躍度圖表顯示超過一年的期間時，會一併顯示年份，不再出現兩個相同的月份\n\n版本1.3新增的功能：跨所有聊天搜尋、訊息收藏、儲存提醒、統計圖片分享';
+
+  @override
   String get helpAboutTitle => '關於本應用程式';
 
   @override
@@ -1706,7 +1780,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get helpImportBody =>
-      '1. 在LINE聊天畫面點擊選單(≡)→「傳送聊天記錄」→「以文字形式傳送」\n2. 從分享清單中選擇「聊天記錄保存」即可自動匯入\n3. 如果清單中沒有顯示,請先儲存為.txt檔案,然後在本應用程式中透過「匯入聊天記錄」→「選擇檔案」讀取\n\n您也可以在匯入畫面透過「開啟LINE」按鈕直接切換到LINE應用程式。';
+      '1. 在LINE開啟想保留的聊天，點右上角的選單(≡)→「設定」→「傳送聊天記錄」\n2. 從分享清單中選擇「聊天記錄保存」即可自動匯入\n3. 如果清單中沒有顯示,請先儲存為.txt檔案（Android也可使用「備份聊天記錄」→「以文字備份」）,然後在本應用程式中透過「匯入聊天記錄」→「選擇檔案」讀取\n\n您也可以在匯入畫面透過「開啟LINE」按鈕直接切換到LINE應用程式。';
 
   @override
   String get helpChatListTitle => '聊天清單操作';

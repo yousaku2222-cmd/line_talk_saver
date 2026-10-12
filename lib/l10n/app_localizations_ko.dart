@@ -724,6 +724,41 @@ class AppLocalizationsKo extends AppLocalizations {
   String get selectFileButton => '파일 선택';
 
   @override
+  String get importAltBodyAndroid =>
+      'LINE의 「대화 기록 백업」 → 「텍스트로 백업」으로 저장한 .txt 파일도 불러올 수 있습니다.';
+
+  @override
+  String get importAltBodyIos => 'LINE에서 「파일에 저장」한 .txt 파일을 선택해 불러올 수 있습니다.';
+
+  @override
+  String get importAltTitle => '다른 방법: 저장한 파일 불러오기';
+
+  @override
+  String get importStepDone => '이 앱이 열리고 내용이 표시되면 확인 후 저장하면 완료입니다';
+
+  @override
+  String get importStepPickAndroid => '보낼 앱 목록에서 「토크 저장」을 선택합니다';
+
+  @override
+  String get importStepPickIos =>
+      '공유 메뉴에서 「토크 저장」을 선택합니다 (보이지 않으면 앱 목록을 끝까지 넘겨 「더 보기」에서 선택)';
+
+  @override
+  String get importStepSend => '「대화 기록 보내기」를 탭합니다';
+
+  @override
+  String get importStepMenu => '오른쪽 위 메뉴(≡) → 「설정」을 탭합니다';
+
+  @override
+  String get importStepOpenChat => '아래 「LINE 열기」로 남기고 싶은 대화를 엽니다';
+
+  @override
+  String get importRecommendedLead => '파일을 저장하지 않아도 LINE에서 보내기만 하면 불러올 수 있습니다.';
+
+  @override
+  String get importRecommendedTitle => '추천: LINE에서 바로 보내기';
+
+  @override
   String get retrySelectFileButton => '다시 선택';
 
   @override
@@ -812,6 +847,10 @@ class AppLocalizationsKo extends AppLocalizations {
       '대화 통계 기능을 확장했습니다.\n\n・메시지를 보내는 시간대 경향을 볼 수 있습니다(야행성, 아침형 등)\n・질문에 대한 답장률(대화의 핑퐁 정도)을 볼 수 있습니다\n・저장된 모든 대화의 통계를 모아 보는 대시보드를 추가했습니다\n・PDF/Excel/Word로 내보낼 때 통계 정보를 포함할 수 있습니다';
 
   @override
+  String get whatsNewV132Body =>
+      '대화 불러오기가 더 쉬워졌습니다.\n\n• 「대화 불러오기」 화면에 LINE에서 바로 보내는 방법을 번호와 함께 표시합니다\n• 활동 그래프가 1년 이상의 기간을 표시할 때 같은 달이 두 번 나오던 문제를 고쳤습니다(연도도 표시)\n\n버전 1.3에서 추가된 기능: 전체 대화 검색, 메시지 즐겨찾기, 저장 알림, 통계 이미지 공유';
+
+  @override
   String get helpAboutTitle => '이 앱에 대하여';
 
   @override
@@ -823,7 +862,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. LINE 대화 화면에서 메뉴(≡) → 「대화 기록 보내기」 → 「텍스트로 보내기」 선택\n2. 공유 대상 목록에서 「토크 저장」을 선택하면 자동으로 불러옵니다\n3. 목록에 없으면 .txt 파일로 저장한 후, 앱의 「대화 불러오기」 → 「파일 선택」에서 불러오세요\n\n불러오기 화면의 「LINE 열기」 버튼으로 LINE 앱으로 바로 이동할 수도 있습니다.';
+      '1. LINE에서 남기고 싶은 대화를 열고 오른쪽 위 메뉴(≡) → 「설정」 → 「대화 기록 보내기」를 탭\n2. 공유 대상 목록에서 「토크 저장」을 선택하면 자동으로 불러옵니다\n3. 목록에 없으면 .txt 파일로 저장한 후(Android는 「대화 기록 백업」 → 「텍스트로 백업」도 가능), 앱의 「대화 불러오기」 → 「파일 선택」에서 불러오세요\n\n불러오기 화면의 「LINE 열기」 버튼으로 LINE 앱으로 바로 이동할 수도 있습니다.';
 
   @override
   String get helpChatListTitle => '대화 목록 조작';

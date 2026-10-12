@@ -757,6 +757,46 @@ class AppLocalizationsId extends AppLocalizations {
   String get selectFileButton => 'Pilih file';
 
   @override
+  String get importAltBodyAndroid =>
+      'Anda juga bisa memuat file .txt yang disimpan lewat \"Cadangkan riwayat obrolan\" → \"Cadangkan sebagai teks\" di LINE.';
+
+  @override
+  String get importAltBodyIos =>
+      'Pilih file .txt yang Anda simpan dari LINE dengan \"Simpan ke File\".';
+
+  @override
+  String get importAltTitle => 'Cara lain: muat file yang tersimpan';
+
+  @override
+  String get importStepDone =>
+      'Aplikasi ini terbuka dengan isi obrolan — periksa lalu simpan, selesai';
+
+  @override
+  String get importStepPickAndroid =>
+      'Pilih \"Talk Saver\" dari daftar aplikasi';
+
+  @override
+  String get importStepPickIos =>
+      'Pilih \"Talk Saver\" di lembar berbagi (jika tidak ada, geser deretan aplikasi sampai ujung lalu ketuk \"Lainnya\")';
+
+  @override
+  String get importStepSend => 'Ketuk \"Kirim riwayat obrolan\"';
+
+  @override
+  String get importStepMenu => 'Ketuk menu (≡) di kanan atas → \"Pengaturan\"';
+
+  @override
+  String get importStepOpenChat =>
+      'Ketuk \"Buka LINE\" di bawah dan buka obrolan yang ingin disimpan';
+
+  @override
+  String get importRecommendedLead =>
+      'Tidak perlu menyimpan file — cukup kirim obrolan dari LINE.';
+
+  @override
+  String get importRecommendedTitle => 'Disarankan: kirim langsung dari LINE';
+
+  @override
   String get retrySelectFileButton => 'Pilih lagi';
 
   @override
@@ -845,6 +885,10 @@ class AppLocalizationsId extends AppLocalizations {
       'Kami telah memperluas fitur statistik obrolan.\n\n• Lihat tren waktu Anda mengirim pesan (tipe malam, tipe pagi, dll.)\n• Lihat tingkat balasan pertanyaan Anda (seberapa lancar percakapan berjalan)\n• Menambahkan dasbor untuk melihat statistik semua obrolan tersimpan\n• Sekarang Anda dapat menyertakan statistik saat mengekspor ke PDF/Excel/Word';
 
   @override
+  String get whatsNewV132Body =>
+      'Mengimpor obrolan kini lebih mudah.\n\n• Layar \"Impor obrolan\" kini menampilkan langkah bernomor untuk mengirim obrolan langsung dari LINE\n• Grafik aktivitas kini menampilkan tahun jika mencakup lebih dari satu tahun, sehingga bulan yang sama tidak muncul dua kali\n\nDitambahkan di versi 1.3: pencarian di semua obrolan, pesan favorit, pengingat penyimpanan, dan berbagi statistik sebagai gambar';
+
+  @override
   String get helpAboutTitle => 'Tentang aplikasi ini';
 
   @override
@@ -856,7 +900,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. Di LINE, buka obrolan, ketuk menu (≡) → \"Kirim riwayat obrolan\" → \"Kirim sebagai teks\"\n2. Pilih \"Talk Saver\" dari lembar berbagi untuk mengimpornya secara otomatis\n3. Jika tidak muncul, simpan sebagai file .txt terlebih dahulu, lalu gunakan \"Impor obrolan\" → \"Pilih file\" di aplikasi ini\n\nAnda juga bisa langsung membuka LINE menggunakan tombol \"Buka LINE\" di layar impor.';
+      '1. Di LINE, buka obrolan lalu ketuk menu (≡) di kanan atas → \"Pengaturan\" → \"Kirim riwayat obrolan\"\n2. Pilih \"Talk Saver\" dari lembar berbagi untuk mengimpornya secara otomatis\n3. Jika tidak muncul, simpan sebagai file .txt terlebih dahulu (di Android, \"Cadangkan riwayat obrolan\" → \"Cadangkan sebagai teks\" juga bisa), lalu gunakan \"Impor obrolan\" → \"Pilih file\" di aplikasi ini\n\nAnda juga bisa langsung membuka LINE menggunakan tombol \"Buka LINE\" di layar impor.';
 
   @override
   String get helpChatListTitle => 'Mengelola daftar obrolan';

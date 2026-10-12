@@ -721,6 +721,41 @@ class AppLocalizationsJa extends AppLocalizations {
   String get selectFileButton => 'ファイルを選択';
 
   @override
+  String get importAltBodyAndroid =>
+      'LINEの「トーク履歴をバックアップ」→「テキストでバックアップ」で保存した.txtファイルも読み込めます。';
+
+  @override
+  String get importAltBodyIos => 'LINEから「ファイルに保存」した.txtファイルを選んで読み込めます。';
+
+  @override
+  String get importAltTitle => '別の方法：保存したファイルを読み込む';
+
+  @override
+  String get importStepDone => 'このアプリが開いて中身が表示されたら、確認して保存すれば完了です';
+
+  @override
+  String get importStepPickAndroid => '送信先のアプリ一覧から「トーク保存」を選ぶ';
+
+  @override
+  String get importStepPickIos =>
+      '共有メニューから「トーク保存」を選ぶ（見当たらない時は、アプリの並びを右端までスクロールして「その他」から）';
+
+  @override
+  String get importStepSend => '「トーク履歴を送信」をタップ';
+
+  @override
+  String get importStepMenu => '右上のメニュー（≡）→「設定」をタップ';
+
+  @override
+  String get importStepOpenChat => '下の「LINEを開く」から、残したいトークを開く';
+
+  @override
+  String get importRecommendedLead => 'ファイルを保存しなくても、LINEから送るだけで取り込めます。';
+
+  @override
+  String get importRecommendedTitle => 'おすすめ：LINEから直接送る';
+
+  @override
   String get retrySelectFileButton => 'もう一度選択';
 
   @override
@@ -809,6 +844,10 @@ class AppLocalizationsJa extends AppLocalizations {
       'トーク統計機能を強化しました。\n\n・送信時間の傾向がわかるようになりました(夜型か朝型かなど、よく話す時間帯を表示)\n・質問への返信率(キャッチボール度)を表示するようになりました\n・保存した複数のトークをまとめて見られるダッシュボードを追加しました\n・書き出し(PDF/Excel/Word)に統計情報を含められるようになりました';
 
   @override
+  String get whatsNewV132Body =>
+      'トークの取り込みがわかりやすくなりました。\n\n・「トークを取り込む」画面に、LINEから直接送る手順を番号つきで表示するようにしました\n・温度感グラフで、1年以上の期間を表示したときに同じ月が並んで見分けにくかったのを直しました(年も表示します)\n\nバージョン1.3で追加した機能: 全トーク横断検索、メッセージのお気に入り、保存リマインダー、統計の画像シェア';
+
+  @override
   String get helpAboutTitle => 'このアプリについて';
 
   @override
@@ -820,7 +859,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. LINEのトーク画面で「その他」→「トーク履歴を送信」→「テキストで送信」を選ぶ\n2. 共有先の一覧から「トーク保存」を選ぶと自動で取り込まれます\n3. 一覧に出ない場合は、いったん.txtとして保存し、本アプリの「トークを取り込む」→「ファイルを選択」から読み込んでください\n\n「トークを取り込む」画面の「LINEを開く」ボタンから、LINEアプリへすぐに切り替えることもできます。';
+      '1. LINEで残したいトークを開き、右上のメニュー（≡）→「設定」→「トーク履歴を送信」をタップ\n2. 共有先の一覧から「トーク保存」を選ぶと自動で取り込まれます\n3. 一覧に出ない場合は、いったん.txtとして保存し（Androidは「トーク履歴をバックアップ」→「テキストでバックアップ」でも可）、本アプリの「トークを取り込む」→「ファイルを選択」から読み込んでください\n\n「トークを取り込む」画面の「LINEを開く」ボタンから、LINEアプリへすぐに切り替えることもできます。';
 
   @override
   String get helpChatListTitle => 'トーク一覧の操作';

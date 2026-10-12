@@ -749,6 +749,48 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectFileButton => 'Choose a file';
 
   @override
+  String get importAltBodyAndroid =>
+      'You can also load a .txt file saved with LINE\'s \"Back up chat history\" → \"Back up as text\".';
+
+  @override
+  String get importAltBodyIos =>
+      'Choose a .txt file you saved from LINE with \"Save to Files\".';
+
+  @override
+  String get importAltTitle => 'Another way: load a saved file';
+
+  @override
+  String get importStepDone =>
+      'This app opens with the chat — check it and save, and you\'re done';
+
+  @override
+  String get importStepPickAndroid =>
+      'Choose \"Talk Saver\" from the list of apps';
+
+  @override
+  String get importStepPickIos =>
+      'Choose \"Talk Saver\" in the share sheet (if it isn\'t there, scroll the app row to the end and tap \"More\")';
+
+  @override
+  String get importStepSend => 'Tap \"Send chat history\"';
+
+  @override
+  String get importStepMenu =>
+      'Tap the menu (≡) at the top right → \"Settings\"';
+
+  @override
+  String get importStepOpenChat =>
+      'Tap \"Open LINE\" below and open the chat you want to keep';
+
+  @override
+  String get importRecommendedLead =>
+      'No need to save a file — just send the chat from LINE.';
+
+  @override
+  String get importRecommendedTitle =>
+      'Recommended: send it straight from LINE';
+
+  @override
   String get retrySelectFileButton => 'Choose again';
 
   @override
@@ -837,6 +879,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'We\'ve expanded the chat stats feature.\n\n• See trends in when you send messages (night owl, early bird, etc.)\n• See your question reply rate (how well conversations go back and forth)\n• Added a dashboard to see stats across every saved chat\n• You can now include stats when exporting to PDF/Excel/Word';
 
   @override
+  String get whatsNewV132Body =>
+      'Importing chats is now easier.\n\n• The \"Import chat\" screen now shows numbered steps for sending a chat straight from LINE\n• The activity chart now shows the year when it covers more than one year, so the same month no longer appears twice\n\nAdded in version 1.3: search across all chats, favorite messages, save reminders, and sharing stats as images';
+
+  @override
   String get helpAboutTitle => 'About this app';
 
   @override
@@ -848,7 +894,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. In LINE, open the chat, tap the menu (≡) → \"Send chat history\" → \"Send as text\"\n2. Choose \"Talk Saver\" from the share sheet to import it automatically\n3. If it doesn\'t appear in the list, save it as a .txt file first, then use \"Import chat\" → \"Choose file\" in this app\n\nYou can also jump straight to LINE using the \"Open LINE\" button on the import screen.';
+      '1. In LINE, open the chat and tap the menu (≡) at the top right → \"Settings\" → \"Send chat history\"\n2. Choose \"Talk Saver\" from the share sheet to import it automatically\n3. If it doesn\'t appear in the list, save it as a .txt file first (on Android, \"Back up chat history\" → \"Back up as text\" also works), then use \"Import chat\" → \"Choose file\" in this app\n\nYou can also jump straight to LINE using the \"Open LINE\" button on the import screen.';
 
   @override
   String get helpChatListTitle => 'Managing the chat list';

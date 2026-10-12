@@ -745,6 +745,45 @@ class AppLocalizationsTh extends AppLocalizations {
   String get selectFileButton => 'เลือกไฟล์';
 
   @override
+  String get importAltBodyAndroid =>
+      'โหลดไฟล์ .txt ที่บันทึกด้วย「สำรองประวัติแชท」→「สำรองเป็นข้อความ」ของ LINE ได้เช่นกัน';
+
+  @override
+  String get importAltBodyIos =>
+      'เลือกไฟล์ .txt ที่บันทึกจาก LINE ด้วย「บันทึกไปยังไฟล์」';
+
+  @override
+  String get importAltTitle => 'อีกวิธี: โหลดไฟล์ที่บันทึกไว้';
+
+  @override
+  String get importStepDone =>
+      'แอปนี้จะเปิดขึ้นพร้อมเนื้อหาแชท ตรวจสอบแล้วบันทึกก็เสร็จเรียบร้อย';
+
+  @override
+  String get importStepPickAndroid => 'เลือก「บันทึกแชท」จากรายการแอป';
+
+  @override
+  String get importStepPickIos =>
+      'เลือก「บันทึกแชท」ในเมนูแชร์ (ถ้าไม่เห็น ให้เลื่อนแถวแอปไปจนสุดแล้วแตะ「เพิ่มเติม」)';
+
+  @override
+  String get importStepSend => 'แตะ「ส่งประวัติแชท」';
+
+  @override
+  String get importStepMenu => 'แตะเมนู (≡) มุมขวาบน →「การตั้งค่า」';
+
+  @override
+  String get importStepOpenChat =>
+      'แตะ「เปิด LINE」ด้านล่าง แล้วเปิดแชทที่ต้องการเก็บ';
+
+  @override
+  String get importRecommendedLead =>
+      'ไม่ต้องบันทึกไฟล์ แค่ส่งแชทจาก LINE ก็นำเข้าได้';
+
+  @override
+  String get importRecommendedTitle => 'แนะนำ: ส่งจาก LINE โดยตรง';
+
+  @override
   String get retrySelectFileButton => 'เลือกอีกครั้ง';
 
   @override
@@ -833,6 +872,10 @@ class AppLocalizationsTh extends AppLocalizations {
       'เราได้ขยายฟีเจอร์สถิติแชท\n\n• ดูแนวโน้มช่วงเวลาที่คุณส่งข้อความ (กลางคืน กลางวัน ฯลฯ)\n• ดูอัตราการตอบคำถาม (ความราบรื่นของบทสนทนา)\n• เพิ่มแดชบอร์ดเพื่อดูสถิติของแชทที่บันทึกไว้ทั้งหมด\n• ตอนนี้สามารถรวมข้อมูลสถิติเมื่อส่งออกเป็น PDF/Excel/Word ได้แล้ว';
 
   @override
+  String get whatsNewV132Body =>
+      'การนำเข้าแชทง่ายขึ้นแล้ว\n\n• หน้า「นำเข้าแชท」แสดงขั้นตอนการส่งแชทจาก LINE โดยตรงพร้อมหมายเลข\n• กราฟกิจกรรมแสดงปีด้วยเมื่อครอบคลุมเกิน 1 ปี เดือนเดียวกันจึงไม่ซ้ำกันอีก\n\nฟีเจอร์ที่เพิ่มในเวอร์ชัน 1.3: ค้นหาทุกแชท ข้อความโปรด การแจ้งเตือนให้บันทึก และแชร์สถิติเป็นรูปภาพ';
+
+  @override
   String get helpAboutTitle => 'เกี่ยวกับแอปนี้';
 
   @override
@@ -844,7 +887,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. ในหน้าแชทของ LINE แตะเมนู (≡) → 「ส่งประวัติแชท」→「ส่งเป็นข้อความ」\n2. เลือก「บันทึกแชท」จากรายการแชร์เพื่อนำเข้าโดยอัตโนมัติ\n3. หากไม่ปรากฏในรายการ ให้บันทึกเป็นไฟล์ .txt ก่อน แล้วใช้「นำเข้าแชท」→「เลือกไฟล์」ในแอปนี้\n\nคุณยังสามารถเปิด LINE ได้ทันทีด้วยปุ่ม「เปิด LINE」ในหน้านำเข้า';
+      '1. ใน LINE เปิดแชทที่ต้องการเก็บ แล้วแตะเมนู (≡) มุมขวาบน →「การตั้งค่า」→「ส่งประวัติแชท」\n2. เลือก「บันทึกแชท」จากรายการแชร์เพื่อนำเข้าโดยอัตโนมัติ\n3. หากไม่ปรากฏในรายการ ให้บันทึกเป็นไฟล์ .txt ก่อน (บน Android ใช้「สำรองประวัติแชท」→「สำรองเป็นข้อความ」ได้เช่นกัน) แล้วใช้「นำเข้าแชท」→「เลือกไฟล์」ในแอปนี้\n\nคุณยังสามารถเปิด LINE ได้ทันทีด้วยปุ่ม「เปิด LINE」ในหน้านำเข้า';
 
   @override
   String get helpChatListTitle => 'การจัดการรายการแชท';

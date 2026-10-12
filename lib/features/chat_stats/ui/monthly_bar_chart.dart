@@ -73,10 +73,22 @@ class MonthlyBarChart extends StatelessWidget {
                       // histories -- show at most ~6 across the chart.
                       final step = (months.length / 6).ceil().clamp(1, months.length);
                       if (i % step != 0) return const SizedBox.shrink();
+                      // Across calendar years the same month name repeats,
+                      // so name the year on the first label and wherever
+                      // it changes ("25年6月" / "Jun '25").
+                      final month = months[i].key;
+                      final showYear =
+                          months.first.key.year != months.last.key.year &&
+                              (i == 0 || months[i - step].key.year != month.year);
+                      final format = !showYear
+                          ? DateFormat.MMM(locale)
+                          : locale.startsWith('ja') || locale.startsWith('zh')
+                              ? DateFormat('yy年M月', locale)
+                              : DateFormat("MMM ''yy", locale);
                       return Padding(
                         padding: const EdgeInsets.only(top: 6),
                         child: Text(
-                          DateFormat.MMM(locale).format(months[i].key),
+                          format.format(month),
                           style: const TextStyle(fontSize: 10),
                         ),
                       );

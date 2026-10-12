@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../l10n/app_localizations.dart';
 
-/// One shipped version's release notes. New entries go at the top of the
-/// list in [WhatsNewScreen] each time a new version ships.
+/// One shipped version's release notes.
 typedef WhatsNewEntry = ({String version, String date, String body});
+
+/// Release notes, newest first. Add each new version at the top: the
+/// update dialog ([WhatsNewAutoPopup]) shows the first entry.
+List<WhatsNewEntry> whatsNewEntries(AppLocalizations l10n) => [
+      (version: '1.3.2', date: '2026-10-12', body: l10n.whatsNewV132Body),
+      (version: '1.2.0', date: '2026-09-23', body: l10n.whatsNewV120Body),
+    ];
 
 class WhatsNewScreen extends StatelessWidget {
   const WhatsNewScreen({super.key});
@@ -16,9 +22,7 @@ class WhatsNewScreen extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    final entries = <WhatsNewEntry>[
-      (version: '1.2.0', date: '2026-09-23', body: l10n.whatsNewV120Body),
-    ];
+    final entries = whatsNewEntries(l10n);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.whatsNewScreenTitle)),

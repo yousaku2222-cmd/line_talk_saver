@@ -1383,6 +1383,72 @@ abstract class AppLocalizations {
   /// **'ファイルを選択'**
   String get selectFileButton;
 
+  /// No description provided for @importAltBodyAndroid.
+  ///
+  /// In ja, this message translates to:
+  /// **'LINEの「トーク履歴をバックアップ」→「テキストでバックアップ」で保存した.txtファイルも読み込めます。'**
+  String get importAltBodyAndroid;
+
+  /// No description provided for @importAltBodyIos.
+  ///
+  /// In ja, this message translates to:
+  /// **'LINEから「ファイルに保存」した.txtファイルを選んで読み込めます。'**
+  String get importAltBodyIos;
+
+  /// No description provided for @importAltTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'別の方法：保存したファイルを読み込む'**
+  String get importAltTitle;
+
+  /// No description provided for @importStepDone.
+  ///
+  /// In ja, this message translates to:
+  /// **'このアプリが開いて中身が表示されたら、確認して保存すれば完了です'**
+  String get importStepDone;
+
+  /// No description provided for @importStepPickAndroid.
+  ///
+  /// In ja, this message translates to:
+  /// **'送信先のアプリ一覧から「トーク保存」を選ぶ'**
+  String get importStepPickAndroid;
+
+  /// No description provided for @importStepPickIos.
+  ///
+  /// In ja, this message translates to:
+  /// **'共有メニューから「トーク保存」を選ぶ（見当たらない時は、アプリの並びを右端までスクロールして「その他」から）'**
+  String get importStepPickIos;
+
+  /// No description provided for @importStepSend.
+  ///
+  /// In ja, this message translates to:
+  /// **'「トーク履歴を送信」をタップ'**
+  String get importStepSend;
+
+  /// No description provided for @importStepMenu.
+  ///
+  /// In ja, this message translates to:
+  /// **'右上のメニュー（≡）→「設定」をタップ'**
+  String get importStepMenu;
+
+  /// No description provided for @importStepOpenChat.
+  ///
+  /// In ja, this message translates to:
+  /// **'下の「LINEを開く」から、残したいトークを開く'**
+  String get importStepOpenChat;
+
+  /// No description provided for @importRecommendedLead.
+  ///
+  /// In ja, this message translates to:
+  /// **'ファイルを保存しなくても、LINEから送るだけで取り込めます。'**
+  String get importRecommendedLead;
+
+  /// No description provided for @importRecommendedTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'おすすめ：LINEから直接送る'**
+  String get importRecommendedTitle;
+
   /// No description provided for @retrySelectFileButton.
   ///
   /// In ja, this message translates to:
@@ -1527,6 +1593,12 @@ abstract class AppLocalizations {
   /// **'トーク統計機能を強化しました。\n\n・送信時間の傾向がわかるようになりました(夜型か朝型かなど、よく話す時間帯を表示)\n・質問への返信率(キャッチボール度)を表示するようになりました\n・保存した複数のトークをまとめて見られるダッシュボードを追加しました\n・書き出し(PDF/Excel/Word)に統計情報を含められるようになりました'**
   String get whatsNewV120Body;
 
+  /// No description provided for @whatsNewV132Body.
+  ///
+  /// In ja, this message translates to:
+  /// **'トークの取り込みがわかりやすくなりました。\n\n・「トークを取り込む」画面に、LINEから直接送る手順を番号つきで表示するようにしました\n・温度感グラフで、1年以上の期間を表示したときに同じ月が並んで見分けにくかったのを直しました(年も表示します)\n\nバージョン1.3で追加した機能: 全トーク横断検索、メッセージのお気に入り、保存リマインダー、統計の画像シェア'**
+  String get whatsNewV132Body;
+
   /// No description provided for @helpAboutTitle.
   ///
   /// In ja, this message translates to:
@@ -1548,7 +1620,7 @@ abstract class AppLocalizations {
   /// No description provided for @helpImportBody.
   ///
   /// In ja, this message translates to:
-  /// **'1. LINEのトーク画面で「その他」→「トーク履歴を送信」→「テキストで送信」を選ぶ\n2. 共有先の一覧から「トーク保存」を選ぶと自動で取り込まれます\n3. 一覧に出ない場合は、いったん.txtとして保存し、本アプリの「トークを取り込む」→「ファイルを選択」から読み込んでください\n\n「トークを取り込む」画面の「LINEを開く」ボタンから、LINEアプリへすぐに切り替えることもできます。'**
+  /// **'1. LINEで残したいトークを開き、右上のメニュー（≡）→「設定」→「トーク履歴を送信」をタップ\n2. 共有先の一覧から「トーク保存」を選ぶと自動で取り込まれます\n3. 一覧に出ない場合は、いったん.txtとして保存し（Androidは「トーク履歴をバックアップ」→「テキストでバックアップ」でも可）、本アプリの「トークを取り込む」→「ファイルを選択」から読み込んでください\n\n「トークを取り込む」画面の「LINEを開く」ボタンから、LINEアプリへすぐに切り替えることもできます。'**
   String get helpImportBody;
 
   /// No description provided for @helpChatListTitle.

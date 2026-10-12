@@ -244,51 +244,120 @@ class _IdleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final scheme = Theme.of(context).colorScheme;
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 104,
-              height: 104,
-              decoration: BoxDecoration(
-                color: scheme.primaryContainer,
-                shape: BoxShape.circle,
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    // Sharing straight from LINE is the easy path, so it leads with
+    // numbered steps; saving a .txt and picking it is the fallback below.
+    final steps = [
+      l10n.importStepOpenChat,
+      l10n.importStepMenu,
+      l10n.importStepSend,
+      Platform.isIOS ? l10n.importStepPickIos : l10n.importStepPickAndroid,
+      l10n.importStepDone,
+    ];
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.auto_awesome, size: 20, color: scheme.primary),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  l10n.importRecommendedTitle,
+                  style: theme.textTheme.titleMedium
+                      ?.copyWith(fontWeight: FontWeight.w700),
+                ),
               ),
-              child: Icon(
-                Icons.file_upload_outlined,
-                size: 44,
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            l10n.importRecommendedLead,
+            style: theme.textTheme.bodySmall
+                ?.copyWith(color: scheme.onSurfaceVariant),
+          ),
+          const SizedBox(height: 16),
+          for (var i = 0; i < steps.length; i++)
+            _StepRow(number: i + 1, text: steps[i]),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: onOpenLine,
+              icon: const Icon(Icons.chat_bubble_outline),
+              label: Text(l10n.openLineButton),
+            ),
+          ),
+          const SizedBox(height: 28),
+          const Divider(),
+          const SizedBox(height: 16),
+          Text(
+            l10n.importAltTitle,
+            style: theme.textTheme.titleSmall
+                ?.copyWith(fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            Platform.isIOS ? l10n.importAltBodyIos : l10n.importAltBodyAndroid,
+            style: theme.textTheme.bodySmall
+                ?.copyWith(color: scheme.onSurfaceVariant),
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: onPick,
+              icon: const Icon(Icons.folder_open),
+              label: Text(l10n.selectFileButton),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StepRow extends StatelessWidget {
+  const _StepRow({required this.number, required this.text});
+
+  final int number;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 26,
+            height: 26,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: scheme.primaryContainer,
+              shape: BoxShape.circle,
+            ),
+            child: Text(
+              '$number',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
                 color: scheme.onPrimaryContainer,
               ),
             ),
-            const SizedBox(height: 24),
-            Text(
-              l10n.idleImportInstruction,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 3),
+              child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
             ),
-            const SizedBox(height: 32),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton.icon(
-                onPressed: onOpenLine,
-                icon: const Icon(Icons.chat_bubble_outline),
-                label: Text(l10n.openLineButton),
-              ),
-            ),
-            const SizedBox(height: 12),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton.icon(
-                onPressed: onPick,
-                icon: const Icon(Icons.folder_open),
-                label: Text(l10n.selectFileButton),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
