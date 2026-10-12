@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:drift/drift.dart';
+
 import '../db/app_database.dart';
 
 class ChatRepository {
@@ -68,6 +70,58 @@ class ChatRepository {
 
   Future<List<Sender>> sendersForChat(int chatId) =>
       _db.messageDao.sendersForChat(chatId);
+
+  /// Appends [text] (a single message shared from LINE, which arrives as
+  /// bare text with no sender or time) to the end of [chatId], stamped now
+  /// and attributed to a [senderName] sender created on first use.
+  Future<void> appendSharedText({
+    required int chatId,
+    required String text,
+    required String senderName,
+  }) {
+    return _db.transaction(() async {
+      final dao = _db.messageDao;
+      var sender = (await dao.sendersForChat(chatId))
+          .where((s) => s.displayName == senderName)
+          .firstOrNull;
+      if (sender == null) {
+        await dao.insertSenders([
+          SendersCompanion.insert(chatId: chatId, displayName: senderName),
+        ]);
+        sender = (await dao.sendersForChat(chatId))
+            .lastWhere((s) => s.displayName == senderName);
+      }
+      await dao.insertMessages([
+        MessagesCompanion.insert(
+          chatId: chatId,
+          senderId: Value(sender.id),
+          timestamp: DateTime.now(),
+          rawText: text,
+          sortIndex: await dao.nextSortIndex(chatId),
+        ),
+      ]);
+    });
+  }
+
+  /// Saves [text] as the first message of a new chat named [title]. Unlike
+  /// [createEmptyChat] it gets a non-empty sourceFileName, so it opens as a
+  /// normal chat timeline rather than a photo room.
+  Future<int> createChatFromSharedText({
+    required String title,
+    required String text,
+    required String senderName,
+  }) async {
+    final chatId = await _db.chatDao.insertChat(
+      ChatsCompanion.insert(
+        title: title,
+        importedAt: DateTime.now(),
+        sourceFileName: title,
+        rawTxtPath: '',
+      ),
+    );
+    await appendSharedText(chatId: chatId, text: text, senderName: senderName);
+    return chatId;
+  }
 
   Stream<List<ImageAttachment>> watchImageAttachments(int chatId) =>
       _db.imageAttachmentDao.watchForChat(chatId);

@@ -54,6 +54,16 @@ class MessageDao extends DatabaseAccessor<AppDatabase>
     return (delete(messages)..where((t) => t.id.equals(id))).go();
   }
 
+  /// The sortIndex for a message appended after everything in [chatId].
+  Future<int> nextSortIndex(int chatId) async {
+    final maxIndex = messages.sortIndex.max();
+    final row = await (selectOnly(messages)
+          ..addColumns([maxIndex])
+          ..where(messages.chatId.equals(chatId)))
+        .getSingle();
+    return (row.read(maxIndex) ?? -1) + 1;
+  }
+
   Future<List<Sender>> sendersForChat(int chatId) {
     return (select(senders)..where((t) => t.chatId.equals(chatId))).get();
   }

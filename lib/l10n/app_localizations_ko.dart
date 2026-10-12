@@ -765,6 +765,27 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sharedTextFallbackTitle => 'LINE 대화 (공유됨)';
 
   @override
+  String get pickChatForTextTitle => '이 메시지를 추가할 대화';
+
+  @override
+  String get pickChatForTextLead =>
+      'LINE에서 받은 것은 메시지 문장뿐입니다(보낸 사람·시간 없음). 대화를 선택하면 현재 날짜와 시간으로 맨 끝에 추가됩니다.';
+
+  @override
+  String get sharedTextNewChatButton => '새 대화로 저장';
+
+  @override
+  String sharedTextNewChatTitle(Object date) {
+    return '공유 메모 $date';
+  }
+
+  @override
+  String get sharedTextSenderName => '공유';
+
+  @override
+  String get sharedTextSavedMessage => '대화에 추가했습니다';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return '공유된 내용을 불러오지 못했습니다: $error';
   }

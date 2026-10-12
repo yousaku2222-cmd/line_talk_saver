@@ -762,6 +762,27 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sharedTextFallbackTitle => 'LINEトーク（共有）';
 
   @override
+  String get pickChatForTextTitle => 'このメッセージを追加するトーク';
+
+  @override
+  String get pickChatForTextLead =>
+      'LINEから届いたのはメッセージの文章だけです(送信者・時刻は付いていません)。保存先のトークを選ぶと、末尾に今の日時で追加します。';
+
+  @override
+  String get sharedTextNewChatButton => '新しいトークとして保存';
+
+  @override
+  String sharedTextNewChatTitle(Object date) {
+    return '共有メモ $date';
+  }
+
+  @override
+  String get sharedTextSenderName => '共有';
+
+  @override
+  String get sharedTextSavedMessage => 'トークに追加しました';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return '共有内容の読み込みに失敗しました: $error';
   }

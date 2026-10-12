@@ -803,6 +803,27 @@ class AppLocalizationsId extends AppLocalizations {
   String get sharedTextFallbackTitle => 'Obrolan LINE (dibagikan)';
 
   @override
+  String get pickChatForTextTitle => 'Tambahkan pesan ini ke obrolan';
+
+  @override
+  String get pickChatForTextLead =>
+      'LINE hanya mengirim teks pesan (tanpa pengirim atau waktu). Pilih obrolan dan pesan akan ditambahkan di akhir dengan tanggal dan waktu saat ini.';
+
+  @override
+  String get sharedTextNewChatButton => 'Simpan sebagai obrolan baru';
+
+  @override
+  String sharedTextNewChatTitle(Object date) {
+    return 'Catatan bersama $date';
+  }
+
+  @override
+  String get sharedTextSenderName => 'Dibagikan';
+
+  @override
+  String get sharedTextSavedMessage => 'Ditambahkan ke obrolan';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return 'Gagal memuat konten yang dibagikan: $error';
   }

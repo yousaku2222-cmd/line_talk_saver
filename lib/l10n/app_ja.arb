@@ -333,6 +333,15 @@
   "importRecommendedTitle": "おすすめ：LINEから直接送る",
   "retrySelectFileButton": "もう一度選択",
   "sharedTextFallbackTitle": "LINEトーク（共有）",
+  "pickChatForTextTitle": "このメッセージを追加するトーク",
+  "pickChatForTextLead": "LINEから届いたのはメッセージの文章だけです(送信者・時刻は付いていません)。保存先のトークを選ぶと、末尾に今の日時で追加します。",
+  "sharedTextNewChatButton": "新しいトークとして保存",
+  "sharedTextNewChatTitle": "共有メモ {date}",
+  "@sharedTextNewChatTitle": {
+    "placeholders": { "date": {} }
+  },
+  "sharedTextSenderName": "共有",
+  "sharedTextSavedMessage": "トークに追加しました",
   "sharedContentLoadFailed": "共有内容の読み込みに失敗しました: {error}",
   "@sharedContentLoadFailed": {
     "placeholders": { "error": {} }

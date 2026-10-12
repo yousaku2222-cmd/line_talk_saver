@@ -758,6 +758,27 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sharedTextFallbackTitle => 'LINE聊天記錄（分享）';
 
   @override
+  String get pickChatForTextTitle => '選擇要加入這則訊息的對話';
+
+  @override
+  String get pickChatForTextLead =>
+      'LINE傳來的只有訊息文字（沒有傳送者和時間）。選擇對話後，會以目前的日期時間加到最後。';
+
+  @override
+  String get sharedTextNewChatButton => '儲存為新的對話';
+
+  @override
+  String sharedTextNewChatTitle(Object date) {
+    return '分享的筆記 $date';
+  }
+
+  @override
+  String get sharedTextSenderName => '分享';
+
+  @override
+  String get sharedTextSavedMessage => '已加入對話';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return '讀取分享內容失敗：$error';
   }
@@ -1682,6 +1703,27 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get sharedTextFallbackTitle => 'LINE聊天記錄（分享）';
+
+  @override
+  String get pickChatForTextTitle => '選擇要加入這則訊息的對話';
+
+  @override
+  String get pickChatForTextLead =>
+      'LINE傳來的只有訊息文字（沒有傳送者和時間）。選擇對話後，會以目前的日期時間加到最後。';
+
+  @override
+  String get sharedTextNewChatButton => '儲存為新的對話';
+
+  @override
+  String sharedTextNewChatTitle(Object date) {
+    return '分享的筆記 $date';
+  }
+
+  @override
+  String get sharedTextSenderName => '分享';
+
+  @override
+  String get sharedTextSavedMessage => '已加入對話';
 
   @override
   String sharedContentLoadFailed(Object error) {

@@ -12,6 +12,7 @@ import 'features/cross_search/ui/cross_search_screen.dart';
 import 'features/help/ui/help_screen.dart';
 import 'features/import/ui/import_screen.dart';
 import 'features/import/ui/import_screen_args.dart';
+import 'features/import/ui/pick_chat_for_text_screen.dart';
 import 'features/monetization/purchase/purchase_listener.dart';
 import 'features/photo_association/ui/pending_photo_args.dart';
 import 'features/photo_association/ui/photo_gallery_screen.dart';
@@ -74,6 +75,11 @@ class LineTalkSaverApp extends ConsumerWidget {
             final args = settings.arguments as PendingPhotoArgs;
             return MaterialPageRoute(
               builder: (_) => PickChatForPhotoScreen(args: args),
+            );
+          case '/pick-chat-for-text':
+            return MaterialPageRoute(
+              builder: (_) =>
+                  PickChatForTextScreen(text: settings.arguments as String),
             );
           case '/photos':
             final args = settings.arguments;

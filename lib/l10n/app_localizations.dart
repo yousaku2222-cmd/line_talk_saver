@@ -1461,6 +1461,42 @@ abstract class AppLocalizations {
   /// **'LINEトーク（共有）'**
   String get sharedTextFallbackTitle;
 
+  /// No description provided for @pickChatForTextTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'このメッセージを追加するトーク'**
+  String get pickChatForTextTitle;
+
+  /// No description provided for @pickChatForTextLead.
+  ///
+  /// In ja, this message translates to:
+  /// **'LINEから届いたのはメッセージの文章だけです(送信者・時刻は付いていません)。保存先のトークを選ぶと、末尾に今の日時で追加します。'**
+  String get pickChatForTextLead;
+
+  /// No description provided for @sharedTextNewChatButton.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいトークとして保存'**
+  String get sharedTextNewChatButton;
+
+  /// No description provided for @sharedTextNewChatTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'共有メモ {date}'**
+  String sharedTextNewChatTitle(Object date);
+
+  /// No description provided for @sharedTextSenderName.
+  ///
+  /// In ja, this message translates to:
+  /// **'共有'**
+  String get sharedTextSenderName;
+
+  /// No description provided for @sharedTextSavedMessage.
+  ///
+  /// In ja, this message translates to:
+  /// **'トークに追加しました'**
+  String get sharedTextSavedMessage;
+
   /// No description provided for @sharedContentLoadFailed.
   ///
   /// In ja, this message translates to:

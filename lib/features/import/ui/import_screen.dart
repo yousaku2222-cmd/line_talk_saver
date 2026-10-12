@@ -62,6 +62,15 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
 
   Future<void> _loadFromSharedText(String content) async {
     final l10n = AppLocalizations.of(context)!;
+    // Sharing a single message from LINE hands over only its bare text, which
+    // parses to no messages -- offer to add it to a chat instead of showing
+    // a "0 messages" import that can't be saved.
+    if (content.trim().isNotEmpty &&
+        LineTxtParser().parse(content).messages.isEmpty) {
+      Navigator.of(context)
+          .pushReplacementNamed('/pick-chat-for-text', arguments: content.trim());
+      return;
+    }
     setState(() {
       _status = _Status.working;
       _errorMessage = null;

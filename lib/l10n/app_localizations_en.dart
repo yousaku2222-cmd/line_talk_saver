@@ -797,6 +797,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sharedTextFallbackTitle => 'LINE chat (shared)';
 
   @override
+  String get pickChatForTextTitle => 'Add this message to a chat';
+
+  @override
+  String get pickChatForTextLead =>
+      'LINE sent only the message text (no sender or time). Choose a chat and it will be added at the end with the current date and time.';
+
+  @override
+  String get sharedTextNewChatButton => 'Save as a new chat';
+
+  @override
+  String sharedTextNewChatTitle(Object date) {
+    return 'Shared note $date';
+  }
+
+  @override
+  String get sharedTextSenderName => 'Shared';
+
+  @override
+  String get sharedTextSavedMessage => 'Added to the chat';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return 'Failed to load the shared content: $error';
   }

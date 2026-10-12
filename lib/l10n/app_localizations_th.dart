@@ -790,6 +790,27 @@ class AppLocalizationsTh extends AppLocalizations {
   String get sharedTextFallbackTitle => 'แชท LINE (แชร์มา)';
 
   @override
+  String get pickChatForTextTitle => 'เพิ่มข้อความนี้ลงในแชท';
+
+  @override
+  String get pickChatForTextLead =>
+      'LINE ส่งมาเฉพาะข้อความเท่านั้น (ไม่มีผู้ส่งหรือเวลา) เลือกแชทแล้วข้อความจะถูกเพิ่มไว้ท้ายสุดพร้อมวันเวลาปัจจุบัน';
+
+  @override
+  String get sharedTextNewChatButton => 'บันทึกเป็นแชทใหม่';
+
+  @override
+  String sharedTextNewChatTitle(Object date) {
+    return 'บันทึกที่แชร์ $date';
+  }
+
+  @override
+  String get sharedTextSenderName => 'แชร์';
+
+  @override
+  String get sharedTextSavedMessage => 'เพิ่มลงในแชทแล้ว';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return 'โหลดเนื้อหาที่แชร์มาไม่สำเร็จ: $error';
   }
