@@ -901,7 +901,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      'Importing chats is now easier.\n\n• The \"Import chat\" screen now shows numbered steps for sending a chat straight from LINE\n• The activity chart now shows the year when it covers more than one year, so the same month no longer appears twice\n\nAdded in version 1.3: search across all chats, favorite messages, save reminders, and sharing stats as images';
+      'Importing chats is now easier.\n\n• The \"Import chat\" screen now shows numbered steps for sending a chat straight from LINE\n• The activity chart now shows the year when it covers more than one year, so the same month no longer appears twice\n• A single message shared from LINE can now be added to any chat\n\nAdded in version 1.3: search across all chats, favorite messages, save reminders, and sharing stats as images';
 
   @override
   String get helpAboutTitle => 'About this app';
