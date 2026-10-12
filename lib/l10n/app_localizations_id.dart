@@ -965,7 +965,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      'Mengimpor obrolan kini lebih mudah.\n\n• Layar \"Impor obrolan\" kini menampilkan langkah bernomor untuk mengirim obrolan langsung dari LINE\n• Grafik aktivitas kini menampilkan tahun jika mencakup lebih dari satu tahun, sehingga bulan yang sama tidak muncul dua kali\n• Satu pesan yang dibagikan dari LINE kini bisa ditambahkan ke obrolan mana pun\n• Pesan Anda sendiri kini bisa tampil di kanan seperti di LINE (cukup pilih nama Anda di obrolan)\n• Panduan yang lebih jelas (langkah saat impor gagal, panduan ganti ponsel, menu berlabel, dan lainnya)\n\nDitambahkan di versi 1.3: pencarian di semua obrolan, pesan favorit, pengingat penyimpanan, dan berbagi statistik sebagai gambar';
+      'Mengimpor obrolan kini lebih mudah.\n\n• Layar \"Impor obrolan\" kini menampilkan langkah bernomor untuk mengirim obrolan langsung dari LINE\n• Grafik aktivitas kini menampilkan tahun jika mencakup lebih dari satu tahun, sehingga bulan yang sama tidak muncul dua kali\n• Satu pesan yang dibagikan dari LINE kini bisa ditambahkan ke obrolan mana pun\n• Pesan Anda sendiri kini bisa tampil di kanan seperti di LINE (cukup pilih nama Anda di obrolan)\n• Panduan yang lebih jelas (langkah saat impor gagal, panduan ganti ponsel, menu berlabel, dan lainnya)\n• Memperbaiki obrolan yang dihapus masih meninggalkan pesan dan foto di perangkat (sisa penghapusan sebelumnya dibersihkan setelah pembaruan)\n\nDitambahkan di versi 1.3: pencarian di semua obrolan, pesan favorit, pengingat penyimpanan, dan berbagi statistik sebagai gambar';
 
   @override
   String get helpAboutTitle => 'Tentang aplikasi ini';

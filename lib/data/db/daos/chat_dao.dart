@@ -24,10 +24,6 @@ class ChatDao extends DatabaseAccessor<AppDatabase> with _$ChatDaoMixin {
 
   Future<int> insertChat(ChatsCompanion chat) => into(chats).insert(chat);
 
-  Future<void> deleteChat(int chatId) async {
-    await (delete(chats)..where((t) => t.id.equals(chatId))).go();
-  }
-
   Future<void> updateIcon(int chatId, String? iconKey) {
     return (update(chats)..where((t) => t.id.equals(chatId)))
         .write(ChatsCompanion(iconKey: Value(iconKey)));

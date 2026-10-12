@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:drift/drift.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../db/app_database.dart';
 
@@ -34,7 +35,20 @@ class ChatRepository {
 
   Future<Chat> getChat(int chatId) => _db.chatDao.getChat(chatId);
 
-  Future<void> deleteChat(int chatId) => _db.chatDao.deleteChat(chatId);
+  /// Deletes the chat with its messages, senders and attachments, plus the
+  /// attachment files and the imported .txt copy when it lives in the
+  /// app's own storage (a path outside it belongs to whatever app shared it).
+  Future<void> deleteChat(int chatId) async {
+    final chat = await _db.chatDao.getChat(chatId);
+    final attachmentPaths = await _db.deleteChatWithContents(chatId);
+    for (final path in attachmentPaths) {
+      await _deleteFileIfExists(path);
+    }
+    final appDir = (await getApplicationDocumentsDirectory()).path;
+    if (chat.rawTxtPath.isNotEmpty && chat.rawTxtPath.startsWith(appDir)) {
+      await _deleteFileIfExists(chat.rawTxtPath);
+    }
+  }
 
   Future<void> updateChatIcon(int chatId, String? iconKey) =>
       _db.chatDao.updateIcon(chatId, iconKey);
