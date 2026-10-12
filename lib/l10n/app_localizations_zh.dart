@@ -727,6 +727,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get importAltTitle => '其他方法：讀取已儲存的檔案';
 
   @override
+  String get importPartialTitle => '只想保留部分訊息時';
+
+  @override
+  String get importPartialStep1 => '在LINE長按想保留的訊息，點「轉傳」';
+
+  @override
+  String get importPartialStep2 => '再點選其他想保留的訊息';
+
+  @override
+  String get importPartialStep3 => '點下方的轉傳圖示，從清單中選擇「聊天記錄保存」';
+
+  @override
+  String get importPartialStep4 => '選擇要加入的對話即完成（選取的訊息會合併成一個對話框）';
+
+  @override
   String get importStepDone => '本應用程式開啟並顯示內容後，確認並儲存即完成';
 
   @override
@@ -761,7 +776,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get pickChatForTextLead =>
-      'LINE傳來的只有訊息文字（沒有傳送者和時間）。選擇對話後，會以目前的日期時間加到最後。';
+      'LINE傳來的只有訊息文字（沒有傳送者和時間）。選擇對話後，會以目前的日期時間加到最後。如果選了多則訊息，會合併成一個對話框。';
 
   @override
   String get sharedTextNewChatButton => '儲存為新的對話';
@@ -911,7 +926,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. 在LINE開啟想保留的聊天，點右上角的選單(≡)→「設定」→「傳送聊天記錄」\n2. 從分享清單中選擇「聊天記錄保存」即可自動匯入\n3. 如果清單中沒有顯示,請先儲存為.txt檔案（Android也可使用「備份聊天記錄」→「以文字備份」）,然後在本應用程式中透過「匯入聊天記錄」→「選擇檔案」讀取\n\n您也可以在匯入畫面透過「開啟LINE」按鈕直接切換到LINE應用程式。';
+      '1. 在LINE開啟想保留的聊天，點右上角的選單(≡)→「設定」→「傳送聊天記錄」\n2. 從分享清單中選擇「聊天記錄保存」即可自動匯入\n3. 如果清單中沒有顯示,請先儲存為.txt檔案（Android也可使用「備份聊天記錄」→「以文字備份」）,然後在本應用程式中透過「匯入聊天記錄」→「選擇檔案」讀取\n\n您也可以在匯入畫面透過「開啟LINE」按鈕直接切換到LINE應用程式。\n\n只想保留部分訊息時：\n在LINE長按訊息→「轉傳」→選取訊息→下方的轉傳圖示→「聊天記錄保存」，再選擇要加入的對話。選取的訊息會以不含傳送者與時間的文字，合併成一個對話框保存。';
 
   @override
   String get helpChatListTitle => '聊天清單操作';
@@ -1710,6 +1725,21 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get importAltTitle => '其他方法：讀取已儲存的檔案';
 
   @override
+  String get importPartialTitle => '只想保留部分訊息時';
+
+  @override
+  String get importPartialStep1 => '在LINE長按想保留的訊息，點「轉傳」';
+
+  @override
+  String get importPartialStep2 => '再點選其他想保留的訊息';
+
+  @override
+  String get importPartialStep3 => '點下方的轉傳圖示，從清單中選擇「聊天記錄保存」';
+
+  @override
+  String get importPartialStep4 => '選擇要加入的對話即完成（選取的訊息會合併成一個對話框）';
+
+  @override
   String get importStepDone => '本應用程式開啟並顯示內容後，確認並儲存即完成';
 
   @override
@@ -1744,7 +1774,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get pickChatForTextLead =>
-      'LINE傳來的只有訊息文字（沒有傳送者和時間）。選擇對話後，會以目前的日期時間加到最後。';
+      'LINE傳來的只有訊息文字（沒有傳送者和時間）。選擇對話後，會以目前的日期時間加到最後。如果選了多則訊息，會合併成一個對話框。';
 
   @override
   String get sharedTextNewChatButton => '儲存為新的對話';
@@ -1894,7 +1924,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get helpImportBody =>
-      '1. 在LINE開啟想保留的聊天，點右上角的選單(≡)→「設定」→「傳送聊天記錄」\n2. 從分享清單中選擇「聊天記錄保存」即可自動匯入\n3. 如果清單中沒有顯示,請先儲存為.txt檔案（Android也可使用「備份聊天記錄」→「以文字備份」）,然後在本應用程式中透過「匯入聊天記錄」→「選擇檔案」讀取\n\n您也可以在匯入畫面透過「開啟LINE」按鈕直接切換到LINE應用程式。';
+      '1. 在LINE開啟想保留的聊天，點右上角的選單(≡)→「設定」→「傳送聊天記錄」\n2. 從分享清單中選擇「聊天記錄保存」即可自動匯入\n3. 如果清單中沒有顯示,請先儲存為.txt檔案（Android也可使用「備份聊天記錄」→「以文字備份」）,然後在本應用程式中透過「匯入聊天記錄」→「選擇檔案」讀取\n\n您也可以在匯入畫面透過「開啟LINE」按鈕直接切換到LINE應用程式。\n\n只想保留部分訊息時：\n在LINE長按訊息→「轉傳」→選取訊息→下方的轉傳圖示→「聊天記錄保存」，再選擇要加入的對話。選取的訊息會以不含傳送者與時間的文字，合併成一個對話框保存。';
 
   @override
   String get helpChatListTitle => '聊天清單操作';

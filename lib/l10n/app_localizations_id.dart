@@ -768,6 +768,25 @@ class AppLocalizationsId extends AppLocalizations {
   String get importAltTitle => 'Cara lain: muat file yang tersimpan';
 
   @override
+  String get importPartialTitle => 'Untuk menyimpan sebagian pesan saja';
+
+  @override
+  String get importPartialStep1 =>
+      'Di LINE, tekan lama pesan yang ingin disimpan lalu ketuk \"Teruskan\"';
+
+  @override
+  String get importPartialStep2 =>
+      'Ketuk pesan lain yang ingin disimpan untuk memilihnya';
+
+  @override
+  String get importPartialStep3 =>
+      'Ketuk ikon teruskan di bawah dan pilih \"Talk Saver\"';
+
+  @override
+  String get importPartialStep4 =>
+      'Pilih obrolan tujuan, selesai (pesan yang dipilih menjadi satu gelembung)';
+
+  @override
   String get importStepDone =>
       'Aplikasi ini terbuka dengan isi obrolan — periksa lalu simpan, selesai';
 
@@ -807,7 +826,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get pickChatForTextLead =>
-      'LINE hanya mengirim teks pesan (tanpa pengirim atau waktu). Pilih obrolan dan pesan akan ditambahkan di akhir dengan tanggal dan waktu saat ini.';
+      'LINE hanya mengirim teks pesan (tanpa pengirim atau waktu). Pilih obrolan dan pesan akan ditambahkan di akhir dengan tanggal dan waktu saat ini. Jika Anda memilih beberapa pesan, semuanya menjadi satu gelembung.';
 
   @override
   String get sharedTextNewChatButton => 'Simpan sebagai obrolan baru';
@@ -960,7 +979,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. Di LINE, buka obrolan lalu ketuk menu (≡) di kanan atas → \"Pengaturan\" → \"Kirim riwayat obrolan\"\n2. Pilih \"Talk Saver\" dari lembar berbagi untuk mengimpornya secara otomatis\n3. Jika tidak muncul, simpan sebagai file .txt terlebih dahulu (di Android, \"Cadangkan riwayat obrolan\" → \"Cadangkan sebagai teks\" juga bisa), lalu gunakan \"Impor obrolan\" → \"Pilih file\" di aplikasi ini\n\nAnda juga bisa langsung membuka LINE menggunakan tombol \"Buka LINE\" di layar impor.';
+      '1. Di LINE, buka obrolan lalu ketuk menu (≡) di kanan atas → \"Pengaturan\" → \"Kirim riwayat obrolan\"\n2. Pilih \"Talk Saver\" dari lembar berbagi untuk mengimpornya secara otomatis\n3. Jika tidak muncul, simpan sebagai file .txt terlebih dahulu (di Android, \"Cadangkan riwayat obrolan\" → \"Cadangkan sebagai teks\" juga bisa), lalu gunakan \"Impor obrolan\" → \"Pilih file\" di aplikasi ini\n\nAnda juga bisa langsung membuka LINE menggunakan tombol \"Buka LINE\" di layar impor.\n\nUntuk menyimpan sebagian pesan saja:\nDi LINE, tekan lama pesan → \"Teruskan\" → pilih pesan → ikon teruskan di bawah → \"Talk Saver\", lalu pilih obrolan tujuan. Pesan disimpan bersama dalam satu gelembung sebagai teks, tanpa pengirim atau waktu.';
 
   @override
   String get helpChatListTitle => 'Mengelola daftar obrolan';

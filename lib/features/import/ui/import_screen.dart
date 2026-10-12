@@ -299,6 +299,24 @@ class _IdleView extends StatelessWidget {
           const SizedBox(height: 28),
           const Divider(),
           const SizedBox(height: 16),
+          // LINE's message forward also offers other apps, which hands
+          // over just the selected messages' text (see PickChatForTextScreen).
+          Text(
+            l10n.importPartialTitle,
+            style: theme.textTheme.titleSmall
+                ?.copyWith(fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 10),
+          for (final (i, step) in [
+            l10n.importPartialStep1,
+            l10n.importPartialStep2,
+            l10n.importPartialStep3,
+            l10n.importPartialStep4,
+          ].indexed)
+            _StepRow(number: i + 1, text: step),
+          const SizedBox(height: 16),
+          const Divider(),
+          const SizedBox(height: 16),
           Text(
             l10n.importAltTitle,
             style: theme.textTheme.titleSmall

@@ -760,6 +760,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get importAltTitle => 'Another way: load a saved file';
 
   @override
+  String get importPartialTitle => 'To keep only some messages';
+
+  @override
+  String get importPartialStep1 =>
+      'In LINE, press and hold a message you want to keep and tap \"Forward\"';
+
+  @override
+  String get importPartialStep2 =>
+      'Tap any other messages you want to keep to select them';
+
+  @override
+  String get importPartialStep3 =>
+      'Tap the forward icon at the bottom and choose \"Talk Saver\"';
+
+  @override
+  String get importPartialStep4 =>
+      'Choose the chat to add them to and you\'re done (the selected messages become one bubble)';
+
+  @override
   String get importStepDone =>
       'This app opens with the chat — check it and save, and you\'re done';
 
@@ -801,7 +820,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pickChatForTextLead =>
-      'LINE sent only the message text (no sender or time). Choose a chat and it will be added at the end with the current date and time.';
+      'LINE sent only the message text (no sender or time). Choose a chat and it will be added at the end with the current date and time. If you selected several messages, they become one bubble.';
 
   @override
   String get sharedTextNewChatButton => 'Save as a new chat';
@@ -954,7 +973,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. In LINE, open the chat and tap the menu (≡) at the top right → \"Settings\" → \"Send chat history\"\n2. Choose \"Talk Saver\" from the share sheet to import it automatically\n3. If it doesn\'t appear in the list, save it as a .txt file first (on Android, \"Back up chat history\" → \"Back up as text\" also works), then use \"Import chat\" → \"Choose file\" in this app\n\nYou can also jump straight to LINE using the \"Open LINE\" button on the import screen.';
+      '1. In LINE, open the chat and tap the menu (≡) at the top right → \"Settings\" → \"Send chat history\"\n2. Choose \"Talk Saver\" from the share sheet to import it automatically\n3. If it doesn\'t appear in the list, save it as a .txt file first (on Android, \"Back up chat history\" → \"Back up as text\" also works), then use \"Import chat\" → \"Choose file\" in this app\n\nYou can also jump straight to LINE using the \"Open LINE\" button on the import screen.\n\nTo keep only some messages:\nIn LINE, press and hold a message → \"Forward\" → select the messages → the forward icon at the bottom → \"Talk Saver\", then choose the chat to add them to. They are saved together in one bubble as text, without sender or time.';
 
   @override
   String get helpChatListTitle => 'Managing the chat list';

@@ -731,6 +731,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get importAltTitle => '別の方法：保存したファイルを読み込む';
 
   @override
+  String get importPartialTitle => '一部のメッセージだけ残したいとき';
+
+  @override
+  String get importPartialStep1 => 'LINEで残したいメッセージを長押しして「転送」をタップ';
+
+  @override
+  String get importPartialStep2 => 'ほかに残したいメッセージもタップして選ぶ';
+
+  @override
+  String get importPartialStep3 => '下の転送アイコンをタップし、一覧から「トーク保存」を選ぶ';
+
+  @override
+  String get importPartialStep4 => '追加先のトークを選べば完了です(選んだメッセージはまとめて1つの吹き出しになります)';
+
+  @override
   String get importStepDone => 'このアプリが開いて中身が表示されたら、確認して保存すれば完了です';
 
   @override
@@ -766,7 +781,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get pickChatForTextLead =>
-      'LINEから届いたのはメッセージの文章だけです(送信者・時刻は付いていません)。保存先のトークを選ぶと、末尾に今の日時で追加します。';
+      'LINEから届いたのはメッセージの文章だけです(送信者・時刻は付いていません)。保存先のトークを選ぶと、末尾に今の日時で追加します。複数のメッセージを選んだ場合は、まとめて1つの吹き出しになります。';
 
   @override
   String get sharedTextNewChatButton => '新しいトークとして保存';
@@ -916,7 +931,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. LINEで残したいトークを開き、右上のメニュー（≡）→「設定」→「トーク履歴を送信」をタップ\n2. 共有先の一覧から「トーク保存」を選ぶと自動で取り込まれます\n3. 一覧に出ない場合は、いったん.txtとして保存し（Androidは「トーク履歴をバックアップ」→「テキストでバックアップ」でも可）、本アプリの「トークを取り込む」→「ファイルを選択」から読み込んでください\n\n「トークを取り込む」画面の「LINEを開く」ボタンから、LINEアプリへすぐに切り替えることもできます。';
+      '1. LINEで残したいトークを開き、右上のメニュー（≡）→「設定」→「トーク履歴を送信」をタップ\n2. 共有先の一覧から「トーク保存」を選ぶと自動で取り込まれます\n3. 一覧に出ない場合は、いったん.txtとして保存し（Androidは「トーク履歴をバックアップ」→「テキストでバックアップ」でも可）、本アプリの「トークを取り込む」→「ファイルを選択」から読み込んでください\n\n「トークを取り込む」画面の「LINEを開く」ボタンから、LINEアプリへすぐに切り替えることもできます。\n\n一部のメッセージだけ残したいとき:\nLINEでメッセージを長押し→「転送」→残したいメッセージを選ぶ→下の転送アイコン→「トーク保存」を選び、追加先のトークを選んでください。選んだメッセージは送信者・時刻なしの文章として、まとめて1つの吹き出しで保存されます。';
 
   @override
   String get helpChatListTitle => 'トーク一覧の操作';

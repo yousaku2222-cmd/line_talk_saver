@@ -734,6 +734,22 @@ class AppLocalizationsKo extends AppLocalizations {
   String get importAltTitle => '다른 방법: 저장한 파일 불러오기';
 
   @override
+  String get importPartialTitle => '일부 메시지만 남기고 싶을 때';
+
+  @override
+  String get importPartialStep1 => 'LINE에서 남기고 싶은 메시지를 길게 누르고 「전달」을 탭';
+
+  @override
+  String get importPartialStep2 => '남기고 싶은 다른 메시지도 탭해서 선택';
+
+  @override
+  String get importPartialStep3 => '아래의 전달 아이콘을 탭하고 목록에서 「토크 저장」을 선택';
+
+  @override
+  String get importPartialStep4 =>
+      '추가할 대화를 선택하면 완료입니다(선택한 메시지는 하나의 말풍선으로 합쳐집니다)';
+
+  @override
   String get importStepDone => '이 앱이 열리고 내용이 표시되면 확인 후 저장하면 완료입니다';
 
   @override
@@ -769,7 +785,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get pickChatForTextLead =>
-      'LINE에서 받은 것은 메시지 문장뿐입니다(보낸 사람·시간 없음). 대화를 선택하면 현재 날짜와 시간으로 맨 끝에 추가됩니다.';
+      'LINE에서 받은 것은 메시지 문장뿐입니다(보낸 사람·시간 없음). 대화를 선택하면 현재 날짜와 시간으로 맨 끝에 추가됩니다. 여러 메시지를 선택한 경우 하나의 말풍선으로 합쳐집니다.';
 
   @override
   String get sharedTextNewChatButton => '새 대화로 저장';
@@ -919,7 +935,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get helpImportBody =>
-      '1. LINE에서 남기고 싶은 대화를 열고 오른쪽 위 메뉴(≡) → 「설정」 → 「대화 기록 보내기」를 탭\n2. 공유 대상 목록에서 「토크 저장」을 선택하면 자동으로 불러옵니다\n3. 목록에 없으면 .txt 파일로 저장한 후(Android는 「대화 기록 백업」 → 「텍스트로 백업」도 가능), 앱의 「대화 불러오기」 → 「파일 선택」에서 불러오세요\n\n불러오기 화면의 「LINE 열기」 버튼으로 LINE 앱으로 바로 이동할 수도 있습니다.';
+      '1. LINE에서 남기고 싶은 대화를 열고 오른쪽 위 메뉴(≡) → 「설정」 → 「대화 기록 보내기」를 탭\n2. 공유 대상 목록에서 「토크 저장」을 선택하면 자동으로 불러옵니다\n3. 목록에 없으면 .txt 파일로 저장한 후(Android는 「대화 기록 백업」 → 「텍스트로 백업」도 가능), 앱의 「대화 불러오기」 → 「파일 선택」에서 불러오세요\n\n불러오기 화면의 「LINE 열기」 버튼으로 LINE 앱으로 바로 이동할 수도 있습니다.\n\n일부 메시지만 남기고 싶을 때:\nLINE에서 메시지를 길게 누름 → 「전달」 → 남길 메시지 선택 → 아래 전달 아이콘 → 「토크 저장」을 선택하고 추가할 대화를 고르세요. 선택한 메시지는 보낸 사람·시간 없이 하나의 말풍선으로 저장됩니다.';
 
   @override
   String get helpChatListTitle => '대화 목록 조작';
