@@ -17,4 +17,9 @@ class Chats extends Table {
 
   /// When true, this chat is pinned to the top of the chat list.
   BoolColumn get isFavorite => boolean().withDefault(const Constant(false))();
+
+  /// Which sender is the user, by display name, so their messages sit on the
+  /// right like in LINE. null = not chosen yet (the chat offers a picker);
+  /// empty = the user dismissed the picker without choosing.
+  TextColumn get selfSenderName => text().nullable()();
 }

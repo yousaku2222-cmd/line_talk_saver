@@ -779,6 +779,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sharedTextSavedMessage => '已加入對話';
 
   @override
+  String get selfSenderBannerMessage => '哪一位是你？選擇後，你的訊息會顯示在右側';
+
+  @override
+  String get selfSenderDialogTitle => '選擇自己';
+
+  @override
+  String get selfSenderNone => '不選擇（全部顯示在左側）';
+
+  @override
+  String get selfSenderMenuTitle => '重新選擇自己';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return '讀取分享內容失敗：$error';
   }
@@ -861,7 +873,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      '匯入聊天記錄變得更簡單了。\n\n・「匯入聊天記錄」畫面會以編號步驟說明如何從LINE直接傳送\n・活躍度圖表顯示超過一年的期間時，會一併顯示年份，不再出現兩個相同的月份\n・從LINE只分享一則訊息時，也能加入任一對話中保存\n\n版本1.3新增的功能：跨所有聊天搜尋、訊息收藏、儲存提醒、統計圖片分享';
+      '匯入聊天記錄變得更簡單了。\n\n・「匯入聊天記錄」畫面會以編號步驟說明如何從LINE直接傳送\n・活躍度圖表顯示超過一年的期間時，會一併顯示年份，不再出現兩個相同的月份\n・從LINE只分享一則訊息時，也能加入任一對話中保存\n・自己的訊息可以像LINE一樣顯示在右側（只要在對話中選擇自己的名字）\n\n版本1.3新增的功能：跨所有聊天搜尋、訊息收藏、儲存提醒、統計圖片分享';
 
   @override
   String get helpAboutTitle => '關於本應用程式';
@@ -1726,6 +1738,18 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get sharedTextSavedMessage => '已加入對話';
 
   @override
+  String get selfSenderBannerMessage => '哪一位是你？選擇後，你的訊息會顯示在右側';
+
+  @override
+  String get selfSenderDialogTitle => '選擇自己';
+
+  @override
+  String get selfSenderNone => '不選擇（全部顯示在左側）';
+
+  @override
+  String get selfSenderMenuTitle => '重新選擇自己';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return '讀取分享內容失敗：$error';
   }
@@ -1808,7 +1832,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get whatsNewV132Body =>
-      '匯入聊天記錄變得更簡單了。\n\n・「匯入聊天記錄」畫面會以編號步驟說明如何從LINE直接傳送\n・活躍度圖表顯示超過一年的期間時，會一併顯示年份，不再出現兩個相同的月份\n・從LINE只分享一則訊息時，也能加入任一對話中保存\n\n版本1.3新增的功能：跨所有聊天搜尋、訊息收藏、儲存提醒、統計圖片分享';
+      '匯入聊天記錄變得更簡單了。\n\n・「匯入聊天記錄」畫面會以編號步驟說明如何從LINE直接傳送\n・活躍度圖表顯示超過一年的期間時，會一併顯示年份，不再出現兩個相同的月份\n・從LINE只分享一則訊息時，也能加入任一對話中保存\n・自己的訊息可以像LINE一樣顯示在右側（只要在對話中選擇自己的名字）\n\n版本1.3新增的功能：跨所有聊天搜尋、訊息收藏、儲存提醒、統計圖片分享';
 
   @override
   String get helpAboutTitle => '關於本應用程式';

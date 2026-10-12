@@ -824,6 +824,19 @@ class AppLocalizationsId extends AppLocalizations {
   String get sharedTextSavedMessage => 'Ditambahkan ke obrolan';
 
   @override
+  String get selfSenderBannerMessage =>
+      'Yang mana Anda? Pilih nama Anda agar pesan Anda tampil di kanan';
+
+  @override
+  String get selfSenderDialogTitle => 'Pilih diri Anda';
+
+  @override
+  String get selfSenderNone => 'Tidak ada (tampilkan semua di kiri)';
+
+  @override
+  String get selfSenderMenuTitle => 'Ganti siapa saya';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return 'Gagal memuat konten yang dibagikan: $error';
   }
@@ -907,7 +920,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      'Mengimpor obrolan kini lebih mudah.\n\n• Layar \"Impor obrolan\" kini menampilkan langkah bernomor untuk mengirim obrolan langsung dari LINE\n• Grafik aktivitas kini menampilkan tahun jika mencakup lebih dari satu tahun, sehingga bulan yang sama tidak muncul dua kali\n• Satu pesan yang dibagikan dari LINE kini bisa ditambahkan ke obrolan mana pun\n\nDitambahkan di versi 1.3: pencarian di semua obrolan, pesan favorit, pengingat penyimpanan, dan berbagi statistik sebagai gambar';
+      'Mengimpor obrolan kini lebih mudah.\n\n• Layar \"Impor obrolan\" kini menampilkan langkah bernomor untuk mengirim obrolan langsung dari LINE\n• Grafik aktivitas kini menampilkan tahun jika mencakup lebih dari satu tahun, sehingga bulan yang sama tidak muncul dua kali\n• Satu pesan yang dibagikan dari LINE kini bisa ditambahkan ke obrolan mana pun\n• Pesan Anda sendiri kini bisa tampil di kanan seperti di LINE (cukup pilih nama Anda di obrolan)\n\nDitambahkan di versi 1.3: pencarian di semua obrolan, pesan favorit, pengingat penyimpanan, dan berbagi statistik sebagai gambar';
 
   @override
   String get helpAboutTitle => 'Tentang aplikasi ini';

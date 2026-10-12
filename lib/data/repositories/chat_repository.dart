@@ -48,6 +48,10 @@ class ChatRepository {
   Future<void> setChatFavorite(int chatId, bool favorite) =>
       _db.chatDao.updateFavorite(chatId, favorite);
 
+  /// [name] is the user's own sender name in this chat, or '' for none.
+  Future<void> setSelfSenderName(int chatId, String name) =>
+      _db.chatDao.updateSelfSenderName(chatId, name);
+
   Stream<List<Message>> watchAllMessages() => _db.messageDao.watchAllMessages();
 
   Stream<List<Sender>> watchAllSenders() => _db.messageDao.watchAllSenders();

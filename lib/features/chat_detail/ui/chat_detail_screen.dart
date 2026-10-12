@@ -17,6 +17,7 @@ import '../../photo_association/providers/photo_provider.dart';
 import '../../search/providers/message_filter.dart';
 import '../../search/ui/search_filter_sheet.dart';
 import '../providers/chat_detail_provider.dart';
+import '../self_sender_prefs.dart';
 import 'widgets/message_bubble.dart';
 
 class ChatDetailScreen extends ConsumerStatefulWidget {
@@ -50,6 +51,55 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
       ? MessageFilter.empty
       : MessageFilter(textQuery: widget.initialTextQuery);
   late final List<String> _pendingPhotoPaths = [...widget.pendingPhotoPaths];
+  bool _autoSelfScheduled = false;
+
+  /// Records [name] as the user in this chat ('' = none) and, when it is a
+  /// real name, remembers it so other chats pick it up on their own.
+  Future<void> _setSelf(String name) async {
+    await ref
+        .read(chatRepositoryProvider)
+        .setSelfSenderName(widget.chatId, name);
+    await rememberSelfName(ref.read(sharedPreferencesProvider), name);
+    ref.invalidate(chatProvider(widget.chatId));
+  }
+
+  /// Sender names the user can pick as "me": everyone except the
+  /// placeholder sender given to single messages shared in from LINE.
+  List<String> _selfCandidates(Map<int, String> senders) {
+    final shared = AppLocalizations.of(context)!.sharedTextSenderName;
+    return senders.values.where((n) => n != shared).toSet().toList()..sort();
+  }
+
+  Future<void> _pickSelf(Map<int, String> senders, String? current) async {
+    final l10n = AppLocalizations.of(context)!;
+    final picked = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) => SimpleDialog(
+        title: Text(l10n.selfSenderDialogTitle),
+        children: [
+          for (final name in [..._selfCandidates(senders), ''])
+            SimpleDialogOption(
+              onPressed: () => Navigator.of(dialogContext).pop(name),
+              child: Row(
+                children: [
+                  Icon(
+                    name == (current ?? '')
+                        ? Icons.radio_button_checked
+                        : Icons.radio_button_unchecked,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 12),
+                  Flexible(
+                    child: Text(name.isEmpty ? l10n.selfSenderNone : name),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+    if (picked != null) await _setSelf(picked);
+  }
 
   Future<void> _openFilterSheet() async {
     final senders =
@@ -246,6 +296,27 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
         if (a.messageId != null) a.messageId!: a,
     };
     final l10n = AppLocalizations.of(context)!;
+    final chat = chatAsync.valueOrNull;
+    final senderNames = sendersAsync.valueOrNull ?? const <int, String>{};
+    final selfName = chat?.selfSenderName;
+    final selfCandidates = _selfCandidates(senderNames);
+    // Not chosen yet: take the one name picked in another chat if it is
+    // here, otherwise ask with a banner.
+    final needsSelf =
+        chat != null &&
+        selfName == null &&
+        sendersAsync.hasValue &&
+        selfCandidates.isNotEmpty;
+    final guessedSelf = needsSelf
+        ? guessSelfName(ref.read(sharedPreferencesProvider), selfCandidates)
+        : null;
+    if (guessedSelf != null && !_autoSelfScheduled) {
+      _autoSelfScheduled = true;
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _setSelf(guessedSelf),
+      );
+    }
+    final showSelfBanner = needsSelf && guessedSelf == null && !_selectionMode;
 
     return Scaffold(
       appBar: AppBar(
@@ -330,6 +401,8 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                       _formatMessages(messages, senders),
                       label: l10n.allCountLabel(messages.length),
                     );
+                  case 'self':
+                    _pickSelf(senderNames, selfName);
                 }
               },
               itemBuilder: (context) => [
@@ -354,6 +427,17 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                     ],
                   ),
                 ),
+                PopupMenuItem(
+                  value: 'self',
+                  enabled: selfCandidates.isNotEmpty,
+                  child: Row(
+                    children: [
+                      const Icon(Icons.person_outline, size: 20),
+                      const SizedBox(width: 12),
+                      Text(l10n.selfSenderMenuTitle),
+                    ],
+                  ),
+                ),
               ],
             ),
           ],
@@ -361,6 +445,12 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
       ),
       body: Column(
         children: [
+          if (showSelfBanner)
+            _SelfSenderBanner(
+              names: selfCandidates,
+              onPick: _setSelf,
+              onDismiss: () => _setSelf(''),
+            ),
           if (_pendingPhotoPaths.isNotEmpty)
             Container(
               width: double.infinity,
@@ -477,6 +567,10 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                       selected: _selectedIds.contains(message.id),
                       selectionMode: _selectionMode,
                       showHeader: showHeader[message.id] ?? true,
+                      isSelf:
+                          selfName != null &&
+                          selfName.isNotEmpty &&
+                          senderName == selfName,
                       attachment: attachmentsByMessageId[message.id],
                       onAttachPhoto: _selectionMode
                           ? null
@@ -555,6 +649,64 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
         ],
       ),
       bottomNavigationBar: const SafeArea(child: DismissibleBannerAd()),
+    );
+  }
+}
+
+/// Asks which participant is the user, so their messages can sit on the
+/// right. Shown until a name is picked or the banner is closed.
+class _SelfSenderBanner extends StatelessWidget {
+  const _SelfSenderBanner({
+    required this.names,
+    required this.onPick,
+    required this.onDismiss,
+  });
+
+  final List<String> names;
+  final ValueChanged<String> onPick;
+  final VoidCallback onDismiss;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final scheme = Theme.of(context).colorScheme;
+    return Container(
+      width: double.infinity,
+      color: scheme.surfaceContainerHigh,
+      padding: const EdgeInsets.fromLTRB(16, 10, 4, 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.selfSenderBannerMessage,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const SizedBox(height: 6),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 4,
+                  children: [
+                    for (final name in names)
+                      ActionChip(
+                        label: Text(name),
+                        onPressed: () => onPick(name),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.close, size: 20),
+            tooltip: l10n.cancel,
+            onPressed: onDismiss,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -786,6 +786,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sharedTextSavedMessage => '대화에 추가했습니다';
 
   @override
+  String get selfSenderBannerMessage => '어느 쪽이 당신인가요? 선택하면 내 메시지가 오른쪽에 표시됩니다';
+
+  @override
+  String get selfSenderDialogTitle => '나 선택하기';
+
+  @override
+  String get selfSenderNone => '선택 안 함(모두 왼쪽에 표시)';
+
+  @override
+  String get selfSenderMenuTitle => '나 다시 선택하기';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return '공유된 내용을 불러오지 못했습니다: $error';
   }
@@ -869,7 +881,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      '대화 불러오기가 더 쉬워졌습니다.\n\n• 「대화 불러오기」 화면에 LINE에서 바로 보내는 방법을 번호와 함께 표시합니다\n• 활동 그래프가 1년 이상의 기간을 표시할 때 같은 달이 두 번 나오던 문제를 고쳤습니다(연도도 표시)\n• LINE에서 메시지 하나만 공유해도 원하는 대화에 추가해 저장할 수 있습니다\n\n버전 1.3에서 추가된 기능: 전체 대화 검색, 메시지 즐겨찾기, 저장 알림, 통계 이미지 공유';
+      '대화 불러오기가 더 쉬워졌습니다.\n\n• 「대화 불러오기」 화면에 LINE에서 바로 보내는 방법을 번호와 함께 표시합니다\n• 활동 그래프가 1년 이상의 기간을 표시할 때 같은 달이 두 번 나오던 문제를 고쳤습니다(연도도 표시)\n• LINE에서 메시지 하나만 공유해도 원하는 대화에 추가해 저장할 수 있습니다\n• 내 메시지를 LINE처럼 오른쪽에 표시할 수 있습니다(대화에서 내 이름만 선택)\n\n버전 1.3에서 추가된 기능: 전체 대화 검색, 메시지 즐겨찾기, 저장 알림, 통계 이미지 공유';
 
   @override
   String get helpAboutTitle => '이 앱에 대하여';

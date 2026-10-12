@@ -783,6 +783,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sharedTextSavedMessage => 'トークに追加しました';
 
   @override
+  String get selfSenderBannerMessage => 'あなたはどれ？ 選ぶと自分の発言が右側に表示されます';
+
+  @override
+  String get selfSenderDialogTitle => '自分を選ぶ';
+
+  @override
+  String get selfSenderNone => '選ばない(全員を左側に表示)';
+
+  @override
+  String get selfSenderMenuTitle => '自分を選び直す';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return '共有内容の読み込みに失敗しました: $error';
   }
@@ -866,7 +878,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      'トークの取り込みがわかりやすくなりました。\n\n・「トークを取り込む」画面に、LINEから直接送る手順を番号つきで表示するようにしました\n・温度感グラフで、1年以上の期間を表示したときに同じ月が並んで見分けにくかったのを直しました(年も表示します)\n・LINEでメッセージを1件だけ共有したときも、好きなトークに追加して保存できるようにしました\n\nバージョン1.3で追加した機能: 全トーク横断検索、メッセージのお気に入り、保存リマインダー、統計の画像シェア';
+      'トークの取り込みがわかりやすくなりました。\n\n・「トークを取り込む」画面に、LINEから直接送る手順を番号つきで表示するようにしました\n・温度感グラフで、1年以上の期間を表示したときに同じ月が並んで見分けにくかったのを直しました(年も表示します)\n・LINEでメッセージを1件だけ共有したときも、好きなトークに追加して保存できるようにしました\n・自分の発言をLINEと同じように右側に表示できるようになりました(トークを開いて自分の名前を選ぶだけ)\n\nバージョン1.3で追加した機能: 全トーク横断検索、メッセージのお気に入り、保存リマインダー、統計の画像シェア';
 
   @override
   String get helpAboutTitle => 'このアプリについて';

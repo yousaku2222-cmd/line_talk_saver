@@ -52,6 +52,7 @@ class MessageBubble extends StatelessWidget {
     required this.onTap,
     required this.onLongPress,
     this.showHeader = true,
+    this.isSelf = false,
     this.attachment,
     this.onAttachPhoto,
   });
@@ -66,6 +67,10 @@ class MessageBubble extends StatelessWidget {
   /// When false this message follows another from the same sender within a
   /// few minutes, so the name/time line is dropped and just the bubble shows.
   final bool showHeader;
+
+  /// The user's own message: drawn on the right in the theme colour with no
+  /// name, the time beside the bubble, like LINE.
+  final bool isSelf;
 
   /// A photo the user has manually attached to this message, if any.
   final ImageAttachment? attachment;
@@ -116,35 +121,58 @@ class MessageBubble extends StatelessWidget {
                 ),
               ),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (showHeader) ...[
-                    Row(
+              child: isSelf
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          senderName ??
-                              AppLocalizations.of(context)!.unknownSender,
-                          style: textTheme.labelLarge?.copyWith(
-                            color: _senderColor(senderName),
+                        if (showHeader)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 6, bottom: 2),
+                            child: Text(
+                              DateFormat('HH:mm').format(message.timestamp),
+                              style: textTheme.labelSmall,
+                            ),
+                          ),
+                        Flexible(
+                          child: _MessageContent(
+                            message: message,
+                            attachment: attachment,
+                            onAttachPhoto: onAttachPhoto,
+                            isSelf: true,
                           ),
                         ),
-                        const SizedBox(width: 8),
-                        Text(
-                          DateFormat('HH:mm').format(message.timestamp),
-                          style: textTheme.labelSmall,
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (showHeader) ...[
+                          Row(
+                            children: [
+                              Text(
+                                senderName ??
+                                    AppLocalizations.of(context)!.unknownSender,
+                                style: textTheme.labelLarge?.copyWith(
+                                  color: _senderColor(senderName),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                DateFormat('HH:mm').format(message.timestamp),
+                                style: textTheme.labelSmall,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 3),
+                        ],
+                        _MessageContent(
+                          message: message,
+                          attachment: attachment,
+                          onAttachPhoto: onAttachPhoto,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 3),
-                  ],
-                  _MessageContent(
-                    message: message,
-                    attachment: attachment,
-                    onAttachPhoto: onAttachPhoto,
-                  ),
-                ],
-              ),
             ),
           ],
         ),
@@ -158,11 +186,13 @@ class _MessageContent extends StatelessWidget {
     required this.message,
     required this.attachment,
     required this.onAttachPhoto,
+    this.isSelf = false,
   });
 
   final Message message;
   final ImageAttachment? attachment;
   final VoidCallback? onAttachPhoto;
+  final bool isSelf;
 
   @override
   Widget build(BuildContext context) {
@@ -258,23 +288,26 @@ class _MessageContent extends StatelessWidget {
       );
     }
 
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.sizeOf(context).width * 0.78,
+    final bubble = ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.sizeOf(context).width * 0.78,
+      ),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
+        decoration: BoxDecoration(
+          color: isSelf
+              ? scheme.primaryContainer
+              : scheme.surfaceContainerHighest,
+          border: isSelf ? null : Border.all(color: scheme.outline),
+          borderRadius: BorderRadius.circular(18),
         ),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
-          decoration: BoxDecoration(
-            color: scheme.surfaceContainerHighest,
-            border: Border.all(color: scheme.outline),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          child: LinkifiedText(message.rawText),
-        ),
+        child: LinkifiedText(message.rawText),
       ),
     );
+    // A self bubble sits in a right-aligned row beside its time, so it
+    // must keep its own width rather than fill the row.
+    if (isSelf) return bubble;
+    return Align(alignment: Alignment.centerLeft, child: bubble);
   }
 
   Widget _placeholderBox(BuildContext context) {

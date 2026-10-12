@@ -811,6 +811,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get sharedTextSavedMessage => 'เพิ่มลงในแชทแล้ว';
 
   @override
+  String get selfSenderBannerMessage =>
+      'คุณคือคนไหน? เลือกชื่อของคุณเพื่อแสดงข้อความของคุณทางขวา';
+
+  @override
+  String get selfSenderDialogTitle => 'เลือกตัวคุณ';
+
+  @override
+  String get selfSenderNone => 'ไม่เลือก (แสดงทุกคนทางซ้าย)';
+
+  @override
+  String get selfSenderMenuTitle => 'เลือกตัวเองใหม่';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return 'โหลดเนื้อหาที่แชร์มาไม่สำเร็จ: $error';
   }
@@ -894,7 +907,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      'การนำเข้าแชทง่ายขึ้นแล้ว\n\n• หน้า「นำเข้าแชท」แสดงขั้นตอนการส่งแชทจาก LINE โดยตรงพร้อมหมายเลข\n• กราฟกิจกรรมแสดงปีด้วยเมื่อครอบคลุมเกิน 1 ปี เดือนเดียวกันจึงไม่ซ้ำกันอีก\n• ข้อความเดียวที่แชร์จาก LINE สามารถเพิ่มลงในแชทใดก็ได้แล้ว\n\nฟีเจอร์ที่เพิ่มในเวอร์ชัน 1.3: ค้นหาทุกแชท ข้อความโปรด การแจ้งเตือนให้บันทึก และแชร์สถิติเป็นรูปภาพ';
+      'การนำเข้าแชทง่ายขึ้นแล้ว\n\n• หน้า「นำเข้าแชท」แสดงขั้นตอนการส่งแชทจาก LINE โดยตรงพร้อมหมายเลข\n• กราฟกิจกรรมแสดงปีด้วยเมื่อครอบคลุมเกิน 1 ปี เดือนเดียวกันจึงไม่ซ้ำกันอีก\n• ข้อความเดียวที่แชร์จาก LINE สามารถเพิ่มลงในแชทใดก็ได้แล้ว\n• ข้อความของคุณแสดงทางขวาได้เหมือนใน LINE แล้ว (แค่เลือกชื่อของคุณในแชท)\n\nฟีเจอร์ที่เพิ่มในเวอร์ชัน 1.3: ค้นหาทุกแชท ข้อความโปรด การแจ้งเตือนให้บันทึก และแชร์สถิติเป็นรูปภาพ';
 
   @override
   String get helpAboutTitle => 'เกี่ยวกับแอปนี้';

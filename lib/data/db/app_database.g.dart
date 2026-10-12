@@ -104,6 +104,17 @@ class $ChatsTable extends Chats with TableInfo<$ChatsTable, Chat> {
     ),
     defaultValue: const Constant(false),
   );
+  static const VerificationMeta _selfSenderNameMeta = const VerificationMeta(
+    'selfSenderName',
+  );
+  @override
+  late final GeneratedColumn<String> selfSenderName = GeneratedColumn<String>(
+    'self_sender_name',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -114,6 +125,7 @@ class $ChatsTable extends Chats with TableInfo<$ChatsTable, Chat> {
     iconKey,
     isLocked,
     isFavorite,
+    selfSenderName,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -186,6 +198,15 @@ class $ChatsTable extends Chats with TableInfo<$ChatsTable, Chat> {
         isFavorite.isAcceptableOrUnknown(data['is_favorite']!, _isFavoriteMeta),
       );
     }
+    if (data.containsKey('self_sender_name')) {
+      context.handle(
+        _selfSenderNameMeta,
+        selfSenderName.isAcceptableOrUnknown(
+          data['self_sender_name']!,
+          _selfSenderNameMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -227,6 +248,10 @@ class $ChatsTable extends Chats with TableInfo<$ChatsTable, Chat> {
         DriftSqlType.bool,
         data['${effectivePrefix}is_favorite'],
       )!,
+      selfSenderName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}self_sender_name'],
+      ),
     );
   }
 
@@ -253,6 +278,11 @@ class Chat extends DataClass implements Insertable<Chat> {
 
   /// When true, this chat is pinned to the top of the chat list.
   final bool isFavorite;
+
+  /// Which sender is the user, by display name, so their messages sit on the
+  /// right like in LINE. null = not chosen yet (the chat offers a picker);
+  /// empty = the user dismissed the picker without choosing.
+  final String? selfSenderName;
   const Chat({
     required this.id,
     required this.title,
@@ -262,6 +292,7 @@ class Chat extends DataClass implements Insertable<Chat> {
     this.iconKey,
     required this.isLocked,
     required this.isFavorite,
+    this.selfSenderName,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -276,6 +307,9 @@ class Chat extends DataClass implements Insertable<Chat> {
     }
     map['is_locked'] = Variable<bool>(isLocked);
     map['is_favorite'] = Variable<bool>(isFavorite);
+    if (!nullToAbsent || selfSenderName != null) {
+      map['self_sender_name'] = Variable<String>(selfSenderName);
+    }
     return map;
   }
 
@@ -291,6 +325,9 @@ class Chat extends DataClass implements Insertable<Chat> {
           : Value(iconKey),
       isLocked: Value(isLocked),
       isFavorite: Value(isFavorite),
+      selfSenderName: selfSenderName == null && nullToAbsent
+          ? const Value.absent()
+          : Value(selfSenderName),
     );
   }
 
@@ -308,6 +345,7 @@ class Chat extends DataClass implements Insertable<Chat> {
       iconKey: serializer.fromJson<String?>(json['iconKey']),
       isLocked: serializer.fromJson<bool>(json['isLocked']),
       isFavorite: serializer.fromJson<bool>(json['isFavorite']),
+      selfSenderName: serializer.fromJson<String?>(json['selfSenderName']),
     );
   }
   @override
@@ -322,6 +360,7 @@ class Chat extends DataClass implements Insertable<Chat> {
       'iconKey': serializer.toJson<String?>(iconKey),
       'isLocked': serializer.toJson<bool>(isLocked),
       'isFavorite': serializer.toJson<bool>(isFavorite),
+      'selfSenderName': serializer.toJson<String?>(selfSenderName),
     };
   }
 
@@ -334,6 +373,7 @@ class Chat extends DataClass implements Insertable<Chat> {
     Value<String?> iconKey = const Value.absent(),
     bool? isLocked,
     bool? isFavorite,
+    Value<String?> selfSenderName = const Value.absent(),
   }) => Chat(
     id: id ?? this.id,
     title: title ?? this.title,
@@ -343,6 +383,9 @@ class Chat extends DataClass implements Insertable<Chat> {
     iconKey: iconKey.present ? iconKey.value : this.iconKey,
     isLocked: isLocked ?? this.isLocked,
     isFavorite: isFavorite ?? this.isFavorite,
+    selfSenderName: selfSenderName.present
+        ? selfSenderName.value
+        : this.selfSenderName,
   );
   Chat copyWithCompanion(ChatsCompanion data) {
     return Chat(
@@ -362,6 +405,9 @@ class Chat extends DataClass implements Insertable<Chat> {
       isFavorite: data.isFavorite.present
           ? data.isFavorite.value
           : this.isFavorite,
+      selfSenderName: data.selfSenderName.present
+          ? data.selfSenderName.value
+          : this.selfSenderName,
     );
   }
 
@@ -375,7 +421,8 @@ class Chat extends DataClass implements Insertable<Chat> {
           ..write('rawTxtPath: $rawTxtPath, ')
           ..write('iconKey: $iconKey, ')
           ..write('isLocked: $isLocked, ')
-          ..write('isFavorite: $isFavorite')
+          ..write('isFavorite: $isFavorite, ')
+          ..write('selfSenderName: $selfSenderName')
           ..write(')'))
         .toString();
   }
@@ -390,6 +437,7 @@ class Chat extends DataClass implements Insertable<Chat> {
     iconKey,
     isLocked,
     isFavorite,
+    selfSenderName,
   );
   @override
   bool operator ==(Object other) =>
@@ -402,7 +450,8 @@ class Chat extends DataClass implements Insertable<Chat> {
           other.rawTxtPath == this.rawTxtPath &&
           other.iconKey == this.iconKey &&
           other.isLocked == this.isLocked &&
-          other.isFavorite == this.isFavorite);
+          other.isFavorite == this.isFavorite &&
+          other.selfSenderName == this.selfSenderName);
 }
 
 class ChatsCompanion extends UpdateCompanion<Chat> {
@@ -414,6 +463,7 @@ class ChatsCompanion extends UpdateCompanion<Chat> {
   final Value<String?> iconKey;
   final Value<bool> isLocked;
   final Value<bool> isFavorite;
+  final Value<String?> selfSenderName;
   const ChatsCompanion({
     this.id = const Value.absent(),
     this.title = const Value.absent(),
@@ -423,6 +473,7 @@ class ChatsCompanion extends UpdateCompanion<Chat> {
     this.iconKey = const Value.absent(),
     this.isLocked = const Value.absent(),
     this.isFavorite = const Value.absent(),
+    this.selfSenderName = const Value.absent(),
   });
   ChatsCompanion.insert({
     this.id = const Value.absent(),
@@ -433,6 +484,7 @@ class ChatsCompanion extends UpdateCompanion<Chat> {
     this.iconKey = const Value.absent(),
     this.isLocked = const Value.absent(),
     this.isFavorite = const Value.absent(),
+    this.selfSenderName = const Value.absent(),
   }) : title = Value(title),
        importedAt = Value(importedAt),
        sourceFileName = Value(sourceFileName),
@@ -446,6 +498,7 @@ class ChatsCompanion extends UpdateCompanion<Chat> {
     Expression<String>? iconKey,
     Expression<bool>? isLocked,
     Expression<bool>? isFavorite,
+    Expression<String>? selfSenderName,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -456,6 +509,7 @@ class ChatsCompanion extends UpdateCompanion<Chat> {
       if (iconKey != null) 'icon_key': iconKey,
       if (isLocked != null) 'is_locked': isLocked,
       if (isFavorite != null) 'is_favorite': isFavorite,
+      if (selfSenderName != null) 'self_sender_name': selfSenderName,
     });
   }
 
@@ -468,6 +522,7 @@ class ChatsCompanion extends UpdateCompanion<Chat> {
     Value<String?>? iconKey,
     Value<bool>? isLocked,
     Value<bool>? isFavorite,
+    Value<String?>? selfSenderName,
   }) {
     return ChatsCompanion(
       id: id ?? this.id,
@@ -478,6 +533,7 @@ class ChatsCompanion extends UpdateCompanion<Chat> {
       iconKey: iconKey ?? this.iconKey,
       isLocked: isLocked ?? this.isLocked,
       isFavorite: isFavorite ?? this.isFavorite,
+      selfSenderName: selfSenderName ?? this.selfSenderName,
     );
   }
 
@@ -508,6 +564,9 @@ class ChatsCompanion extends UpdateCompanion<Chat> {
     if (isFavorite.present) {
       map['is_favorite'] = Variable<bool>(isFavorite.value);
     }
+    if (selfSenderName.present) {
+      map['self_sender_name'] = Variable<String>(selfSenderName.value);
+    }
     return map;
   }
 
@@ -521,7 +580,8 @@ class ChatsCompanion extends UpdateCompanion<Chat> {
           ..write('rawTxtPath: $rawTxtPath, ')
           ..write('iconKey: $iconKey, ')
           ..write('isLocked: $isLocked, ')
-          ..write('isFavorite: $isFavorite')
+          ..write('isFavorite: $isFavorite, ')
+          ..write('selfSenderName: $selfSenderName')
           ..write(')'))
         .toString();
   }
@@ -1705,6 +1765,7 @@ typedef $$ChatsTableCreateCompanionBuilder = ChatsCompanion Function({
   Value<String?> iconKey,
   Value<bool> isLocked,
   Value<bool> isFavorite,
+  Value<String?> selfSenderName,
 });
 typedef $$ChatsTableUpdateCompanionBuilder = ChatsCompanion Function({
   Value<int> id,
@@ -1715,6 +1776,7 @@ typedef $$ChatsTableUpdateCompanionBuilder = ChatsCompanion Function({
   Value<String?> iconKey,
   Value<bool> isLocked,
   Value<bool> isFavorite,
+  Value<String?> selfSenderName,
 });
 
 final class $$ChatsTableReferences
@@ -1825,6 +1887,11 @@ class $$ChatsTableFilterComposer extends Composer<_$AppDatabase, $ChatsTable> {
 
   ColumnFilters<bool> get isFavorite => $composableBuilder(
     column: $table.isFavorite,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get selfSenderName => $composableBuilder(
+    column: $table.selfSenderName,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -1952,6 +2019,11 @@ class $$ChatsTableOrderingComposer
     column: $table.isFavorite,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get selfSenderName => $composableBuilder(
+    column: $table.selfSenderName,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$ChatsTableAnnotationComposer
@@ -1992,6 +2064,11 @@ class $$ChatsTableAnnotationComposer
 
   GeneratedColumn<bool> get isFavorite => $composableBuilder(
     column: $table.isFavorite,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get selfSenderName => $composableBuilder(
+    column: $table.selfSenderName,
     builder: (column) => column,
   );
 
@@ -2111,6 +2188,7 @@ class $$ChatsTableTableManager
                 Value<String?> iconKey = const Value.absent(),
                 Value<bool> isLocked = const Value.absent(),
                 Value<bool> isFavorite = const Value.absent(),
+                Value<String?> selfSenderName = const Value.absent(),
               }) => ChatsCompanion(
                 id: id,
                 title: title,
@@ -2120,6 +2198,7 @@ class $$ChatsTableTableManager
                 iconKey: iconKey,
                 isLocked: isLocked,
                 isFavorite: isFavorite,
+                selfSenderName: selfSenderName,
               ),
           createCompanionCallback:
               ({
@@ -2131,6 +2210,7 @@ class $$ChatsTableTableManager
                 Value<String?> iconKey = const Value.absent(),
                 Value<bool> isLocked = const Value.absent(),
                 Value<bool> isFavorite = const Value.absent(),
+                Value<String?> selfSenderName = const Value.absent(),
               }) => ChatsCompanion.insert(
                 id: id,
                 title: title,
@@ -2140,6 +2220,7 @@ class $$ChatsTableTableManager
                 iconKey: iconKey,
                 isLocked: isLocked,
                 isFavorite: isFavorite,
+                selfSenderName: selfSenderName,
               ),
           withReferenceMapper: (p0) => p0
               .map(

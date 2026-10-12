@@ -47,4 +47,9 @@ class ChatDao extends DatabaseAccessor<AppDatabase> with _$ChatDaoMixin {
     return (update(chats)..where((t) => t.id.equals(chatId)))
         .write(ChatsCompanion(isFavorite: Value(favorite)));
   }
+
+  Future<void> updateSelfSenderName(int chatId, String name) {
+    return (update(chats)..where((t) => t.id.equals(chatId)))
+        .write(ChatsCompanion(selfSenderName: Value(name)));
+  }
 }

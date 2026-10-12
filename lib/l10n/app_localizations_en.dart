@@ -818,6 +818,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sharedTextSavedMessage => 'Added to the chat';
 
   @override
+  String get selfSenderBannerMessage =>
+      'Which one is you? Pick your name to show your messages on the right';
+
+  @override
+  String get selfSenderDialogTitle => 'Choose yourself';
+
+  @override
+  String get selfSenderNone => 'None (show everyone on the left)';
+
+  @override
+  String get selfSenderMenuTitle => 'Change who is me';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return 'Failed to load the shared content: $error';
   }
@@ -901,7 +914,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      'Importing chats is now easier.\n\n• The \"Import chat\" screen now shows numbered steps for sending a chat straight from LINE\n• The activity chart now shows the year when it covers more than one year, so the same month no longer appears twice\n• A single message shared from LINE can now be added to any chat\n\nAdded in version 1.3: search across all chats, favorite messages, save reminders, and sharing stats as images';
+      'Importing chats is now easier.\n\n• The \"Import chat\" screen now shows numbered steps for sending a chat straight from LINE\n• The activity chart now shows the year when it covers more than one year, so the same month no longer appears twice\n• A single message shared from LINE can now be added to any chat\n• Your own messages can now appear on the right, like in LINE (just pick your name in a chat)\n\nAdded in version 1.3: search across all chats, favorite messages, save reminders, and sharing stats as images';
 
   @override
   String get helpAboutTitle => 'About this app';
