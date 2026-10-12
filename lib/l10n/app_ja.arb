@@ -155,7 +155,7 @@
   "@saveToDeviceFailedMessage": {
     "placeholders": { "error": {} }
   },
-  "emptyChatListMessage": "まだトークが取り込まれていません。\nLINEで「トークをテキストで送信」したファイルを右下のボタンから読み込んでください。",
+  "emptyChatListMessage": "まだトークが保存されていません。\n下の「トークを取り込む」を押すと、LINEから送る手順が出ます。",
   "importedAtLabel": "取込日時: {datetime}",
   "@importedAtLabel": {
     "placeholders": { "datetime": {} }
@@ -346,6 +346,16 @@
   "selfSenderDialogTitle": "自分を選ぶ",
   "selfSenderNone": "選ばない(全員を左側に表示)",
   "selfSenderMenuTitle": "自分を選び直す",
+  "importRetryWithStepsButton": "手順を見てやり直す",
+  "longPressHintMessage": "メッセージを長押しすると、選んでコピーできます",
+  "selfSenderLabel": "{name}（自分）",
+  "close": "閉じる",
+  "phoneChangeGuideTitle": "機種変更の前に",
+  "phoneChangeGuideSubtitle": "保存したトークを新しいスマホへ移すには",
+  "phoneChangeGuideBody": "保存したトークは、このスマホの中にだけ保存されています。機種変更やアプリの削除をすると消えてしまいます。\n\n移すときは、次の順に操作してください。\n1. このスマホで「バックアップを作成」し、できたファイルをGoogleドライブやメールなどに保存する\n2. 新しいスマホにこのアプリを入れ、「バックアップから復元」でそのファイルを選ぶ\n\nバックアップは買い切りの有料機能です。新しいスマホでは、先に「購入を復元」を押すと、購入済みのバックアップ機能をそのまま使えます。",
+  "@selfSenderLabel": {
+    "placeholders": { "name": {} }
+  },
   "sharedContentLoadFailed": "共有内容の読み込みに失敗しました: {error}",
   "@sharedContentLoadFailed": {
     "placeholders": { "error": {} }
@@ -370,7 +380,7 @@
   "@previewParticipantCountValue": {
     "placeholders": { "count": {} }
   },
-  "previewSuspiciousMessage": "メッセージとして認識できませんでした。LINEの標準エクスポート形式の.txtファイルか確認してください。",
+  "previewSuspiciousMessage": "トーク履歴として読み取れませんでした。LINEの「トーク履歴を送信」から送ったものか確認して、下の手順でやり直してください。",
   "previewUnrecognizedLinesMessage": "{count}行は直前のメッセージの続きとして解析されました。",
   "@previewUnrecognizedLinesMessage": {
     "placeholders": { "count": {} }
@@ -390,7 +400,7 @@
   "whatsNewDialogTitle": "アプリがアップデートされました",
   "whatsNewDialogOkButton": "OK",
   "whatsNewV120Body": "トーク統計機能を強化しました。\n\n・送信時間の傾向がわかるようになりました(夜型か朝型かなど、よく話す時間帯を表示)\n・質問への返信率(キャッチボール度)を表示するようになりました\n・保存した複数のトークをまとめて見られるダッシュボードを追加しました\n・書き出し(PDF/Excel/Word)に統計情報を含められるようになりました",
-  "whatsNewV132Body": "トークの取り込みがわかりやすくなりました。\n\n・「トークを取り込む」画面に、LINEから直接送る手順を番号つきで表示するようにしました\n・温度感グラフで、1年以上の期間を表示したときに同じ月が並んで見分けにくかったのを直しました(年も表示します)\n・LINEでメッセージを1件だけ共有したときも、好きなトークに追加して保存できるようにしました\n・自分の発言をLINEと同じように右側に表示できるようになりました(トークを開いて自分の名前を選ぶだけ)\n\nバージョン1.3で追加した機能: 全トーク横断検索、メッセージのお気に入り、保存リマインダー、統計の画像シェア",
+  "whatsNewV132Body": "トークの取り込みがわかりやすくなりました。\n\n・「トークを取り込む」画面に、LINEから直接送る手順を番号つきで表示するようにしました\n・温度感グラフで、1年以上の期間を表示したときに同じ月が並んで見分けにくかったのを直しました(年も表示します)\n・LINEでメッセージを1件だけ共有したときも、好きなトークに追加して保存できるようにしました\n・自分の発言をLINEと同じように右側に表示できるようになりました(トークを開いて自分の名前を選ぶだけ)\n・使い方の案内を見直しました(取り込みに失敗したときの手順表示、機種変更の前の案内、メニューの文字表示など)\n\nバージョン1.3で追加した機能: 全トーク横断検索、メッセージのお気に入り、保存リマインダー、統計の画像シェア",
   "helpAboutTitle": "このアプリについて",
   "helpAboutBody": "「トーク保存」は、LINEのトーク履歴をあとから見返しやすい形で端末に保存するためのアプリです。LINE本体を自動操作することはなく、LINE標準の「トークをテキストで送信」機能で書き出した.txtファイルを取り込んで使います。",
   "helpImportTitle": "トークを取り込む",

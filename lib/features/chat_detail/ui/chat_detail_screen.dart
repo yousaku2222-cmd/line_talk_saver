@@ -53,6 +53,33 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
   late final List<String> _pendingPhotoPaths = [...widget.pendingPhotoPaths];
   bool _autoSelfScheduled = false;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _maybeShowLongPressHint());
+  }
+
+  /// Selecting/copying starts with a long press, which nothing on screen
+  /// hints at -- say so once, the first time any chat is opened.
+  Future<void> _maybeShowLongPressHint() async {
+    const key = 'hint_long_press_shown';
+    final prefs = ref.read(sharedPreferencesProvider);
+    if (!mounted || (prefs.getBool(key) ?? false)) return;
+    await prefs.setBool(key, true);
+    if (!mounted) return;
+    final l10n = AppLocalizations.of(context)!;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(l10n.longPressHintMessage),
+        duration: const Duration(seconds: 6),
+        // An action makes a SnackBar stay until tapped by default; this is
+        // only a hint, so let it go away on its own.
+        persist: false,
+        action: SnackBarAction(label: l10n.whatsNewDialogOkButton, onPressed: () {}),
+      ),
+    );
+  }
+
   /// Records [name] as the user in this chat ('' = none) and, when it is a
   /// real name, remembers it so other chats pick it up on their own.
   Future<void> _setSelf(String name) async {
@@ -317,6 +344,23 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
       );
     }
     final showSelfBanner = needsSelf && guessedSelf == null && !_selectionMode;
+    // Exports name the user's own sender "<name>（自分）" so a reader can
+    // tell which side of the chat was the user.
+    final exportSenderNames =
+        markSelfSender(senderNames, selfName, l10n.selfSenderLabel);
+    final VoidCallback? exportAction = messagesAsync.maybeWhen(
+      data: (messages) {
+        if (messages.isEmpty) return null;
+        return () => showExportOptionsSheet(
+          context,
+          chatTitle: chat?.title ?? l10n.defaultChatTitleForExport,
+          messages: messages,
+          senderNames: exportSenderNames,
+        );
+      },
+      orElse: () => null,
+    );
+    void openStats() => showChatStatsScreen(context, ref, widget.chatId);
 
     return Scaffold(
       appBar: AppBar(
@@ -366,30 +410,22 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
             IconButton(
               icon: const Icon(Icons.ios_share_outlined),
               tooltip: l10n.exportTooltip,
-              onPressed: messagesAsync.maybeWhen(
-                data: (messages) {
-                  if (messages.isEmpty) return null;
-                  final senders = sendersAsync.valueOrNull ?? const {};
-                  return () => showExportOptionsSheet(
-                    context,
-                    chatTitle:
-                        chatAsync.valueOrNull?.title ??
-                        l10n.defaultChatTitleForExport,
-                    messages: messages,
-                    senderNames: senders,
-                  );
-                },
-                orElse: () => null,
-              ),
+              onPressed: exportAction,
             ),
             IconButton(
               icon: const Icon(Icons.insights_outlined),
               tooltip: l10n.chatStatsTooltip,
-              onPressed: () => showChatStatsScreen(context, ref, widget.chatId),
+              onPressed: openStats,
             ),
             PopupMenuButton<String>(
               onSelected: (value) {
                 switch (value) {
+                  case 'filter':
+                    _openFilterSheet();
+                  case 'export':
+                    exportAction?.call();
+                  case 'stats':
+                    openStats();
                   case 'photos':
                     Navigator.of(context)
                         .pushNamed('/photos', arguments: widget.chatId);
@@ -405,7 +441,41 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
                     _pickSelf(senderNames, selfName);
                 }
               },
+              // The app-bar icons above are unlabelled, so the menu repeats
+              // them with words for anyone unsure what an icon does.
               itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: 'filter',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.filter_list, size: 20),
+                      const SizedBox(width: 12),
+                      Text(l10n.filterTooltip),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'export',
+                  enabled: exportAction != null,
+                  child: Row(
+                    children: [
+                      const Icon(Icons.ios_share_outlined, size: 20),
+                      const SizedBox(width: 12),
+                      Text(l10n.exportTooltip),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'stats',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.insights_outlined, size: 20),
+                      const SizedBox(width: 12),
+                      Text(l10n.chatStatsTooltip),
+                    ],
+                  ),
+                ),
+                const PopupMenuDivider(),
                 PopupMenuItem(
                   value: 'photos',
                   child: Row(

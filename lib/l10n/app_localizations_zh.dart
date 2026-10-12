@@ -348,8 +348,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get emptyChatListMessage =>
-      '尚未匯入任何聊天記錄。\n請在LINE中使用「以文字傳送聊天記錄」，再從右下角的按鈕載入已儲存的檔案。';
+  String get emptyChatListMessage => '還沒有儲存任何對話。\n點下方的「匯入聊天記錄」，就會顯示從LINE傳送的步驟。';
 
   @override
   String importedAtLabel(Object datetime) {
@@ -791,6 +790,30 @@ class AppLocalizationsZh extends AppLocalizations {
   String get selfSenderMenuTitle => '重新選擇自己';
 
   @override
+  String get importRetryWithStepsButton => '查看步驟並重試';
+
+  @override
+  String get longPressHintMessage => '長按訊息即可選取並複製';
+
+  @override
+  String selfSenderLabel(Object name) {
+    return '$name（自己）';
+  }
+
+  @override
+  String get close => '關閉';
+
+  @override
+  String get phoneChangeGuideTitle => '換手機之前';
+
+  @override
+  String get phoneChangeGuideSubtitle => '把儲存的對話移到新手機的方法';
+
+  @override
+  String get phoneChangeGuideBody =>
+      '儲存的對話只保存在這支手機裡。換手機或刪除應用程式後就會消失。\n\n移動時請依照以下順序操作：\n1. 在這支手機點「建立備份」，並把產生的檔案存到Google雲端硬碟或電子郵件等\n2. 在新手機安裝本應用程式，用「從備份還原」選擇該檔案\n\n備份是一次性購買的付費功能。在新手機上，先點「還原購買」，就能繼續使用已購買的備份功能。';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return '讀取分享內容失敗：$error';
   }
@@ -828,7 +851,8 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get previewSuspiciousMessage => '無法辨識任何訊息，請確認這是LINE標準匯出格式的.txt檔案。';
+  String get previewSuspiciousMessage =>
+      '無法讀取為聊天記錄。請確認是用LINE的「傳送聊天記錄」傳送的，再依照下方步驟重試。';
 
   @override
   String previewUnrecognizedLinesMessage(Object count) {
@@ -873,7 +897,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      '匯入聊天記錄變得更簡單了。\n\n・「匯入聊天記錄」畫面會以編號步驟說明如何從LINE直接傳送\n・活躍度圖表顯示超過一年的期間時，會一併顯示年份，不再出現兩個相同的月份\n・從LINE只分享一則訊息時，也能加入任一對話中保存\n・自己的訊息可以像LINE一樣顯示在右側（只要在對話中選擇自己的名字）\n\n版本1.3新增的功能：跨所有聊天搜尋、訊息收藏、儲存提醒、統計圖片分享';
+      '匯入聊天記錄變得更簡單了。\n\n・「匯入聊天記錄」畫面會以編號步驟說明如何從LINE直接傳送\n・活躍度圖表顯示超過一年的期間時，會一併顯示年份，不再出現兩個相同的月份\n・從LINE只分享一則訊息時，也能加入任一對話中保存\n・自己的訊息可以像LINE一樣顯示在右側（只要在對話中選擇自己的名字）\n・改善了操作說明（匯入失敗時顯示步驟、換手機前的說明、選單加上文字等）\n\n版本1.3新增的功能：跨所有聊天搜尋、訊息收藏、儲存提醒、統計圖片分享';
 
   @override
   String get helpAboutTitle => '關於本應用程式';
@@ -1307,8 +1331,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get emptyChatListMessage =>
-      '尚未匯入任何聊天記錄。\n請在LINE中使用「以文字傳送聊天記錄」，再從右下角的按鈕載入已儲存的檔案。';
+  String get emptyChatListMessage => '還沒有儲存任何對話。\n點下方的「匯入聊天記錄」，就會顯示從LINE傳送的步驟。';
 
   @override
   String importedAtLabel(Object datetime) {
@@ -1750,6 +1773,30 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get selfSenderMenuTitle => '重新選擇自己';
 
   @override
+  String get importRetryWithStepsButton => '查看步驟並重試';
+
+  @override
+  String get longPressHintMessage => '長按訊息即可選取並複製';
+
+  @override
+  String selfSenderLabel(Object name) {
+    return '$name（自己）';
+  }
+
+  @override
+  String get close => '關閉';
+
+  @override
+  String get phoneChangeGuideTitle => '換手機之前';
+
+  @override
+  String get phoneChangeGuideSubtitle => '把儲存的對話移到新手機的方法';
+
+  @override
+  String get phoneChangeGuideBody =>
+      '儲存的對話只保存在這支手機裡。換手機或刪除應用程式後就會消失。\n\n移動時請依照以下順序操作：\n1. 在這支手機點「建立備份」，並把產生的檔案存到Google雲端硬碟或電子郵件等\n2. 在新手機安裝本應用程式，用「從備份還原」選擇該檔案\n\n備份是一次性購買的付費功能。在新手機上，先點「還原購買」，就能繼續使用已購買的備份功能。';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return '讀取分享內容失敗：$error';
   }
@@ -1787,7 +1834,8 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get previewSuspiciousMessage => '無法辨識任何訊息，請確認這是LINE標準匯出格式的.txt檔案。';
+  String get previewSuspiciousMessage =>
+      '無法讀取為聊天記錄。請確認是用LINE的「傳送聊天記錄」傳送的，再依照下方步驟重試。';
 
   @override
   String previewUnrecognizedLinesMessage(Object count) {
@@ -1832,7 +1880,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get whatsNewV132Body =>
-      '匯入聊天記錄變得更簡單了。\n\n・「匯入聊天記錄」畫面會以編號步驟說明如何從LINE直接傳送\n・活躍度圖表顯示超過一年的期間時，會一併顯示年份，不再出現兩個相同的月份\n・從LINE只分享一則訊息時，也能加入任一對話中保存\n・自己的訊息可以像LINE一樣顯示在右側（只要在對話中選擇自己的名字）\n\n版本1.3新增的功能：跨所有聊天搜尋、訊息收藏、儲存提醒、統計圖片分享';
+      '匯入聊天記錄變得更簡單了。\n\n・「匯入聊天記錄」畫面會以編號步驟說明如何從LINE直接傳送\n・活躍度圖表顯示超過一年的期間時，會一併顯示年份，不再出現兩個相同的月份\n・從LINE只分享一則訊息時，也能加入任一對話中保存\n・自己的訊息可以像LINE一樣顯示在右側（只要在對話中選擇自己的名字）\n・改善了操作說明（匯入失敗時顯示步驟、換手機前的說明、選單加上文字等）\n\n版本1.3新增的功能：跨所有聊天搜尋、訊息收藏、儲存提醒、統計圖片分享';
 
   @override
   String get helpAboutTitle => '關於本應用程式';

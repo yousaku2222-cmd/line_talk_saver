@@ -714,7 +714,7 @@ abstract class AppLocalizations {
   /// No description provided for @emptyChatListMessage.
   ///
   /// In ja, this message translates to:
-  /// **'まだトークが取り込まれていません。\nLINEで「トークをテキストで送信」したファイルを右下のボタンから読み込んでください。'**
+  /// **'まだトークが保存されていません。\n下の「トークを取り込む」を押すと、LINEから送る手順が出ます。'**
   String get emptyChatListMessage;
 
   /// No description provided for @importedAtLabel.
@@ -1521,6 +1521,48 @@ abstract class AppLocalizations {
   /// **'自分を選び直す'**
   String get selfSenderMenuTitle;
 
+  /// No description provided for @importRetryWithStepsButton.
+  ///
+  /// In ja, this message translates to:
+  /// **'手順を見てやり直す'**
+  String get importRetryWithStepsButton;
+
+  /// No description provided for @longPressHintMessage.
+  ///
+  /// In ja, this message translates to:
+  /// **'メッセージを長押しすると、選んでコピーできます'**
+  String get longPressHintMessage;
+
+  /// No description provided for @selfSenderLabel.
+  ///
+  /// In ja, this message translates to:
+  /// **'{name}（自分）'**
+  String selfSenderLabel(Object name);
+
+  /// No description provided for @close.
+  ///
+  /// In ja, this message translates to:
+  /// **'閉じる'**
+  String get close;
+
+  /// No description provided for @phoneChangeGuideTitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'機種変更の前に'**
+  String get phoneChangeGuideTitle;
+
+  /// No description provided for @phoneChangeGuideSubtitle.
+  ///
+  /// In ja, this message translates to:
+  /// **'保存したトークを新しいスマホへ移すには'**
+  String get phoneChangeGuideSubtitle;
+
+  /// No description provided for @phoneChangeGuideBody.
+  ///
+  /// In ja, this message translates to:
+  /// **'保存したトークは、このスマホの中にだけ保存されています。機種変更やアプリの削除をすると消えてしまいます。\n\n移すときは、次の順に操作してください。\n1. このスマホで「バックアップを作成」し、できたファイルをGoogleドライブやメールなどに保存する\n2. 新しいスマホにこのアプリを入れ、「バックアップから復元」でそのファイルを選ぶ\n\nバックアップは買い切りの有料機能です。新しいスマホでは、先に「購入を復元」を押すと、購入済みのバックアップ機能をそのまま使えます。'**
+  String get phoneChangeGuideBody;
+
   /// No description provided for @sharedContentLoadFailed.
   ///
   /// In ja, this message translates to:
@@ -1578,7 +1620,7 @@ abstract class AppLocalizations {
   /// No description provided for @previewSuspiciousMessage.
   ///
   /// In ja, this message translates to:
-  /// **'メッセージとして認識できませんでした。LINEの標準エクスポート形式の.txtファイルか確認してください。'**
+  /// **'トーク履歴として読み取れませんでした。LINEの「トーク履歴を送信」から送ったものか確認して、下の手順でやり直してください。'**
   String get previewSuspiciousMessage;
 
   /// No description provided for @previewUnrecognizedLinesMessage.
@@ -1656,7 +1698,7 @@ abstract class AppLocalizations {
   /// No description provided for @whatsNewV132Body.
   ///
   /// In ja, this message translates to:
-  /// **'トークの取り込みがわかりやすくなりました。\n\n・「トークを取り込む」画面に、LINEから直接送る手順を番号つきで表示するようにしました\n・温度感グラフで、1年以上の期間を表示したときに同じ月が並んで見分けにくかったのを直しました(年も表示します)\n・LINEでメッセージを1件だけ共有したときも、好きなトークに追加して保存できるようにしました\n・自分の発言をLINEと同じように右側に表示できるようになりました(トークを開いて自分の名前を選ぶだけ)\n\nバージョン1.3で追加した機能: 全トーク横断検索、メッセージのお気に入り、保存リマインダー、統計の画像シェア'**
+  /// **'トークの取り込みがわかりやすくなりました。\n\n・「トークを取り込む」画面に、LINEから直接送る手順を番号つきで表示するようにしました\n・温度感グラフで、1年以上の期間を表示したときに同じ月が並んで見分けにくかったのを直しました(年も表示します)\n・LINEでメッセージを1件だけ共有したときも、好きなトークに追加して保存できるようにしました\n・自分の発言をLINEと同じように右側に表示できるようになりました(トークを開いて自分の名前を選ぶだけ)\n・使い方の案内を見直しました(取り込みに失敗したときの手順表示、機種変更の前の案内、メニューの文字表示など)\n\nバージョン1.3で追加した機能: 全トーク横断検索、メッセージのお気に入り、保存リマインダー、統計の画像シェア'**
   String get whatsNewV132Body;
 
   /// No description provided for @helpAboutTitle.

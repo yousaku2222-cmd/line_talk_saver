@@ -362,7 +362,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emptyChatListMessage =>
-      'No chats have been imported yet.\nIn LINE, use \"Send Chat as Text\", then load the saved file with the button below.';
+      'No chats saved yet.\nTap \"Import a chat\" below to see how to send one from LINE.';
 
   @override
   String importedAtLabel(Object datetime) {
@@ -831,6 +831,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selfSenderMenuTitle => 'Change who is me';
 
   @override
+  String get importRetryWithStepsButton => 'See the steps and try again';
+
+  @override
+  String get longPressHintMessage =>
+      'Press and hold a message to select and copy it';
+
+  @override
+  String selfSenderLabel(Object name) {
+    return '$name (me)';
+  }
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get phoneChangeGuideTitle => 'Before changing phones';
+
+  @override
+  String get phoneChangeGuideSubtitle =>
+      'How to move your saved chats to a new phone';
+
+  @override
+  String get phoneChangeGuideBody =>
+      'Your saved chats are stored only on this phone. Changing phones or deleting the app will erase them.\n\nTo move them:\n1. On this phone, tap \"Create backup\" and save the file to Google Drive, email, or similar\n2. Install this app on the new phone and pick that file with \"Restore from backup\"\n\nBackup is a one-time paid feature. On the new phone, tap \"Restore purchase\" first to use the backup feature you already bought.';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return 'Failed to load the shared content: $error';
   }
@@ -869,7 +895,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get previewSuspiciousMessage =>
-      'No messages could be recognized. Please check that this is a .txt file exported directly from LINE.';
+      'This couldn\'t be read as a chat history. Check that it was sent with LINE\'s \"Send chat history\", then try again with the steps below.';
 
   @override
   String previewUnrecognizedLinesMessage(Object count) {
@@ -914,7 +940,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      'Importing chats is now easier.\n\n• The \"Import chat\" screen now shows numbered steps for sending a chat straight from LINE\n• The activity chart now shows the year when it covers more than one year, so the same month no longer appears twice\n• A single message shared from LINE can now be added to any chat\n• Your own messages can now appear on the right, like in LINE (just pick your name in a chat)\n\nAdded in version 1.3: search across all chats, favorite messages, save reminders, and sharing stats as images';
+      'Importing chats is now easier.\n\n• The \"Import chat\" screen now shows numbered steps for sending a chat straight from LINE\n• The activity chart now shows the year when it covers more than one year, so the same month no longer appears twice\n• A single message shared from LINE can now be added to any chat\n• Your own messages can now appear on the right, like in LINE (just pick your name in a chat)\n• Clearer guidance throughout (steps when an import fails, a guide for changing phones, labelled menu items, and more)\n\nAdded in version 1.3: search across all chats, favorite messages, save reminders, and sharing stats as images';
 
   @override
   String get helpAboutTitle => 'About this app';

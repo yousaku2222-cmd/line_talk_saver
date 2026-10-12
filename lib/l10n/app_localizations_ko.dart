@@ -350,7 +350,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get emptyChatListMessage =>
-      '아직 가져온 대화가 없습니다.\nLINE에서 \"대화를 텍스트로 보내기\"를 사용한 후, 오른쪽 아래 버튼으로 저장된 파일을 불러오세요.';
+      '아직 저장된 대화가 없습니다.\n아래 「대화 가져오기」를 누르면 LINE에서 보내는 방법이 나옵니다.';
 
   @override
   String importedAtLabel(Object datetime) {
@@ -798,6 +798,30 @@ class AppLocalizationsKo extends AppLocalizations {
   String get selfSenderMenuTitle => '나 다시 선택하기';
 
   @override
+  String get importRetryWithStepsButton => '방법 보고 다시 하기';
+
+  @override
+  String get longPressHintMessage => '메시지를 길게 누르면 선택해서 복사할 수 있습니다';
+
+  @override
+  String selfSenderLabel(Object name) {
+    return '$name(나)';
+  }
+
+  @override
+  String get close => '닫기';
+
+  @override
+  String get phoneChangeGuideTitle => '기기 변경 전에';
+
+  @override
+  String get phoneChangeGuideSubtitle => '저장한 대화를 새 스마트폰으로 옮기려면';
+
+  @override
+  String get phoneChangeGuideBody =>
+      '저장한 대화는 이 스마트폰 안에만 저장되어 있습니다. 기기를 바꾸거나 앱을 삭제하면 사라집니다.\n\n옮길 때는 다음 순서로 하세요.\n1. 이 스마트폰에서 「백업 만들기」를 하고, 만들어진 파일을 Google 드라이브나 메일 등에 저장\n2. 새 스마트폰에 이 앱을 설치하고 「백업에서 복원」으로 그 파일을 선택\n\n백업은 한 번 구매하는 유료 기능입니다. 새 스마트폰에서는 먼저 「구매 복원」을 누르면 구매한 백업 기능을 그대로 쓸 수 있습니다.';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return '공유된 내용을 불러오지 못했습니다: $error';
   }
@@ -836,7 +860,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get previewSuspiciousMessage =>
-      '메시지를 인식할 수 없습니다. LINE 표준 내보내기 형식의 .txt 파일인지 확인해 주세요.';
+      '대화 기록으로 읽을 수 없었습니다. LINE의 「대화 기록 보내기」로 보낸 것인지 확인하고 아래 방법으로 다시 시도하세요.';
 
   @override
   String previewUnrecognizedLinesMessage(Object count) {
@@ -881,7 +905,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      '대화 불러오기가 더 쉬워졌습니다.\n\n• 「대화 불러오기」 화면에 LINE에서 바로 보내는 방법을 번호와 함께 표시합니다\n• 활동 그래프가 1년 이상의 기간을 표시할 때 같은 달이 두 번 나오던 문제를 고쳤습니다(연도도 표시)\n• LINE에서 메시지 하나만 공유해도 원하는 대화에 추가해 저장할 수 있습니다\n• 내 메시지를 LINE처럼 오른쪽에 표시할 수 있습니다(대화에서 내 이름만 선택)\n\n버전 1.3에서 추가된 기능: 전체 대화 검색, 메시지 즐겨찾기, 저장 알림, 통계 이미지 공유';
+      '대화 불러오기가 더 쉬워졌습니다.\n\n• 「대화 불러오기」 화면에 LINE에서 바로 보내는 방법을 번호와 함께 표시합니다\n• 활동 그래프가 1년 이상의 기간을 표시할 때 같은 달이 두 번 나오던 문제를 고쳤습니다(연도도 표시)\n• LINE에서 메시지 하나만 공유해도 원하는 대화에 추가해 저장할 수 있습니다\n• 내 메시지를 LINE처럼 오른쪽에 표시할 수 있습니다(대화에서 내 이름만 선택)\n• 사용 안내를 개선했습니다(가져오기 실패 시 방법 표시, 기기 변경 전 안내, 메뉴 글자 표시 등)\n\n버전 1.3에서 추가된 기능: 전체 대화 검색, 메시지 즐겨찾기, 저장 알림, 통계 이미지 공유';
 
   @override
   String get helpAboutTitle => '이 앱에 대하여';

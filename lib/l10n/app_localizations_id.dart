@@ -367,7 +367,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get emptyChatListMessage =>
-      'Belum ada obrolan yang diimpor.\nDi LINE, gunakan \"Kirim Obrolan sebagai Teks\", lalu muat file yang tersimpan lewat tombol di kanan bawah.';
+      'Belum ada obrolan yang disimpan.\nKetuk \"Impor obrolan\" di bawah untuk melihat cara mengirimnya dari LINE.';
 
   @override
   String importedAtLabel(Object datetime) {
@@ -837,6 +837,32 @@ class AppLocalizationsId extends AppLocalizations {
   String get selfSenderMenuTitle => 'Ganti siapa saya';
 
   @override
+  String get importRetryWithStepsButton => 'Lihat langkah dan coba lagi';
+
+  @override
+  String get longPressHintMessage =>
+      'Tekan lama sebuah pesan untuk memilih dan menyalinnya';
+
+  @override
+  String selfSenderLabel(Object name) {
+    return '$name (saya)';
+  }
+
+  @override
+  String get close => 'Tutup';
+
+  @override
+  String get phoneChangeGuideTitle => 'Sebelum ganti ponsel';
+
+  @override
+  String get phoneChangeGuideSubtitle =>
+      'Cara memindahkan obrolan tersimpan ke ponsel baru';
+
+  @override
+  String get phoneChangeGuideBody =>
+      'Obrolan yang disimpan hanya ada di ponsel ini. Mengganti ponsel atau menghapus aplikasi akan menghapusnya.\n\nUntuk memindahkannya:\n1. Di ponsel ini, ketuk \"Buat cadangan\" dan simpan file ke Google Drive, email, atau sejenisnya\n2. Pasang aplikasi ini di ponsel baru dan pilih file itu dengan \"Pulihkan dari cadangan\"\n\nCadangan adalah fitur berbayar sekali beli. Di ponsel baru, ketuk \"Pulihkan pembelian\" terlebih dahulu untuk memakai fitur cadangan yang sudah dibeli.';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return 'Gagal memuat konten yang dibagikan: $error';
   }
@@ -875,7 +901,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get previewSuspiciousMessage =>
-      'Tidak ada pesan yang dapat dikenali. Pastikan ini adalah file .txt hasil ekspor langsung dari LINE.';
+      'Ini tidak dapat dibaca sebagai riwayat obrolan. Pastikan dikirim lewat \"Kirim riwayat obrolan\" di LINE, lalu coba lagi dengan langkah di bawah.';
 
   @override
   String previewUnrecognizedLinesMessage(Object count) {
@@ -920,7 +946,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      'Mengimpor obrolan kini lebih mudah.\n\n• Layar \"Impor obrolan\" kini menampilkan langkah bernomor untuk mengirim obrolan langsung dari LINE\n• Grafik aktivitas kini menampilkan tahun jika mencakup lebih dari satu tahun, sehingga bulan yang sama tidak muncul dua kali\n• Satu pesan yang dibagikan dari LINE kini bisa ditambahkan ke obrolan mana pun\n• Pesan Anda sendiri kini bisa tampil di kanan seperti di LINE (cukup pilih nama Anda di obrolan)\n\nDitambahkan di versi 1.3: pencarian di semua obrolan, pesan favorit, pengingat penyimpanan, dan berbagi statistik sebagai gambar';
+      'Mengimpor obrolan kini lebih mudah.\n\n• Layar \"Impor obrolan\" kini menampilkan langkah bernomor untuk mengirim obrolan langsung dari LINE\n• Grafik aktivitas kini menampilkan tahun jika mencakup lebih dari satu tahun, sehingga bulan yang sama tidak muncul dua kali\n• Satu pesan yang dibagikan dari LINE kini bisa ditambahkan ke obrolan mana pun\n• Pesan Anda sendiri kini bisa tampil di kanan seperti di LINE (cukup pilih nama Anda di obrolan)\n• Panduan yang lebih jelas (langkah saat impor gagal, panduan ganti ponsel, menu berlabel, dan lainnya)\n\nDitambahkan di versi 1.3: pencarian di semua obrolan, pesan favorit, pengingat penyimpanan, dan berbagi statistik sebagai gambar';
 
   @override
   String get helpAboutTitle => 'Tentang aplikasi ini';

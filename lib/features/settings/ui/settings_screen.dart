@@ -213,6 +213,35 @@ class SettingsScreen extends ConsumerWidget {
     await purchaseBackupUnlock(context, ref);
   }
 
+  Future<void> _showPhoneChangeGuide(
+    BuildContext context,
+    WidgetRef ref,
+    bool backupUnlocked,
+  ) async {
+    final l10n = AppLocalizations.of(context)!;
+    final create = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.phoneChangeGuideTitle),
+        content: SingleChildScrollView(child: Text(l10n.phoneChangeGuideBody)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.close),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(l10n.backupTitle),
+          ),
+        ],
+      ),
+    );
+    if (create != true || !context.mounted) return;
+    backupUnlocked
+        ? await _createBackup(context, ref)
+        : await _promptBackupPurchase(context, ref);
+  }
+
   Future<void> _createBackup(BuildContext context, WidgetRef ref) async {
     final l10n = AppLocalizations.of(context)!;
     showDialog<void>(
@@ -480,6 +509,15 @@ class SettingsScreen extends ConsumerWidget {
           const SizedBox(height: AppSpacing.x4),
           SettingsGroup(
             children: [
+              // Chats live only on this device, so a phone change loses them
+              // unless backed up first -- spelled out here, ahead of the
+              // backup tiles it leads to.
+              ListTile(
+                leading: const Icon(Icons.phone_android_outlined),
+                title: Text(l10n.phoneChangeGuideTitle),
+                subtitle: Text(l10n.phoneChangeGuideSubtitle),
+                onTap: () => _showPhoneChangeGuide(context, ref, backupUnlocked),
+              ),
               ListTile(
                 leading: const Icon(Icons.backup_outlined),
                 title: Text(l10n.backupTitle),

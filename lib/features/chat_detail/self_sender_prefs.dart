@@ -22,3 +22,20 @@ String? guessSelfName(SharedPreferences prefs, Iterable<String> senderNames) {
   final matches = senderNames.where(known.contains).toSet();
   return matches.length == 1 ? matches.single : null;
 }
+
+/// [senders] with the user's own name ([selfName]) passed through [label]
+/// (e.g. "山田（自分）"), for exports and stats that show names as text.
+Map<int, String> markSelfSender(
+  Map<int, String> senders,
+  String? selfName,
+  String Function(String name) label,
+) {
+  if (selfName == null || selfName.isEmpty) return senders;
+  // A sender literally named the bare word ("自分", "me") needs no mark.
+  final bareWord = label('').replaceAll(RegExp(r'[\s()（）]'), '');
+  if (selfName == bareWord) return senders;
+  return {
+    for (final e in senders.entries)
+      e.key: e.value == selfName ? label(e.value) : e.value,
+  };
+}

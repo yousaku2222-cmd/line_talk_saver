@@ -255,6 +255,25 @@ class _MessageContent extends StatelessWidget {
           ),
         );
       }
+      // A sticker isn't a photo the user has somewhere to attach, so it is
+      // just labelled, with no "tap to attach" prompt.
+      if (message.mediaPlaceholderType == 'sticker') {
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              _iconFor('sticker'),
+              size: 18,
+              color: scheme.onSurfaceVariant,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              message.rawText,
+              style: TextStyle(color: scheme.onSurfaceVariant, fontSize: 12),
+            ),
+          ],
+        );
+      }
       final isVideoPlaceholder = message.mediaPlaceholderType == 'video';
       final isFilePlaceholder = message.mediaPlaceholderType == 'file';
       return InkWell(

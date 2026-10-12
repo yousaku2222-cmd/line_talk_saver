@@ -361,7 +361,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get emptyChatListMessage =>
-      'ยังไม่มีแชทที่นำเข้า\nใน LINE ใช้ฟังก์ชัน \"ส่งแชทเป็นข้อความ\" แล้วโหลดไฟล์ที่บันทึกไว้ด้วยปุ่มด้านล่างขวา';
+      'ยังไม่มีแชทที่บันทึกไว้\nแตะ「นำเข้าแชท」ด้านล่างเพื่อดูวิธีส่งจาก LINE';
 
   @override
   String importedAtLabel(Object datetime) {
@@ -824,6 +824,31 @@ class AppLocalizationsTh extends AppLocalizations {
   String get selfSenderMenuTitle => 'เลือกตัวเองใหม่';
 
   @override
+  String get importRetryWithStepsButton => 'ดูขั้นตอนแล้วลองใหม่';
+
+  @override
+  String get longPressHintMessage => 'กดค้างที่ข้อความเพื่อเลือกและคัดลอก';
+
+  @override
+  String selfSenderLabel(Object name) {
+    return '$name (ฉัน)';
+  }
+
+  @override
+  String get close => 'ปิด';
+
+  @override
+  String get phoneChangeGuideTitle => 'ก่อนเปลี่ยนมือถือ';
+
+  @override
+  String get phoneChangeGuideSubtitle =>
+      'วิธีย้ายแชทที่บันทึกไว้ไปยังมือถือเครื่องใหม่';
+
+  @override
+  String get phoneChangeGuideBody =>
+      'แชทที่บันทึกไว้อยู่ในมือถือเครื่องนี้เท่านั้น หากเปลี่ยนมือถือหรือลบแอป แชทจะหายไป\n\nวิธีย้าย:\n1. ที่มือถือเครื่องนี้ แตะ「สร้างไฟล์สำรองข้อมูล」แล้วบันทึกไฟล์ไว้ใน Google Drive อีเมล หรือที่อื่น\n2. ติดตั้งแอปนี้ในมือถือเครื่องใหม่ แล้วเลือกไฟล์นั้นด้วย「กู้คืนจากไฟล์สำรองข้อมูล」\n\nการสำรองข้อมูลเป็นฟีเจอร์แบบชำระเงินครั้งเดียว ที่มือถือเครื่องใหม่ ให้แตะ「กู้คืนการซื้อ」ก่อน เพื่อใช้ฟีเจอร์สำรองข้อมูลที่ซื้อไว้แล้ว';
+
+  @override
   String sharedContentLoadFailed(Object error) {
     return 'โหลดเนื้อหาที่แชร์มาไม่สำเร็จ: $error';
   }
@@ -862,7 +887,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get previewSuspiciousMessage =>
-      'ไม่สามารถระบุข้อความได้ โปรดตรวจสอบว่าเป็นไฟล์ .txt ที่ส่งออกจาก LINE โดยตรง';
+      'ไม่สามารถอ่านเป็นประวัติแชทได้ ตรวจสอบว่าส่งด้วย「ส่งประวัติแชท」ของ LINE แล้วลองใหม่ตามขั้นตอนด้านล่าง';
 
   @override
   String previewUnrecognizedLinesMessage(Object count) {
@@ -907,7 +932,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get whatsNewV132Body =>
-      'การนำเข้าแชทง่ายขึ้นแล้ว\n\n• หน้า「นำเข้าแชท」แสดงขั้นตอนการส่งแชทจาก LINE โดยตรงพร้อมหมายเลข\n• กราฟกิจกรรมแสดงปีด้วยเมื่อครอบคลุมเกิน 1 ปี เดือนเดียวกันจึงไม่ซ้ำกันอีก\n• ข้อความเดียวที่แชร์จาก LINE สามารถเพิ่มลงในแชทใดก็ได้แล้ว\n• ข้อความของคุณแสดงทางขวาได้เหมือนใน LINE แล้ว (แค่เลือกชื่อของคุณในแชท)\n\nฟีเจอร์ที่เพิ่มในเวอร์ชัน 1.3: ค้นหาทุกแชท ข้อความโปรด การแจ้งเตือนให้บันทึก และแชร์สถิติเป็นรูปภาพ';
+      'การนำเข้าแชทง่ายขึ้นแล้ว\n\n• หน้า「นำเข้าแชท」แสดงขั้นตอนการส่งแชทจาก LINE โดยตรงพร้อมหมายเลข\n• กราฟกิจกรรมแสดงปีด้วยเมื่อครอบคลุมเกิน 1 ปี เดือนเดียวกันจึงไม่ซ้ำกันอีก\n• ข้อความเดียวที่แชร์จาก LINE สามารถเพิ่มลงในแชทใดก็ได้แล้ว\n• ข้อความของคุณแสดงทางขวาได้เหมือนใน LINE แล้ว (แค่เลือกชื่อของคุณในแชท)\n• ปรับปรุงคำแนะนำการใช้งาน (แสดงขั้นตอนเมื่อนำเข้าไม่สำเร็จ คำแนะนำก่อนเปลี่ยนมือถือ เมนูแบบมีข้อความ ฯลฯ)\n\nฟีเจอร์ที่เพิ่มในเวอร์ชัน 1.3: ค้นหาทุกแชท ข้อความโปรด การแจ้งเตือนให้บันทึก และแชร์สถิติเป็นรูปภาพ';
 
   @override
   String get helpAboutTitle => 'เกี่ยวกับแอปนี้';

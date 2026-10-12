@@ -232,7 +232,10 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
       case _Status.working:
         return const Center(child: CircularProgressIndicator());
       case _Status.error:
-        return _ErrorView(message: _errorMessage!, onRetry: _pickFile);
+        return _ErrorView(
+          message: _errorMessage!,
+          onRetry: () => setState(() => _status = _Status.idle),
+        );
       case _Status.preview:
         return _PreviewView(
           result: _result!,
@@ -257,13 +260,7 @@ class _IdleView extends StatelessWidget {
     final scheme = theme.colorScheme;
     // Sharing straight from LINE is the easy path, so it leads with
     // numbered steps; saving a .txt and picking it is the fallback below.
-    final steps = [
-      l10n.importStepOpenChat,
-      l10n.importStepMenu,
-      l10n.importStepSend,
-      Platform.isIOS ? l10n.importStepPickIos : l10n.importStepPickAndroid,
-      l10n.importStepDone,
-    ];
+    final steps = _shareSteps(l10n);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -327,6 +324,14 @@ class _IdleView extends StatelessWidget {
     );
   }
 }
+
+List<String> _shareSteps(AppLocalizations l10n) => [
+      l10n.importStepOpenChat,
+      l10n.importStepMenu,
+      l10n.importStepSend,
+      Platform.isIOS ? l10n.importStepPickIos : l10n.importStepPickAndroid,
+      l10n.importStepDone,
+    ];
 
 class _StepRow extends StatelessWidget {
   const _StepRow({required this.number, required this.text});
@@ -405,7 +410,7 @@ class _ErrorView extends StatelessWidget {
             width: double.infinity,
             child: FilledButton(
               onPressed: onRetry,
-              child: Text(AppLocalizations.of(context)!.retrySelectFileButton),
+              child: Text(AppLocalizations.of(context)!.importRetryWithStepsButton),
             ),
           ),
         ],
@@ -484,13 +489,37 @@ class _PreviewView extends StatelessWidget {
               ),
             ),
           ),
-        const Spacer(),
+        if (looksSuspicious) ...[
+          const SizedBox(height: 16),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.importRecommendedTitle,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 10),
+                  for (final (i, step) in _shareSteps(l10n).indexed)
+                    _StepRow(number: i + 1, text: step),
+                ],
+              ),
+            ),
+          ),
+        ] else
+          const Spacer(),
         Row(
           children: [
             Expanded(
               child: OutlinedButton(
                 onPressed: onCancel,
-                child: Text(l10n.cancel),
+                child: Text(
+                  looksSuspicious ? l10n.importRetryWithStepsButton : l10n.cancel,
+                ),
               ),
             ),
             const SizedBox(width: 16),

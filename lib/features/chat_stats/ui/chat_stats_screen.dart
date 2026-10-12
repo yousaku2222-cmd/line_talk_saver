@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../chat_detail/providers/chat_detail_provider.dart';
+import '../../chat_detail/self_sender_prefs.dart';
 import '../../monetization/ads/rewarded_ad_service.dart';
 import '../../monetization/purchase/purchase_prefs.dart';
 import '../../search/providers/message_filter.dart';
@@ -116,7 +117,11 @@ class _ChatStatsScreenState extends ConsumerState<ChatStatsScreen>
         body: Center(child: Text(l10n.loadErrorWithMessage(e.toString()))),
       ),
       data: (messages) {
-        final senders = sendersAsync.valueOrNull ?? const {};
+        final senders = markSelfSender(
+          sendersAsync.valueOrNull ?? const {},
+          ref.watch(chatProvider(widget.chatId)).valueOrNull?.selfSenderName,
+          l10n.selfSenderLabel,
+        );
         final stats = ChatStatsCalculator.compute(messages, senders);
         if (stats.totalMessages == 0) {
           return Scaffold(
